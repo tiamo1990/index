@@ -6,25 +6,139 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * {margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
-body{background:#f5f7fa;color:#333;line-height:1.6}
-header{background:#2c3e50;color:#fff;padding:1rem 0;box-shadow:0 2px 5px rgba(0,0,0,.1)}
-.container{width:90%;max-width:1100px;margin:0 auto}
-.logo{font-size:1.5rem;font-weight:700}
-main{padding:2rem 0;min-height:70vh}
-.title{text-align:center;margin-bottom:2rem;color:#2c3e50}
-.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:1rem}
-.card{background:#fff;border-radius:10px;padding:2rem;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.05);transition:.3s;text-decoration:none;color:#333}
-.card:hover{transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,.1)}
-.card h3{margin:1rem 0;color:#2c3e50}
-footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-top:2rem}
+body{
+    background:linear-gradient(135deg, #f8fafc, #e2e8f0);
+    color:#333;line-height:1.6;
+    min-height:100vh;
+}
+header{
+    background:linear-gradient(90deg, #1e293b, #334155);
+    color:#fff;padding:1.2rem 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+.container{width:95%;max-width:1100px;margin:0 auto;padding:0 10px}
+.logo{font-size:1.6rem;font-weight:700;display:flex;align-items:center;gap:8px}
+main{padding:3rem 0;min-height:70vh}
+.title{
+    text-align:center;margin-bottom:2.5rem;
+    color:#1e293b;font-size:clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight:600;
+}
+.category-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1.8rem;margin-top:1rem;
+}
+.card{
+    background:#fff;border-radius:16px;padding:2.5rem 2rem;
+    text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.06);
+    transition:all 0.3s ease;text-decoration:none;
+    color:#333;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;min-height:200px;
+    border:1px solid rgba(255,255,255,0.5);
+}
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(0,0,0,.1);
+    background:linear-gradient(135deg, #ffffff, #f8fafc);
+}
+.card h3{
+    margin:1rem 0;color:#1e293b;
+    font-size:clamp(1.2rem, 2vw, 1.4rem);
+    font-weight:600;
+}
+.card p{
+    font-size:clamp(0.95rem, 1.5vw, 1rem);
+    color:#64748b;line-height:1.5;
+}
+footer{
+    text-align:center;padding:1.8rem 0;
+    background:#1e293b;color:#fff;
+    margin-top:3rem;font-size:clamp(0.85rem, 1.5vw, 0.95rem);
+}
+
+/* 欢迎弹窗 - 修复显示 */
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.modal.show {
+    display: flex;
+}
+.modal-box {
+    background: #fff;
+    width: 90%;
+    max-width: 380px;
+    padding: 2.2rem 2rem;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: pop 0.4s ease;
+}
+@keyframes pop {
+    from{transform:scale(0.9);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+.modal-box h2 {
+    font-size: 1.4rem;
+    color: #1e293b;
+    margin-bottom: 0.8rem;
+}
+.modal-box p {
+    font-size: 1rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+.modal-btn {
+    padding: 0.75rem 2.2rem;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(59,130,246,0.3);
+}
+
+@media (max-width:768px){
+    .category-grid{gap:1.2rem}
+    .card{padding:2rem 1.5rem;min-height:180px}
+    main{padding:2rem 0}
+}
+@media (max-width:480px){
+    .logo{font-size:1.3rem}
+    .category-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
+
+<!-- 欢迎弹窗 -->
+<div class="modal" id="welcomeModal">
+    <div class="modal-box">
+        <h2>👋 欢迎访问本站</h2>
+        <p>这里汇集了各类实用工具，安全、免费、好用！</p>
+        <button class="modal-btn" onclick="closeModal()">确定</button>
+    </div>
+</div>
+
 <header>
 <div class="container">
 <div class="logo">📦 个人工具合集</div>
 </div>
 </header>
+
 <main class="container">
 <h2 class="title">选择工具分类</h2>
 <div class="category-grid">
@@ -46,8 +160,26 @@ footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-t
 </a>
 </div>
 </main>
+
 <footer>
 <div class="container">© 2026 个人工具下载站</div>
 </footer>
+
+<script>
+// 智能弹窗：从子页返回不弹，首次进入才弹
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('welcomeModal');
+  const fromSite = document.referrer.includes(window.location.host);
+  
+  if (!fromSite) {
+    modal.classList.add('show');
+  }
+});
+
+function closeModal() {
+  document.getElementById('welcomeModal').classList.remove('show');
+}
+</script>
+
 </body>
 </html>

@@ -6,21 +6,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * {margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
-body{background:#f5f7fa;color:#333;line-height:1.6}
-header{background:#2c3e50;color:#fff;padding:1rem 0;box-shadow:0 2px 5px rgba(0,0,0,.1)}
-.container{width:90%;max-width:1100px;margin:0 auto}
-.logo{font-size:1.5rem;font-weight:700}
-main{padding:2rem 0;min-height:70vh}
-.title{text-align:center;margin-bottom:2rem;color:#2c3e50}
-.tool-list{display:flex;flex-direction:column;gap:1rem}
-.tool-item{background:#fff;padding:1.2rem;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-.tool-name{font-weight:700;font-size:1.1rem}
-.tool-desc{color:#666;font-size:.9rem;margin:.3rem 0}
-.download-btn{background:#3498db;color:#fff;border:none;padding:.6rem 1.2rem;border-radius:5px;cursor:pointer;text-decoration:none;transition:.2s}
-.download-btn:hover{background:#2980b9}
-footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-top:2rem}
-.back{display:inline-block;margin-bottom:1rem;color:#3498db;text-decoration:none}
-.back:hover{text-decoration:underline}
+body{
+    background:linear-gradient(135deg, #f8fafc, #e2e8f0);
+    color:#333;line-height:1.6;min-height:100vh;
+}
+header{
+    background:linear-gradient(90deg, #1e293b, #334155);
+    color:#fff;padding:1.2rem 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+.container{width:95%;max-width:1100px;margin:0 auto;padding:0 10px}
+.logo{font-size:1.6rem;font-weight:700;display:flex;align-items:center;gap:8px}
+main{padding:2.5rem 0;min-height:70vh}
+.title{
+    text-align:center;margin-bottom:2.2rem;
+    color:#1e293b;font-size:clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight:600;
+}
+.tool-list{display:flex;flex-direction:column;gap:1.2rem}
+.tool-item{
+    background:#fff;padding:1.5rem;border-radius:12px;
+    box-shadow:0 6px 16px rgba(0,0,0,.05);
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:1.2rem;transition:0.25s;
+    border:1px solid rgba(255,255,255,0.6);
+}
+.tool-item:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 22px rgba(0,0,0,.08);
+}
+.tool-info{flex:1;min-width:260px}
+.tool-name{
+    font-weight:600;font-size:clamp(1.05rem, 2vw, 1.2rem);
+    color:#1e293b;margin-bottom:0.3rem;
+}
+.tool-desc{
+    color:#64748b;font-size:clamp(0.9rem, 1.5vw, 0.95rem);
+    line-height:1.5;
+}
+.download-btn{
+    background:linear-gradient(90deg, #3b82f6, #2563eb);
+    color:#fff;border:none;padding:0.7rem 1.4rem;
+    border-radius:8px;cursor:pointer;text-decoration:none;
+    transition:0.25s;white-space:nowrap;flex-shrink:0;
+    font-weight:500;box-shadow:0 3px 8px rgba(59,130,246,0.2);
+}
+.download-btn:hover{
+    background:linear-gradient(90deg, #2563eb, #1d4ed8);
+    transform:translateY(-2px);
+    box-shadow:0 5px 12px rgba(59,130,246,0.3);
+}
+footer{
+    text-align:center;padding:1.8rem 0;
+    background:#1e293b;color:#fff;
+    margin-top:3rem;font-size:clamp(0.85rem, 1.5vw, 0.95rem);
+}
+/* 这是美化后的返回首页按钮，替换原来的 .back 样式 */
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: #475569;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.back:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+    text-decoration: none;
+}
+
+
+@media (max-width:768px){
+    .tool-item{padding:1.2rem}
+    .download-btn{width:100%;text-align:center;padding:0.9rem 0}
+}
+@media (max-width:480px){
+    .logo{font-size:1.3rem}
+    .tool-item{flex-direction:column;align-items:stretch}
+    .tool-info{min-width:unset}
+}
 </style>
 </head>
 <body>
@@ -36,19 +107,62 @@ footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-t
 
 <div class="tool-item">
 <div>
-<div class="tool-name">WPS Office</div>
+<div class="tool-name">WPS Office 2025专业版</div>
 <div class="tool-desc">轻量全能办公套件</div>
 </div>
-<a href="files/WPS.zip" class="download-btn" download>立即下载</a>
+<a href="https://pan.xunlei.com/s/VOh7lUE3hS06QVfZhL8tGTyZA1?pwd=td3b" class="download-btn" download>立即下载</a>
 </div>
 
 <div class="tool-item">
 <div>
-<div class="tool-name">PDF编辑器</div>
-<div class="tool-desc">PDF阅读、编辑、转换、合并</div>
+<div class="tool-name">office 2021</div>
+<div class="tool-desc">微软官方办公软件</div>
 </div>
-<a href="files/PDFedit.zip" class="download-btn" download>立即下载</a>
+<a href="https://pan.xunlei.com/s/VOMNOiB3GqkJZ56yXVoMds8UA1?pwd=vprd" class="download-btn" download>立即下载</a>
 </div>
+
+<div class="tool-item">
+<div>
+<div class="tool-name">office 2019</div>
+<div class="tool-desc">微软官方办公软件</div>
+</div>
+<a href="https://pan.xunlei.com/s/VOMNOlPRlZaV6altaliUQjxfA1?pwd=f8pv" class="download-btn" download>立即下载</a>
+</div>
+
+<div class="tool-item">
+<div>
+<div class="tool-name">Ps 2023</div>
+<div class="tool-desc">ps修图软件</div>
+</div>
+<a href="https://pan.xunlei.com/s/VOMDV0t5qDkS1CUvmYIMc2OyA1?pwd=sedf" class="download-btn" download>立即下载</a>
+</div>
+
+<div class="tool-item">
+<div>
+<div class="tool-name">Ps 2024</div>
+<div class="tool-desc">ps修图软件</div>
+</div>
+<a href="https://pan.xunlei.com/s/VOMFRIFVmmKtiCFXXos5H5qHA1?pwd=m26s" class="download-btn" download>立即下载</a>
+</div>
+
+<div class="tool-item">
+<div>
+<div class="tool-name">剪映6.0.1会员永久激活版</div>
+<div class="tool-desc">视频剪辑</div>
+</div>
+<a href="https://pan.xunlei.com/s/VOMQjmqZgEsLegm6oGnU4KgiA1?pwd=x7ka" class="download-btn" download>立即下载</a>
+</div>
+
+<div class="tool-item">
+<div>
+<div class="tool-name">PDF转换网站</div>
+<div class="tool-desc">pdf转换</div>
+</div>
+<a href="https://www.ilovepdf.com/" class="download-btn" download>立即访问</a>
+</div>
+
+
+
 
 </div>
 </main>

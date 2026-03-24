@@ -6,21 +6,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * {margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
-body{background:#f5f7fa;color:#333;line-height:1.6}
-header{background:#2c3e50;color:#fff;padding:1rem 0;box-shadow:0 2px 5px rgba(0,0,0,.1)}
-.container{width:90%;max-width:1100px;margin:0 auto}
-.logo{font-size:1.5rem;font-weight:700}
-main{padding:2rem 0;min-height:70vh}
-.title{text-align:center;margin-bottom:2rem;color:#2c3e50}
-.tool-list{display:flex;flex-direction:column;gap:1rem}
-.tool-item{background:#fff;padding:1.2rem;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-.tool-name{font-weight:700;font-size:1.1rem}
-.tool-desc{color:#666;font-size:.9rem;margin:.3rem 0}
-.download-btn{background:#3498db;color:#fff;border:none;padding:.6rem 1.2rem;border-radius:5px;cursor:pointer;text-decoration:none;transition:.2s}
-.download-btn:hover{background:#2980b9}
-footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-top:2rem}
-.back{display:inline-block;margin-bottom:1rem;color:#3498db;text-decoration:none}
-.back:hover{text-decoration:underline}
+body{
+    background:linear-gradient(135deg, #f8fafc, #e2e8f0);
+    color:#333;line-height:1.6;min-height:100vh;
+}
+header{
+    background:linear-gradient(90deg, #1e293b, #334155);
+    color:#fff;padding:1.2rem 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+.container{width:95%;max-width:1100px;margin:0 auto;padding:0 10px}
+.logo{font-size:1.6rem;font-weight:700;display:flex;align-items:center;gap:8px}
+main{padding:2.5rem 0;min-height:70vh}
+.title{
+    text-align:center;margin-bottom:2.2rem;
+    color:#1e293b;font-size:clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight:600;
+}
+.tool-list{display:flex;flex-direction:column;gap:1.2rem}
+.tool-item{
+    background:#fff;padding:1.5rem;border-radius:12px;
+    box-shadow:0 6px 16px rgba(0,0,0,.05);
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:1.2rem;transition:0.25s;
+    border:1px solid rgba(255,255,255,0.6);
+}
+.tool-item:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 22px rgba(0,0,0,.08);
+}
+.tool-info{flex:1;min-width:260px}
+.tool-name{
+    font-weight:600;font-size:clamp(1.05rem, 2vw, 1.2rem);
+    color:#1e293b;margin-bottom:0.3rem;
+}
+.tool-desc{
+    color:#64748b;font-size:clamp(0.9rem, 1.5vw, 0.95rem);
+    line-height:1.5;
+}
+.download-btn{
+    background:linear-gradient(90deg, #3b82f6, #2563eb);
+    color:#fff;border:none;padding:0.7rem 1.4rem;
+    border-radius:8px;cursor:pointer;text-decoration:none;
+    transition:0.25s;white-space:nowrap;flex-shrink:0;
+    font-weight:500;box-shadow:0 3px 8px rgba(59,130,246,0.2);
+}
+.download-btn:hover{
+    background:linear-gradient(90deg, #2563eb, #1d4ed8);
+    transform:translateY(-2px);
+    box-shadow:0 5px 12px rgba(59,130,246,0.3);
+}
+footer{
+    text-align:center;padding:1.8rem 0;
+    background:#1e293b;color:#fff;
+    margin-top:3rem;font-size:clamp(0.85rem, 1.5vw, 0.95rem);
+}
+/* 这是美化后的返回首页按钮，替换原来的 .back 样式 */
+/* 美化 + 位置正确的 返回首页按钮 */
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: #475569;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.back:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+    text-decoration: none;
+}
+
+
+
+@media (max-width:768px){
+    .tool-item{padding:1.2rem}
+    .download-btn{width:100%;text-align:center;padding:0.9rem 0}
+}
+@media (max-width:480px){
+    .logo{font-size:1.3rem}
+    .tool-item{flex-direction:column;align-items:stretch}
+    .tool-info{min-width:unset}
+}
 </style>
 </head>
 <body>
@@ -35,7 +108,7 @@ footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-t
 <div class="tool-list">
 
 <div class="tool-item">
-<div>
+<div class="tool-info">
 <div class="tool-name">360zip</div>
 <div class="tool-desc">解压缩软件</div>
 </div>
@@ -43,7 +116,7 @@ footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-t
 </div>
 
 <div class="tool-item">
-<div>
+<div class="tool-info">
 <div class="tool-name">图吧工具箱</div>
 <div class="tool-desc">内含各种系统工具</div>
 </div>
@@ -51,7 +124,7 @@ footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-t
 </div>
 
 <div class="tool-item">
-<div>
+<div class="tool-info">
 <div class="tool-name">DiskGenius</div>
 <div class="tool-desc">硬盘分区、数据恢复、磁盘管理</div>
 </div>
@@ -59,7 +132,7 @@ footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-t
 </div>
 
 <div class="tool-item">
-  <div>
+  <div class="tool-info">
     <div class="tool-name">KMS激活工具</div>
     <div class="tool-desc">Windows/Office 激活工具</div>
   </div>
@@ -67,7 +140,7 @@ footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-t
 </div>
 
 <div class="tool-item">
-  <div>
+  <div class="tool-info">
     <div class="tool-name">MobaXterm</div>
     <div class="tool-desc">远程ssh工具</div>
   </div>
@@ -75,7 +148,7 @@ footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-t
 </div>
 
 <div class="tool-item">
-  <div>
+  <div class="tool-info">
     <div class="tool-name">Xshell</div>
     <div class="tool-desc">另一款远程ssh工具</div>
   </div>
@@ -83,17 +156,28 @@ footer{text-align:center;padding:1.5rem 0;background:#2c3e50;color:#fff;margin-t
 </div>
 
 <div class="tool-item">
-  <div>
+  <div class="tool-info">
     <div class="tool-name">Rufus</div>
     <div class="tool-desc">体积小巧的PE盘制作工具</div>
   </div>
   <a href="https://rufus.ie/zh/" class="download-btn" target="_blank">立即下载</a>
 </div>
 
+<div class="tool-item">
+  <div class="tool-info">
+    <div class="tool-name">MSDN I tell you</div>
+    <div class="tool-desc">windows官方系统镜像下载站</div>
+  </div>
+  <a href="https://msdn.itellyou.cn/2" class="download-btn" target="_blank">立即下载</a>
+</div>
 
-
-
-
+<div class="tool-item">
+  <div class="tool-info">
+    <div class="tool-name">NDM下载器</div>
+    <div class="tool-desc">一款多线程下载加速器</div>
+  </div>
+  <a href="https://soft.3dmgame.com/down/362347.html" class="download-btn" target="_blank">立即下载</a>
+</div>
 
 </div>
 </main>
