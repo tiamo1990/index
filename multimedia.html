@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>专业开发工具 - 个人工具合集</title>
+<title>多媒体工具 - 个人工具下载站</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * {margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC", "Microsoft YaHei", sans-serif}
@@ -42,12 +42,17 @@ header.scrolled {
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
 }
 
+.container{width:92%;max-width:1200px;margin:0 auto;padding:0 15px}
+
 .nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
 }
+
+.logo{font-size:1.6rem;font-weight:700;display:flex;align-items:center;gap:10px;color:#2d3748}
+.logo span{background: linear-gradient(135deg, #f06292, #ba68c8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 .nav-menu {
     display: flex;
@@ -150,14 +155,13 @@ header.scrolled {
 .search-input::placeholder {
     color: #94a3b8;
 }
-.container{width:92%;max-width:1200px;margin:0 auto;padding:0 15px}
-.logo{font-size:1.6rem;font-weight:700;display:flex;align-items:center;gap:10px;color:#2d3748}
-.logo span{background: linear-gradient(135deg, #f06292, #ba68c8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-main{padding:4rem 0;min-height:80vh}
+
+main{padding:5rem 0 4rem;min-height:80vh}
 
 .page-header {
     margin-bottom: 3rem;
 }
+
 .back {
     display: inline-flex;align-items:center;gap:6px;
     color:#f06292;
@@ -172,12 +176,14 @@ main{padding:4rem 0;min-height:80vh}
     margin-bottom: 1.5rem;
     font-size:0.95rem;
 }
+
 .back:hover{
     background: linear-gradient(135deg, #f06292, #ba68c8);
     color:#fff;
     transform: translateX(-4px);
     box-shadow: 0 8px 25px rgba(240, 98, 146, 0.25);
 }
+
 .back:active {
     transform: translateX(-2px);
 }
@@ -196,27 +202,32 @@ main{padding:4rem 0;min-height:80vh}
 .tool-list{
     display:flex;flex-direction:column;gap:1.5rem;
 }
+
 .tool-item{
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
     padding:1.6rem 2rem;
     border-radius:20px;
     display:flex;justify-content:space-between;align-items:center;
     flex-wrap:wrap;gap:1.2rem;
     transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .tool-item:hover{
     transform:translateY(-6px);
     box-shadow: 0 16px 48px rgba(240, 98, 146, 0.15);
     border-color: rgba(240, 98, 146, 0.25);
 }
+
 .tool-item:active {
     transform: translateY(-3px);
 }
+
 .tool-info{flex:1;min-width:260px;}
+
 .tool-name{
     font-weight:600;
     font-size:1.15rem;
@@ -224,15 +235,18 @@ main{padding:4rem 0;min-height:80vh}
     margin-bottom:0.5rem;
     transition: all 0.3s ease;
 }
+
 .tool-desc{
     color:#64748b;
     font-size:0.95rem;
     line-height:1.5;
     transition: all 0.3s ease;
 }
+
 .tool-item:hover .tool-name {
     color: #d81b60;
 }
+
 .download-btn{
     background: linear-gradient(135deg, #f06292, #ba68c8);
     color:#fff;
@@ -247,10 +261,12 @@ main{padding:4rem 0;min-height:80vh}
     font-size:0.95rem;
     box-shadow: 0 6px 20px rgba(240, 98, 146, 0.25);
 }
+
 .download-btn:hover{
     transform:translateY(-3px);
     box-shadow: 0 10px 30px rgba(240, 98, 146, 0.35);
 }
+
 .download-btn:active {
     transform: translateY(-1px);
 }
@@ -287,6 +303,7 @@ footer{
     z-index: 999;
     opacity: 0.8;
 }
+
 .back-to-top:hover {
     background: linear-gradient(135deg, #f06292, #ba68c8);
     color: #fff;
@@ -300,6 +317,7 @@ footer{
     transform: translateY(30px);
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .scroll-animate.visible {
     opacity: 1;
     transform: translateY(0);
@@ -336,6 +354,7 @@ footer{
     main{padding:4rem 0 3rem}
     .container{width:94%}
 }
+
 @media (max-width:480px){
     .logo{font-size:1.4rem}
     .nav-menu {
@@ -373,9 +392,9 @@ footer{
             <a href="index.html" class="nav-item">首页</a>
             <a href="system.html" class="nav-item">系统工具</a>
             <a href="office.html" class="nav-item">办公工具</a>
-            <a href="dev.html" class="nav-item active">开发工具</a>
+            <a href="dev.html" class="nav-item">开发工具</a>
             <a href="network.html" class="nav-item">网络工具</a>
-            <a href="multimedia.html" class="nav-item">多媒体工具</a>
+            <a href="multimedia.html" class="nav-item active">多媒体工具</a>
             <a href="plugin.html" class="nav-item">其他工具</a>
         </nav>
         
@@ -393,89 +412,58 @@ footer{
 <main class="container">
 <div class="page-header">
     <a href="index.html" class="back">← 返回首页</a>
-    <h1 class="page-title">💻 专业开发工具</h1>
+    <h1 class="page-title">🎬 多媒体工具</h1>
 </div>
 
 <div class="tool-list">
 <div class="tool-item scroll-animate">
 <div class="tool-info">
-<div class="tool-name">VS Code</div>
-<div class="tool-desc">轻量强大代码编辑器</div>
+<div class="tool-name">剪映6.0.1会员永久激活版</div>
+<div class="tool-desc">视频剪辑软件</div>
 </div>
-<a href="https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-archive" class="download-btn" download>立即下载</a>
-</div>
-
-<div class="tool-item scroll-animate">
-<div class="tool-info">
-<div class="tool-name">Ensp</div>
-<div class="tool-desc">网络终端设备模拟器</div>
-</div>
-<a href="https://forspeed.365xiazai.com/down/2022down/3/03/hwmnqensp.rar" class="download-btn" download>立即下载</a>
+<a href="https://pan.xunlei.com/s/VOMQjmqZgEsLegm6oGnU4KgiA1?pwd=x7ka" class="download-btn" download>立即下载</a>
 </div>
 
 <div class="tool-item scroll-animate">
 <div class="tool-info">
-<div class="tool-name">wireshark</div>
-<div class="tool-desc">网络协议抓包工具</div>
+<div class="tool-name">Ps 2023</div>
+<div class="tool-desc">专业图像处理软件</div>
 </div>
-<a href="https://1.na.dl.wireshark.org/win64/Wireshark-4.4.3-x64.exe" class="download-btn" download>立即下载</a>
-</div>
-
-<div class="tool-item scroll-animate">
-<div class="tool-info">
-<div class="tool-name">VirtualBox</div>
-<div class="tool-desc">虚拟机软件</div>
-</div>
-<a href="https://download.virtualbox.org/virtualbox/5.2.44/VirtualBox-5.2.44-139111-Win.exe" class="download-btn" download>立即下载</a>
+<a href="https://pan.xunlei.com/s/VOMDV0t5qDkS1CUvmYIMc2OyA1?pwd=sedf" class="download-btn" download>立即下载</a>
 </div>
 
 <div class="tool-item scroll-animate">
 <div class="tool-info">
-<div class="tool-name">WinPcap</div>
-<div class="tool-desc">ensp运行必要组件</div>
+<div class="tool-name">Ps 2024</div>
+<div class="tool-desc">专业图像处理软件</div>
 </div>
-<a href="https://soft.onlinedown.net/soft/2685.htm" class="download-btn" download>立即下载</a>
-</div>
-
-<div class="tool-item scroll-animate">
-<div class="tool-info">
-<div class="tool-name">VMware Workstation 17 Pro</div>
-<div class="tool-desc">虚拟机软件</div>
-</div>
-<a href="https://get.downkuai.com/download/123409/8" class="download-btn" download>立即下载</a>
+<a href="https://pan.xunlei.com/s/VOMFRIFVmmKtiCFXXos5H5qHA1?pwd=m26s" class="download-btn" download>立即下载</a>
 </div>
 
 <div class="tool-item scroll-animate">
 <div class="tool-info">
-<div class="tool-name">Pycharm</div>
-<div class="tool-desc">python代码编辑器</div>
+<div class="tool-name">Audacity</div>
+<div class="tool-desc">音频编辑软件</div>
 </div>
-<a href="https://www.jetbrains.com/pycharm/download/?section=windows" class="download-btn" download>立即下载</a>
-</div>
-
-<div class="tool-item scroll-animate">
-<div class="tool-info">
-<div class="tool-name">PHP study（小皮面板）</div>
-<div class="tool-desc">php集成环境</div>
-</div>
-<a href="https://m.xp.cn/" class="download-btn" download>立即下载</a>
+<a href="https://www.audacityteam.org/download/" class="download-btn" target="_blank">立即下载</a>
 </div>
 
 <div class="tool-item scroll-animate">
 <div class="tool-info">
-<div class="tool-name">win11关闭vbs脚本</div>
-<div class="tool-desc">解决ensp中AR路由器在win11系统上不能启动的问题</div>
+<div class="tool-name">HandBrake</div>
+<div class="tool-desc">视频转码工具</div>
 </div>
-<a href="https://chinakb.lenovo.com.cn/chinakb/prod-api/file/downloadFile?key=uniko/FILE/92e0a9ae331aadcf27abdb22f9974b32-1763517794836.zip&name=%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8.zip" class="download-btn" download>立即下载</a>
+<a href="https://handbrake.fr/downloads.php" class="download-btn" target="_blank">立即下载</a>
 </div>
 
 <div class="tool-item scroll-animate">
 <div class="tool-info">
-<div class="tool-name">梯子（clash）</div>
-<div class="tool-desc">网络代理工具</div>
+<div class="tool-name">GIMP</div>
+<div class="tool-desc">开源图像处理软件</div>
 </div>
-<a href="https://clashone.com.cn/" class="download-btn" target="_blank">立即下载</a>
+<a href="https://www.gimp.org/downloads/" class="download-btn" target="_blank">立即下载</a>
 </div>
+
 </div>
 </main>
 
