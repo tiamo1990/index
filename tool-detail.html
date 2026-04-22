@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>工具详情 - 个人工具下载站</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 外部样式文件 -->
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header id="mainHeader">
+<div class="container">
+    <div class="nav-container">
+        <div class="logo">📦 个人工具<span>合集</span></div>
+        
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-item">首页</a>
+            <a href="system.html" class="nav-item">系统工具</a>
+            <a href="office.html" class="nav-item">办公工具</a>
+            <a href="dev.html" class="nav-item">开发工具</a>
+            <a href="network.html" class="nav-item">网络工具</a>
+            <a href="multimedia.html" class="nav-item">多媒体工具</a>
+            <a href="plugin.html" class="nav-item">其他工具</a>
+            <a href="login.html" class="nav-item">后台管理</a>
+        </nav>
+        
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input type="text" class="search-input" placeholder="搜索工具...">
+        </div>
+    </div>
+</div>
+</header>
+
+<main class="container">
+<div class="tool-detail-header">
+    <a href="javascript:history.back()" class="back">← 返回上一页</a>
+    <h1 class="tool-detail-title" id="toolTitle">WinRar</h1>
+    
+    <div class="tool-meta">
+        <div class="meta-item">
+            <div class="meta-label">分类</div>
+            <div class="meta-value" id="toolCategory">系统工具</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-label">版本</div>
+            <div class="meta-value" id="toolVersion">7.20</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-label">文件大小</div>
+            <div class="meta-value" id="toolSize">5.2MB</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-label">更新日期</div>
+            <div class="meta-value" id="toolDate">2026-04-21</div>
+        </div>
+    </div>
+</div>
+
+<div class="tool-content">
+    <div class="tool-description">
+        <h2>工具介绍</h2>
+        <p id="toolDescription">WinRAR 是一款功能强大的压缩文件管理工具，它能备份您的数据，减少电子邮件附件的大小，解压缩从 Internet 上下载的 RAR、ZIP 及其它类型文件，并且可以新建 RAR 及 ZIP 格式等的压缩类文件。</p>
+        
+        <h2>主要功能</h2>
+        <ul id="toolFeatures">
+            <li>支持多种压缩格式，包括 RAR、ZIP、7Z 等</li>
+            <li>提供强大的压缩算法，压缩率高</li>
+            <li>支持分卷压缩和自解压功能</li>
+            <li>内置文件加密功能，保护您的文件安全</li>
+            <li>支持批量处理和命令行操作</li>
+        </ul>
+        
+        <h2>系统要求</h2>
+        <p id="toolRequirements">Windows 7/8/10/11 32位或64位操作系统，至少 512MB 内存，10MB 可用磁盘空间。</p>
+    </div>
+    
+    <div class="tool-sidebar">
+        <div class="download-section">
+            <a href="#" class="download-btn" id="downloadLink">立即下载</a>
+            <div class="version-info">当前版本：<span id="downloadVersion">7.20</span></div>
+            <div class="file-info">
+                <div>文件类型：<span id="fileType">EXE 安装包</span></div>
+                <div>文件大小：<span id="fileSize">5.2MB</span></div>
+                <div>适用平台：<span id="platform">Windows</span></div>
+            </div>
+        </div>
+        
+        <div class="screenshot-section">
+            <h3>软件截图</h3>
+            <div class="screenshot-gallery">
+                <div class="screenshot-item">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=WinRAR%20software%20interface%20screenshot%2C%20file%20compression%20tool%2C%20windows%20application%2C%20professional%20UI&image_size=square" alt="WinRAR 截图1">
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=WinRAR%20compression%20settings%20dialog%2C%20file%20compression%20options%2C%20windows%20software%20interface&image_size=square" alt="WinRAR 截图2">
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=WinRAR%20file%20browser%20interface%2C%20compressed%20files%20management%2C%20windows%20application&image_size=square" alt="WinRAR 截图3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="related-tools">
+    <h2>相关工具</h2>
+    <div class="related-tools-grid" id="relatedTools">
+        <a href="tool-detail.html?tool=360zip" class="related-tool-item">
+            <h3>360zip</h3>
+            <p>免费的解压缩软件，支持多种格式</p>
+        </a>
+        <a href="tool-detail.html?tool=7zip" class="related-tool-item">
+            <h3>7-Zip</h3>
+            <p>开源免费的压缩工具，压缩率高</p>
+        </a>
+        <a href="tool-detail.html?tool=bandizip" class="related-tool-item">
+            <h3>Bandizip</h3>
+            <p>轻量级压缩软件，界面简洁</p>
+        </a>
+    </div>
+</div>
+</main>
+
+<footer>
+<div class="container">© 2026 个人工具下载站</div>
+</footer>
+
+<button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+<!-- 外部脚本文件 -->
+<script src="script.js"></script>
+
+<!-- 工具详情页面特有脚本 -->
+<script>
+// 加载工具详情
+function loadToolDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const toolId = urlParams.get('tool') || 'winrar';
+    
+    const toolData = {
+        winrar: {
+            title: 'WinRar',
+            category: '系统工具',
+            version: '7.20',
+            size: '5.2MB',
+            date: '2026-04-21',
+            description: 'WinRAR 是一款功能强大的压缩文件管理工具，它能备份您的数据，减少电子邮件附件的大小，解压缩从 Internet 上下载的 RAR、ZIP 及其它类型文件，并且可以新建 RAR 及 ZIP 格式等的压缩类文件。',
+            features: [
+                '支持多种压缩格式，包括 RAR、ZIP、7Z 等',
+                '提供强大的压缩算法，压缩率高',
+                '支持分卷压缩和自解压功能',
+                '内置文件加密功能，保护您的文件安全',
+                '支持批量处理和命令行操作'
+            ],
+            requirements: 'Windows 7/8/10/11 32位或64位操作系统，至少 512MB 内存，10MB 可用磁盘空间。',
+            downloadLink: 'https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-720sc.exe',
+            downloadVersion: '7.20',
+            fileType: 'EXE 安装包',
+            fileSize: '5.2MB',
+            platform: 'Windows',
+            relatedTools: [
+                {name: '360zip', url: 'tool-detail.html?tool=360zip', desc: '免费的解压缩软件，支持多种格式'},
+                {name: '7-Zip', url: 'tool-detail.html?tool=7zip', desc: '开源免费的压缩工具，压缩率高'},
+                {name: 'Bandizip', url: 'tool-detail.html?tool=bandizip', desc: '轻量级压缩软件，界面简洁'}
+            ]
+        },
+        '360zip': {
+            title: '360zip',
+            category: '系统工具',
+            version: '4.0.0',
+            size: '3.8MB',
+            date: '2026-04-15',
+            description: '360压缩是一款免费的解压缩软件，支持多种压缩格式，界面简洁，操作方便。',
+            features: [
+                '支持 ZIP、RAR、7Z 等多种压缩格式',
+                '界面简洁，操作方便',
+                '支持批量压缩和解压缩',
+                '内置文件预览功能',
+                '支持拖拽操作'
+            ],
+            requirements: 'Windows XP/Vista/7/8/10/11，至少 256MB 内存，5MB 可用磁盘空间。',
+            downloadLink: 'https://www.onlinedown.net/iopdfbhjl/20267030?module=download&t=website&v=20260318183111',
+            downloadVersion: '4.0.0',
+            fileType: 'EXE 安装包',
+            fileSize: '3.8MB',
+            platform: 'Windows',
+            relatedTools: [
+                {name: 'WinRAR', url: 'tool-detail.html?tool=winrar', desc: '功能强大的压缩文件管理工具'},
+                {name: '7-Zip', url: 'tool-detail.html?tool=7zip', desc: '开源免费的压缩工具，压缩率高'},
+                {name: 'Bandizip', url: 'tool-detail.html?tool=bandizip', desc: '轻量级压缩软件，界面简洁'}
+            ]
+        },
+        'vscode': {
+            title: 'VS Code',
+            category: '开发工具',
+            version: '1.89.0',
+            size: '85MB',
+            date: '2026-04-20',
+            description: 'Visual Studio Code 是微软推出的免费开源代码编辑器，支持多种编程语言，拥有丰富的扩展生态。',
+            features: [
+                '支持多种编程语言和文件格式',
+                '内置调试功能',
+                '丰富的扩展生态系统',
+                '智能代码补全和语法高亮',
+                '集成终端和版本控制'
+            ],
+            requirements: 'Windows 7/8/10/11，至少 1GB 内存，200MB 可用磁盘空间。',
+            downloadLink: 'https://code.visualstudio.com/Download',
+            downloadVersion: '1.89.0',
+            fileType: 'EXE 安装包',
+            fileSize: '85MB',
+            platform: 'Windows/macOS/Linux',
+            relatedTools: [
+                {name: 'Pycharm', url: 'tool-detail.html?tool=pycharm', desc: 'Python 专业集成开发环境'},
+                {name: 'Sublime Text', url: 'tool-detail.html?tool=sublime', desc: '轻量级代码编辑器'},
+                {name: 'Atom', url: 'tool-detail.html?tool=atom', desc: '开源代码编辑器'}
+            ]
+        }
+    };
+    
+    const tool = toolData[toolId] || toolData.winrar;
+    
+    // 填充工具信息
+    document.getElementById('toolTitle').textContent = tool.title;
+    document.getElementById('toolCategory').textContent = tool.category;
+    document.getElementById('toolVersion').textContent = tool.version;
+    document.getElementById('toolSize').textContent = tool.size;
+    document.getElementById('toolDate').textContent = tool.date;
+    document.getElementById('toolDescription').textContent = tool.description;
+    document.getElementById('downloadLink').href = tool.downloadLink;
+    document.getElementById('downloadVersion').textContent = tool.downloadVersion;
+    document.getElementById('fileType').textContent = tool.fileType;
+    document.getElementById('fileSize').textContent = tool.fileSize;
+    document.getElementById('platform').textContent = tool.platform;
+    
+    // 填充功能列表
+    const featuresList = document.getElementById('toolFeatures');
+    featuresList.innerHTML = '';
+    tool.features.forEach(feature => {
+        const li = document.createElement('li');
+        li.textContent = feature;
+        featuresList.appendChild(li);
+    });
+    
+    document.getElementById('toolRequirements').textContent = tool.requirements;
+    
+    // 填充相关工具
+    const relatedToolsGrid = document.getElementById('relatedTools');
+    relatedToolsGrid.innerHTML = '';
+    tool.relatedTools.forEach(relatedTool => {
+        const a = document.createElement('a');
+        a.href = relatedTool.url;
+        a.className = 'related-tool-item';
+        a.innerHTML = `
+            <h3>${relatedTool.name}</h3>
+            <p>${relatedTool.desc}</p>
+        `;
+        relatedToolsGrid.appendChild(a);
+    });
+}
+
+// 页面加载完成后加载工具详情
+document.addEventListener('DOMContentLoaded', loadToolDetails);
+</script>
+
+</body>
+</html>

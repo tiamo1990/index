@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>登录 - 后台管理</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 外部样式文件 -->
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* 登录页面特有样式 */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+    padding: 3rem;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    animation: loginBoxFadeIn 0.8s ease forwards;
+}
+
+@keyframes loginBoxFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.login-header {
+    margin-bottom: 2.5rem;
+}
+
+.login-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.login-header p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #2d3748;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #f06292;
+    box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.1);
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #f06292, #ba68c8);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(240, 98, 146, 0.25);
+    margin-top: 1rem;
+}
+
+.login-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(240, 98, 146, 0.35);
+}
+
+.login-btn:active {
+    transform: translateY(-1px);
+}
+
+.error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: #dc2626;
+    font-size: 0.95rem;
+    display: none;
+}
+
+.success-message {
+    background: rgba(72, 187, 120, 0.1);
+    border: 1px solid rgba(72, 187, 120, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: #15803d;
+    font-size: 0.95rem;
+    display: none;
+}
+
+.back-to-home {
+    margin-top: 2rem;
+    display: inline-block;
+    color: #f06292;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.back-to-home:hover {
+    color: #ba68c8;
+    text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+    
+    .login-box {
+        padding: 2.5rem;
+    }
+    
+    .login-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .form-input {
+        padding: 0.9rem;
+    }
+    
+    .login-btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 2rem;
+    }
+    
+    .login-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .login-header p {
+        font-size: 1rem;
+    }
+    
+    .form-input {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+    }
+    
+    .login-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="login-container">
+    <div class="login-box">
+        <div class="login-header">
+            <h1>后台管理登录</h1>
+            <p>请输入用户名和密码登录</p>
+        </div>
+        
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+        
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" class="form-input" id="username" placeholder="请输入用户名" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-input" id="password" placeholder="请输入密码" required>
+            </div>
+            
+            <button type="submit" class="login-btn">登录</button>
+        </form>
+        
+        <a href="index.html" class="back-to-home">返回首页</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        // 验证用户名和密码
+        if (username === 'admin' && password === '123456') {
+            // 登录成功，存储登录状态
+            localStorage.setItem('adminLoggedIn', 'true');
+            
+            // 显示成功消息
+            successMessage.textContent = '登录成功，正在跳转...';
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+            
+            // 跳转到后台管理页面
+            setTimeout(() => {
+                window.location.href = 'admin.html';
+            }, 1000);
+        } else {
+            // 登录失败
+            errorMessage.textContent = '用户名或密码错误';
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+    });
+    
+    // 检查是否已登录
+    if (localStorage.getItem('adminLoggedIn') === 'true') {
+        window.location.href = 'admin.html';
+    }
+});
+</script>
+</body>
+</html>
