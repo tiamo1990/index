@@ -9,6 +9,15 @@
 <meta name="author" content="个人工具下载站">
 <meta name="robots" content="index, follow">
 <meta name="googlebot" content="index, follow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#f06292">
+
+<!-- 预加载和DNS预取 -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preload" href="styles.css" as="style">
 
 <!-- 结构化数据 -->
 <script type="application/ld+json">
@@ -29,14 +38,6 @@
 </head>
 
 <body>
-<div class="modal" id="welcomeModal">
-    <div class="modal-box">
-        <h2 class="modal-title">👋 欢迎访问本站</h2>
-        <p class="modal-text">这里汇集了各类实用工具，安全、免费、好用！</p>
-        <button class="modal-btn" id="modalCloseBtn">我知道了</button>
-    </div>
-</div>
-
 <header id="mainHeader">
 <div class="container">
     <div class="nav-container">
@@ -67,6 +68,7 @@
 
 <main class="container">
     <div class="hero-section">
+        <div class="hero-bg"></div>
         <h1 class="page-title">选择工具分类</h1>
         <p class="hero-subtitle">精心整理的实用工具合集，满足您的各种需求</p>
         
@@ -91,37 +93,37 @@
             <div class="tool-count">10+</div>
             <div class="card-icon">🖥️</div>
             <h3>系统工具</h3>
-            <p>清理、优化、驱动、备份</p>
+            <p>压缩解压 · 硬盘管理 · 系统激活</p>
         </a>
         <a href="office.html" class="card scroll-animate">
             <div class="tool-count">7+</div>
             <div class="card-icon">📝</div>
             <h3>办公工具</h3>
-            <p>文档、表格、PDF、格式转换</p>
+            <p>Office套件 · PDF转换 · 文档处理</p>
         </a>
         <a href="dev.html" class="card scroll-animate">
             <div class="tool-count">10+</div>
             <div class="card-icon">💻</div>
             <h3>开发工具</h3>
-            <p>编程、调试、版本控制</p>
+            <p>代码编辑 · 虚拟机 · 开发环境</p>
         </a>
         <a href="network.html" class="card scroll-animate">
             <div class="tool-count">8+</div>
             <div class="card-icon">🌐</div>
             <h3>网络工具</h3>
-            <p>网络分析、协议抓包、远程连接</p>
+            <p>网络分析 · 远程连接 · 抓包调试</p>
         </a>
         <a href="multimedia.html" class="card scroll-animate">
             <div class="tool-count">6+</div>
             <div class="card-icon">🎬</div>
             <h3>多媒体工具</h3>
-            <p>视频编辑、图像处理、音频处理</p>
+            <p>视频剪辑 · 图像处理 · 音频编辑</p>
         </a>
         <a href="plugin.html" class="card scroll-animate">
             <div class="tool-count">11+</div>
             <div class="card-icon">📦</div>
             <h3>其他工具</h3>
-            <p>游戏辅助、系统增强、杀毒密码</p>
+            <p>杀毒软件 · 密码管理 · 驱动程序</p>
         </a>
     </div>
 </main>

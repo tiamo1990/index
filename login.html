@@ -19,16 +19,17 @@
 }
 
 .login-box {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px);
+    background: var(--glass-bg);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
     border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), 0 25px 80px rgba(0, 0, 0, 0.4);
     padding: 3rem;
     width: 100%;
     max-width: 480px;
     text-align: center;
-    animation: loginBoxFadeIn 0.8s ease forwards;
+    animation: loginBoxFadeIn 0.8s var(--ease-out-expo) forwards;
 }
 
 @keyframes loginBoxFadeIn {
@@ -43,12 +44,12 @@
 .login-header h1 {
     font-size: 2rem;
     font-weight: 700;
-    color: #2d3748;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .login-header p {
-    color: #64748b;
+    color: var(--text-secondary);
     font-size: 1.1rem;
 }
 
@@ -65,7 +66,7 @@
 .form-group label {
     display: block;
     font-weight: 600;
-    color: #2d3748;
+    color: var(--text-secondary);
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
 }
@@ -73,22 +74,22 @@
 .form-input {
     width: 100%;
     padding: 1rem;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--glass-border);
     border-radius: 12px;
     font-size: 1rem;
-    color: #2d3748;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-primary);
+    transition: all 0.3s var(--ease-out-expo);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .form-input:focus {
     outline: none;
-    border-color: #f06292;
-    box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.1);
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .login-btn {
-    background: linear-gradient(135deg, #f06292, #ba68c8);
+    background: var(--primary-gradient);
     color: #fff;
     border: none;
     padding: 1rem 2rem;
@@ -96,14 +97,14 @@
     cursor: pointer;
     font-weight: 600;
     font-size: 1.1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(240, 98, 146, 0.25);
+    transition: all 0.3s var(--ease-out-back);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
     margin-top: 1rem;
 }
 
 .login-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(240, 98, 146, 0.35);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
 }
 
 .login-btn:active {
@@ -111,23 +112,23 @@
 }
 
 .error-message {
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(239, 68, 68, 0.15);
     border: 1px solid rgba(239, 68, 68, 0.3);
     border-radius: 12px;
     padding: 1rem;
     margin-bottom: 1.5rem;
-    color: #dc2626;
+    color: #ef4444;
     font-size: 0.95rem;
     display: none;
 }
 
 .success-message {
-    background: rgba(72, 187, 120, 0.1);
-    border: 1px solid rgba(72, 187, 120, 0.3);
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 12px;
     padding: 1rem;
     margin-bottom: 1.5rem;
-    color: #15803d;
+    color: #10b981;
     font-size: 0.95rem;
     display: none;
 }
@@ -135,15 +136,18 @@
 .back-to-home {
     margin-top: 2rem;
     display: inline-block;
-    color: #f06292;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.3s ease;
+    transition: all 0.3s var(--ease-out-expo);
 }
 
 .back-to-home:hover {
-    color: #ba68c8;
-    text-decoration: underline;
+    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
 /* 响应式设计 */
@@ -230,6 +234,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     const errorMessage = document.getElementById('errorMessage');
     const successMessage = document.getElementById('successMessage');
+
+    // 检查是否已登录（仅在非登录页面时跳转）
+    if (localStorage.getItem('adminLoggedIn') === 'true') {
+        window.location.href = 'admin.html';
+        return;
+    }
     
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -250,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 跳转到后台管理页面
             setTimeout(() => {
                 window.location.href = 'admin.html';
-            }, 1000);
+            }, 500);
         } else {
             // 登录失败
             errorMessage.textContent = '用户名或密码错误';
@@ -258,11 +268,6 @@ document.addEventListener('DOMContentLoaded', function() {
             successMessage.style.display = 'none';
         }
     });
-    
-    // 检查是否已登录
-    if (localStorage.getItem('adminLoggedIn') === 'true') {
-        window.location.href = 'admin.html';
-    }
 });
 </script>
 </body>

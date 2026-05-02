@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>工具详情 - 个人工具下载站</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="工具详情页面，提供详细的工具介绍和下载链接。">
+<meta name="robots" content="index, follow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#667eea">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="styles.css">
+<style>
+.tool-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.8s var(--ease-out-expo);
+}
+
+.tool-icon-large {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    animation: bounce 2s var(--ease-in-out-circ) infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.tool-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tool-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+}
+
+.tool-tags {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.tool-tag {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.tool-tag:hover {
+    background: var(--primary-gradient);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.tool-main-content {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+    animation: fadeInUp 1s var(--ease-out-expo);
+}
+
+@media (max-width: 768px) {
+    .tool-main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.tool-description-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.tool-description-card h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.tool-description-card p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.feature-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.feature-list li:hover {
+    padding-left: 1rem;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 12px;
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.tool-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.download-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.download-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.download-btn-large {
+    display: inline-block;
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none;
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s var(--ease-out-back);
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    margin-bottom: 1rem;
+}
+
+.download-btn-large:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+    background: var(--accent-gradient);
+}
+
+.file-info {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 1rem;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.info-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+    font-size: 0.95rem;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.info-value {
+    color: #fff;
+    font-weight: 500;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+
+<header id="mainHeader">
+<div class="container">
+    <div class="nav-container">
+        <div class="logo">📦 个人工具<span>合集</span></div>
+        
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-item">首页</a>
+            <a href="system.html" class="nav-item">系统工具</a>
+            <a href="office.html" class="nav-item">办公工具</a>
+            <a href="dev.html" class="nav-item">开发工具</a>
+            <a href="network.html" class="nav-item">网络工具</a>
+            <a href="multimedia.html" class="nav-item">多媒体工具</a>
+            <a href="plugin.html" class="nav-item">其他工具</a>
+            <a href="login.html" class="nav-item">后台管理</a>
+        </nav>
+        
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input type="text" class="search-input" placeholder="搜索工具...">
+        </div>
+    </div>
+</div>
+</header>
+
+<main class="container">
+<div class="tool-detail-container">
+    <a href="javascript:history.back()" class="back">← 返回列表</a>
+    
+    <div class="tool-header">
+        <div class="tool-icon-large">📦</div>
+        <h1 class="tool-title">工具名称</h1>
+        <p class="tool-subtitle">简短有力的工具描述，突出核心功能</p>
+        
+        <div class="tool-tags">
+            <span class="tool-tag">标签一</span>
+            <span class="tool-tag">标签二</span>
+            <span class="tool-tag">标签三</span>
+        </div>
+    </div>
+    
+    <div class="tool-main-content">
+        <div class="tool-description-card">
+            <h2>📋 工具介绍</h2>
+            <p>这里是工具的详细介绍，说明工具的主要功能、使用场景和优势特点。文字要简洁明了，突出重点。</p>
+            
+            <h2 style="margin-top: 2rem;">✨ 核心特性</h2>
+            <ul class="feature-list">
+                <li>
+                    <span class="feature-icon">🚀</span>
+                    <span>特性一：简洁明了的功能描述</span>
+                </li>
+                <li>
+                    <span class="feature-icon">⚡</span>
+                    <span>特性二：突出工具的核心优势</span>
+                </li>
+                <li>
+                    <span class="feature-icon">🛡️</span>
+                    <span>特性三：强调安全性和稳定性</span>
+                </li>
+                <li>
+                    <span class="feature-icon">💎</span>
+                    <span>特性四：界面美观，操作便捷</span>
+                </li>
+            </ul>
+            
+            <h2 style="margin-top: 2rem;">📖 使用说明</h2>
+            <p>简要说明工具的使用方法和注意事项，帮助用户快速上手。可以包含安装步骤、配置方法等关键信息。</p>
+        </div>
+        
+        <div class="tool-sidebar">
+            <div class="download-card">
+                <h3>⬇️ 立即下载</h3>
+                <a href="#" class="download-btn-large" download>下载文件</a>
+                <div class="file-info">
+                    文件大小：约 XX MB<br>
+                    版本：X.X.X<br>
+                    更新时间：2026-01-01
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <h3>📊 详细信息</h3>
+                <div class="info-item">
+                    <span class="info-label">软件名称</span>
+                    <span class="info-value">工具名称</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">软件版本</span>
+                    <span class="info-value">X.X.X</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">文件大小</span>
+                    <span class="info-value">XX MB</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">更新时间</span>
+                    <span class="info-value">2026-01-01</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">适用系统</span>
+                    <span class="info-value">Windows</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+<footer>
+<div class="container">© 2026 个人工具下载站</div>
+</footer>
+
+<button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>

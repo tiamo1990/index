@@ -1,0 +1,1007 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>宸ュ叿璇︽儏 - 涓汉宸ュ叿涓嬭浇绔?/title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<style>
+.image-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.image-modal-overlay {
+    position: absolute;
+    inset: 0;
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    padding: 1rem;
+}
+
+.image-modal-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.image-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.screenshot-item {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.screenshot-item:hover .screenshot-overlay {
+    opacity: 1;
+}
+
+.screenshot-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 8px;
+}
+
+.screenshot-overlay span {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.no-screenshot {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+}
+
+.no-screenshot-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<header id="mainHeader">
+<div class="container">
+    <div class="nav-container">
+        <div class="logo">馃摝 涓汉宸ュ叿<span>鍚堥泦</span></div>
+        
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-item">棣栭〉</a>
+            <a href="system.html" class="nav-item">绯荤粺宸ュ叿</a>
+            <a href="office.html" class="nav-item">鍔炲叕宸ュ叿</a>
+            <a href="dev.html" class="nav-item">寮€鍙戝伐鍏?/a>
+            <a href="network.html" class="nav-item">缃戠粶宸ュ叿</a>
+            <a href="multimedia.html" class="nav-item">澶氬獟浣撳伐鍏?/a>
+            <a href="plugin.html" class="nav-item">鍏朵粬宸ュ叿</a>
+            <a href="login.html" class="nav-item">鍚庡彴绠＄悊</a>
+        </nav>
+        
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input type="text" class="search-input" placeholder="鎼滅储宸ュ叿...">
+        </div>
+    </div>
+</div>
+</header>
+
+<main class="container">
+<div class="tool-detail-header">
+    <a href="javascript:history.back()" class="back">鈫?杩斿洖涓婁竴椤?/a>
+    <h1 class="tool-detail-title" id="toolTitle">WinRar</h1>
+    
+    <div class="tool-meta">
+        <div class="meta-item">
+            <div class="meta-label">鍒嗙被</div>
+            <div class="meta-value" id="toolCategory">绯荤粺宸ュ叿</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-label">鐗堟湰</div>
+            <div class="meta-value" id="toolVersion">7.20</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-label">鏂囦欢澶у皬</div>
+            <div class="meta-value" id="toolSize">5.2MB</div>
+        </div>
+        <div class="meta-item">
+            <div class="meta-label">鏇存柊鏃ユ湡</div>
+            <div class="meta-value" id="toolDate">2026-04-21</div>
+        </div>
+    </div>
+</div>
+
+<div class="tool-content">
+    <div class="tool-description">
+        <h2>宸ュ叿浠嬬粛</h2>
+        <p id="toolDescription">WinRAR 鏄竴娆惧姛鑳藉己澶х殑鍘嬬缉鏂囦欢绠＄悊宸ュ叿锛屽畠鑳藉浠芥偍鐨勬暟鎹紝鍑忓皯鐢靛瓙閭欢闄勪欢鐨勫ぇ灏忥紝瑙ｅ帇缂╀粠 Internet 涓婁笅杞界殑 RAR銆乑IP 鍙婂叾瀹冪被鍨嬫枃浠讹紝骞朵笖鍙互鏂板缓 RAR 鍙?ZIP 鏍煎紡绛夌殑鍘嬬缉绫绘枃浠躲€?/p>
+        
+        <h2>涓昏鍔熻兘</h2>
+        <ul id="toolFeatures">
+            <li>鏀寔澶氱鍘嬬缉鏍煎紡锛屽寘鎷?RAR銆乑IP銆?Z 绛?/li>
+            <li>鎻愪緵寮哄ぇ鐨勫帇缂╃畻娉曪紝鍘嬬缉鐜囬珮</li>
+            <li>鏀寔鍒嗗嵎鍘嬬缉鍜岃嚜瑙ｅ帇鍔熻兘</li>
+            <li>鍐呯疆鏂囦欢鍔犲瘑鍔熻兘锛屼繚鎶ゆ偍鐨勬枃浠跺畨鍏?/li>
+            <li>鏀寔鎵归噺澶勭悊鍜屽懡浠よ鎿嶄綔</li>
+        </ul>
+        
+        <h2>绯荤粺瑕佹眰</h2>
+        <p id="toolRequirements">Windows 7/8/10/11 32浣嶆垨64浣嶆搷浣滅郴缁燂紝鑷冲皯 512MB 鍐呭瓨锛?0MB 鍙敤纾佺洏绌洪棿銆?/p>
+    </div>
+    
+    <div class="tool-sidebar">
+        <div class="download-section">
+            <a href="#" class="download-btn" id="downloadLink">绔嬪嵆涓嬭浇</a>
+            <div class="version-info">褰撳墠鐗堟湰锛?span id="downloadVersion">7.20</span></div>
+            <div class="file-info">
+                <div>鏂囦欢绫诲瀷锛?span id="fileType">EXE 瀹夎鍖?/span></div>
+                <div>鏂囦欢澶у皬锛?span id="fileSize">5.2MB</span></div>
+                <div>閫傜敤骞冲彴锛?span id="platform">Windows</span></div>
+            </div>
+        </div>
+        
+        <div class="screenshot-section" id="screenshotSection">
+            <h3>杞欢鎴浘</h3>
+            <div class="screenshot-gallery" id="screenshotGallery">
+                <div class="screenshot-item">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=WinRAR%20software%20interface%20screenshot%2C%20file%20compression%20tool%2C%20windows%20application%2C%20professional%20UI&image_size=square" alt="WinRAR 鎴浘1">
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=WinRAR%20compression%20settings%20dialog%2C%20file%20compression%20options%2C%20windows%20software%20interface&image_size=square" alt="WinRAR 鎴浘2">
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=WinRAR%20file%20browser%20interface%2C%20compressed%20files%20management%2C%20windows%20application&image_size=square" alt="WinRAR 鎴浘3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="related-tools">
+    <h2>鐩稿叧宸ュ叿</h2>
+    <div class="related-tools-grid" id="relatedTools">
+        <a href="tool-detail.html?tool=360zip" class="related-tool-item">
+            <h3>360zip</h3>
+            <p>鍏嶈垂鐨勮В鍘嬬缉杞欢锛屾敮鎸佸绉嶆牸寮?/p>
+        </a>
+        <a href="tool-detail.html?tool=7zip" class="related-tool-item">
+            <h3>7-Zip</h3>
+            <p>寮€婧愬厤璐圭殑鍘嬬缉宸ュ叿锛屽帇缂╃巼楂?/p>
+        </a>
+        <a href="tool-detail.html?tool=bandizip" class="related-tool-item">
+            <h3>Bandizip</h3>
+            <p>杞婚噺绾у帇缂╄蒋浠讹紝鐣岄潰绠€娲?/p>
+        </a>
+    </div>
+</div>
+</main>
+
+<footer>
+<div class="container">漏 2026 涓汉宸ュ叿涓嬭浇绔?/div>
+</footer>
+
+<button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">鈫?/button>
+
+<script src="script.js"></script>
+
+<script>
+const DEFAULT_TOOL_DATA = {
+    winrar: {
+        title: 'WinRar',
+        category: '绯荤粺宸ュ叿',
+        version: '7.20',
+        size: '5.2MB',
+        date: '2026-04-21',
+        description: 'WinRAR 鏄竴娆惧姛鑳藉己澶х殑鍘嬬缉鏂囦欢绠＄悊宸ュ叿锛屽畠鑳藉浠芥偍鐨勬暟鎹紝鍑忓皯鐢靛瓙閭欢闄勪欢鐨勫ぇ灏忥紝瑙ｅ帇缂╀粠 Internet 涓婁笅杞界殑 RAR銆乑IP 鍙婂叾瀹冪被鍨嬫枃浠讹紝骞朵笖鍙互鏂板缓 RAR 鍙?ZIP 鏍煎紡绛夌殑鍘嬬缉绫绘枃浠躲€?,
+        features: ['鏀寔澶氱鍘嬬缉鏍煎紡锛屽寘鎷?RAR銆乑IP銆?Z 绛?, '鎻愪緵寮哄ぇ鐨勫帇缂╃畻娉曪紝鍘嬬缉鐜囬珮', '鏀寔鍒嗗嵎鍘嬬缉鍜岃嚜瑙ｅ帇鍔熻兘', '鍐呯疆鏂囦欢鍔犲瘑鍔熻兘锛屼繚鎶ゆ偍鐨勬枃浠跺畨鍏?, '鏀寔鎵归噺澶勭悊鍜屽懡浠よ鎿嶄綔'],
+        requirements: 'Windows 7/8/10/11 32浣嶆垨64浣嶆搷浣滅郴缁燂紝鑷冲皯 512MB 鍐呭瓨锛?0MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-720sc.exe',
+        downloadVersion: '7.20',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '5.2MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: '360zip', url: 'tool-detail.html?tool=360zip', desc: '鍏嶈垂鐨勮В鍘嬬缉杞欢锛屾敮鎸佸绉嶆牸寮?}, {name: '7-Zip', url: 'tool-detail.html?tool=7zip', desc: '寮€婧愬厤璐圭殑鍘嬬缉宸ュ叿锛屽帇缂╃巼楂?}, {name: 'Bandizip', url: 'tool-detail.html?tool=bandizip', desc: '杞婚噺绾у帇缂╄蒋浠讹紝鐣岄潰绠€娲?}]
+    },
+    '360zip': {
+        title: '360zip',
+        category: '绯荤粺宸ュ叿',
+        version: '4.0.0',
+        size: '3.8MB',
+        date: '2026-04-15',
+        description: '360鍘嬬缉鏄竴娆惧厤璐圭殑瑙ｅ帇缂╄蒋浠讹紝鏀寔澶氱鍘嬬缉鏍煎紡锛岀晫闈㈢畝娲侊紝鎿嶄綔鏂逛究銆?,
+        features: ['鏀寔 ZIP銆丷AR銆?Z 绛夊绉嶅帇缂╂牸寮?, '鐣岄潰绠€娲侊紝鎿嶄綔鏂逛究', '鏀寔鎵归噺鍘嬬缉鍜岃В鍘嬬缉', '鍐呯疆鏂囦欢棰勮鍔熻兘', '鏀寔鎷栨嫿鎿嶄綔'],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?256MB 鍐呭瓨锛?MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.onlinedown.net/iopdfbhjl/20267030?module=download&t=website&v=20260318183111',
+        downloadVersion: '4.0.0',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '3.8MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'WinRAR', url: 'tool-detail.html?tool=winrar', desc: '鍔熻兘寮哄ぇ鐨勫帇缂╂枃浠剁鐞嗗伐鍏?}, {name: '7-Zip', url: 'tool-detail.html?tool=7zip', desc: '寮€婧愬厤璐圭殑鍘嬬缉宸ュ叿锛屽帇缂╃巼楂?}, {name: 'Bandizip', url: 'tool-detail.html?tool=bandizip', desc: '杞婚噺绾у帇缂╄蒋浠讹紝鐣岄潰绠€娲?}]
+    },
+    '7zip': {
+        title: '7-Zip',
+        category: '绯荤粺宸ュ叿',
+        version: '24.07',
+        size: '1MB',
+        date: '2026-03-01',
+        description: '7-Zip鏄竴娆惧紑婧愬厤璐圭殑鍘嬬缉宸ュ叿锛屾敮鎸佸绉嶅帇缂╂牸寮忥紝鍘嬬缉鐜囬珮銆?,
+        features: ['寮€婧愬厤璐?, '楂樺帇缂╃巼', '鏀寔7Z鏍煎紡', '鏀寔鍒嗗嵎鍘嬬缉', '鍛戒护琛屾敮鎸?],
+        requirements: 'Windows XP/Vista/7/8/10/11銆?,
+        downloadLink: 'https://www.7-zip.org/download.html',
+        downloadVersion: '24.07',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '1MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'WinRAR', url: 'tool-detail.html?tool=winrar', desc: '鍔熻兘寮哄ぇ鐨勫帇缂╂枃浠剁鐞嗗伐鍏?}, {name: '360zip', url: 'tool-detail.html?tool=360zip', desc: '鍏嶈垂鐨勮В鍘嬬缉杞欢'}]
+    },
+    'bandizip': {
+        title: 'Bandizip',
+        category: '绯荤粺宸ュ叿',
+        version: '7.31',
+        size: '15MB',
+        date: '2026-02-15',
+        description: 'Bandizip鏄竴娆捐交閲忕骇鍘嬬缉杞欢锛岀晫闈㈢畝娲侊紝鏀寔澶氱鍘嬬缉鏍煎紡銆?,
+        features: ['杞婚噺绾?, '鐣岄潰绠€娲?, '澶氭牸寮忔敮鎸?, '楂橀€熷帇缂?, '鍏嶈垂浣跨敤'],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?256MB 鍐呭瓨锛?0MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.bandisoft.com/bandizip/zh-cn/',
+        downloadVersion: '7.31',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '15MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'WinRAR', url: 'tool-detail.html?tool=winrar', desc: '鍔熻兘寮哄ぇ鐨勫帇缂╂枃浠剁鐞嗗伐鍏?}, {name: '7-Zip', url: 'tool-detail.html?tool=7zip', desc: '寮€婧愬厤璐圭殑鍘嬬缉宸ュ叿'}]
+    },
+    'tubo': {
+        title: '鍥惧惂宸ュ叿绠?,
+        category: '绯荤粺宸ュ叿',
+        version: '2026.01.1',
+        size: '85MB',
+        date: '2026-01-15',
+        description: '鍥惧惂宸ュ叿绠辨槸涓€娆鹃泦鎴愮‖浠舵娴嬨€佺郴缁熶紭鍖栫瓑澶氬姛鑳戒簬涓€浣撶殑宸ュ叿闆嗭紝涓撲负鐢佃剳鐖卞ソ鑰呰璁°€?,
+        features: ['闆嗘垚纭欢妫€娴嬪伐鍏?, '鏀寔绯荤粺淇℃伅鏌ョ湅', '鎻愪緵鎬ц兘娴嬭瘯鍔熻兘', '鍖呭惈澶氱瀹炵敤灏忓伐鍏?, '缁胯壊鍏嶅畨瑁咃紝渚挎惡浣跨敤'],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?512MB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://apac.tualatin.club/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1202601.1%E5%AE%89%E8%A3%85%E5%8C%85.exe',
+        downloadVersion: '2026.01.1',
+        fileType: 'EXE 渚挎惡鐗?,
+        fileSize: '85MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'DiskGenius', url: 'tool-detail.html?tool=diskgenius', desc: '涓撲笟纭洏鍒嗗尯涓庢暟鎹仮澶嶅伐鍏?}, {name: 'Rufus', url: 'tool-detail.html?tool=rufus', desc: '杞婚噺绾E鐩樺埗浣滃伐鍏?}, {name: 'WinRAR', url: 'tool-detail.html?tool=winrar', desc: '鍔熻兘寮哄ぇ鐨勫帇缂╂枃浠剁鐞嗗伐鍏?}]
+    },
+    'diskgenius': {
+        title: 'DiskGenius',
+        category: '绯荤粺宸ュ叿',
+        version: '6.1.0',
+        size: '28MB',
+        date: '2026-03-20',
+        description: 'DiskGenius鏄竴娆句笓涓氱‖鐩樺垎鍖轰笌鏁版嵁鎭㈠宸ュ叿锛屾敮鎸佸悇绉嶇‖鐩樺垎鍖虹鐞嗘搷浣溿€?,
+        features: ['鏀寔纭洏鍒嗗尯绠＄悊', '寮哄ぇ鐨勬暟鎹仮澶嶅姛鑳?, '鏀寔鎵囧尯缂栬緫', '澶囦唤杩樺師纭洏鍒嗗尯', '鏀寔GUID鍒嗗尯琛?],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?512MB 鍐呭瓨锛?0MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://eassos.lanzoue.com/DG64',
+        downloadVersion: '6.1.0',
+        fileType: 'EXE 瀹夎鐗?,
+        fileSize: '28MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: '鍥惧惂宸ュ叿绠?, url: 'tool-detail.html?tool=tubo', desc: '闆嗘垚纭欢妫€娴嬨€佺郴缁熶紭鍖栫瓑澶氬姛鑳藉伐鍏烽泦'}, {name: 'Rufus', url: 'tool-detail.html?tool=rufus', desc: '杞婚噺绾E鐩樺埗浣滃伐鍏?}, {name: 'MSDN I tell you', url: 'tool-detail.html?tool=msdn', desc: 'Windows瀹樻柟绯荤粺闀滃儚涓嬭浇绔?}]
+    },
+    'kms': {
+        title: 'KMS婵€娲诲伐鍏?,
+        category: '绯荤粺宸ュ叿',
+        version: '2026.03',
+        size: '15MB',
+        date: '2026-03-01',
+        description: 'KMS婵€娲诲伐鍏锋槸涓€娆網indows鍜孫ffice涓€閿縺娲诲伐鍏凤紝鎿嶄綔绠€鍗曪紝瀹夊叏鍙潬銆?,
+        features: ['涓€閿縺娲籛indows绯荤粺', '涓€閿縺娲籓ffice鍔炲叕杞欢', '鎿嶄綔绠€鍗曚究鎹?, '婵€娲绘垚鍔熺巼楂?, '瀹夊叏鏃犻闄?],
+        requirements: 'Windows 7/8/10/11鎴朞ffice 2010/2013/2016/2019/2021銆?,
+        downloadLink: 'https://github.com/tiamo1990/index/blob/main/kms.rar',
+        downloadVersion: '2026.03',
+        fileType: 'RAR 鍘嬬缉鍖?,
+        fileSize: '15MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: '鍥惧惂宸ュ叿绠?, url: 'tool-detail.html?tool=tubo', desc: '闆嗘垚纭欢妫€娴嬨€佺郴缁熶紭鍖栫瓑澶氬姛鑳藉伐鍏烽泦'}, {name: 'MSDN I tell you', url: 'tool-detail.html?tool=msdn', desc: 'Windows瀹樻柟绯荤粺闀滃儚涓嬭浇绔?}]
+    },
+    'mobaxterm': {
+        title: 'MobaXterm',
+        category: '绯荤粺宸ュ叿',
+        version: '26.0',
+        size: '35MB',
+        date: '2026-02-15',
+        description: 'MobaXterm鏄竴娆惧姛鑳藉己澶х殑杩滅▼SSH缁堢宸ュ叿锛岄泦鎴愬绉嶇綉缁滃伐鍏蜂簬涓€浣撱€?,
+        features: ['鏀寔SSH銆乀elnet銆丷login绛夊绉嶅崗璁?, '闆嗘垚X鏈嶅姟鍣?, '鏀寔SSH闅ч亾', '鍐呯疆澶氱缃戠粶宸ュ叿', '鏀寔瀹忓拰鎻掍欢鎵╁睍'],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?512MB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://download.mobatek.net/2602026012910130/MobaXterm_Installer_v26.0.zip',
+        downloadVersion: '26.0',
+        fileType: 'ZIP 瀹夎鍖?,
+        fileSize: '35MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Xshell', url: 'tool-detail.html?tool=xshell', desc: '涓撲笟鐨勮繙绋婼SH杩炴帴宸ュ叿'}, {name: 'NDM涓嬭浇鍣?, url: 'tool-detail.html?tool=ndm', desc: '澶氱嚎绋嬩笅杞藉姞閫熷櫒'}]
+    },
+    'xshell': {
+        title: 'Xshell',
+        category: '绯荤粺宸ュ叿',
+        version: '7.0',
+        size: '45MB',
+        date: '2026-01-25',
+        description: 'Xshell鏄竴娆句笓涓氱殑杩滅▼SSH杩炴帴宸ュ叿锛屽箍娉涚敤浜庢湇鍔″櫒绠＄悊鍜岃繍缁村伐浣溿€?,
+        features: ['鏀寔SSH銆丼FTP銆乀ELNET绛夊绉嶅崗璁?, '鎻愪緵鏍囩寮忎細璇濈鐞?, '鏀寔鑷畾涔夊揩鎹烽敭', '鍐呯疆VBScript鍜孞S鑴氭湰鏀寔', '鏀寔缁戝畾瀵嗛挜鐧诲綍'],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?512MB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://down.wsyhn.com/23_371911',
+        downloadVersion: '7.0',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '45MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'MobaXterm', url: 'tool-detail.html?tool=mobaxterm', desc: '鍔熻兘寮哄ぇ鐨勮繙绋婼SH缁堢宸ュ叿'}, {name: 'NDM涓嬭浇鍣?, url: 'tool-detail.html?tool=ndm', desc: '澶氱嚎绋嬩笅杞藉姞閫熷櫒'}]
+    },
+    'rufus': {
+        title: 'Rufus',
+        category: '绯荤粺宸ュ叿',
+        version: '4.13',
+        size: '1.5MB',
+        date: '2026-04-01',
+        description: 'Rufus鏄竴娆捐交閲忕骇PE鐩樺埗浣滃伐鍏凤紝鍙互蹇€熷皢U鐩樺埗浣滄垚鍚姩鐩樸€?,
+        features: ['杞婚噺绾т究鎼哄伐鍏?, '鍒朵綔閫熷害蹇?, '鏀寔澶氱闀滃儚鏍煎紡', '鑷姩妫€娴婾鐩?, '鏃犻渶澶嶆潅璁剧疆'],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?512MB 鍐呭瓨锛?0MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://github.com/pbatard/rufus/releases/download/v4.13/rufus-4.13.exe',
+        downloadVersion: '4.13',
+        fileType: 'EXE 渚挎惡鐗?,
+        fileSize: '1.5MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'DiskGenius', url: 'tool-detail.html?tool=diskgenius', desc: '涓撲笟纭洏鍒嗗尯涓庢暟鎹仮澶嶅伐鍏?}, {name: 'MSDN I tell you', url: 'tool-detail.html?tool=msdn', desc: 'Windows瀹樻柟绯荤粺闀滃儚涓嬭浇绔?}]
+    },
+    'msdn': {
+        title: 'MSDN I tell you',
+        category: '绯荤粺宸ュ叿',
+        version: '鍦ㄧ嚎鐗?,
+        size: '缃戠珯',
+        date: '2026-01-01',
+        description: 'MSDN I tell you鏄疻indows瀹樻柟绯荤粺闀滃儚涓嬭浇绔欙紝鎻愪緵寰蒋鍘熺増绯荤粺闀滃儚涓嬭浇鏈嶅姟銆?,
+        features: ['鎻愪緵寰蒋鍘熺増绯荤粺闀滃儚', '娑电洊Windows鍚勭増鏈?, '鍖呭惈Server绯荤粺闀滃儚', '涓嬭浇閫熷害蹇?, '闀滃儚鏂囦欢瀹屾暣鍙潬'],
+        requirements: '缃戠粶娴忚鍣ㄥ嵆鍙闂€?,
+        downloadLink: 'https://msdn.itellyou.cn/2',
+        downloadVersion: '鍦ㄧ嚎鐗?,
+        fileType: '缃戠珯',
+        fileSize: '缃戠珯',
+        platform: 'Web',
+        screenshots: [],
+        relatedTools: [{name: 'Rufus', url: 'tool-detail.html?tool=rufus', desc: '杞婚噺绾E鐩樺埗浣滃伐鍏?}, {name: 'DiskGenius', url: 'tool-detail.html?tool=diskgenius', desc: '涓撲笟纭洏鍒嗗尯涓庢暟鎹仮澶嶅伐鍏?}]
+    },
+    'ndm': {
+        title: 'NDM涓嬭浇鍣?,
+        category: '绯荤粺宸ュ叿',
+        version: '2.5',
+        size: '8MB',
+        date: '2026-02-20',
+        description: 'NDM涓嬭浇鍣ㄦ槸涓€娆惧绾跨▼涓嬭浇鍔犻€熷櫒锛屼笅杞介€熷害蹇紝鏀寔鏂偣缁紶銆?,
+        features: ['澶氱嚎绋嬩笅杞藉姞閫?, '鏀寔鏂偣缁紶', '闆嗘垚娴忚鍣ㄦ崟鑾?, '鏀寔BT绉嶅瓙涓嬭浇', '鐣岄潰绠€娲佺編瑙?],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?256MB 鍐呭瓨锛?0MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: '#',
+        downloadVersion: '2.5',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '8MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'MobaXterm', url: 'tool-detail.html?tool=mobaxterm', desc: '鍔熻兘寮哄ぇ鐨勮繙绋婼SH缁堢宸ュ叿'}, {name: 'Xshell', url: 'tool-detail.html?tool=xshell', desc: '涓撲笟鐨勮繙绋婼SH杩炴帴宸ュ叿'}]
+    },
+    'ensp': {
+        title: 'Ensp',
+        category: '寮€鍙戝伐鍏?,
+        version: '1.3',
+        size: '350MB',
+        date: '2026-02-10',
+        description: 'Ensp鏄竴娆剧綉缁滅粓绔澶囨ā鎷熷櫒锛屾敮鎸佸绉嶇綉缁滆澶囩殑妯℃嫙锛屾槸缃戠粶宸ョ▼甯堝涔犲拰娴嬭瘯缃戠粶閰嶇疆鐨勫ソ宸ュ叿銆?,
+        features: ['鏀寔澶氱缃戠粶璁惧妯℃嫙', '鎻愪緵鎷撴墤缃戠粶鎼缓', '鏀寔鍗忚閰嶇疆娴嬭瘯', '鍖呭惈璺敱鍣ㄣ€佷氦鎹㈡満绛夎澶?, '瀛︿範缃戠粶鎶€鏈殑濂藉府鎵?],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?4GB 鍐呭瓨锛?0GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://forspeed.365xiazai.com/down/2022down/3/03/hwmnqensp.rar',
+        downloadVersion: '1.3',
+        fileType: 'RAR 鍘嬬缉鍖?,
+        fileSize: '350MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Wireshark', url: 'tool-detail.html?tool=wireshark', desc: '缃戠粶鍗忚鎶撳寘宸ュ叿'}, {name: 'VirtualBox', url: 'tool-detail.html?tool=virtualbox', desc: '鍏嶈垂鐨勮櫄鎷熸満杞欢'}]
+    },
+    'wireshark': {
+        title: 'Wireshark',
+        category: '寮€鍙戝伐鍏?,
+        version: '4.4.3',
+        size: '75MB',
+        date: '2026-03-15',
+        description: 'Wireshark鏄竴娆剧綉缁滃崗璁姄鍖呭伐鍏凤紝鏀寔澶氱缃戠粶鍗忚鐨勫垎鏋愶紝鏄綉缁滄晠闅滄帓鏌ュ拰缃戠粶瀹夊叏鍒嗘瀽鐨勫繀澶囧伐鍏枫€?,
+        features: ['鏀寔澶氱缃戠粶鍗忚鍒嗘瀽', '瀹炴椂鏁版嵁鍖呮崟鑾?, '寮哄ぇ鐨勮繃婊ゅ姛鑳?, '鏀寔鍗忚瑙ｇ爜', '璺ㄥ钩鍙版敮鎸?],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?1GB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://1.na.dl.wireshark.org/win64/Wireshark-4.4.3-x64.exe',
+        downloadVersion: '4.4.3',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '75MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'Ensp', url: 'tool-detail.html?tool=ensp', desc: '缃戠粶缁堢璁惧妯℃嫙鍣?}, {name: 'WinPcap', url: 'tool-detail.html?tool=winpcap', desc: '缃戠粶鎶撳寘蹇呰缁勪欢'}]
+    },
+    'virtualbox': {
+        title: 'VirtualBox',
+        category: '寮€鍙戝伐鍏?,
+        version: '5.2.44',
+        size: '162MB',
+        date: '2026-01-20',
+        description: 'VirtualBox鏄竴娆惧厤璐圭殑铏氭嫙鏈鸿蒋浠讹紝鏀寔澶氱鎿嶄綔绯荤粺鐨勮櫄鎷熷寲锛屾槸寮€鍙戝拰娴嬭瘯鐨勫ソ甯墜銆?,
+        features: ['鍏嶈垂寮€婧愯櫄鎷熸満', '鏀寔澶氭搷浣滅郴缁?, '鏀寔蹇収鍔熻兘', '鏀寔鍏变韩鏂囦欢澶?, '鎬ц兘绋冲畾鍙潬'],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?2GB 鍐呭瓨锛?0GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://download.virtualbox.org/virtualbox/5.2.44/VirtualBox-5.2.44-139111-Win.exe',
+        downloadVersion: '5.2.44',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '162MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'VMware Workstation', url: 'tool-detail.html?tool=vmware', desc: '涓撲笟鐨勮櫄鎷熸満杞欢'}, {name: 'Ensp', url: 'tool-detail.html?tool=ensp', desc: '缃戠粶缁堢璁惧妯℃嫙鍣?}]
+    },
+    'winpcap': {
+        title: 'WinPcap',
+        category: '寮€鍙戝伐鍏?,
+        version: '4.1.3',
+        size: '1.5MB',
+        date: '2025-12-01',
+        description: 'WinPcap鏄竴娆剧綉缁滄姄鍖呭繀瑕佺粍浠讹紝涓虹綉缁滄姄鍖呭伐鍏锋彁渚涘簳灞傛敮鎸侊紝鏄綉缁滃垎鏋愬伐鍏风殑鍩虹銆?,
+        features: ['鎻愪緵缃戠粶搴曞眰璁块棶', '鏀寔鏁版嵁鍖呮崟鑾?, '娴侀噺缁熻鍔熻兘', '缃戠粶鐩戞帶鏀寔', '鍏煎澶氱鎶撳寘宸ュ叿'],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?256MB 鍐呭瓨锛?0MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://soft.onlinedown.net/soft/2685.htm',
+        downloadVersion: '4.1.3',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '1.5MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Wireshark', url: 'tool-detail.html?tool=wireshark', desc: '缃戠粶鍗忚鎶撳寘宸ュ叿'}]
+    },
+    'vmware': {
+        title: 'VMware Workstation 17 Pro',
+        category: '寮€鍙戝伐鍏?,
+        version: '17.0',
+        size: '630MB',
+        date: '2026-02-28',
+        description: 'VMware Workstation 17 Pro鏄竴娆句笓涓氱殑铏氭嫙鏈鸿蒋浠讹紝鏀寔澶氱鎿嶄綔绯荤粺鐨勮櫄鎷熷寲锛屽姛鑳藉己澶э紝鎬ц兘绋冲畾銆?,
+        features: ['涓撲笟绾ц櫄鎷熷寲', '鏀寔DX11鍥惧舰鍔犻€?, '鏀寔USB璁惧鐩撮€?, '鏀寔铏氭嫙鏈哄厠闅?, '鎬ц兘涓氱晫棰嗗厛'],
+        requirements: 'Windows 10/11锛岃嚦灏?4GB 鍐呭瓨锛?0GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://get.downkuai.com/download/123409/8',
+        downloadVersion: '17.0',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '630MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'VirtualBox', url: 'tool-detail.html?tool=virtualbox', desc: '鍏嶈垂鐨勮櫄鎷熸満杞欢'}, {name: 'Ensp', url: 'tool-detail.html?tool=ensp', desc: '缃戠粶缁堢璁惧妯℃嫙鍣?}]
+    },
+    'pycharm': {
+        title: 'Pycharm',
+        category: '寮€鍙戝伐鍏?,
+        version: '2024.1',
+        size: '450MB',
+        date: '2026-04-10',
+        description: 'PyCharm鏄竴娆句笓涓氱殑Python浠ｇ爜缂栬緫鍣紝鏀寔浠ｇ爜琛ュ叏銆佽皟璇曠瓑澶氱鍔熻兘锛屾槸Python寮€鍙戜汉鍛樼殑蹇呭宸ュ叿銆?,
+        features: ['涓撲笟鐨凱ython IDE', '鏅鸿兘浠ｇ爜琛ュ叏', '寮哄ぇ鐨勮皟璇曞姛鑳?, '鏀寔鍗曞厓娴嬭瘯', '涓板瘜鐨勬彃浠剁敓鎬?],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?2GB 鍐呭瓨锛?GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.jetbrains.com/pycharm/download/?section=windows',
+        downloadVersion: '2024.1',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '450MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'VS Code', url: 'tool-detail.html?tool=vscode', desc: '寰蒋杞婚噺寮哄ぇ浠ｇ爜缂栬緫鍣?}]
+    },
+    'vscode': {
+        title: 'VS Code',
+        category: '寮€鍙戝伐鍏?,
+        version: '1.89.0',
+        size: '85MB',
+        date: '2026-04-20',
+        description: 'Visual Studio Code 鏄井杞帹鍑虹殑鍏嶈垂寮€婧愪唬鐮佺紪杈戝櫒锛屾敮鎸佸绉嶇紪绋嬭瑷€锛屾嫢鏈変赴瀵岀殑鎵╁睍鐢熸€併€?,
+        features: ['鏀寔澶氱缂栫▼璇█鍜屾枃浠舵牸寮?, '鍐呯疆璋冭瘯鍔熻兘', '涓板瘜鐨勬墿灞曠敓鎬佺郴缁?, '鏅鸿兘浠ｇ爜琛ュ叏鍜岃娉曢珮浜?, '闆嗘垚缁堢鍜岀増鏈帶鍒?],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?1GB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://code.visualstudio.com/Download',
+        downloadVersion: '1.89.0',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '85MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'Pycharm', url: 'tool-detail.html?tool=pycharm', desc: 'Python 涓撲笟闆嗘垚寮€鍙戠幆澧?}, {name: 'Sublime Text', url: 'tool-detail.html?tool=sublime', desc: '杞婚噺绾т唬鐮佺紪杈戝櫒'}, {name: 'Atom', url: 'tool-detail.html?tool=atom', desc: '寮€婧愪唬鐮佺紪杈戝櫒'}]
+    },
+    'sublime': {
+        title: 'Sublime Text',
+        category: '寮€鍙戝伐鍏?,
+        version: '4.4',
+        size: '10MB',
+        date: '2026-01-10',
+        description: 'Sublime Text鏄竴娆捐交閲忕骇浠ｇ爜缂栬緫鍣紝鍚姩閫熷害蹇紝鎵╁睍鎬у己銆?,
+        features: ['杞婚噺绾?, '鍚姩閫熷害蹇?, '寮哄ぇ鎻掍欢绯荤粺', '澶氬厜鏍囩紪杈?, '璺ㄥ钩鍙版敮鎸?],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?512MB 鍐呭瓨锛?0MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.sublimetext.com/download',
+        downloadVersion: '4.4',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '10MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'VS Code', url: 'tool-detail.html?tool=vscode', desc: '寰蒋杞婚噺寮哄ぇ浠ｇ爜缂栬緫鍣?}, {name: 'Pycharm', url: 'tool-detail.html?tool=pycharm', desc: 'Python涓撲笟闆嗘垚寮€鍙戠幆澧?}]
+    },
+    'atom': {
+        title: 'Atom',
+        category: '寮€鍙戝伐鍏?,
+        version: '1.63',
+        size: '150MB',
+        date: '2025-12-01',
+        description: 'Atom鏄竴娆惧紑婧愪唬鐮佺紪杈戝櫒锛岀敱GitHub寮€鍙戯紝鍙珮搴﹁嚜瀹氫箟銆?,
+        features: ['寮€婧愬厤璐?, '楂樺害鍙畾鍒?, '涓板瘜鎻掍欢', '鍐呯疆Git鏀寔', '鏅鸿兘琛ュ叏'],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?1GB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://atom.io/',
+        downloadVersion: '1.63',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '150MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'VS Code', url: 'tool-detail.html?tool=vscode', desc: '寰蒋杞婚噺寮哄ぇ浠ｇ爜缂栬緫鍣?}]
+    },
+    'phpstudy': {
+        title: 'PHP study锛堝皬鐨潰鏉匡級',
+        category: '寮€鍙戝伐鍏?,
+        version: '8.1',
+        size: '45MB',
+        date: '2026-03-25',
+        description: 'PHP study锛堝皬鐨潰鏉匡級鏄竴娆綪HP闆嗘垚鐜锛屽寘鍚獳pache銆丮ySQL銆丳HP绛夊绉嶇粍浠讹紝鏄疨HP寮€鍙戠殑濂藉府鎵嬨€?,
+        features: ['涓€閿厤缃甈HP鐜', '闆嗘垚Apache/Nginx', '闆嗘垚MySQL鏁版嵁搴?, '鏀寔澶歅HP鐗堟湰鍒囨崲', '鍙鍖栫鐞嗙晫闈?],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?1GB 鍐呭瓨锛?GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://m.xp.cn/',
+        downloadVersion: '8.1',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '45MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'VS Code', url: 'tool-detail.html?tool=vscode', desc: '寰蒋杞婚噺寮哄ぇ浠ｇ爜缂栬緫鍣?}]
+    },
+    'win11vbs': {
+        title: 'win11鍏抽棴vbs鑴氭湰',
+        category: '寮€鍙戝伐鍏?,
+        version: '1.0',
+        size: '2MB',
+        date: '2026-01-15',
+        description: 'win11鍏抽棴vbs鑴氭湰鐢ㄤ簬鍏抽棴Windows 11铏氭嫙鍖栧畨鍏ㄥ姛鑳斤紝瑙ｅ喅ensp涓瑼R璺敱鍣ㄥ湪win11绯荤粺涓婁笉鑳藉惎鍔ㄧ殑闂銆?,
+        features: ['涓€閿叧闂璙BS鍔熻兘', '鎿嶄綔绠€鍗曚究鎹?, '鑷姩澶囦唤娉ㄥ唽琛?, '鏀寔閲嶆柊寮€鍚疺BS', '鍏煎Win11绯荤粺'],
+        requirements: 'Windows 11绯荤粺銆?,
+        downloadLink: 'https://chinakb.lenovo.com.cn/chinakb/prod-api/file/downloadFile?key=uniko/FILE/92e0a9ae331aadcf27abdb22f9974b32-1763517794836.zip&name=%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8.zip',
+        downloadVersion: '1.0',
+        fileType: 'ZIP 鍘嬬缉鍖?,
+        fileSize: '2MB',
+        platform: 'Windows 11',
+        screenshots: [],
+        relatedTools: [{name: 'Ensp', url: 'tool-detail.html?tool=ensp', desc: '缃戠粶缁堢璁惧妯℃嫙鍣?}]
+    },
+    'clash': {
+        title: '姊瓙锛坈lash锛?,
+        category: '寮€鍙戝伐鍏?,
+        version: '2024.02',
+        size: '15MB',
+        date: '2026-02-01',
+        description: 'Clash鏄竴娆剧綉缁滀唬鐞嗗伐鍏凤紝鏀寔澶氱浠ｇ悊鍗忚锛岀晫闈㈠弸濂斤紝鍔熻兘寮哄ぇ锛屾槸绉戝涓婄綉鐨勫ソ宸ュ叿銆?,
+        features: ['鏀寔澶氱浠ｇ悊鍗忚', '瑙勫垯鍒嗙粍绠＄悊', 'TUN妯″紡鏀寔', '璺ㄥ钩鍙版敮鎸?, '鐣岄潰绠€娲佺編瑙?],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?512MB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: '#',
+        downloadVersion: '2024.02',
+        fileType: 'EXE 渚挎惡鐗?,
+        fileSize: '15MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'Wireshark', url: 'tool-detail.html?tool=wireshark', desc: '缃戠粶鍗忚鎶撳寘宸ュ叿'}]
+    },
+    'curl': {
+        title: 'curl',
+        category: '缃戠粶宸ュ叿',
+        version: '8.5.0',
+        size: '10MB',
+        date: '2026-03-01',
+        description: 'curl鏄竴娆惧姛鑳藉己澶х殑鍛戒护琛岀綉缁滃伐鍏凤紝鏀寔澶氱鍗忚锛屽彲鐢ㄤ簬鍙戦€丠TTP璇锋眰銆佷笅杞芥枃浠躲€佹祴璇旳PI绛夈€?,
+        features: ['鏀寔澶氱缃戠粶鍗忚', '鍙戦€丠TTP璇锋眰', '鏂囦欢涓嬭浇涓婁紶', 'API娴嬭瘯鍒╁櫒', '璺ㄥ钩鍙版敮鎸?],
+        requirements: '鏀寔Windows銆乵acOS銆丩inux銆?,
+        downloadLink: 'https://curl.se/windows/',
+        downloadVersion: '8.5.0',
+        fileType: 'ZIP 鍙墽琛屾枃浠?,
+        fileSize: '10MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'Postman', url: 'tool-detail.html?tool=postman', desc: '涓撲笟鐨凙PI娴嬭瘯宸ュ叿'}, {name: 'Wireshark', url: 'tool-detail.html?tool=wireshark', desc: '缃戠粶鍗忚鎶撳寘宸ュ叿'}]
+    },
+    'postman': {
+        title: 'Postman',
+        category: '缃戠粶宸ュ叿',
+        version: '10.20',
+        size: '120MB',
+        date: '2026-02-15',
+        description: 'Postman鏄竴娆句笓涓氱殑API娴嬭瘯宸ュ叿锛屾敮鎸丠TTP璇锋眰鐨勫垱寤恒€佸彂閫佸拰绠＄悊锛岄泦鎴愪簡娴嬭瘯鑴氭湰銆佺幆澧冨彉閲忋€侀泦鍚堢瓑鍔熻兘銆?,
+        features: ['API璇锋眰绠＄悊', '娴嬭瘯鑴氭湰鏀寔', '鐜鍙橀噺閰嶇疆', '闆嗗悎鍔熻兘', '鍥㈤槦鍗忎綔'],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?2GB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.postman.com/downloads/',
+        downloadVersion: '10.20',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '120MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'curl', url: 'tool-detail.html?tool=curl', desc: '鍛戒护琛岀綉缁滃伐鍏?}, {name: 'Wireshark', url: 'tool-detail.html?tool=wireshark', desc: '缃戠粶鍗忚鎶撳寘宸ュ叿'}]
+    },
+    'jianying': {
+        title: '鍓槧6.0.1浼氬憳姘镐箙婵€娲荤増',
+        category: '澶氬獟浣撳伐鍏?,
+        version: '6.0.1',
+        size: '500MB',
+        date: '2026-01-20',
+        description: '鍓槧鏄竴娆惧姛鑳藉己澶х殑瑙嗛鍓緫杞欢锛屾敮鎸佸绉嶈棰戠紪杈戝姛鑳斤紝鍖呮嫭婊ら暅銆佽浆鍦恒€佸瓧骞曘€佺壒鏁堢瓑锛岀晫闈㈠弸濂斤紝鎿嶄綔绠€鍗曘€?,
+        features: ['澶氱瑙嗛缂栬緫鍔熻兘', '涓板瘜婊ら暅鏁堟灉', '杞満瀛楀箷鐗规晥', '鎿嶄綔绠€鍗曟槗涓婃墜', '杈撳嚭澶氱鏍煎紡'],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?4GB 鍐呭瓨锛?0GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://pan.xunlei.com/s/VOMQjmqZgEsLegm6oGnU4KgiA1?pwd=x7ka',
+        downloadVersion: '6.0.1',
+        fileType: 'RAR 鍘嬬缉鍖?,
+        fileSize: '500MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Ps 2024', url: 'tool-detail.html?tool=ps2024', desc: '涓撲笟鍥惧儚澶勭悊杞欢'}, {name: 'Audacity', url: 'tool-detail.html?tool=audacity', desc: '寮€婧愰煶棰戠紪杈戣蒋浠?}]
+    },
+    'ps2023': {
+        title: 'Ps 2023',
+        category: '澶氬獟浣撳伐鍏?,
+        version: '24.0',
+        size: '3.5GB',
+        date: '2025-10-15',
+        description: 'Adobe Photoshop 2023鏄竴娆句笓涓氱殑鍥惧儚澶勭悊杞欢锛屾敮鎸佸绉嶅浘鍍忓鐞嗗姛鑳斤紝鍖呮嫭鍥惧眰缂栬緫銆佹护闀溿€佽皟鑹茬瓑銆?,
+        features: ['鍥惧眰缂栬緫鍔熻兘', '涓板瘜婊ら暅鏁堟灉', '涓撲笟璋冭壊宸ュ叿', '閫夊尯钂欑増鏀寔', '绗笁鏂规彃浠舵墿灞?],
+        requirements: 'Windows 10/11锛岃嚦灏?8GB 鍐呭瓨锛?6GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://pan.xunlei.com/s/VOMDV0t5qDkS1CUvmYIMc2OyA1?pwd=sedf',
+        downloadVersion: '24.0',
+        fileType: 'RAR 鍘嬬缉鍖?,
+        fileSize: '3.5GB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Ps 2024', url: 'tool-detail.html?tool=ps2024', desc: '鏈€鏂扮増鍥惧儚澶勭悊杞欢'}, {name: 'GIMP', url: 'tool-detail.html?tool=gimp', desc: '寮€婧愬浘鍍忓鐞嗚蒋浠?}]
+    },
+    'ps2024': {
+        title: 'Ps 2024',
+        category: '澶氬獟浣撳伐鍏?,
+        version: '25.0',
+        size: '4GB',
+        date: '2026-01-10',
+        description: 'Adobe Photoshop 2024鏄竴娆句笓涓氱殑鍥惧儚澶勭悊杞欢锛岀晫闈㈡洿鏂帮紝鍔熻兘鏇村姞寮哄ぇ锛屽寘鎷珹I杈呭姪宸ュ叿銆侀珮绾ц皟鑹茬瓑銆?,
+        features: ['AI杈呭姪鍔熻兘', '楂樼骇璋冭壊宸ュ叿', '绁炵粡缃戠粶婊ら暅', '澧炲己鐗堝唴瀹规劅鐭?, '浜戞枃妗ｅ悓姝?],
+        requirements: 'Windows 10/11锛岃嚦灏?8GB 鍐呭瓨锛?6GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://pan.xunlei.com/s/VOMFRIFVmmKtiCFXXos5H5qHA1?pwd=m26s',
+        downloadVersion: '25.0',
+        fileType: 'RAR 鍘嬬缉鍖?,
+        fileSize: '4GB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Ps 2023', url: 'tool-detail.html?tool=ps2023', desc: '涓撲笟鍥惧儚澶勭悊杞欢'}, {name: 'GIMP', url: 'tool-detail.html?tool=gimp', desc: '寮€婧愬浘鍍忓鐞嗚蒋浠?}]
+    },
+    'audacity': {
+        title: 'Audacity',
+        category: '澶氬獟浣撳伐鍏?,
+        version: '3.4',
+        size: '45MB',
+        date: '2026-02-01',
+        description: 'Audacity鏄竴娆惧紑婧愮殑闊抽缂栬緫杞欢锛屾敮鎸佸绉嶉煶棰戠紪杈戝姛鑳斤紝鍖呮嫭褰曢煶銆佸壀杈戙€佹贩闊炽€佹晥鏋滃鐞嗙瓑銆?,
+        features: ['澶氳建闊抽缂栬緫', '褰曢煶鍔熻兘', '涓板瘜闊虫晥澶勭悊', '鏀寔澶氱鏍煎紡', '瀹屽叏鍏嶈垂寮€婧?],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?2GB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.audacityteam.org/download/',
+        downloadVersion: '3.4',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '45MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'HandBrake', url: 'tool-detail.html?tool=handbrake', desc: '寮€婧愯棰戣浆鐮佸伐鍏?}, {name: '鍓槧', url: 'tool-detail.html?tool=jianying', desc: '瑙嗛鍓緫杞欢'}]
+    },
+    'handbrake': {
+        title: 'HandBrake',
+        category: '澶氬獟浣撳伐鍏?,
+        version: '1.7.0',
+        size: '12MB',
+        date: '2026-01-25',
+        description: 'HandBrake鏄竴娆惧紑婧愮殑瑙嗛杞爜宸ュ叿锛屾敮鎸佸绉嶈棰戞牸寮忕殑杞崲锛屾彁渚涘绉嶇紪鐮侀€夐」鍜岄璁俱€?,
+        features: ['澶氱鏍煎紡杞崲', '棰勮杈撳嚭鏂规', '鎵归噺杞爜鏀寔', '瑙嗛棰勮', '鍛戒护琛屾敮鎸?],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?2GB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://handbrake.fr/downloads.php',
+        downloadVersion: '1.7.0',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '12MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'Audacity', url: 'tool-detail.html?tool=audacity', desc: '寮€婧愰煶棰戠紪杈戣蒋浠?}, {name: '鍓槧', url: 'tool-detail.html?tool=jianying', desc: '瑙嗛鍓緫杞欢'}]
+    },
+    'gimp': {
+        title: 'GIMP',
+        category: '澶氬獟浣撳伐鍏?,
+        version: '2.10.34',
+        size: '120MB',
+        date: '2026-02-10',
+        description: 'GIMP鏄竴娆惧紑婧愮殑鍥惧儚澶勭悊杞欢锛屾敮鎸佸绉嶅浘鍍忓鐞嗗姛鑳斤紝鍖呮嫭鍥惧眰缂栬緫銆佹护闀溿€佺粯鍥剧瓑锛屾槸Photoshop鐨勪紭绉€鏇夸唬鍝併€?,
+        features: ['鍥惧眰钂欑増鏀寔', '涓板瘜婊ら暅鏁堟灉', '缁樺浘宸ュ叿', '鑷畾涔夌晫闈?, '瀹屽叏鍏嶈垂寮€婧?],
+        requirements: 'Windows XP/Vista/7/8/10/11锛岃嚦灏?2GB 鍐呭瓨锛?00MB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.gimp.org/downloads/',
+        downloadVersion: '2.10.34',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '120MB',
+        platform: 'Windows/macOS/Linux',
+        screenshots: [],
+        relatedTools: [{name: 'Ps 2024', url: 'tool-detail.html?tool=ps2024', desc: '鏈€鏂扮増鍥惧儚澶勭悊杞欢'}, {name: 'Ps 2023', url: 'tool-detail.html?tool=ps2023', desc: '涓撲笟鍥惧儚澶勭悊杞欢'}]
+    },
+    'wps2025': {
+        title: 'WPS Office 2025涓撲笟鐗?,
+        category: '鍔炲叕宸ュ叿',
+        version: '2025',
+        size: '220MB',
+        date: '2026-01-15',
+        description: 'WPS Office鏄竴娆捐交閲忓叏鑳藉姙鍏浠讹紝鍔熻兘寮哄ぇ锛屽吋瀹筂icrosoft Office鏍煎紡銆?,
+        features: ['鏂囧瓧澶勭悊', '琛ㄦ牸缂栬緫', '婕旂ず鍒朵綔', 'PDF闃呰', '娴烽噺妯℃澘'],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?1GB 鍐呭瓨锛?GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://pan.xunlei.com/s/VOh7lUE3hS06QVfZhL8tGTyZA1?pwd=td3b',
+        downloadVersion: '2025',
+        fileType: 'RAR 鍘嬬缉鍖?,
+        fileSize: '220MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Office 2021', url: 'tool-detail.html?tool=office2021', desc: '寰蒋瀹樻柟鍔炲叕濂椾欢'}, {name: 'PDF杞崲缃戠珯', url: 'tool-detail.html?tool=pdfconvert', desc: '鍦ㄧ嚎PDF杞崲宸ュ叿'}]
+    },
+    'office2021': {
+        title: 'Office 2021',
+        category: '鍔炲叕宸ュ叿',
+        version: '2021',
+        size: '4.5GB',
+        date: '2025-08-20',
+        description: 'Microsoft Office 2021鏄井杞畼鏂瑰姙鍏浠讹紝鍖呭惈Word銆丒xcel銆丳owerPoint绛夌粍浠躲€?,
+        features: ['瀹屾暣鍔炲叕濂椾欢', '娣卞害绯荤粺闆嗘垚', '浜戝悓姝ユ敮鎸?, '鍗忎綔鍔熻兘', '闀挎湡鏀寔'],
+        requirements: 'Windows 10/11锛岃嚦灏?4GB 鍐呭瓨锛?0GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://pan.xunlei.com/s/VOMNOiB3GqkJZ56yXVoMds8UA1?pwd=vprd',
+        downloadVersion: '2021',
+        fileType: 'RAR 鍘嬬缉鍖?,
+        fileSize: '4.5GB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Office 2019', url: 'tool-detail.html?tool=office2019', desc: '寰蒋缁忓吀鍔炲叕濂椾欢'}, {name: 'WPS Office', url: 'tool-detail.html?tool=wps2025', desc: '杞婚噺鍏ㄨ兘鍔炲叕濂椾欢'}]
+    },
+    'office2019': {
+        title: 'Office 2019',
+        category: '鍔炲叕宸ュ叿',
+        version: '2019',
+        size: '3.8GB',
+        date: '2025-05-15',
+        description: 'Microsoft Office 2019鏄井杞粡鍏稿姙鍏浠讹紝绋冲畾鍙潬锛屽箍娉涘簲鐢ㄤ簬鍚勭被鍔炲叕鍦烘櫙銆?,
+        features: ['缁忓吀鍔炲叕濂椾欢', '绋冲畾鍙潬', '瀹屾暣鍔炲叕鍔熻兘', '绂荤嚎鍙敤', '闀挎湡鏀寔鐗堟湰'],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?2GB 鍐呭瓨锛?GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://pan.xunlei.com/s/VOMNOlPRlZaV6altaliUQjxfA1?pwd=f8pv',
+        downloadVersion: '2019',
+        fileType: 'RAR 鍘嬬缉鍖?,
+        fileSize: '3.8GB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Office 2021', url: 'tool-detail.html?tool=office2021', desc: '寰蒋瀹樻柟鍔炲叕濂椾欢'}, {name: 'WPS Office', url: 'tool-detail.html?tool=wps2025', desc: '杞婚噺鍏ㄨ兘鍔炲叕濂椾欢'}]
+    },
+    'pdfconvert': {
+        title: 'PDF杞崲缃戠珯',
+        category: '鍔炲叕宸ュ叿',
+        version: '鍦ㄧ嚎鐗?,
+        size: '缃戠珯',
+        date: '2026-01-01',
+        description: '鍦ㄧ嚎PDF杞崲宸ュ叿锛屾敮鎸佸绉嶆牸寮忚浆鎹紝鍖呮嫭PDF杞琖ord銆丒xcel銆丳PT銆佸浘鐗囩瓑銆?,
+        features: ['澶氭牸寮忚浆鎹?, '鏃犻渶瀹夎杞欢', '浜戠澶勭悊', '闅愮淇濇姢', '鍏嶈垂浣跨敤'],
+        requirements: '缃戠粶娴忚鍣ㄥ嵆鍙闂€?,
+        downloadLink: 'https://www.ilovepdf.com/',
+        downloadVersion: '鍦ㄧ嚎鐗?,
+        fileType: '缃戠珯',
+        fileSize: '缃戠珯',
+        platform: 'Web',
+        screenshots: [],
+        relatedTools: [{name: 'WPS Office', url: 'tool-detail.html?tool=wps2025', desc: '杞婚噺鍏ㄨ兘鍔炲叕濂椾欢'}, {name: 'Office 2021', url: 'tool-detail.html?tool=office2021', desc: '寰蒋瀹樻柟鍔炲叕濂椾欢'}]
+    },
+    'steamking': {
+        title: 'SteamKing',
+        category: '鍏朵粬宸ュ叿',
+        version: '1.3',
+        size: '25MB',
+        date: '2026-02-05',
+        description: 'SteamKing鏄竴娆維team鍋囧叆搴撳伐鍏凤紝鍙皢闈濻team娓告垙娣诲姞鍒癝team搴撲腑锛屾敮鎸佹湰鍦版父鐜╁拰Steam鍔熻兘闆嗘垚銆?,
+        features: ['鍋囧叆搴撳姛鑳?, 'Steam鍔熻兘闆嗘垚', '鏈湴娓告垙绠＄悊', '绠€鍗曟槗鐢?, '鎸佺画鏇存柊鏀寔'],
+        requirements: 'Windows 7/8/10/11锛屽畨瑁匰team瀹㈡埛绔€?,
+        downloadLink: 'https://gitee.com/wansijun/steam-king/releases/download/v1.3/SteamKing.zip',
+        downloadVersion: '1.3',
+        fileType: 'ZIP 鍘嬬缉鍖?,
+        fileSize: '25MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: '鍗″反鏂熀', url: 'tool-detail.html?tool=kaspersky', desc: '涓撲笟鏉€姣掕蒋浠?}]
+    },
+    'shizuku': {
+        title: 'ShiZuKu',
+        category: '鍏朵粬宸ュ叿',
+        version: '13.4.0',
+        size: '3MB',
+        date: '2026-03-10',
+        description: 'Shizuku鏄竴娆炬棤闇€Root鍗冲彲閫氳繃ADB鏉冮檺璁╂櫘閫氬簲鐢ㄨ皟鐢ㄧ郴缁烝PI鐨勫紑婧愬伐鍏凤紝涓哄簲鐢ㄦ彁渚涙洿楂樼骇鐨勭郴缁熻闂兘鍔涖€?,
+        features: ['鏃犻渶Root', 'ADB鏉冮檺璋冪敤', '绯荤粺API璁块棶', '澧炲己搴旂敤鍔熻兘', '寮€婧愬厤璐?],
+        requirements: 'Android 6.0浠ヤ笂璁惧銆?,
+        downloadLink: 'https://down.medibangpaint.cn/chatapk/channel/sp2901/shizuku.apk',
+        downloadVersion: '13.4.0',
+        fileType: 'APK 瀹夎鍖?,
+        fileSize: '3MB',
+        platform: 'Android',
+        screenshots: [],
+        relatedTools: [{name: 'HXAudio Pro', url: 'tool-detail.html?tool=hxaudio2', desc: '瀹夊崜鎵嬫満璋冮煶浼樺寲杞欢'}]
+    },
+    'maicong': {
+        title: '杩堜粠椹卞姩',
+        category: '鍏朵粬宸ュ叿',
+        version: '2024.12',
+        size: '50MB',
+        date: '2025-12-20',
+        description: '杩堜粠澶栬椹卞姩绋嬪簭锛屼负杩堜粠鍝佺墝鐨勯敭鐩樸€侀紶鏍囩瓑澶栬鎻愪緵瀹屾暣鐨勫姛鑳芥敮鎸併€?,
+        features: ['鎸夐敭鑷畾涔?, '鐏厜鏁堟灉璁剧疆', '瀹忛厤缃?, '鍥轰欢鏇存柊', '閰嶇疆鏂囦欢瀵煎叆瀵煎嚭'],
+        requirements: 'Windows 7/8/10/11锛岃繛鎺ヨ繄浠庡璁俱€?,
+        downloadLink: 'https://cdn.mchose.com.cn/MCHOSE_HUB_installer.zip',
+        downloadVersion: '2024.12',
+        fileType: 'ZIP 瀹夎鍖?,
+        fileSize: '50MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: '鐙艰洓閿洏椹卞姩', url: 'tool-detail.html?tool=langzhu', desc: '鐙艰洓閿洏椹卞姩绋嬪簭'}]
+    },
+    'langzhu': {
+        title: '鐙艰洓閿洏椹卞姩',
+        category: '鍏朵粬宸ュ叿',
+        version: '2024.10',
+        size: '45MB',
+        date: '2025-11-15',
+        description: '鐙艰洓閿洏椹卞姩绋嬪簭锛屼负鐙艰洓鍝佺墝鐨勬満姊伴敭鐩樻彁渚涘畬鏁寸殑鍔熻兘鏀寔銆?,
+        features: ['鎸夐敭鑷畾涔?, '瀹忚缃?, '鐏厜鏁堟灉璋冭妭', '澶氭ā寮忔敮鎸?, '娓告垙妯″紡'],
+        requirements: 'Windows 7/8/10/11锛岃繛鎺ョ嫾铔涢敭鐩樸€?,
+        downloadLink: 'https://www.aulacn.com/index/index/driverdownload.html',
+        downloadVersion: '2024.10',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '45MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: '杩堜粠椹卞姩', url: 'tool-detail.html?tool=maicong', desc: '杩堜粠澶栬椹卞姩'}]
+    },
+    'hxaudio1': {
+        title: 'HXAudio Pro銆?.5銆?,
+        category: '鍏朵粬宸ュ叿',
+        version: '1.5',
+        size: '8MB',
+        date: '2025-10-10',
+        description: 'HXAudio Pro鏄竴娆惧畨鍗撴墜鏈鸿皟闊充紭鍖栬蒋浠讹紝鎻愪緵涓撲笟鐨勯煶棰戣皟鑺傚姛鑳姐€?,
+        features: ['鍧囪　鍣ㄨ皟鑺?, '闊虫晥澧炲己', '闊抽噺鎻愬崌', '鑰宠繑鍔熻兘', '澶氱棰勮'],
+        requirements: 'Android 6.0浠ヤ笂璁惧銆?,
+        downloadLink: 'https://github.com/tiamo1990/index/blob/main/HXAudioPro-1.5.APK',
+        downloadVersion: '1.5',
+        fileType: 'APK 瀹夎鍖?,
+        fileSize: '8MB',
+        platform: 'Android',
+        screenshots: [],
+        relatedTools: [{name: 'HXAudio Pro 2.1b', url: 'tool-detail.html?tool=hxaudio2', desc: '杩涢樁鐗堥煶棰戣皟闊宠蒋浠?}, {name: 'Shizuku', url: 'tool-detail.html?tool=shizuku', desc: '绯荤粺API璋冪敤宸ュ叿'}]
+    },
+    'hxaudio2': {
+        title: 'HXAudio Pro銆?.1b銆?,
+        category: '鍏朵粬宸ュ叿',
+        version: '2.1b',
+        size: '10MB',
+        date: '2026-01-05',
+        description: 'HXAudio Pro杩涢樁鐗堬紝闇€鎼厤Shizuku浣跨敤锛屾彁渚涙洿楂樼骇鐨勯煶棰戣皟鑺傚姛鑳姐€?,
+        features: ['绯荤粺绾ч煶棰戝寮?, '涓撲笟鍧囪　鍣?, 'Shizuku闆嗘垚', '娣卞害闊虫晥璋冭妭', '鑷畾涔夐厤缃?],
+        requirements: 'Android 6.0浠ヤ笂璁惧锛屽凡瀹夎Shizuku銆?,
+        downloadLink: 'https://github.com/tiamo1990/index/blob/main/HX-2.1b.APK',
+        downloadVersion: '2.1b',
+        fileType: 'APK 瀹夎鍖?,
+        fileSize: '10MB',
+        platform: 'Android',
+        screenshots: [],
+        relatedTools: [{name: 'Shizuku', url: 'tool-detail.html?tool=shizuku', desc: '绯荤粺API璋冪敤宸ュ叿'}, {name: 'HXAudio Pro 1.5', url: 'tool-detail.html?tool=hxaudio1', desc: '鍩虹鐗堥煶棰戣皟闊宠蒋浠?}]
+    },
+    'kaspersky': {
+        title: '鍗″反鏂熀鏉€姣掕蒋浠?,
+        category: '鍏朵粬宸ュ叿',
+        version: '21.3',
+        size: '150MB',
+        date: '2026-02-20',
+        description: '鍗″反鏂熀鏉€姣掕蒋浠舵槸涓€娆句笓涓氱殑瀹夊叏闃叉姢杞欢锛屾彁渚涘叏闈㈢殑鐥呮瘨鏌ユ潃銆佹伓鎰忚蒋浠堕槻鎶ゃ€佺綉缁滃畨鍏ㄧ瓑鍔熻兘銆?,
+        features: ['鍏ㄩ潰鐥呮瘨鏌ユ潃', '鎭舵剰杞欢闃叉姢', '缃戠粶瀹夊叏鐩戞帶', '闃茬伀澧欏姛鑳?, '瀵嗙爜绠＄悊鍣?],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?1GB 鍐呭瓨锛?GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.kaspersky.com.cn/downloads',
+        downloadVersion: '21.3',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '150MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: 'Bitdefender', url: 'tool-detail.html?tool=bitdefender', desc: '鐭ュ悕鏉€姣掕蒋浠?}, {name: 'Avast', url: 'tool-detail.html?tool=avast', desc: '鍏嶈垂鏉€姣掕蒋浠?}]
+    },
+    'bitdefender': {
+        title: 'Bitdefender',
+        category: '鍏朵粬宸ュ叿',
+        version: '2024',
+        size: '120MB',
+        date: '2026-01-15',
+        description: 'Bitdefender鏄竴娆剧煡鍚嶇殑鏉€姣掕蒋浠讹紝閲囩敤鍏堣繘鐨勫畨鍏ㄦ妧鏈繚鎶ゆ偍鐨勮绠楁満銆?,
+        features: ['鍏堣繘瀹夊叏鎶€鏈?, '瀹炴椂闃叉姢', '鍙嶆伓鎰忚蒋浠?, '闃茬伀澧?, '鎬ц兘浼樺寲'],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?1GB 鍐呭瓨锛?GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.bitdefender.com.cn/solutions/antivirus.html',
+        downloadVersion: '2024',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '120MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: '鍗″反鏂熀', url: 'tool-detail.html?tool=kaspersky', desc: '涓撲笟鏉€姣掕蒋浠?}, {name: 'Avast', url: 'tool-detail.html?tool=avast', desc: '鍏嶈垂鏉€姣掕蒋浠?}]
+    },
+    'avast': {
+        title: 'Avast',
+        category: '鍏朵粬宸ュ叿',
+        version: '24.0',
+        size: '100MB',
+        date: '2026-01-20',
+        description: 'Avast鏄竴娆惧厤璐圭殑鏉€姣掕蒋浠讹紝鎻愪緵鍩烘湰鐨勭梾姣掓煡鏉€鍔熻兘锛岀晫闈㈠弸濂姐€?,
+        features: ['鍏嶈垂鏉€姣?, '鍩烘湰闃叉姢', '鐢ㄦ埛鍙嬪ソ', '杞婚噺绾?, '瀹氭湡鏇存柊'],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?512MB 鍐呭瓨锛?GB 鍙敤纾佺洏绌洪棿銆?,
+        downloadLink: 'https://www.avast.com/zh-cn/index',
+        downloadVersion: '24.0',
+        fileType: 'EXE 瀹夎鍖?,
+        fileSize: '100MB',
+        platform: 'Windows',
+        screenshots: [],
+        relatedTools: [{name: '鍗″反鏂熀', url: 'tool-detail.html?tool=kaspersky', desc: '涓撲笟鏉€姣掕蒋浠?}, {name: 'Bitdefender', url: 'tool-detail.html?tool=bitdefender', desc: '鐭ュ悕鏉€姣掕蒋浠?}]
+    },
+    'lastpass': {
+        title: 'LastPass',
+        category: '鍏朵粬宸ュ叿',
+        version: '4.12',
+        size: '50MB',
+        date: '2026-02-10',
+        description: 'LastPass鏄竴娆句笓涓氱殑瀵嗙爜绠＄悊宸ュ叿锛屽畨鍏ㄥ瓨鍌ㄥ拰绠＄悊鍚勭被瀵嗙爜銆?,
+        features: ['瀵嗙爜瀛樺偍', '鑷姩濉厖', '瀹夊叏鍔犲瘑', '璺ㄨ澶囧悓姝?, '瀵嗙爜鐢熸垚鍣?],
+        requirements: 'Windows 7/8/10/11锛岃嚦灏?256

@@ -15,12 +15,12 @@
 }
 
 .admin-header {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-    color: #2d3748;
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    color: var(--text-primary);
     padding: 1rem 0;
     position: sticky;
     top: 0;
@@ -42,21 +42,21 @@
 
 .admin-nav-item {
     text-decoration: none;
-    color: #4a5568;
+    color: var(--text-secondary);
     font-weight: 500;
     font-size: 0.95rem;
     padding: 0.6rem 1.2rem;
     border-radius: 50px;
-    transition: all 0.3s ease;
+    transition: all 0.3s var(--ease-out-back);
 }
 
 .admin-nav-item:hover {
-    background: rgba(236, 72, 153, 0.1);
-    color: #ec4899;
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--text-primary);
 }
 
 .admin-nav-item.active {
-    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    background: var(--primary-gradient);
     color: white;
 }
 
@@ -65,18 +65,18 @@
 }
 
 .admin-section {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
     padding: 1.5rem;
     margin-bottom: 2rem;
 }
 
 .admin-section h3 {
-    color: #2d3748;
+    color: var(--text-primary);
     margin-bottom: 1.5rem;
     font-size: 1.25rem;
     font-weight: 600;
@@ -97,9 +97,25 @@
 
 .filter-select, .search-input {
     padding: 0.5rem 0.75rem;
-    border: 1px solid #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     font-size: 0.9rem;
+    background: rgba(30, 30, 60, 0.8);
+    color: #ffffff;
+    transition: all 0.3s var(--ease-out-expo);
+    min-width: 120px;
+}
+
+.filter-select option {
+    background: #1a1a3e;
+    color: #ffffff;
+    padding: 0.5rem;
+}
+
+.filter-select:focus, .search-input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .action-btn {
@@ -109,26 +125,27 @@
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s var(--ease-out-back);
 }
 
 .action-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .action-btn.primary {
-    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    background: var(--primary-gradient);
     color: white;
 }
 
 .action-btn.secondary {
-    background: #e2e8f0;
-    color: #2d3748;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
 }
 
 .action-btn.danger {
-    background: #ef4444;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
     color: white;
 }
 
@@ -142,17 +159,18 @@
 .resources-table td {
     padding: 0.75rem 1rem;
     text-align: left;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--glass-border);
+    color: var(--text-primary);
 }
 
 .resources-table th {
-    background: #f7fafc;
+    background: rgba(99, 102, 241, 0.1);
     font-weight: 600;
-    color: #4a5568;
+    color: var(--text-secondary);
 }
 
 .resources-table tr:hover {
-    background: #f7fafc;
+    background: rgba(99, 102, 241, 0.05);
 }
 
 .resource-actions {
@@ -168,7 +186,7 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    color: #4a5568;
+    color: var(--text-secondary);
 }
 
 .form-group input,
@@ -176,9 +194,20 @@
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
     font-size: 1rem;
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .form-group textarea {
@@ -194,21 +223,21 @@
 
 .admin-message {
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 12px;
     margin-bottom: 1rem;
     font-weight: 500;
 }
 
 .admin-message.success {
-    background: #d1fae5;
-    color: #065f46;
-    border: 1px solid #a7f3d0;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .admin-message.error {
-    background: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fecaca;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -443,20 +472,49 @@ window.onload = function() {
 
 // 加载资源列表
 function loadResources() {
-    // 从 localStorage 加载资源数据
-    var storedResources = localStorage.getItem('resources');
+    // 从 localStorage 加载资源数据（与网站数据同步）
+    var storedResources = localStorage.getItem('adminResources');
     if (storedResources) {
-        resources = JSON.parse(storedResources);
+        // 将分类格式转换为数组格式
+        var categoryData = JSON.parse(storedResources);
+        resources = [];
+        var id = 1;
+        Object.keys(categoryData).forEach(function(category) {
+            categoryData[category].forEach(function(item) {
+                resources.push({
+                    id: id++,
+                    name: item.name,
+                    category: category,
+                    description: item.description || '',
+                    downloadLink: item.downloadLink || ''
+                });
+            });
+        });
     } else {
-        // 如果没有数据，初始化默认数据
+        // 如果没有数据，初始化网站真实数据
         resources = [
-            { id: 1, name: 'WinRar', category: 'system', description: 'WinRAR 是一款功能强大的压缩文件管理工具', downloadLink: 'https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-720sc.exe' },
-            { id: 2, name: '360zip', category: 'system', description: '360压缩是一款免费的解压缩软件', downloadLink: 'https://www.onlinedown.net/iopdfbhjl/20267030?module=download&t=website&v=20260318183111' },
-            { id: 3, name: 'VS Code', category: 'dev', description: 'Visual Studio Code 是微软推出的免费开源代码编辑器', downloadLink: 'https://code.visualstudio.com/Download' },
-            { id: 4, name: 'WPS Office 2025专业版', category: 'office', description: 'WPS Office 是一款功能强大的办公软件', downloadLink: 'https://www.wps.cn/product/wps-office' },
-            { id: 5, name: '剪映6.0.1会员永久激活版', category: 'multimedia', description: '剪映是一款专业的视频编辑软件', downloadLink: 'https://www.capcut.com/' }
+            { id: 1, name: '360zip', category: 'system', description: '免费解压缩软件，界面简洁易操作', downloadLink: 'https://www.onlinedown.net/iopdfbhjl/20267030?module=download&t=website&v=20260318183111' },
+            { id: 2, name: '图吧工具箱', category: 'system', description: '集成硬件检测、系统优化等多功能工具集', downloadLink: 'https://apac.tualatin.club/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1202601.1%E5%AE%89%E8%A3%85%E5%8C%85.exe' },
+            { id: 3, name: 'DiskGenius', category: 'system', description: '专业硬盘分区与数据恢复工具', downloadLink: 'https://eassos.lanzoue.com/DG64' },
+            { id: 4, name: 'KMS激活工具', category: 'system', description: 'Windows和Office一键激活工具', downloadLink: 'https://github.com/tiamo1990/index/blob/main/kms.rar' },
+            { id: 5, name: 'MobaXterm', category: 'system', description: '功能强大的远程SSH终端工具', downloadLink: 'https://download.mobatek.net/2602026012910130/MobaXterm_Installer_v26.0.zip' },
+            { id: 6, name: 'office 2021', category: 'office', description: '微软官方办公套件，功能全面', downloadLink: 'https://pan.xunlei.com/s/VOMNOiB3GqkJZ56yXVoMds8UA1?pwd=vprd' },
+            { id: 7, name: 'office 2019', category: 'office', description: '微软经典办公套件，稳定可靠', downloadLink: 'https://pan.xunlei.com/s/VOMNOlPRlZaV6altaliUQjxfA1?pwd=f8pv' },
+            { id: 8, name: 'Ps 2023', category: 'office', description: '专业图像处理软件，设计师必备', downloadLink: 'https://pan.xunlei.com/s/VOMDV0t5qDkS1CUvmYIMc2OyA1?pwd=sedf' },
+            { id: 9, name: 'Ensp', category: 'dev', description: '网络终端设备模拟器，支持多种网络设备模拟', downloadLink: 'https://forspeed.365xiazai.com/down/2022down/3/03/hwmnqensp.rar' },
+            { id: 10, name: 'wireshark', category: 'dev', description: '网络协议抓包工具，支持多种网络协议分析', downloadLink: 'https://1.na.dl.wireshark.org/win64/Wireshark-4.4.3-x64.exe' },
+            { id: 11, name: 'VirtualBox', category: 'dev', description: '免费虚拟机软件，支持多种操作系统虚拟化', downloadLink: 'https://download.virtualbox.org/virtualbox/5.2.44/VirtualBox-5.2.44-139111-Win.exe' },
+            { id: 12, name: 'VMware Workstation 17 Pro', category: 'dev', description: '专业虚拟机软件，支持多种操作系统虚拟化', downloadLink: 'https://get.downkuai.com/download/123409/8' },
+            { id: 13, name: '剪映6.0.1会员永久激活版', category: 'multimedia', description: '专业视频剪辑软件，操作简单', downloadLink: 'https://pan.xunlei.com/s/VOMQjmqZgEsLegm6oGnU4KgiA1?pwd=x7ka' },
+            { id: 14, name: 'Audacity', category: 'multimedia', description: '开源音频编辑软件，支持录音、剪辑、混音等', downloadLink: 'https://www.audacityteam.org/download/' },
+            { id: 15, name: 'HandBrake', category: 'multimedia', description: '开源视频转码工具，支持多种视频格式转换', downloadLink: 'https://handbrake.fr/downloads.php' },
+            { id: 16, name: 'GIMP', category: 'multimedia', description: '开源图像处理软件，功能强大，完全免费', downloadLink: 'https://www.gimp.org/downloads/' },
+            { id: 17, name: 'SteamKing', category: 'plugin', description: 'Steam游戏王，提供Steam游戏辅助功能', downloadLink: 'https://gitee.com/wansijun/steam-king/releases/download/v1.3/SteamKing.zip' },
+            { id: 18, name: 'ShiZuKu', category: 'plugin', description: '无需Root即可通过ADB权限调用系统API的开源工具', downloadLink: 'https://down.medibangpaint.cn/chatapk/channel/sp2901/shizuku.apk' },
+            { id: 19, name: 'Clash', category: 'network', description: '网络代理工具，支持多种代理协议', downloadLink: 'https://clashone.com.cn/' },
+            { id: 20, name: 'Postman', category: 'network', description: '专业API测试工具，支持HTTP请求创建、发送和管理', downloadLink: 'https://www.postman.com/downloads/' }
         ];
-        // 保存到 localStorage
+        // 保存到 localStorage（保持与网站数据格式一致）
         saveResources();
     }
     
@@ -490,7 +548,27 @@ function renderResources(resourcesToRender) {
 
 // 保存资源数据到 localStorage
 function saveResources() {
-    localStorage.setItem('resources', JSON.stringify(resources));
+    // 将数组格式转换为分类格式并保存
+    var categoryData = {
+        system: [],
+        office: [],
+        dev: [],
+        network: [],
+        multimedia: [],
+        plugin: []
+    };
+    
+    resources.forEach(function(item) {
+        if (categoryData[item.category]) {
+            categoryData[item.category].push({
+                name: item.name,
+                description: item.description,
+                downloadLink: item.downloadLink
+            });
+        }
+    });
+    
+    localStorage.setItem('adminResources', JSON.stringify(categoryData));
 }
 
 // 获取分类名称
@@ -744,7 +822,7 @@ function generateStaticFiles() {
             html = html + category;
             html = html + '.html"\n';
             html = html + '}\n';
-            html = html + '</script>\n';
+            html = html + '}</' + 'script>\n';
             html = html + '<link rel="stylesheet" href="styles.css">\n';
             html = html + '</head>\n';
             html = html + '<body>\n';
@@ -854,7 +932,7 @@ function generateStaticFiles() {
             html = html + '</div>\n';
             html = html + '</footer>\n';
             html = html + '\n';
-            html = html + '<script src="script.js"></script>\n';
+            html = html + '<script src="script.js"><' + '/script>\n';
             html = html + '</body>\n';
             html = html + '</html>';
             
