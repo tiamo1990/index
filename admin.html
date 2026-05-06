@@ -839,6 +839,100 @@
 .resources-table .link:hover {
     text-decoration: underline;
 }
+
+/* 一键部署样式 */
+.deploy-card {
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.deploy-step {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.deploy-step:not(:last-child) {
+    border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
+}
+
+.deploy-step:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.step-content p {
+    margin: 0 0 1rem 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.data-preview {
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.data-preview h4 {
+    margin: 0 0 1rem 0;
+    color: var(--text-primary);
+}
+
+.preview-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.preview-code {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+    line-height: 1.5;
+}
+
+.preview-code::-webkit-scrollbar {
+    width: 6px;
+}
+
+.preview-code::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.4);
+    border-radius: 3px;
+}
 </style>
 </head>
 <body>
@@ -879,6 +973,11 @@
             <a href="index.html" class="sidebar-nav-item">
                 <span class="nav-icon">🏠</span>
                 <span>返回主页</span>
+            </a>
+            
+            <a href="help.html" target="_blank" class="sidebar-nav-item">
+                <span class="nav-icon">📖</span>
+                <span>使用帮助</span>
             </a>
             
             <button class="sidebar-nav-item" onclick="generateStaticFiles()" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer;">
@@ -925,8 +1024,13 @@
                         <label for="resource-search">搜索资源:</label>
                         <input type="text" id="resource-search" class="search-input" placeholder="输入资源名称...">
                     </div>
-                    <button class="action-btn primary" onclick="generateStaticFiles()">生成静态文件</button>
+                    <button class="action-btn primary" onclick="generateStaticFiles()">导出资源数据</button>
+                    <label class="action-btn secondary import-btn">
+                        <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImportFile(this)">
+                        导入资源数据
+                    </label>
                     <button class="action-btn secondary" onclick="resetResources()">重置资源数据</button>
+                    <button class="action-btn secondary" onclick="showDeployGuide()">部署指南</button>
                 </div>
                 
                 <table class="resources-table" id="resourcesTable">
@@ -1088,6 +1192,44 @@
                 </div>
             </section>
             
+            <!-- 一键部署 -->
+            <section id="deploy" class="admin-section">
+                <h3>🚀 一键部署</h3>
+                <div class="deploy-card">
+                    <div class="deploy-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>导出并复制数据</h4>
+                            <p>点击下方按钮，自动导出资源数据并复制到剪贴板</p>
+                            <button class="action-btn primary" onclick="copyResourcesToClipboard()">📋 复制数据</button>
+                        </div>
+                    </div>
+                    <div class="deploy-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>粘贴到 GitHub</h4>
+                            <p>打开 GitHub 仓库的 admin-script.js 文件，替换 DEFAULT_RESOURCES</p>
+                            <a href="https://github.com/tiamo1990/index" target="_blank" class="action-btn secondary">🔗 打开仓库</a>
+                        </div>
+                    </div>
+                    <div class="deploy-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>提交并推送</h4>
+                            <p>提交更改并推送到 GitHub，网站会自动更新</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-preview">
+                    <h4>📊 当前资源数据预览</h4>
+                    <div class="preview-actions">
+                        <button class="action-btn secondary" onclick="togglePreview()">切换显示</button>
+                        <button class="action-btn secondary" onclick="copyResourcesToClipboard()">复制全部</button>
+                    </div>
+                    <pre id="dataPreview" class="preview-code" style="display: none;"></pre>
+                </div>
+            </section>
+            
             <!-- 添加资源 -->
             <section id="add" class="admin-section">
                 <h3>添加资源</h3>
@@ -1114,6 +1256,18 @@
                     <div class="form-group">
                         <label for="addDownloadLink">下载链接:</label>
                         <input type="url" id="addDownloadLink" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addVersion">版本:</label>
+                        <input type="text" id="addVersion" placeholder="如: 1.0.0">
+                    </div>
+                    <div class="form-group">
+                        <label for="addSize">文件大小:</label>
+                        <input type="text" id="addSize" placeholder="如: 5.2MB">
+                    </div>
+                    <div class="form-group">
+                        <label for="addPlatform">适用平台:</label>
+                        <input type="text" id="addPlatform" placeholder="如: Windows">
                     </div>
                     <div class="form-actions">
                         <button type="submit" class="action-btn primary">添加资源</button>

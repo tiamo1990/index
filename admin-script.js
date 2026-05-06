@@ -216,8 +216,16 @@ function getCategoryName(category) {
 }
 
 // 添加资源
-function addResource(name, category, description, downloadLink) {
-    resources[category].push({ name, description, downloadLink });
+function addResource(name, category, description, downloadLink, version = '', size = '', platform = '', screenshots = []) {
+    resources[category].push({ 
+        name, 
+        description, 
+        downloadLink,
+        version,
+        size,
+        platform,
+        screenshots 
+    });
     saveResources();
     showAll = false;
     renderResources();
@@ -904,8 +912,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const category = document.getElementById('addCategory').value;
             const description = document.getElementById('addDescription').value;
             const downloadLink = document.getElementById('addDownloadLink').value;
+            const version = document.getElementById('addVersion').value;
+            const size = document.getElementById('addSize').value;
+            const platform = document.getElementById('addPlatform').value;
 
-            addResource(name, category, description, downloadLink);
+            addResource(name, category, description, downloadLink, version, size, platform);
             addForm.reset();
         });
     }
@@ -1190,14 +1201,79 @@ function generateStaticFiles() {
         version: '1.0'
     };
 
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const jsonString = JSON.stringify(data, null, 2);
+    
+    // 下载文件
+    const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = `tools-data-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    showMessage('资源数据已导出', 'success');
+    
+    // 复制到剪贴板
+    navigator.clipboard.writeText(jsonString).then(() => {
+        showMessage('资源数据已导出并复制到剪贴板', 'success');
+    }).catch(() => {
+        showMessage('资源数据已导出', 'success');
+    });
+}
+
+// 一键部署提示
+function showDeployGuide() {
+    const guide = `部署说明（GitHub静态网站）：
+
+1. 点击"导出资源数据"按钮
+2. 数据会自动复制到剪贴板
+3. 打开 GitHub 仓库中的 admin-script.js 文件
+4. 找到 DEFAULT_RESOURCES 变量，替换为新数据
+5. 提交并推送更改到 GitHub
+
+提示：由于这是静态网站，所有数据都存储在 JavaScript 文件中。
+每次更新资源后，都需要重新部署到 GitHub。`;
+    
+    alert(guide);
+}
+
+// 复制资源数据到剪贴板
+function copyResourcesToClipboard() {
+    const data = JSON.stringify(resources, null, 4);
+    
+    navigator.clipboard.writeText(data).then(() => {
+        showMessage('✅ 数据已复制到剪贴板！', 'success');
+        
+        // 更新预览区域
+        const preview = document.getElementById('dataPreview');
+        if (preview) {
+            preview.textContent = data;
+        }
+    }).catch((err) => {
+        showMessage('❌ 复制失败，请手动复制', 'error');
+        console.error('Clipboard error:', err);
+    });
+}
+
+// 切换数据预览显示
+function togglePreview() {
+    const preview = document.getElementById('dataPreview');
+    if (preview) {
+        if (preview.style.display === 'none' || preview.style.display === '') {
+            preview.style.display = 'block';
+            // 填充数据
+            preview.textContent = JSON.stringify(resources, null, 4);
+        } else {
+            preview.style.display = 'none';
+        }
+    }
+}
+
+// 处理导入文件选择
+function handleImportFile(input) {
+    if (input.files && input.files[0]) {
+        importResources(input.files[0]);
+        input.value = ''; // 重置文件选择
+    }
 }
 
 // 导入资源数据
