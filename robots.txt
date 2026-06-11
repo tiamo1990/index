@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shancha.dpdns.org/sitemap.xml
+
+# 禁止爬取的目录
+Disallow: /files/

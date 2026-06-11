@@ -1,0 +1,10 @@
+*.bak
+*.downloaded
+temp/
+.DS_Store
+Thumbs.db
+node_modules/
+link-check-results.csv
+链接检查报告.md
+HX-2.1b.APK
+HXAudioPro-1.5.APK
