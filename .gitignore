@@ -8,3 +8,10 @@ link-check-results.csv
 链接检查报告.md
 HX-2.1b.APK
 HXAudioPro-1.5.APK
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
