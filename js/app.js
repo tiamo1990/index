@@ -970,8 +970,26 @@
     if (modal) {
       modal.classList.remove('hidden');
       document.getElementById('adminImportData').value = '';
+      document.getElementById('adminImportFile').value = '';
+      document.getElementById('adminImportFileName').textContent = '';
       document.getElementById('adminImportMsg').style.display = 'none';
     }
+  };
+
+  window.adminImportFileHandler = function (input) {
+    var file = input.files[0];
+    var nameEl = document.getElementById('adminImportFileName');
+    if (!file) {
+      if (nameEl) nameEl.textContent = '';
+      return;
+    }
+    if (nameEl) nameEl.textContent = file.name;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById('adminImportData').value = e.target.result;
+      adminImportData();
+    };
+    reader.readAsText(file);
   };
 
   window.adminImportData = function () {
@@ -1236,7 +1254,7 @@
         commitMsg: 'Update tool data from admin panel'
       };
     }
-    return { token: '', repo: '', branch: 'main', filePath: 'data/tool-data.json', commitMsg: 'Update tool data from admin panel' };
+    return { token: '', repo: 'tiamo1990/index', branch: 'main', filePath: 'data/tool-data.json', commitMsg: 'Update tool data from admin panel' };
   }
 
   function githubSaveConfig(config) {
@@ -1267,6 +1285,22 @@
     if (!el) return;
     el.textContent = msg;
     el.className = 'github-status ' + (type || '');
+  }
+
+  function githubSetLoading(loading) {
+    var syncBtn = document.getElementById('githubSyncBtn');
+    var quickBtn = document.getElementById('githubQuickSyncBtn');
+    var btns = [syncBtn, quickBtn];
+    btns.forEach(function (btn) {
+      if (!btn) return;
+      btn.disabled = loading;
+      if (loading) {
+        btn._origText = btn._origText || btn.textContent;
+        btn.textContent = '同步中...';
+      } else {
+        btn.textContent = btn._origText || btn.textContent;
+      }
+    });
   }
 
   window.githubTestConnection = function () {
@@ -1373,6 +1407,7 @@
     var apiBase = 'https://api.github.com/repos/' + encodeURIComponent(repo) + '/contents/' + filePath;
 
     githubShowStatus('正在同步...', '');
+    githubSetLoading(true);
 
     // Step 1: get existing file sha
     fetch(apiBase + '?ref=' + encodeURIComponent(branch), {
@@ -1410,6 +1445,7 @@
     })
     .then(function (res) {
       return res.json().then(function (data) {
+        githubSetLoading(false);
         if (res.ok) {
           githubShowStatus('同步成功！文件已推送到 ' + repo + '/' + filePath, 'success');
           toast('GitHub 同步成功', 'success');
@@ -1420,6 +1456,7 @@
       });
     })
     .catch(function (err) {
+      githubSetLoading(false);
       githubShowStatus('同步失败：' + err.message, 'error');
       toast('GitHub 同步失败：' + err.message, 'error');
     });

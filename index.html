@@ -344,10 +344,18 @@
       <div id="adminImportModal" class="overlay hidden">
         <div class="modal" style="max-width: 500px;">
           <h2 class="modal-title">导入数据</h2>
-          <p class="modal-desc">粘贴导出的 JSON 数据，将覆盖当前所有数据</p>
+          <p class="modal-desc">粘贴 JSON 数据或直接上传 JSON 文件，将覆盖当前所有数据</p>
           <div class="form-group">
             <label class="form-label">JSON 数据</label>
-            <textarea class="form-textarea" id="adminImportData" rows="8" placeholder='{"system": [...], "office": [...]}'></textarea>
+            <textarea class="form-textarea" id="adminImportData" rows="6" placeholder='{"system": [...], "office": [...]}'></textarea>
+          </div>
+          <div class="flex items-center gap-2" style="margin-bottom:12px;">
+            <span style="color:var(--text-secondary);font-size:13px;">或</span>
+            <label class="btn btn-sm btn-secondary" style="cursor:pointer;margin:0;">
+              选择 JSON 文件
+              <input type="file" id="adminImportFile" accept=".json" style="display:none;" onchange="adminImportFileHandler(this)">
+            </label>
+            <span id="adminImportFileName" style="color:var(--text-secondary);font-size:12px;"></span>
           </div>
           <div class="flex justify-between items-center">
             <span id="adminImportMsg" class="text-sm" style="color:var(--color-danger);display:none;"></span>
