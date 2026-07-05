@@ -1340,44 +1340,30 @@
   };
 
   window.githubSyncToRepo = function () {
-    var tokenInput = document.getElementById('githubTokenInput');
-    var hasConfig = !!(tokenInput && tokenInput.value.trim());
-
+    var hasConfig = githubLoadConfig().repo;
     if (!hasConfig) {
-      var saved = githubLoadConfig();
-      if (!saved.repo) {
-        toast('请先在设置页配置 GitHub Token 和仓库名', 'error');
-        window.adminSwitchSection('settings');
-        return;
-      }
+      toast('请先在设置页配置 GitHub 仓库名', 'error');
+      window.adminSwitchSection('settings');
+      return;
     }
 
-    // POST adminResources directly to Cloudflare Function
-    githubShowStatus('正在同步...', '');
+    githubShowStatus('正在导出数据...', '');
     githubSetLoading(true);
     localStorage.setItem('dataUpdatedAt_v5', new Date().toISOString());
 
-    fetch('/api/sync', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(adminResources)
-    })
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
+    // Export JSON → Downloads folder, sync-watcher picks it up
+    var blob = new Blob([JSON.stringify(adminResources, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'toolhub-export-' + Date.now() + '.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+
+    setTimeout(function () {
       githubSetLoading(false);
-      if (data.ok) {
-        githubShowStatus('同步成功！数据已推送到 GitHub', 'success');
-        toast('同步成功', 'success');
-      } else {
-        githubShowStatus('同步失败：' + (data.message || '未知错误'), 'error');
-        toast('同步失败', 'error');
-      }
-    })
-    .catch(function (err) {
-      githubSetLoading(false);
-      githubShowStatus('同步失败：' + err.message, 'error');
-      toast('同步失败：' + err.message, 'error');
-    });
+      githubShowStatus('数据已导出，自动推送到 GitHub 中...', 'success');
+      toast('同步中，请稍候', 'success');
+    }, 500);
   };
 
   /* Attempt to recover data from GitHub raw when localStorage is empty */
