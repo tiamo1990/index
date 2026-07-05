@@ -1205,16 +1205,48 @@
 
   var GITHUB_CONFIG_KEY = 'githubConfig_v5';
 
+  /* Cookie helpers for cross-clear persistence */
+  function githubCookieGet(name) {
+    var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+  function githubCookieSet(name, value, days) {
+    var expires = '';
+    if (days) {
+      var d = new Date();
+      d.setTime(d.getTime() + days * 86400000);
+      expires = '; expires=' + d.toUTCString();
+    }
+    document.cookie = name + '=' + encodeURIComponent(value) + expires + '; path=/; SameSite=Lax';
+  }
+
   function githubLoadConfig() {
     var saved = localStorage.getItem(GITHUB_CONFIG_KEY);
     if (saved) {
       try { return JSON.parse(saved); } catch (e) {}
+    }
+    // Fallback to cookie (survives localStorage clearing)
+    var repoCookie = githubCookieGet('gh_repo');
+    if (repoCookie) {
+      return {
+        token: '',
+        repo: repoCookie,
+        branch: githubCookieGet('gh_branch') || 'main',
+        filePath: githubCookieGet('gh_path') || 'data/tool-data.json',
+        commitMsg: 'Update tool data from admin panel'
+      };
     }
     return { token: '', repo: '', branch: 'main', filePath: 'data/tool-data.json', commitMsg: 'Update tool data from admin panel' };
   }
 
   function githubSaveConfig(config) {
     localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(config));
+    // Also persist repo info to cookie (no token for security)
+    if (config.repo) {
+      githubCookieSet('gh_repo', config.repo, 365);
+      githubCookieSet('gh_branch', config.branch || 'main', 365);
+      githubCookieSet('gh_path', config.filePath || 'data/tool-data.json', 365);
+    }
   }
 
   function githubFillForm(config) {
