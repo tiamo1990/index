@@ -490,16 +490,22 @@
               });
             });
             adminResources = migrated;
+            adminSaveData();
           } else {
             adminResources = JSON.parse(JSON.stringify(DEFAULT_RESOURCES));
+            adminSaveData();
+            githubRecoverData();
           }
         } catch (e) {
           adminResources = JSON.parse(JSON.stringify(DEFAULT_RESOURCES));
+          adminSaveData();
+          githubRecoverData();
         }
       } else {
         adminResources = JSON.parse(JSON.stringify(DEFAULT_RESOURCES));
+        adminSaveData();
+        githubRecoverData();
       }
-      adminSaveData();
     }
   }
 
@@ -1362,6 +1368,43 @@
       toast('GitHub 同步失败：' + err.message, 'error');
     });
   };
+
+  /* Attempt to recover data from GitHub raw when localStorage is empty */
+  function githubRecoverData() {
+    var config = githubLoadConfig();
+    if (!config.repo) return;
+    var url = 'https://raw.githubusercontent.com/' + config.repo + '/' + config.branch + '/' + config.filePath;
+    return fetch(url, { cache: 'no-cache' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data || !data.tools || !data.tools.length) throw new Error('empty');
+        // Convert flat tools array back to category-based adminResources
+        var recovered = {};
+        data.tools.forEach(function (t) {
+          var cat = t.category || '未分类';
+          if (!recovered[cat]) recovered[cat] = [];
+          recovered[cat].push({
+            name: t.name || '',
+            description: t.desc || '',
+            downloadLink: t.link || '',
+            icon: t.icon || ''
+          });
+        });
+        adminResources = recovered;
+        adminSaveData();
+        hallRenderTools();
+        if (typeof adminRenderDashboard === 'function') adminRenderDashboard();
+        console.log('GitHub 数据恢复成功，共 ' + data.tools.length + ' 个工具');
+        return true;
+      })
+      .catch(function (err) {
+        console.log('GitHub 恢复未执行（无远程数据或网络不可达）:', err.message);
+        return false;
+      });
+  }
 
   function githubInit() {
     var config = githubLoadConfig();
