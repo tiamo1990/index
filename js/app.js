@@ -1485,6 +1485,8 @@
         var remoteUpdated = data.updatedAt || '';
         if (!remoteUpdated || remoteUpdated <= localUpdated) return; // no update
 
+        if (!confirm('检测到 GitHub 上有更新的数据（共 ' + data.tools.length + ' 个工具），是否立即更新？')) return;
+
         // Convert flat tools to category-based
         var recovered = {};
         data.tools.forEach(function (t) {
