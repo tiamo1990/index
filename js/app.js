@@ -1321,7 +1321,7 @@
 
     githubShowStatus('正在测试连接...', '');
 
-    fetch('https://api.github.com/repos/' + encodeURIComponent(repo), {
+    fetch('/api/github-api/repos/' + encodeURIComponent(repo), {
       method: 'GET',
       headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
     })
@@ -1335,7 +1335,7 @@
       });
     })
     .catch(function (err) {
-      githubShowStatus('网络错误：' + err.message, 'error');
+      githubShowStatus('连接失败：请检查网络或尝试使用代理。' + (err.message === 'Failed to fetch' ? '（GitHub API 不可达）' : ''), 'error');
     });
   };
 
@@ -1404,7 +1404,7 @@
     localStorage.setItem('dataUpdatedAt_v5', updatedAt);
     var base64Content = btoa(unescape(encodeURIComponent(jsonContent)));
 
-    var apiBase = 'https://api.github.com/repos/' + encodeURIComponent(repo) + '/contents/' + filePath;
+    var apiBase = '/api/github-api/repos/' + encodeURIComponent(repo) + '/contents/' + filePath;
 
     githubShowStatus('正在同步...', '');
     githubSetLoading(true);
@@ -1457,8 +1457,8 @@
     })
     .catch(function (err) {
       githubSetLoading(false);
-      githubShowStatus('同步失败：' + err.message, 'error');
-      toast('GitHub 同步失败：' + err.message, 'error');
+      githubShowStatus('同步失败：' + (err.message === 'Failed to fetch' ? 'GitHub API 不可达，请检查网络代理' : err.message), 'error');
+      toast('同步失败：' + (err.message === 'Failed to fetch' ? '网络不可达' : err.message), 'error');
     });
   };
 
@@ -1466,7 +1466,7 @@
   function githubRecoverData() {
     var config = githubLoadConfig();
     if (!config.repo) return;
-    var url = 'https://raw.githubusercontent.com/' + config.repo + '/' + config.branch + '/' + config.filePath;
+    var url = '/api/github-raw/' + config.repo + '/' + config.branch + '/' + config.filePath;
     return fetch(url, { cache: 'no-cache' })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1509,7 +1509,7 @@
   function githubCheckUpdate() {
     var config = githubLoadConfig();
     if (!config.repo) return;
-    var url = 'https://raw.githubusercontent.com/' + config.repo + '/' + config.branch + '/' + config.filePath;
+    var url = '/api/github-raw/' + config.repo + '/' + config.branch + '/' + config.filePath;
     var localUpdated = localStorage.getItem('dataUpdatedAt_v5') || '';
 
     fetch(url, { cache: 'no-cache' })
