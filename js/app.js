@@ -1425,10 +1425,56 @@
   };
 
   /* Attempt to recover data from GitHub raw when localStorage is empty */
+  /* Auto-pull from GitHub Pages on any device (no config needed) */
+  function synGithubPull() {
+    // Skip if already have local admin data
+    var existing = localStorage.getItem('adminResources_v5');
+    if (existing) {
+      try {
+        var p = JSON.parse(existing);
+        if (p && typeof p === 'object' && Object.keys(p).length > 0) return;
+      } catch (e) {}
+    }
+
+    fetch('/data/tool-data.json', { cache: 'no-cache' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data || !data.tools || !data.tools.length) throw new Error('empty');
+        var recovered = {};
+        data.tools.forEach(function (t) {
+          var cat = t.category || '未分类';
+          if (!recovered[cat]) recovered[cat] = [];
+          recovered[cat].push({
+            name: t.name || '',
+            description: t.desc || '',
+            downloadLink: t.link || '',
+            icon: t.icon || ''
+          });
+        });
+        localStorage.setItem('adminResources_v5', JSON.stringify(recovered));
+        if (data.updatedAt) localStorage.setItem('dataUpdatedAt_v5', data.updatedAt);
+        // Seed config so githubCheckUpdate works on subsequent visits
+        localStorage.setItem('githubConfig_v2', JSON.stringify({
+          repo: 'tiamo1990/index',
+          branch: 'main',
+          filePath: 'data/tool-data.json'
+        }));
+        hallRenderTools();
+        if (typeof adminRenderDashboard === 'function') adminRenderDashboard();
+        console.log('synGithubPull: loaded ' + data.tools.length + ' tools from data/tool-data.json');
+      })
+      .catch(function (err) {
+        console.log('synGithubPull: skipped (' + err.message + ')');
+      });
+  }
+
   function githubRecoverData() {
     var config = githubLoadConfig();
     if (!config.repo) return;
-    var url = '/api/github-raw/' + config.repo + '/' + config.branch + '/' + config.filePath;
+    var url = '/' + config.filePath;
     return fetch(url, { cache: 'no-cache' })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1471,7 +1517,7 @@
   function githubCheckUpdate() {
     var config = githubLoadConfig();
     if (!config.repo) return;
-    var url = '/api/github-raw/' + config.repo + '/' + config.branch + '/' + config.filePath;
+    var url = '/' + config.filePath;
     var localUpdated = localStorage.getItem('dataUpdatedAt_v5') || '';
 
     fetch(url, { cache: 'no-cache' })
@@ -1539,6 +1585,9 @@
   }
 
   function init() {
+    // Auto-load data from GitHub Pages on every device
+    synGithubPull();
+
     // Bind search input handlers once
     var searchInput = document.getElementById('hallSearchInput');
     if (searchInput) {
