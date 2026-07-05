@@ -284,11 +284,7 @@
               </div>
               <div class="setting-item github-sync-wrap">
                 <h3>GitHub 同步</h3>
-                <p class="setting-desc">配置后可将本地数据一键推送到 GitHub 仓库，使 GitHub Pages 站点同步更新</p>
-                <div class="github-field">
-                  <label>GitHub Token</label>
-                  <input type="password" id="githubTokenInput" placeholder="Settings → Developer settings → Personal access tokens → Tokens (classic)" />
-                </div>
+                <p class="setting-desc">一键将管理后台数据推送到 GitHub 仓库，其他设备打开站点即可获取最新数据</p>
                 <div class="github-field">
                   <label>仓库名</label>
                   <input type="text" id="githubRepoInput" placeholder="username/repo" />
@@ -310,6 +306,7 @@
                   <button class="btn btn-sm btn-primary" id="githubSyncBtn" onclick="window.githubSyncToRepo()">同步到 GitHub</button>
                 </div>
                 <div class="github-status" id="githubStatus"></div>
+                <p style="margin-top: 10px; font-size: 0.82rem; color: var(--muted);">提示：添加、编辑、删除工具后会自动推送至 GitHub，无需手动操作。</p>
               </div>
               <div class="setting-item">
                 <h4 class="setting-title">登录信息</h4>
@@ -428,7 +425,7 @@
   <!-- SCRIPTS                                       -->
   <!-- ============================================= -->
   <script src="js/tool-data.js"></script>
-  <script src="js/app.js?v=20260705"></script>
+  <script src="js/app.js?v=20260705b"></script>
   <button class="back-to-top" id="backToTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
   </button>
