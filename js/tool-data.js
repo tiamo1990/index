@@ -1,4 +1,4 @@
-const TOOLS = [
+window.TOOLS = [
   // ===== 系统工具 (11) =====
   { id: 1,  name: "WinRar",              desc: "强大的压缩管理工具",       category: "system",      download: "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-720sc.exe" },
   { id: 2,  name: "360zip",              desc: "免费解压缩软件",           category: "system",      download: "https://yasuo.360.cn/" },
@@ -55,7 +55,7 @@ const TOOLS = [
   { id: 43, name: "KeePass",             desc: "开源密码管理工具",         category: "plugin",      download: "https://keepass.info/download.html" }
 ];
 
-const CATEGORIES = [
+window.CATEGORIES = [
   { id: "all",         name: "全部工具", icon: "📋", color: "#6366f1" },
   { id: "system",      name: "系统工具", icon: "🖥️", color: "#6366f1" },
   { id: "office",      name: "办公工具", icon: "📝", color: "#f59e0b" },

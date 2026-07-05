@@ -1,135 +1,427 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>实用工具合集 - 个人工具下载站</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="个人工具下载站，提供系统工具、办公工具、开发工具、网络工具、多媒体工具等免费实用工具的下载。">
-<meta name="keywords" content="工具下载,系统工具,办公工具,开发工具,网络工具,多媒体工具,免费工具,实用工具">
-<meta name="author" content="个人工具下载站">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#6366f1">
-
-<!-- Open Graph -->
-<meta property="og:title" content="实用工具合集 - 个人工具下载站">
-<meta property="og:description" content="精心整理的免费实用工具合集，一站式下载">
-<meta property="og:url" content="https://shancha.dpdns.org/">
-<meta property="og:type" content="website">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-
-<!-- Canonical -->
-<link rel="canonical" href="https://shancha.dpdns.org/">
-
-<!-- 结构化数据 -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "个人工具下载站",
-  "url": "https://shancha.dpdns.org",
-  "description": "提供各类免费实用工具的下载网站"
-}
-</script>
-
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToolHub — 工具下载站</title>
+  <meta name="description" content="个人工具下载站 — 系统工具、办公软件、开发利器、多媒体工具一站式下载" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><text x='50%25' y='53%25' dominant-baseline='middle' text-anchor='middle' font-size='18' fill='white'>T</text></svg>" />
 </head>
 <body>
 
-<a class="skip-link" href="#main-content">跳到主要内容</a>
+  <!-- Ambient background orbs -->
+  <div class="bg-ambiance">
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
+    <div class="bg-orb bg-orb--3"></div>
+  </div>
 
-<!-- ==================== HEADER ==================== -->
-<header>
-  <div class="container">
-    <div class="header-inner">
-      <a href="/" class="logo" aria-label="回到首页">
-        <span class="logo-icon">📦</span>
-        实用工具合集
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand" onclick="switchView('hall'); return false;">
+        <div class="nav-brand-icon">T</div>
+        ToolHub
       </a>
-      <div class="search-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/>
-          <path d="M21 21l-4.35-4.35"/>
-        </svg>
-        <input type="text" id="searchInput" class="search-input" placeholder="搜索工具名称或描述..." aria-label="搜索工具" autocomplete="off">
-        <button class="search-clear" id="searchClear" aria-label="清除搜索" type="button">×</button>
+
+      <div class="nav-tabs">
+        <button class="nav-tab active" data-view="hall" onclick="switchView('hall')">工具大厅</button>
+        <button class="nav-tab" data-view="admin" onclick="switchView('admin')">管理后台</button>
+        <button class="nav-tab" data-view="help" onclick="switchView('help')">帮助中心</button>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn btn-sm btn-secondary" id="adminLockBtn" onclick="adminLogout()" style="display:none;">退出管理</button>
       </div>
     </div>
-    <div class="category-nav-wrapper">
-      <nav class="category-nav" aria-label="工具分类">
-        <button class="category-tab active" data-category="all">全部</button>
-        <button class="category-tab" data-category="system">🖥️ 系统工具</button>
-        <button class="category-tab" data-category="office">📝 办公工具</button>
-        <button class="category-tab" data-category="dev">💻 开发工具</button>
-        <button class="category-tab" data-category="network">🌐 网络工具</button>
-        <button class="category-tab" data-category="multimedia">🎬 多媒体</button>
-        <button class="category-tab" data-category="plugin">📦 其他工具</button>
-      </nav>
-    </div>
-  </div>
-</header>
+  </nav>
 
-<!-- ==================== MAIN ==================== -->
-<main id="main-content">
-  <div class="container">
+  <!-- ============================================= -->
+  <!-- VIEW: 工具大厅 (Hall)                           -->
+  <!-- ============================================= -->
+  <div class="page">
+    <section class="view active" id="view-hall">
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1><span class="highlight">实用</span>工具合集</h1>
-        <p class="hero-sub">精心整理的免费实用工具，一键直达下载</p>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <div class="hero-stat-num" id="statTotal">43</div>
-            <div class="hero-stat-label">工具总数</div>
+      <div class="hall-hero">
+        <h1 class="hall-hero-title">高效工具 · 一站下载</h1>
+        <p class="hall-hero-subtitle">精选系统、办公、开发、多媒体等各类实用工具，持续更新</p>
+
+        <div class="hall-search-wrap">
+          <div class="hall-search-box" id="hallSearchBox">
+            <svg class="hall-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input class="hall-search-input" id="hallSearchInput" type="text" placeholder="搜索工具名称或描述..." />
+            <button class="hall-search-clear" id="hallSearchClear" onclick="hallClearSearch()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
           </div>
-          <div class="hero-stat-divider" role="presentation"></div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">6</div>
-            <div class="hero-stat-label">全部分类</div>
+        </div>
+
+        <div class="hall-stats">
+          <div class="hall-stat"><div class="hall-stat-val" id="hallStatTotal">43</div><div class="hall-stat-label">工具总数</div></div>
+          <div class="hall-stat"><div class="hall-stat-val" id="hallStatCategories">7</div><div class="hall-stat-label">分类</div></div>
+          <div class="hall-stat"><div class="hall-stat-val" id="hallStatYear">2026</div><div class="hall-stat-label">持续更新</div></div>
+        </div>
+      </div>
+
+      <div class="hall-categories" id="hallCategories"></div>
+
+      <div class="hall-body">
+        <div class="hall-body-header">
+          <span class="hall-body-title" id="hallBodyTitle">全部工具</span>
+          <span class="text-sm text-muted" id="hallToolCount">43 个工具</span>
+          <div class="hall-body-header-right">
+            <select class="hall-sort-select" id="hallSortSelect" onchange="hallOnSortChange()">
+              <option value="default">默认排序</option>
+              <option value="popular">最常用</option>
+              <option value="recent">最近使用</option>
+            </select>
           </div>
-          <div class="hero-stat-divider" role="presentation"></div>
-          <div class="hero-stat">
-            <div class="hero-stat-num" id="statYear">2026</div>
-            <div class="hero-stat-label">持续更新</div>
+        </div>
+        <div class="tool-grid" id="hallToolGrid"></div>
+      </div>
+
+    </section>
+
+    <!-- ============================================= -->
+    <!-- VIEW: 管理后台 (Admin)                          -->
+    <!-- ============================================= -->
+    <section class="view" id="view-admin">
+
+      <!-- Login gate -->
+      <div id="adminLoginGate" class="overlay" style="position:relative;min-height:calc(100vh - 60px);background:transparent;backdrop-filter:none;">
+        <div class="modal">
+          <h2 class="modal-title">管理后台</h2>
+          <p class="modal-desc">请输入管理员账号和密码</p>
+          <div class="form-group">
+            <label class="form-label">账号</label>
+            <input class="form-input" type="text" id="adminUserInput" placeholder="管理员账号" autocomplete="username" onkeydown="if(event.key==='Enter')document.getElementById('adminPwdInput').focus()" />
           </div>
+          <div class="form-group">
+            <label class="form-label">密码</label>
+            <input class="form-input" type="password" id="adminPwdInput" placeholder="管理员密码" autocomplete="current-password" onkeydown="if(event.key==='Enter')adminLogin()" />
+          </div>
+          <div class="flex justify-between items-center">
+            <span id="adminLoginMsg" class="text-sm" style="color:var(--color-danger);display:none;"></span>
+            <button class="btn btn-primary" onclick="adminLogin()">进入后台</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin panel (hidden until login) -->
+      <div id="adminPanel" class="admin-wrap hidden">
+        <div class="admin-header">
+          <div>
+            <h1 class="admin-title">管理后台</h1>
+            <p class="admin-subtitle">数据存储在浏览器本地，适合 GitHub Pages 静态部署</p>
+          </div>
+          <div class="flex gap-2">
+            <button class="btn btn-sm btn-secondary" onclick="adminExportData()">导出数据</button>
+            <button class="btn btn-sm btn-secondary" onclick="adminImportModal()">导入数据</button>
+            <button class="btn btn-sm btn-secondary" onclick="adminResetData()">恢复默认</button>
+            <button class="btn btn-sm btn-danger" onclick="adminLogout()">退出</button>
+          </div>
+        </div>
+
+        <!-- Sub-nav -->
+        <div class="admin-subnav">
+          <button class="admin-subtab active" data-asection="dashboard" onclick="adminSwitchSection('dashboard')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            仪表盘
+          </button>
+          <button class="admin-subtab" data-asection="resources" onclick="adminSwitchSection('resources')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            资源管理
+          </button>
+          <button class="admin-subtab" data-asection="add" onclick="adminSwitchSection('add')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            添加资源
+          </button>
+          <button class="admin-subtab" data-asection="settings" onclick="adminSwitchSection('settings')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            设置
+          </button>
+          <button class="admin-subtab" data-asection="guide" onclick="adminSwitchSection('guide')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            使用指南
+          </button>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="admin-section active" id="admin-dashboard">
+          <div class="admin-stats" id="adminStatsGrid"></div>
+          <div class="admin-dashboard-cards">
+            <div class="dashboard-card">
+              <h3 class="dashboard-card-title">快速操作</h3>
+              <div class="dashboard-card-actions">
+                <button class="btn btn-sm btn-primary" onclick="adminSwitchSection('add')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  添加新资源
+                </button>
+                <button class="btn btn-sm btn-secondary" onclick="adminExportData()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  导出数据
+                </button>
+                <button class="btn btn-sm btn-secondary" onclick="adminImportModal()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  导入数据
+                </button>
+              </div>
+            </div>
+            <div class="dashboard-card">
+              <h3 class="dashboard-card-title">最近更新</h3>
+              <div class="recent-list" id="adminRecentList"></div>
+            </div>
+            <div class="dashboard-card">
+              <h3 class="dashboard-card-title">分类分布</h3>
+              <div class="category-chart" id="adminCategoryChart"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resource Management -->
+        <div class="admin-section" id="admin-resources">
+          <div class="res-table-wrap">
+            <div class="res-table-toolbar">
+              <div class="res-table-toolbar-left">
+                <select class="form-select" id="adminResFilter" onchange="adminRenderResources()">
+                  <option value="all">全部分类</option>
+                  <option value="system">系统工具</option>
+                  <option value="office">办公工具</option>
+                  <option value="dev">开发工具</option>
+                  <option value="network">网络工具</option>
+                  <option value="multimedia">多媒体工具</option>
+                  <option value="plugin">其他工具</option>
+                </select>
+                <input class="form-input" type="text" id="adminResSearch" placeholder="搜索资源名称或描述..." oninput="adminRenderResources()" />
+              </div>
+              <div class="res-table-toolbar-right">
+                <button class="btn btn-sm btn-secondary" onclick="adminBulkDelete()" id="adminBulkDeleteBtn" style="display:none;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                  批量删除
+                </button>
+                <button class="btn btn-sm btn-primary" onclick="adminSwitchSection('add')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  添加资源
+                </button>
+              </div>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="res-table">
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" id="adminSelectAll" onchange="adminToggleSelectAll(this)" /></th>
+                    <th>#</th>
+                    <th>名称</th>
+                    <th>分类</th>
+                    <th>描述</th>
+                    <th>版本/平台</th>
+                    <th>下载链接</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="adminResTableBody"></tbody>
+              </table>
+            </div>
+            <div class="res-table-footer">
+              <div class="res-table-info" id="adminResTableInfo"></div>
+              <div class="res-table-pagination" id="adminResPagination"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Resource -->
+        <div class="admin-section" id="admin-add">
+          <div class="admin-form-card">
+            <h3 class="card-title" id="adminFormTitle">添加新资源</h3>
+            <form id="adminAddForm" onsubmit="adminSubmitResource(event)" style="display:flex;flex-direction:column;gap:14px;">
+              <input type="hidden" id="adminEditCat" />
+              <input type="hidden" id="adminEditIdx" value="-1" />
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">名称 *</label><input class="form-input" id="adminName" required /></div>
+                <div class="form-group"><label class="form-label">分类 *</label><select class="form-select" id="adminCategory" required><option value="system">系统工具</option><option value="office">办公工具</option><option value="dev">开发工具</option><option value="network">网络工具</option><option value="multimedia">多媒体工具</option><option value="plugin">其他工具</option></select></div>
+              </div>
+              <div class="form-group"><label class="form-label">描述</label><textarea class="form-textarea" id="adminDesc" rows="2" placeholder="简要描述工具的功能和特点"></textarea></div>
+              <div class="form-group"><label class="form-label">下载链接 *</label><input class="form-input" id="adminLink" required placeholder="https://..." /></div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">版本</label><input class="form-input" id="adminVersion" placeholder="如：1.0.0" /></div>
+                <div class="form-group"><label class="form-label">大小</label><input class="form-input" id="adminSize" placeholder="如：10MB" /></div>
+                <div class="form-group"><label class="form-label">平台</label><input class="form-input" id="adminPlatform" placeholder="Windows / macOS / Linux / Web" /></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">图标 (可选)</label>
+                <input class="form-input" id="adminIcon" placeholder="emoji 或 Font Awesome 图标，如：🔧 或 fa-wrench" />
+                <div class="form-hint">支持 emoji 或 Font Awesome 类名，留空使用分类默认图标</div>
+              </div>
+              <div class="flex gap-2" style="margin-top:4px;">
+                <button class="btn btn-primary" type="submit" id="adminSubmitBtn">添加资源</button>
+                <button class="btn btn-secondary" type="button" id="adminCancelEditBtn" style="display:none;" onclick="adminCancelEdit()">取消编辑</button>
+                <button class="btn btn-ghost" type="button" onclick="adminAddForm.reset();">清空表单</button>
+              </div>
+            </form>
+          </div>
+          <div id="adminFormMsg" class="text-sm mt-2" style="display:none;"></div>
+        </div>
+
+        <!-- Settings -->
+        <div class="admin-section" id="admin-settings">
+          <div class="admin-form-card">
+            <h3 class="card-title">系统设置</h3>
+            <div class="settings-grid">
+              <div class="setting-item">
+                <h4 class="setting-title">数据管理</h4>
+                <p class="setting-desc">所有数据存储在浏览器本地 (localStorage)，适合 GitHub Pages 静态部署</p>
+                <div class="setting-actions">
+                  <button class="btn btn-sm btn-primary" onclick="adminExportData()">导出全部数据</button>
+                  <button class="btn btn-sm btn-secondary" onclick="adminImportModal()">导入数据</button>
+                  <button class="btn btn-sm btn-danger" onclick="adminClearAllData()">清空所有数据</button>
+                </div>
+              </div>
+              <div class="setting-item github-sync-wrap">
+                <h3>GitHub 同步</h3>
+                <p class="setting-desc">配置后可将本地数据一键推送到 GitHub 仓库，使 GitHub Pages 站点同步更新</p>
+                <div class="github-field">
+                  <label>GitHub Token</label>
+                  <input type="password" id="githubTokenInput" placeholder="Settings → Developer settings → Personal access tokens → Tokens (classic)" />
+                </div>
+                <div class="github-field">
+                  <label>仓库名</label>
+                  <input type="text" id="githubRepoInput" placeholder="username/repo" />
+                </div>
+                <div class="github-field">
+                  <label>分支名</label>
+                  <input type="text" id="githubBranchInput" value="main" />
+                </div>
+                <div class="github-field">
+                  <label>文件路径</label>
+                  <input type="text" id="githubFilePathInput" value="data/tool-data.json" />
+                </div>
+                <div class="github-field">
+                  <label>提交信息</label>
+                  <input type="text" id="githubCommitMsgInput" value="Update tool data from admin panel" />
+                </div>
+                <div class="github-actions">
+                  <button class="btn btn-sm btn-secondary" id="githubTestBtn" onclick="window.githubTestConnection()">测试连接</button>
+                  <button class="btn btn-sm btn-primary" id="githubSyncBtn" onclick="window.githubSyncToRepo()">同步到 GitHub</button>
+                </div>
+                <div class="github-status" id="githubStatus"></div>
+              </div>
+              <div class="setting-item">
+                <h4 class="setting-title">登录信息</h4>
+                <p class="setting-desc">当前登录账号：<strong>admin</strong> | 密码：<strong>123456</strong></p>
+                <div class="setting-actions">
+                  <button class="btn btn-sm btn-secondary" onclick="adminChangePasswordModal()">修改密码</button>
+                </div>
+              </div>
+              <div class="setting-item">
+                <h4 class="setting-title">关于</h4>
+                <p class="setting-desc">ToolHub v5.0 · 专为静态部署设计的工具下载站</p>
+                <div class="setting-actions">
+                  <button class="btn btn-sm btn-secondary" onclick="window.open('https://github.com', '_blank')">GitHub 仓库</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide -->
+        <div class="admin-section" id="admin-guide">
+          <div class="admin-guide-wrap">
+            <div class="guide-sidebar" id="adminGuideSidebar"></div>
+            <div class="guide-content" id="adminGuideContent">
+              <div class="guide-placeholder">请从左侧选择章节</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Import Modal -->
+      <div id="adminImportModal" class="overlay hidden">
+        <div class="modal" style="max-width: 500px;">
+          <h2 class="modal-title">导入数据</h2>
+          <p class="modal-desc">粘贴导出的 JSON 数据，将覆盖当前所有数据</p>
+          <div class="form-group">
+            <label class="form-label">JSON 数据</label>
+            <textarea class="form-textarea" id="adminImportData" rows="8" placeholder='{"system": [...], "office": [...]}'></textarea>
+          </div>
+          <div class="flex justify-between items-center">
+            <span id="adminImportMsg" class="text-sm" style="color:var(--color-danger);display:none;"></span>
+            <div class="flex gap-2">
+              <button class="btn btn-secondary" onclick="document.getElementById('adminImportModal').classList.add('hidden')">取消</button>
+              <button class="btn btn-primary" onclick="adminImportData()">导入</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Change Password Modal -->
+      <div id="adminChangePasswordModal" class="overlay hidden">
+        <div class="modal" style="max-width: 400px;">
+          <h2 class="modal-title">修改密码</h2>
+          <p class="modal-desc">新密码将立即生效</p>
+          <div class="form-group">
+            <label class="form-label">当前密码</label>
+            <input class="form-input" type="password" id="adminCurrentPwd" placeholder="输入当前密码" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">新密码</label>
+            <input class="form-input" type="password" id="adminNewPwd" placeholder="输入新密码" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">确认新密码</label>
+            <input class="form-input" type="password" id="adminConfirmPwd" placeholder="再次输入新密码" />
+          </div>
+          <div class="flex justify-between items-center">
+            <span id="adminChangePwdMsg" class="text-sm" style="color:var(--color-danger);display:none;"></span>
+            <div class="flex gap-2">
+              <button class="btn btn-secondary" onclick="document.getElementById('adminChangePasswordModal').classList.add('hidden')">取消</button>
+              <button class="btn btn-primary" onclick="adminChangePassword()">确认修改</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================= -->
+    <!-- VIEW: 帮助中心 (Help)                          -->
+    <!-- ============================================= -->
+    <section class="view" id="view-help">
+      <div class="help-wrap">
+        <div class="help-hero">
+          <h1 class="help-hero-title">帮助中心</h1>
+          <p class="help-hero-subtitle">常见问题与使用指南</p>
+        </div>
+        <div class="help-faq">
+          <div class="faq-card"><button class="faq-q" onclick="toggleFaq(this)"><span>如何下载工具？</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">在工具大厅找到需要的工具，点击卡片上的「下载」按钮即可跳转到下载页面。所有下载链接均指向官方或可信源。也可以使用顶部搜索框或分类标签快速定位。</div></div>
+          <div class="faq-card"><button class="faq-q" onclick="toggleFaq(this)"><span>网站需要登录才能用吗？</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">不需要。工具大厅和帮助中心对所有访客开放。管理后台需要管理员登录，仅限站点所有者使用。</div></div>
+          <div class="faq-card"><button class="faq-q" onclick="toggleFaq(this)"><span>下载链接失效怎么办？</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">如发现下载链接失效，请通过管理后台编辑更新链接，或联系站点管理员处理。部分网盘链接（如迅雷云盘）可能因分享到期而失效。</div></div>
+          <div class="faq-card"><button class="faq-q" onclick="toggleFaq(this)"><span>管理后台怎么进？</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">点击顶部导航栏「管理后台」，账号密码由管理员保管，请联系管理员获取。详细教程请进入管理后台后查看「使用指南」页面。</div></div>
+          <div class="faq-card"><button class="faq-q" onclick="toggleFaq(this)"><span>数据存储在哪里？安全吗？</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">所有资源数据保存在浏览器的 localStorage（本地存储）中，不上传到任何服务器。适合 GitHub Pages 等静态部署场景。注意：清除浏览器缓存或更换设备会导致管理数据丢失，建议定期导出 JSON 备份。</div></div>
+          <div class="faq-card"><button class="faq-q" onclick="toggleFaq(this)"><span>如何备份和恢复数据？</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">登录管理后台后，点击「导出数据」下载 JSON 备份文件；点击「导入数据」粘贴备份内容即可恢复。建议每次更新资源后都导出一次。</div></div>
+          <div class="faq-card"><button class="faq-q" onclick="toggleFaq(this)"><span>可以自定义工具图标吗？</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">可以。在添加或编辑资源时，图标字段支持 emoji 或 Font Awesome 类名，如 🔧 或 fa-solid fa-gear。留空则使用分类默认图标。</div></div>
+          <div class="faq-card"><button class="faq-q" onclick="toggleFaq(this)"><span>如何部署到 GitHub Pages？</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">将 index.html、css/、js/ 三个文件/文件夹上传到 GitHub 仓库，在 Settings → Pages 中选择主分支和根目录，保存后等待 1-2 分钟即可通过 https://用户名.github.io/仓库名 访问。由于是纯静态 SPA 应用，无需任何额外配置。</div></div>
         </div>
       </div>
     </section>
 
-    <!-- TOOLS -->
-    <section class="tools-section">
-      <div class="section-header">
-        <h2 id="sectionTitle">全部工具</h2>
-        <span class="tool-count-badge" id="toolCount">43 个工具</span>
-      </div>
-      <div class="tools-grid" id="toolsGrid">
-        <!-- 由 script.js 动态渲染 -->
-      </div>
-    </section>
-
+    <!-- Footer -->
+    <footer class="site-footer">
+      ToolHub &copy; 2026 · 个人工具下载站 · 资源均来自互联网，仅供学习交流
+    </footer>
   </div>
-</main>
 
-<!-- ==================== FOOTER ==================== -->
-<footer>
-  <div class="container">
-    <div class="footer-links">
-      <a href="help.html">📖 使用帮助</a>
-      <a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 项目</a>
-    </div>
-    <p class="footer-text">&copy; 2026 个人工具下载站 · 资源收集于网络，仅供学习交流</p>
-  </div>
-</footer>
-
-<button class="back-to-top" id="backToTop" aria-label="回到顶部">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-    <polyline points="18 15 12 9 6 15"/>
-  </svg>
-</button>
-
-<script src="js/tool-data.js"></script>
-<script src="script.js"></script>
+  <!-- ============================================= -->
+  <!-- SCRIPTS                                       -->
+  <!-- ============================================= -->
+  <script src="js/tool-data.js"></script>
+  <script src="js/app.js"></script>
+  <button class="back-to-top" id="backToTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
 </body>
 </html>
