@@ -1365,7 +1365,9 @@
       };
     });
 
-    var jsonContent = JSON.stringify({ tools: tools, categories: categories }, null, 2);
+    var updatedAt = new Date().toISOString();
+    var jsonContent = JSON.stringify({ tools: tools, categories: categories, updatedAt: updatedAt }, null, 2);
+    localStorage.setItem('dataUpdatedAt_v5', updatedAt);
     var base64Content = btoa(unescape(encodeURIComponent(jsonContent)));
 
     var apiBase = 'https://api.github.com/repos/' + encodeURIComponent(repo) + '/contents/' + filePath;
@@ -1449,6 +1451,7 @@
         });
         adminResources = recovered;
         adminSaveData();
+        if (data.updatedAt) localStorage.setItem('dataUpdatedAt_v5', data.updatedAt);
         hallRenderTools();
         if (typeof adminRenderDashboard === 'function') adminRenderDashboard();
         console.log('GitHub 数据恢复成功，共 ' + data.tools.length + ' 个工具');
@@ -1463,6 +1466,48 @@
   function githubInit() {
     var config = githubLoadConfig();
     githubFillForm(config);
+  }
+
+  /* Check GitHub for newer data and auto-update localStorage */
+  function githubCheckUpdate() {
+    var config = githubLoadConfig();
+    if (!config.repo) return;
+    var url = 'https://raw.githubusercontent.com/' + config.repo + '/' + config.branch + '/' + config.filePath;
+    var localUpdated = localStorage.getItem('dataUpdatedAt_v5') || '';
+
+    fetch(url, { cache: 'no-cache' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data || !data.tools || !data.tools.length) throw new Error('empty');
+        var remoteUpdated = data.updatedAt || '';
+        if (!remoteUpdated || remoteUpdated <= localUpdated) return; // no update
+
+        // Convert flat tools to category-based
+        var recovered = {};
+        data.tools.forEach(function (t) {
+          var cat = t.category || '未分类';
+          if (!recovered[cat]) recovered[cat] = [];
+          recovered[cat].push({
+            name: t.name || '',
+            description: t.desc || '',
+            downloadLink: t.link || '',
+            icon: t.icon || ''
+          });
+        });
+        adminResources = recovered;
+        adminSaveData();
+        localStorage.setItem('dataUpdatedAt_v5', remoteUpdated);
+        hallRenderTools();
+        if (typeof adminRenderDashboard === 'function') adminRenderDashboard();
+        toast('数据已从 GitHub 自动更新', 'success');
+        console.log('GitHub 自动更新完成，共 ' + data.tools.length + ' 个工具');
+      })
+      .catch(function (err) {
+        console.log('GitHub 自动更新跳过:', err.message);
+      });
   }
 
   /* ================================================================
@@ -1534,6 +1579,7 @@
 
     adminLoadData();
     githubInit();
+    githubCheckUpdate();
     var loggedIn = localStorage.getItem('adminLoggedIn_v4');
     if (loggedIn === '1') {
       document.getElementById('adminLockBtn').style.display = '';
