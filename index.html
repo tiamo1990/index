@@ -120,6 +120,7 @@
             <p class="admin-subtitle">数据存储在浏览器本地，适合 GitHub Pages 静态部署</p>
           </div>
           <div class="flex gap-2">
+            <button class="btn btn-sm btn-primary" id="githubQuickSyncBtn" onclick="window.githubSyncToRepo()" title="一键同步到 GitHub">同步到 GitHub</button>
             <button class="btn btn-sm btn-secondary" onclick="adminExportData()">导出数据</button>
             <button class="btn btn-sm btn-secondary" onclick="adminImportModal()">导入数据</button>
             <button class="btn btn-sm btn-secondary" onclick="adminResetData()">恢复默认</button>

@@ -1306,19 +1306,41 @@
   };
 
   window.githubSyncToRepo = function () {
-    var token = document.getElementById('githubTokenInput').value.trim();
-    var repo = document.getElementById('githubRepoInput').value.trim();
-    var branch = document.getElementById('githubBranchInput').value.trim() || 'main';
-    var filePath = document.getElementById('githubFilePathInput').value.trim() || 'data/tool-data.json';
-    var commitMsg = document.getElementById('githubCommitMsgInput').value.trim() || 'Update tool data from admin panel';
+    var tokenInput = document.getElementById('githubTokenInput');
+    var repoInput = document.getElementById('githubRepoInput');
 
-    if (!token || !repo) {
-      githubShowStatus('请填写 GitHub Token 和仓库名', 'error');
-      return;
+    var token, repo, branch, filePath, commitMsg;
+
+    if (tokenInput && repoInput) {
+      // Settings panel is rendered → read from DOM
+      token = tokenInput.value.trim();
+      repo = repoInput.value.trim();
+      branch = document.getElementById('githubBranchInput').value.trim() || 'main';
+      filePath = document.getElementById('githubFilePathInput').value.trim() || 'data/tool-data.json';
+      commitMsg = document.getElementById('githubCommitMsgInput').value.trim() || 'Update tool data from admin panel';
+
+      if (!token || !repo) {
+        githubShowStatus('请填写 GitHub Token 和仓库名', 'error');
+        return;
+      }
+      // Save latest config
+      githubSaveConfig({ token: token, repo: repo, branch: branch, filePath: filePath, commitMsg: commitMsg });
+    } else {
+      // Quick sync from top bar → read from saved config
+      var saved = githubLoadConfig();
+      token = saved.token;
+      repo = saved.repo;
+      branch = saved.branch || 'main';
+      filePath = saved.filePath || 'data/tool-data.json';
+      commitMsg = saved.commitMsg || 'Update tool data from admin panel';
+
+      if (!token || !repo) {
+        toast('请先在设置页配置 GitHub Token 和仓库名', 'error');
+        // Auto-switch to settings tab
+        window.adminSwitchSection('settings');
+        return;
+      }
     }
-
-    // Save config
-    githubSaveConfig({ token: token, repo: repo, branch: branch, filePath: filePath, commitMsg: commitMsg });
 
     // Build clean JSON
     var tools = [];
