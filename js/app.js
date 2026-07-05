@@ -1341,124 +1341,42 @@
 
   window.githubSyncToRepo = function () {
     var tokenInput = document.getElementById('githubTokenInput');
-    var repoInput = document.getElementById('githubRepoInput');
+    var hasConfig = !!(tokenInput && tokenInput.value.trim());
 
-    var token, repo, branch, filePath, commitMsg;
-
-    if (tokenInput && repoInput) {
-      // Settings panel is rendered → read from DOM
-      token = tokenInput.value.trim();
-      repo = repoInput.value.trim();
-      branch = document.getElementById('githubBranchInput').value.trim() || 'main';
-      filePath = document.getElementById('githubFilePathInput').value.trim() || 'data/tool-data.json';
-      commitMsg = document.getElementById('githubCommitMsgInput').value.trim() || 'Update tool data from admin panel';
-
-      if (!token || !repo) {
-        githubShowStatus('请填写 GitHub Token 和仓库名', 'error');
-        return;
-      }
-      // Save latest config
-      githubSaveConfig({ token: token, repo: repo, branch: branch, filePath: filePath, commitMsg: commitMsg });
-    } else {
-      // Quick sync from top bar → read from saved config
+    if (!hasConfig) {
       var saved = githubLoadConfig();
-      token = saved.token;
-      repo = saved.repo;
-      branch = saved.branch || 'main';
-      filePath = saved.filePath || 'data/tool-data.json';
-      commitMsg = saved.commitMsg || 'Update tool data from admin panel';
-
-      if (!token || !repo) {
+      if (!saved.repo) {
         toast('请先在设置页配置 GitHub Token 和仓库名', 'error');
-        // Auto-switch to settings tab
         window.adminSwitchSection('settings');
         return;
       }
     }
 
-    // Build clean JSON
-    var tools = [];
-    var catKeys = Object.keys(adminResources);
-    catKeys.forEach(function (cat) {
-      adminResources[cat].forEach(function (r) {
-        tools.push({
-          name: r.name || '',
-          desc: r.description || '',
-          category: cat,
-          icon: r.icon || '',
-          link: r.downloadLink || ''
-        });
-      });
-    });
-
-    var categories = catKeys.map(function (cat) {
-      return {
-        key: cat,
-        label: CAT_NAMES[cat] || cat,
-        icon: CAT_ICONS[cat] || ''
-      };
-    });
-
-    var updatedAt = new Date().toISOString();
-    var jsonContent = JSON.stringify({ tools: tools, categories: categories, updatedAt: updatedAt }, null, 2);
-    localStorage.setItem('dataUpdatedAt_v5', updatedAt);
-    var base64Content = btoa(unescape(encodeURIComponent(jsonContent)));
-
-    var apiBase = '/api/github-api/repos/' + encodeURIComponent(repo) + '/contents/' + filePath;
-
+    // POST adminResources directly to Cloudflare Function
     githubShowStatus('正在同步...', '');
     githubSetLoading(true);
+    localStorage.setItem('dataUpdatedAt_v5', new Date().toISOString());
 
-    // Step 1: get existing file sha
-    fetch(apiBase + '?ref=' + encodeURIComponent(branch), {
-      method: 'GET',
-      headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
+    fetch('/api/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(adminResources)
     })
-    .then(function (res) {
-      if (res.status === 404) return null; // file doesn't exist yet
-      if (!res.ok) {
-        return res.json().then(function (data) {
-          throw new Error(data.message || 'HTTP ' + res.status);
-        });
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      githubSetLoading(false);
+      if (data.ok) {
+        githubShowStatus('同步成功！数据已推送到 GitHub', 'success');
+        toast('同步成功', 'success');
+      } else {
+        githubShowStatus('同步失败：' + (data.message || '未知错误'), 'error');
+        toast('同步失败', 'error');
       }
-      return res.json();
-    })
-    .then(function (existing) {
-      var body = {
-        message: commitMsg,
-        content: base64Content,
-        branch: branch
-      };
-      if (existing && existing.sha) {
-        body.sha = existing.sha;
-      }
-
-      return fetch(apiBase, {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'token ' + token,
-          'Content-Type': 'application/json',
-          'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify(body)
-      });
-    })
-    .then(function (res) {
-      return res.json().then(function (data) {
-        githubSetLoading(false);
-        if (res.ok) {
-          githubShowStatus('同步成功！文件已推送到 ' + repo + '/' + filePath, 'success');
-          toast('GitHub 同步成功', 'success');
-        } else {
-          githubShowStatus('同步失败：' + (data.message || 'HTTP ' + res.status), 'error');
-          toast('GitHub 同步失败', 'error');
-        }
-      });
     })
     .catch(function (err) {
       githubSetLoading(false);
-      githubShowStatus('同步失败：' + (err.message === 'Failed to fetch' ? 'GitHub API 不可达，请检查网络代理' : err.message), 'error');
-      toast('同步失败：' + (err.message === 'Failed to fetch' ? '网络不可达' : err.message), 'error');
+      githubShowStatus('同步失败：' + err.message, 'error');
+      toast('同步失败：' + err.message, 'error');
     });
   };
 
