@@ -143,8 +143,38 @@
   function hallRenderCategories() {
     var container = document.getElementById('hallCategories');
     if (!container) return;
-    container.innerHTML = _CATEGORIES.map(function (c) {
-      var count = c.id === 'all' ? _TOOLS.length : _TOOLS.filter(function (t) { return t.category === c.id; }).length;
+
+    // Derive categories and tools from admin data if available
+    var cats, tools;
+    var savedAdmin = localStorage.getItem('adminResources_v5');
+    if (savedAdmin) {
+      try {
+        var parsed = JSON.parse(savedAdmin);
+        var hasData = Object.keys(parsed).some(function (c) { return parsed[c] && parsed[c].length > 0; });
+        if (hasData) {
+          tools = [];
+          cats = [{ id: 'all', name: '全部', icon: '📋' }];
+          Object.keys(parsed).forEach(function (cat) {
+            cats.push({ id: cat, name: cat, icon: '' });
+            (parsed[cat] || []).forEach(function (r) {
+              tools.push({ name: r.name || '', category: cat });
+            });
+          });
+        } else {
+          cats = _CATEGORIES;
+          tools = _TOOLS;
+        }
+      } catch (e) {
+        cats = _CATEGORIES;
+        tools = _TOOLS;
+      }
+    } else {
+      cats = _CATEGORIES;
+      tools = _TOOLS;
+    }
+
+    container.innerHTML = cats.map(function (c) {
+      var count = c.id === 'all' ? tools.length : tools.filter(function (t) { return t.category === c.id; }).length;
       var active = '';
       if (c.id === 'all') {
         active = hallState.categories.length === 0 ? ' active' : '';
@@ -166,7 +196,35 @@
     // Disconnect previous observer
     if (hallState.observer) { hallState.observer.disconnect(); hallState.observer = null; }
 
-    var list = _TOOLS.slice();
+    // Load tools from admin localStorage if available, otherwise fallback to static _TOOLS
+    var list;
+    var savedAdmin = localStorage.getItem('adminResources_v5');
+    if (savedAdmin) {
+      try {
+        var parsed = JSON.parse(savedAdmin);
+        var hasData = Object.keys(parsed).some(function (c) { return parsed[c] && parsed[c].length > 0; });
+        if (hasData) {
+          list = [];
+          Object.keys(parsed).forEach(function (cat) {
+            (parsed[cat] || []).forEach(function (r) {
+              list.push({
+                name: r.name || '',
+                desc: r.description || '',
+                category: cat,
+                icon: r.icon || '',
+                link: r.downloadLink || ''
+              });
+            });
+          });
+        } else {
+          list = _TOOLS.slice();
+        }
+      } catch (e) {
+        list = _TOOLS.slice();
+      }
+    } else {
+      list = _TOOLS.slice();
+    }
 
     // Multi-category filter
     if (hallState.categories.length > 0) {
