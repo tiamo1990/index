@@ -46,3 +46,5 @@ index-main/
 ## License
 
 MIT
+
+<!-- force pages rebuild: 2026-07-05 21:26:12 -->
