@@ -1,1 +1,300 @@
-{"categories":[{"label":"test","icon":"","key":"test"}],"tools":[{"icon":"","category":"test","name":"test-tool","desc":"test desc","link":""}],"updatedAt":"2026-07-05T20:45:09.381+08:00"}
+{
+  "tools": [
+    {
+      "name": "WinRar",
+      "desc": "强大的压缩管理工具",
+      "category": "system",
+      "icon": "",
+      "link": "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-720sc.exe"
+    },
+    {
+      "name": "360zip",
+      "desc": "免费解压缩软件",
+      "category": "system",
+      "icon": "",
+      "link": "https://yasuo.360.cn/"
+    },
+    {
+      "name": "图吧工具箱",
+      "desc": "多功能系统工具集",
+      "category": "system",
+      "icon": "",
+      "link": "https://apac.tualatin.club/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1202601.1%E5%AE%89%E8%A3%85%E5%8C%85.exe"
+    },
+    {
+      "name": "DiskGenius",
+      "desc": "硬盘分区与数据恢复工具",
+      "category": "system",
+      "icon": "",
+      "link": "https://eassos.lanzoue.com/DG64"
+    },
+    {
+      "name": "MobaXterm",
+      "desc": "强大的远程SSH终端工具",
+      "category": "system",
+      "icon": "",
+      "link": "https://download.mobatek.net/2602026012910130/MobaXterm_Installer_v26.0.zip"
+    },
+    {
+      "name": "Xshell",
+      "desc": "专业远程SSH工具",
+      "category": "system",
+      "icon": "",
+      "link": "https://down.wsyhn.com/23_371911"
+    },
+    {
+      "name": "Rufus",
+      "desc": "轻量级PE盘制作工具",
+      "category": "system",
+      "icon": "",
+      "link": "https://github.com/pbatard/rufus/releases/download/v4.14/rufus-4.14.exe"
+    },
+    {
+      "name": "NDM下载器",
+      "desc": "多线程下载加速器",
+      "category": "system",
+      "icon": "",
+      "link": "https://www.neatdownloadmanager.com/"
+    },
+    {
+      "name": "WPS Office 2025专业版",
+      "desc": "轻量全能办公套件",
+      "category": "office",
+      "icon": "",
+      "link": "https://pan.xunlei.com/s/VOh7lUE3hS06QVfZhL8tGTyZA1?pwd=td3b"
+    },
+    {
+      "name": "office 2021",
+      "desc": "微软官方办公套件",
+      "category": "office",
+      "icon": "",
+      "link": "https://pan.xunlei.com/s/VOMNOiB3GqkJZ56yXVoMds8UA1?pwd=vprd"
+    },
+    {
+      "name": "office 2019",
+      "desc": "经典微软办公套件",
+      "category": "office",
+      "icon": "",
+      "link": "https://pan.xunlei.com/s/VOMNOlPRlZaV6altaliUQjxfA1?pwd=f8pv"
+    },
+    {
+      "name": "PDF转换网站",
+      "desc": "在线PDF转换工具",
+      "category": "office",
+      "icon": "",
+      "link": "https://www.ilovepdf.com/"
+    },
+    {
+      "name": "VS Code",
+      "desc": "微软轻量强大代码编辑器",
+      "category": "dev",
+      "icon": "",
+      "link": "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-archive"
+    },
+    {
+      "name": "VirtualBox",
+      "desc": "免费虚拟机软件",
+      "category": "dev",
+      "icon": "",
+      "link": "https://download.virtualbox.org/virtualbox/5.2.44/VirtualBox-5.2.44-139111-Win.exe"
+    },
+    {
+      "name": "VMware Workstation 17 Pro",
+      "desc": "专业虚拟机软件",
+      "category": "dev",
+      "icon": "",
+      "link": "https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion"
+    },
+    {
+      "name": "Pycharm",
+      "desc": "专业Python代码编辑器",
+      "category": "dev",
+      "icon": "",
+      "link": "https://www.jetbrains.com/pycharm/download/?section=windows"
+    },
+    {
+      "name": "PHP study（小皮面板）",
+      "desc": "PHP集成环境",
+      "category": "dev",
+      "icon": "",
+      "link": "https://m.xp.cn/"
+    },
+    {
+      "name": "win11关闭vbs脚本",
+      "desc": "关闭Win11虚拟化安全脚本",
+      "category": "dev",
+      "icon": "",
+      "link": "https://support.lenovo.com/us/en/downloads/ds547358"
+    },
+    {
+      "name": "Wireshark",
+      "desc": "网络协议抓包分析工具",
+      "category": "network",
+      "icon": "",
+      "link": "https://2.na.dl.wireshark.org/win64/Wireshark-4.4.3-x64.exe"
+    },
+    {
+      "name": "Ensp",
+      "desc": "网络设备模拟器",
+      "category": "network",
+      "icon": "",
+      "link": "https://support.huawei.com/enterprise/zh/software/ENSP-PID-10096900"
+    },
+    {
+      "name": "WinPcap",
+      "desc": "网络抓包必要组件",
+      "category": "network",
+      "icon": "",
+      "link": "https://www.winpcap.org/install/default.htm"
+    },
+    {
+      "name": "Clash",
+      "desc": "网络代理工具",
+      "category": "network",
+      "icon": "",
+      "link": "https://github.com/MetaCubeX/Clash.Meta/releases"
+    },
+    {
+      "name": "curl",
+      "desc": "强大命令行网络工具",
+      "category": "network",
+      "icon": "",
+      "link": "https://curl.se/windows/"
+    },
+    {
+      "name": "Postman",
+      "desc": "专业API测试工具",
+      "category": "network",
+      "icon": "",
+      "link": "https://www.postman.com/downloads/"
+    },
+    {
+      "name": "剪映6.0.1会员永久激活版",
+      "desc": "专业视频剪辑软件",
+      "category": "multimedia",
+      "icon": "",
+      "link": "https://pan.xunlei.com/s/VOMQjmqZgEsLegm6oGnU4KgiA1?pwd=x7ka"
+    },
+    {
+      "name": "Ps 2023",
+      "desc": "Adobe Photoshop 2023",
+      "category": "multimedia",
+      "icon": "",
+      "link": "https://pan.xunlei.com/s/VOMDV0t5qDkS1CUvmYIMc2OyA1?pwd=sedf"
+    },
+    {
+      "name": "Ps 2024",
+      "desc": "Adobe Photoshop 2024",
+      "category": "multimedia",
+      "icon": "",
+      "link": "https://pan.xunlei.com/s/VOMFRIFVmmKtiCFXXos5H5qHA1?pwd=m26s"
+    },
+    {
+      "name": "Audacity",
+      "desc": "开源音频编辑软件",
+      "category": "multimedia",
+      "icon": "",
+      "link": "https://www.audacityteam.org/download/"
+    },
+    {
+      "name": "HandBrake",
+      "desc": "开源视频转码工具",
+      "category": "multimedia",
+      "icon": "",
+      "link": "https://handbrake.fr/downloads.php"
+    },
+    {
+      "name": "GIMP",
+      "desc": "开源图像处理软件",
+      "category": "multimedia",
+      "icon": "",
+      "link": "https://www.gimp.org/downloads/"
+    },
+    {
+      "name": "SteamKing",
+      "desc": "Steam假入库工具",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://gitee.com/wansijun/steam-king/releases/download/v1.3/SteamKing.zip"
+    },
+    {
+      "name": "ShiZuKu",
+      "desc": "无需Root调用系统API工具",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://github.com/RikkaApps/Shizuku/releases/latest"
+    },
+    {
+      "name": "迈从驱动",
+      "desc": "迈从外设驱动程序",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://cdn.mchose.com.cn/MCHOSE_HUB_installer.zip"
+    },
+    {
+      "name": "狼蛛键盘驱动",
+      "desc": "狼蛛键盘驱动程序",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://www.aulacn.com/index/index/driverdownload.html"
+    },
+    {
+      "name": "HXAudio Pro【1.5】",
+      "desc": "安卓手机调音优化软件",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://github.com/tiamo1990/index/raw/main/HXAudioPro-1.5.APK"
+    },
+    {
+      "name": "HXAudio Pro【2.1b】",
+      "desc": "安卓手机调音优化软件",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://github.com/tiamo1990/index/raw/main/HX-2.1b.APK"
+    },
+    {
+      "name": "卡巴斯基杀毒软件",
+      "desc": "专业安全防护软件",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://www.kaspersky.com.cn/downloads"
+    },
+    {
+      "name": "Bitdefender",
+      "desc": "知名杀毒软件",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://www.bitdefender.com.cn/solutions/antivirus.html"
+    },
+    {
+      "name": "Avast",
+      "desc": "免费杀毒软件",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://www.avast.com/zh-cn/index"
+    },
+    {
+      "name": "LastPass",
+      "desc": "专业密码管理工具",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://www.lastpass.com/zh"
+    },
+    {
+      "name": "KeePass",
+      "desc": "开源密码管理工具",
+      "category": "plugin",
+      "icon": "",
+      "link": "https://keepass.info/download.html"
+    }
+  ],
+  "categories": [
+    "system",
+    "office",
+    "dev",
+    "network",
+    "multimedia",
+    "plugin"
+  ],
+  "updatedAt": "2026-07-05T21:00:00.000+08:00"
+}
