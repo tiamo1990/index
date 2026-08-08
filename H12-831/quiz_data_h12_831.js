@@ -1,0 +1,6013 @@
+const QUIZ_DATA_H12_831 = [
+  {
+    "id": 1,
+    "type": "single",
+    "question": "如图所示的网络，相邻的路由器之间使用直连接口建立EBGP 邻居关系，AS 号为6500x，\n其中X 为路由器的编号。R1 和R4 均有到达192.168.1.0/24 的静态路由，通过import 方\n式引入BGP。在R3 上配置EBGP 负载分担的最大等价路由条数为8。缺省情况下，则R3\n到达192.168.1.0/24 的等价路由数量为以下哪一\n项?",
+    "options": [
+      "2",
+      "8",
+      "1",
+      "3"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "缺省情况下，BGP 负载分担的最大等价路由条数为1，配置为8 代表最大允许8 条\n等价路由条目。R3 可以从R2，R5，R6 学到192.168.1.0 的路由，但是只有R2 和R5 是\n等价的，符合负载均衡的条件",
+    "questionImage": "H12-831/images/q001.png"
+  },
+  {
+    "id": 2,
+    "type": "single",
+    "question": "如图所示的OSPFv3 网络，区域1 为Stub 区域，区域2 为普通区域，区域3 为NSSA\n区域，R6 Loopback0 接口的IPv6 地址为2000::6/128，每一台设备的Router ID 为\n\n10.0.X.X.其中X 为设备的编号，以下描述错误的是哪一项？",
+    "options": [
+      "R4 LSDB 中存在R2 生成的描述2000::6/128 的Inter-Area-Prefix-LSA",
+      "R5 LSDB 中存在R1 生成的描述2000::6/128 的Inter-Area-Prefix-LSA",
+      "R6 LSDB 中存在R3 生成的描述2000::6/128 的Inter-Area-Prefix-LSA",
+      "R1 LSDB 中存在R2 生成的描述2000::6/128 的Inter-Area-Prefix-LSA"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q002.png"
+  },
+  {
+    "id": 3,
+    "type": "single",
+    "question": "如图所示的网络，相邻的路由器之间使用直连接口建立EBGP 邻居关系，每台设备的\nRouter ID 为10.0.X.X，AS 号为6500x.其中x 为路由器的编号，R1 和R4 均有到达\n192.168.1.0/24 的静态路由，通过import 方式引入BGP，R3 针对所有邻居配置了\"peer\ny.y.y.y as-path-filter 1 import\"命令，以下将一项可以使R3 到达192.168.1.0/24 选择AS-\nPath 最长的路\n\n径?",
+    "options": [
+      "ip as-path-filter 1 permit .*ip as-path-filter 1 deny 65001$ip as-path-filter 1 deny ^65005",
+      "ip as-path-filter 1 deny ^65002ip as-path-filter 1 deny ^65005ip as-path-filter 1 permit .*",
+      "ip as-path-filter 1 deny 65001$ip as-path-filter 1 permit .*",
+      "ip as-path-filter 1 deny .*6500ip as-path-filter 1 permit .*"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "可以使R3 到达192.168.1.0/24 选择AS-Path 最长的路径。AS-Path 是BGP 中用于\n表示路由路径的属性，它由一系列AS 号构成，AS 号之间使用空格分隔。在这里，R3 希\n望选择AS-Path 最长的路径，即AS 号数量最多的路径。为了实现这个目标，我们可以在\nR3 上配置AS-Path 过滤器，拒绝包含特定AS 号的路径。根据题目描述，R3 希望拒绝包\n含AS 号65002 和65005 的路径，因此应该配置ip as-path-filter 1 deny ^65002 和ip as-\npath-filter 1 deny ^65005。同时，为了允许其他路径通过，应该配置ip as-path-filter 1\npermit .*。这样，R3 就会选择AS-Path 最长的路径来到达192.168.1.0/24。",
+    "questionImage": "H12-831/images/q003.png"
+  },
+  {
+    "id": 4,
+    "type": "single",
+    "question": "灵活QinQ 功能可以根据不同的内层报文来加上不同的外层Tag，那么以下关于灵活\nQinQ 的tag 添加情况的描述，错误的是哪一项?",
+    "options": [
+      "灵活Qin 可以为具有不同内层VLAN ID 的报文添加不同的外层VLAN Tag",
+      "灵活QinQ 可以根据QoS 策略添加不同的外层VLAN Tag",
+      "灵活QinQ 可以为具有不同TIL 值的报文添加不同的外层VLAN Tag",
+      "灵活QinQ 可以根据报文的原有内层VLAN 的802.1p 优先级添加不同的外层VLAN Tag"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 5,
+    "type": "single",
+    "question": "如图所示为某多层标签嵌套的MPLS 报文，那么S1、S2、S3 这三个位置的S 字段的取\n值，正确的是哪一\n项?",
+    "options": [
+      "S1=2，S2=1，S3=0",
+      "S1=1，S2=1，S3=0",
+      "S1=3，S2=2，S3=1",
+      "S1=0，S2=0，S3=1"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "S：占1 位这个代表“栈”也就是这个标签在栈中的位置，S=1 表示位于栈的最底部，\n其他普通标签S=0。题目中前两个MPLS 报头的S1 和S2 为普通标签，因此值为0，第三\n个MPLS 报头为栈底了，因此S 位为1。",
+    "questionImage": "H12-831/images/q005.png"
+  },
+  {
+    "id": 6,
+    "type": "single",
+    "question": "在某MPLS 网络中，R1 和R3 的LSP 信息如图所示，此时管理员在R1 上输入命令ping\n-a 1.1.1.1 3.3.3.3，那么以下关于该场景的描述，正确的是哪一\n项?",
+    "options": [
+      "R2 收到的Echo Request 报文携带标签1025，R2 收到的EchoReply 报文不携带标签",
+      "R2 收到的Echo Request 报文携带标签1025，R2 收到的Echo Reply 报文携带标签\n1024",
+      "R2 收到的Echo Request 报文不携带标签，R2 收到的EchoReply 报文也不携带标签",
+      "R2 收到的Echo Request 报文不携带标签，R2 收到的Echo Reply 报文携带标签1024"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "在R1 上输入命令ping -a 1.1.1.1 3.3.3.3，从R1 上发送出去的数据包，携带的源地址\n是1.1.1.1，目的地址是3.3.3.3；根据R1 的MPLS 标签转发标，数据从R1 的GE0/0/1 接\n口发出去，出标签为1025，所以R2 收到的Echo Request 报文携带标签1025；R3 收到\n数据后会对发送回应包，此时回应数据携带的源地址是3.3.3.3，目的地址是1.1.1.1，根据\nR3 的MPLS 标签转发表1.1.1.1 对应的出标签为1024，因此R2 收到的Echo Reply 报文\n携带标签1024",
+    "questionImage": "H12-831/images/q006.png"
+  },
+  {
+    "id": 7,
+    "type": "single",
+    "question": "为了支持多拓扑功能，IS-IS 新增加了以下哪一种TLV?",
+    "options": [
+      "229 号TLV",
+      "236 号TLV",
+      "129 号TLV",
+      "232 号TLV"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 8,
+    "type": "single",
+    "question": "如图所示的网络，R1 和R2 之间通过直连接口建立EBGP 邻居关系，并且在BGP 进程中\n开启了BFD 功能，BFD 参数为\"bfd min-tr-interval 1000 min-rx-interval 1000 detect-\nmultiplier 6\"，假如将R2 的GE0/0/0 接口的IP 地址删除，在R1 上查看BGP 邻居关系，\n\n则R1 BGP 邻居关系由Up 状态变为Down 状态的最长时间为以下哪一项？",
+    "options": [
+      "0s",
+      "60s",
+      "6s",
+      "180s"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "当R2 的GE0/0/0 接口IP 地址被删除后，BFD 将很快（根据参数设置，最多6 秒）\n检测到连通性故障。一旦BFD 通知BGP 进程，BGP 邻居状态将很快从Up 变为Down。\n所以，R1 BGP 邻居状态变化的最短时间不会超过BFD 的检测时间（理论上为6 秒），但\n可能稍长一些，因为BGP 需要处理状态变化。",
+    "questionImage": "H12-831/images/q008.png"
+  },
+  {
+    "id": 9,
+    "type": "single",
+    "question": "如图所示，SW3 是网络中的用户网关及DHCPRelay，管理员准备在SW3 上部署DHCP\nSnooping 功能预防DHCP 攻击。那么在SW3 上不需要配置以下哪一条命\n令?",
+    "options": [
+      "[SW3-GigabitEthernet0/0/2] dhcp snooping enable",
+      "[SW3-GigabitEthernet0/0/3]dhcp snooping trusted",
+      "[SW3]dhcp snooping enable ipv4",
+      "[Sw3-GigabitEthernet0/0/1]dhcp snooping enable"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "dhcp snooping trusted 命令用来配置接口为信任状态，用于DHCP server 仿冒者攻\n击，本图中不是仿冒攻击。",
+    "questionImage": "H12-831/images/q009.png"
+  },
+  {
+    "id": 10,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，链路的Cost 值已在图中标出，R1 开启OSPF IP FRR，则以下\n描述中错误的是哪一项？",
+    "options": [
+      "如果R2 和S1 之间的链路中断，R1 将重新计算到达R3 的最优路径",
+      "如果R1 和S1 之间的链路中断，由于R1 开启了FRR，因此R1 将直接使用备份路径到\n达R3",
+      "如果R1 和S1 之间的链路中断，R1 将重新计算到达R3 的最优路径",
+      "如果R1 和S1 之间的链路中断，在R1 设备上查看邻居关系，R1 和R2 之间的邻居关\n系变为Down"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "AC 选项没有冲突，请仔细核对本题中由于R4-R2-R3 链路开销不满足链路保护或链\n路节点双保护不等式，所以不存在备份链路。具体的链路保护计算方法可参考官网介绍：\nhttps://support.huawei.com/enterprise/zh/doc/EDOC1100278244/3e2dec65",
+    "questionImage": "H12-831/images/q010.png"
+  },
+  {
+    "id": 11,
+    "type": "single",
+    "question": "某台OSPFv3 路由器生成的Link-LSA 如图所示，则该接口配置的全球单播地址数量为\n以下哪一项?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "Number of Prefixes：3，分别为2000:14::/64、2001:14::/64、2002:14::/64",
+    "questionImage": "H12-831/images/q011.png"
+  },
+  {
+    "id": 12,
+    "type": "single",
+    "question": "如果对网络执行的技术迁移动作会影响现网运行业务，则在技术迁移项目实施时需严\n格地遵循预先设定的操作流程和风险控制措施，一般将此类项目定义为割接项目。在现网\n中执行以下哪一操作属于非割接项目？",
+    "options": [
+      "批量修改路由器接口的描述信息",
+      "批量将路由引入BGP 的方式由network 修改为import",
+      "批量将IS-IS Level-1-2 路由器的等级修改为Level-1",
+      "批量将某些OSPF 路由器的区域类型修改为Stub 区域"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "路由器接口的描述信息只是方便运维人员查看，就类似于对接口进行注释，该注释\n是不会影响网络运行的。BCD 三个选项都是修改了网络的路由协议功能，路由器需要重新\n计算，收敛路由信息，会影响现网运行业务，因此属于割接范畴。"
+  },
+  {
+    "id": 13,
+    "type": "single",
+    "question": "交换机上的MAC 地址表项有多种类型，其中以下哪一类型的表项可以通过匹配收到的\n报文的源目MAC 地址来进行报文丢弃，从而达到过滤非法用户的目的?",
+    "options": [
+      "业务MAC 地址表",
+      "动态MAC 地址表",
+      "静态MAC 地址表",
+      "黑洞MAC 地址表"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "为了防止无用MAC 地址表项占用MAC 地址表，同时为了防止黑客通过MAC 地址攻\n击用户设备或网络，可将那些有着恶意历史的非信任MAC 地址配置为黑洞MAC 地址，使\n设备在收到目的MAC 或源MAC 地址为这些黑洞MAC 地址的报文时，直接予以丢弃。"
+  },
+  {
+    "id": 14,
+    "type": "single",
+    "question": "流量接入骨干网时需进行VPN 隔离，此时某PE 路由器接口配置如下所示，若管理员\n需要将该接口绑定到VPN1，且接口IP 地址保持不变，那么以下关于管理员操作的描述，\n正确的是哪一项? interface GigabitEthernet 0/0/1 ip address 192.168.100.2 24",
+    "options": [
+      "管理员在接口视图下键入命令ip binding vpn-instance VPN1 后，还需要绑定VPN1 的\nRD 值",
+      "管理员在接口视图下键入命令ip binding vpn-instance VPN1 后，还需要绑定VPN1 的\nRT 值",
+      "管理员在接口视图下键入命令ip binding vpn-instance VPN1 后，还需要重新配置接口\nIP 地址",
+      "管理员在接口视图下键入命令ip binding vpn-instance VPN1 即可"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "执行ip binding vpn-instance 命令时，如果你将某个接口与一个VPN 实例进行绑定，\n那么原本这个接口上已经设置好的IP 地址、路由协议等网络层面的特性就会被清除掉。\n换句话说，这些设置会失效。如果你之后还需要这些特性，你需要手动重新进行配置。"
+  },
+  {
+    "id": 15,
+    "type": "single",
+    "question": "MPLS 的体系结构分为控制平面和转发平面，里面包含了多个协议和表项，请问以下哪\n一个表项负责带MPLS 标签报文的转发？",
+    "options": [
+      "标签信息表LIB",
+      "标签转发信息表LFIB",
+      "转发信息表FIB",
+      "路由信息表RIB"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 16,
+    "type": "single",
+    "question": "IP 报文经过MPLS 网络时，MPLS 设备会对TTL 进行处理，若如图所示拓扑采用Pipe\n处理模式，那么IP 报文中的TTL 值分别为以下哪一\n项?",
+    "options": [
+      "①=255,②=254, ③=252",
+      "①=255,②=255, ③=254",
+      "①=254,②=253, ③=252",
+      "①=254, ②=254, ③=253"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q016.png"
+  },
+  {
+    "id": 17,
+    "type": "single",
+    "question": "某一大型互联网服务提供商需要对机房设备分批进行断电维护，作为割接项目管理人\n员，您会优选以下哪一时间节点?",
+    "options": [
+      "劳动节",
+      "国庆节",
+      "周末",
+      "工作日"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "官方文档写明：避免节假日和非正常上班时间，意思就是要工作日"
+  },
+  {
+    "id": 18,
+    "type": "single",
+    "question": "如图所示的OSPFv3 网络，区域1 为Stub 区域，区域2 为普通区域，区域3 为NSSA\n区域。R5Lopback0 接口的IPv6 地址为2000::5/128，通过import 方式引入OSPFv3。每\n一台设备的Router ID 为10.0.X.X，其中X 为设备的编号。以下描述正确的是哪一\n\n项?",
+    "options": [
+      "R1 在区域0 生成Inter-Area-Router-LSA",
+      "R3 在区域0 生成Inter-Area-Router-LSA",
+      "R3 在区域3 生成Inter-Area-Router-LSA",
+      "R2 在区域0 生成Inter-Area-Router-LSA"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "Inter-Area-Router-LS:在非NSSA 区域的ABR 上产生，描述到ASBR 的路由，通告给\n除ASBR 所在区域的其他相关区域。D 选项符合",
+    "questionImage": "H12-831/images/q018.png"
+  },
+  {
+    "id": 19,
+    "type": "single",
+    "question": "如图所示的网络，网络工程师发现PC1 和PC2 互通的路径非最优路径，每条链路的\ncost 值相同，据此分析，交换机的优先级可能是以下哪一\n\n项?",
+    "options": [
+      "SW1 32768：SW2 4096：SW3 0：SW4 8192",
+      "SW1 32768：SW2 0：SW3 4096：SW4 8192",
+      "SW1 0:SW2 32768:SW3 8192:SW4 4096",
+      "SW1 32768:SW2 12288:SW3 4096:SW4 8192"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "根据路径所示，PC1 和PC2 互通数据需要经过SW1 和SW4，是因为SW2-SW3 之\n间的某接口是被生成树协议阻塞了，因此SW2 和SW3 不可能是根桥，生成树的根桥只能\n属于SW1 或者SW4，根据ABCD 的优先级判断，A 选项根桥为SW3，B 选项根桥为SW2，\nC 选项根桥位SW1，D 选项根桥位SW3，只有C 选项符合题目要求。",
+    "questionImage": "H12-831/images/q019.png"
+  },
+  {
+    "id": 20,
+    "type": "single",
+    "question": "当管理员在MPLS 网络的Egress 设备输入命令label advertise explicit-null，表示向倒\n数第二跳设备分配了以下哪一个标签？",
+    "options": [
+      "3",
+      "15",
+      "0",
+      "18"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 21,
+    "type": "single",
+    "question": "如图所示，某交换网络中部署了VLAN 聚合功能，其中Sub-VLAN 10 和Sub-VLAN 20\n均加入到Super-VLAN 100 中，若要实现PC1 与PC2，PC1 与PC3 均可以互访，则以下关\n于L3 Switch 接口类型和应该放通的VLAN 的描述，正确的是哪一项？",
+    "options": [
+      "GE0/0/1 口和GE0/0/2 口均为Trunk 口，并只放通VLAN 10 即可",
+      "GE0/0/1 口为Trunk 口，放通VLAN 10 和VLAN 20；GE0/0/2 口为Access 口，PVID\n设置为VLAN 10",
+      "GE0/0/10 为Access 口，PVID 设置为VLAN 10：GE0/0/2 口为Trunk 口，并放通\nVLAN 10",
+      "GE0/0/1 口和GE0/0/2 口均为Access 口，并将PVID 设置为VLAN 10"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "GE0/0/1 口以下有存在Sub-VLAN 10 和Sub-VLAN 20，因此该接口必须要配置\ntrunk，并且需要放通VLAN 10 和VLAN 20，这样PC1 和PC2 才能互访；GE0/0/2 口可\n以配置为Access 口，PVID 设置为VLAN 10 后PC1 与PC3 可以互访。综合选项只有B 符\n合要求。",
+    "questionImage": "H12-831/images/q021.png"
+  },
+  {
+    "id": 22,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，链路的Cost 值已在图中标出，R1 开启了OSPFIP FRR，且在\nOSPF 进程中配置了\"maximum load-balancing 8\"命令, 如果某一业务经过R1-R5-R3 这条\n路径到达10.0.3.3/32，则该业务的备份出接口为以下哪一\n项?",
+    "options": [
+      "无备份出接口",
+      "GE0/0/2",
+      "GE0/0/3",
+      "GE0/0/2 和GE0/0/3"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "ip frr 以备份路由的方式实现快速重路由，应用于主备链路，且没有负载分担的组网\n形态；此题中三条链路负载分担了。",
+    "questionImage": "H12-831/images/q022.png"
+  },
+  {
+    "id": 23,
+    "type": "single",
+    "question": "某企业业务路由在网络中传递，其中PE1 与PE2 的部分配置如图所示，此时CE1 新增\n业务网段，并通告进OSPF 10 的Area 1 中，那么在此场景中，CE2 将收到以下哪一类型\n的LSA，其中将包含CE1 新通告的业务网段？",
+    "options": [
+      "Type 5 LSA",
+      "Type 1 LSA",
+      "Type 2 LSA",
+      "Type 3 LSA"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "中间的MPLS VPN 网络可以当成一个传输隧道，逻辑上可以简单理解为CE1 和CE2\n互联，运行OSPF10，区域为0，CE1 上业务网段通告进OSPF 10 的Area 1 中，CE1 会将\n该网段汇总成Type 3 LSA 会传递给区域0，最后传递给CE2。",
+    "questionImage": "H12-831/images/q023.png"
+  },
+  {
+    "id": 24,
+    "type": "single",
+    "question": "R2 设备上存在如图所示的文件信息，当网络工程师使用\"dir | exclude 1\"命令查看文件\n信息时，会看到以下哪一个文\n\n件?",
+    "options": [
+      "4.zip",
+      "3.dat",
+      "1.cfg",
+      "2.cfg"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "“exclude 1”意思是排除含有1 的行，只有3.dat 这一行没有带1，其余的都带1 被排\n除了",
+    "questionImage": "H12-831/images/q024.png"
+  },
+  {
+    "id": 25,
+    "type": "single",
+    "question": "R4 的Router ID 为10.0.4.4，在R4 的LSDB 中看到如图所示的LSA，网络工程师根据\n该LSA 做出以下推断，其中错误的是哪一\n项?",
+    "options": [
+      "R4 有两个OSPFv3 邻居",
+      "R4 在两条链路上都是DR",
+      "R4 不支持将外部路由引入OSPFv3",
+      "该LSA 是由R4 生成"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "这是区域内LSA（1 类LSA），无法判断能否引入，1 类LSA 不能通过option 直接\n判断能否引入。外部路由引入",
+    "questionImage": "H12-831/images/q025.png"
+  },
+  {
+    "id": 26,
+    "type": "single",
+    "question": "如图所示的OSPFv3 网络，路由器之间使用以太网链路互联。缺省情况下，该网络中\nDR 的数量为以下哪一\n项?",
+    "options": [
+      "6",
+      "9",
+      "8",
+      "7"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q026.png"
+  },
+  {
+    "id": 27,
+    "type": "single",
+    "question": "在采用LDP 建立LSP 的MPLS 网络中，当发送标签请求的Ingress 节点的直连下游\nTransit 节点，只有收到最终下游Egress 节点的标签映射消息才会向Ingress 分发标签，\n那么此时采用的标签发布方式和标签分配控制方式的组合是以下哪一项?",
+    "options": [
+      "DU + Independent",
+      "DoD + Independent",
+      "DU + Ordered",
+      "DoD + Ordered"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 28,
+    "type": "single",
+    "question": "某台IS-IS 路由器的进程中配,置了\"set-overload\"命令，缺省情况下，该路由器重启后，\n经过多长时间退出过载状态?",
+    "options": [
+      "900s",
+      "600s",
+      "500s",
+      "1200s"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 29,
+    "type": "single",
+    "question": "网络工程师在处理单跳BFD 会话Down 时，无需执行以下哪一项操作?",
+    "options": [
+      "重复执行display bfd statistics session all 命令，查看BFD 会话收发报文的统计信息",
+      "如果有静态路由绑定了BFD 会话，执行display ip routing-table 命令检查路由表中是否\n存在该静态路由",
+      "Ping BFD 会话之间的链路，检查转发是否正常",
+      "执行display current-configuration configuration bfd 命令查看BFD 会话两端的本地标\n识符和远端标识符是否匹配"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "官方文档1：故障案例：BFD 会话无法Up 的定位思路\nhttps://support.huawei.com/enterprise/zh/doc/EDOC1000177633/6e1e9f62\n故障案例：BFD 会话无法Up 的定位思路\n介绍BFD 会话无法Up 的故障原因、处理流程和详细的故障处理步骤。\n\n官方文档2：\nhttps://support.huawei.com/enterprise/zh/doc/EDOC1100305532/2bafd84d\n配置静态路由与BFD 联动，当bfd 状态为AdminDown 时，静态路由是否受影响\n静态路由不受影响，只有当BFD 检测到链路故障时，该静态路由才会无效。"
+  },
+  {
+    "id": 30,
+    "type": "single",
+    "question": "如图所示的网络，R1 和R2 配置VRRP，虚拟IP 地址为10.0.12.254。配置完成后，网\n络工程师在R1 和R2 上查看VRRP 状态，两台设备均为master 状态，以下哪一项不会导\n致出现该现\n象?",
+    "options": [
+      "R1 和R2 在VRRP 备份组中的优先级不一致",
+      "SW1 GE0/0/1 和GE0/0/2 接口属于不同的VLAN",
+      "R1 和R2 配置的VRID 不一致",
+      "R1 和R2 配置的虛拟IP 地址不一致"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "备份组中的优先级是决定着谁成为master 的原因之一，两者不一样将继续比较mac\n地址，最终选出master，优先级不一致影响的是谁成为master，并不会导致两台设备均\n为master 状态。",
+    "questionImage": "H12-831/images/q030.png"
+  },
+  {
+    "id": 31,
+    "type": "single",
+    "question": "管理员通过命令display mpls lsp 查看设备的LSP，输出信息如图所示，以下关于该信\n息的描述，正确的是哪一\n项?",
+    "options": [
+      "该设备转发到达任何目的IP 地址的数据时，都会剥离标签再发送",
+      "该设备转发目的IP 地址为2.2.2.2 的数据时，会打上标签3 再发送",
+      "该设备转发目的IP 地址为1.1.1.1 的数据时，会打上标签3 再发送",
+      "该设备转发目的IP 地址为3.3.3.3 的数据时，会打上标签1027 再发送"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "根据LSP 表信息显示，设备到达3.3.3.3 的时候Out Label 为1027，因此会打上标签\n1027 再发送，因此A 错，D 对；设备转发目的IP 地址为2.2.2.2 的数据时，Out Label 为\n3，隐私空标签，代表脱离整个标签栈，并不是打上标签3，因此B 错；",
+    "questionImage": "H12-831/images/q031.png"
+  },
+  {
+    "id": 32,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1 为Stub 区域，区域2 为\nTotally Stub 区域，区域3 为NSSA 区域，缺省情况下，以下哪一台路由器的路由表中没\n\n有缺省路由？",
+    "options": [
+      "R3",
+      "R5",
+      "R4",
+      "R6"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q032.png"
+  },
+  {
+    "id": 33,
+    "type": "single",
+    "question": "R1 和R2 之间运行OSPFv3，接口配置的IPv6 地址已在图中标出。R1 的RouterID 为\n10.0.1.1，R2 的Routex ID 为10.0.2.2。缺省情况下，以下描述正确的是哪一\n\n项?",
+    "options": [
+      "R1 生成的Intra-Area-Prefix-LSA 将会描述3 个前缀",
+      "R2 生成的Intra-Area-Prefix-LSA 将会描述4 个前缀",
+      "R1 生成的Intra-Area-Prefix-LSA 将会描述4 个前缀",
+      "R2 生成的Intra-Area-Prefix-LSA 将会描述3 个前缀"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "每台设备均产生描述与Router-LSA 相关联的IPv6 前缀地址的Type9 LSA，DR 会产\n生描述与Network-LSA 相关联的IPv6 前缀地址的Type9 LSA。R2 收到R1 发来的3 个后\n一共4 个前缀。"
+  },
+  {
+    "id": 34,
+    "type": "single",
+    "question": "当IP 报文进入MPLS 域中，入节点会检查目的IP 地址对应的Tunnel ID，当Tunnel ID\n为以下哪一项时，入节点会对该报文执行IP 转发?",
+    "options": [
+      "0x0",
+      "0x2",
+      "0x1",
+      "0x3"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 35,
+    "type": "single",
+    "question": "如图所示的OSPFv3 网络，区域1 为Stub 区域，区域2 为普通区域，区域3 为NSSA\n区域。R6 Lopback0 接口的IPv6 地址为2000::6/128。每一台设备的Router ID 为\n10.0.X.X，其中X 为设备的编号。在R2 的区域1 中配置了\"stub no-summary\"，以下描述\n正确的是哪一\n\n项?",
+    "options": [
+      "R4 LSDB 中存在R1 生成的描述2000::6/128 的Inter-Area-Prefix-LSA",
+      "R4 发送数据包到达2000::6 的路径为R4-R2-R6",
+      "R4 路由表中无2000::/128 的路由条目",
+      "R4 发送数据包到达2000::6 的路径为R4-R1-R5-R3-R6"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q035.png"
+  },
+  {
+    "id": 36,
+    "type": "single",
+    "question": "如图所示的OSPFv3 网络，区域1 为Totally Stub 区域，区域2 为普通区域，区域3 为\nTotally NSSA 区域。R6Loopback0 接口的IPv6 地址为2000:.6/128。每一台设备的\nRouter ID 为10.0.X.X，其中X 为设备的编号。以下描述错误的是哪一\n\n项?",
+    "options": [
+      "R5 路由表中不存在2000::6/128 的路由条目",
+      "R4 路由表中不存在2000::6/128 的路由条目",
+      "R1 不会生成描述2000::6/128 的Inter-Area-Prefix-LSA",
+      "R1 路由表中不存在2000::6/128 的路由条目"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q036.png"
+  },
+  {
+    "id": 37,
+    "type": "single",
+    "question": "为了支持IPv6 路由的处理和计算，IS-IS 在129 号TLV 中新增了一个NLPID。NLPID\n是标识网络层协议报文的一个8 比特字段，IPv6 的NLPID 值为以下哪一项?",
+    "options": [
+      "232",
+      "236",
+      "142",
+      "204"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 38,
+    "type": "single",
+    "question": "如图所示的网络，R1、R2、R3 之间运行OSPF 协议，R1 和R3 之间使用Loopback 接\n口建立IBGP 邻居关系，假如将R2 的GE0/0/1 接口通过\"undo network x.x.x.x y.y.y.y\"命令\n关闭OSPF，在R1 上查看BGP 邻居关系，缺省情况下，R1 BGP 邻居关系由UP 状态变为\nDown 状态的最长时间为以下哪一项？",
+    "options": [
+      "180s",
+      "10s",
+      "40s",
+      "60s"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "BGP 的keeplive 发送间隔为60S，超时时间为3 倍keeplive，即180S",
+    "questionImage": "H12-831/images/q038.png"
+  },
+  {
+    "id": 39,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，区域1 是Totally NSSA 区域，区域2 是普通区域，R4 引入外\n部路由10.0.4.4/32。每一台设备的Router ID 为10.0.x.x，其中X 为设备的编号。在R1\n和R3 的OSPF 进程中均配置了'asbr-summary 10.0.4.0 255.255.255.0”命令，以下描述中\n正确的是哪一\n项?",
+    "options": [
+      "区域2 中没有Type7 LSA",
+      "区域0 中没有Type4 LSA",
+      "区域0 中没有Type5 LSA",
+      "区域1 中没有Type7 LSA"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q039.png"
+  },
+  {
+    "id": 40,
+    "type": "single",
+    "question": "某一台OSPF 路由器的Debug 输出信息如图所示，请问该路由器的Router ID 为以下哪\n一项？",
+    "options": [
+      "10.0.12.1",
+      "10.0.2.2",
+      "10.0.1.1",
+      "10.0.12.2"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "debug 显示的数据里面，容易看出Route:10.0.2.2，即为路由器的Router ID",
+    "questionImage": "H12-831/images/q040.png"
+  },
+  {
+    "id": 41,
+    "type": "single",
+    "question": "OSPFv3 报文封装在IPv6 报文内，IPv6 报文头部中的NextHeader 字段的取值为以下\n哪一项?",
+    "options": [
+      "6",
+      "189",
+      "89",
+      "17"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 42,
+    "type": "single",
+    "question": "在如图所示的BGP /MPLS IP VPN 网络中，管理员通过Hub-spoke 组网实现了Hub 站\n点对VPN 流量的集中管控，那么以下各设备RT 值的规划，正确的是哪一\n\n项?",
+    "options": [
+      "PE1 VPN1: IRT=100:1; ERT=100:1PE2 VPN1: IRT=100:1; ERT=100:1PE3 VPN1:\nIRT=100:1; ERT=100:1",
+      "PE1 VPN1: IRT=100:1; ERT=200:1PE2 VPN1: IRT=100:1; ERT=200:1PE3 VPN_in:\nIRT=100:1; VPN_out: ERT=200:1",
+      "PE1 VPN1: IRT=100:1; ERT=200:1PE2 VPN1: IRT=100:1; ERT=200:1PE3 VPN1:\nIRT=100:1; ERT=100:1",
+      "PE1 VPN1: IRT=100:1; ERT=200:1PE2 VPN1: IRT=100:1; ERT=200:1PE3 VPN_in:\nIRT=200:1; VPN_out: ERT=100:1"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "根据路径显示，Spoke-CE1 和Spoke-CE2 数据传递，需要经过Hub，因此路由传递\n的时候PE1 和PE2 不能互相学习到对端路由，而HUB 需要都学习到PE1 和PE2 上的路\n由，通过规划RT 值来影响路由学习的。PE1 和PE2 的IRT 值需要需要等于PE3 的ERT\n值，PE1 和PE2 的ERT 值需要需要等于PE3 的IRT 值，这样能确保PE1 和PE2 的路由\n都能被PE3 学习到；同时PE1 的IRT 值不能等于PE2 的ERT 值，PE2 的IRT 值不能等\n于PE1 的ERT 值，这样确保PE1 和PE2 不会互相学习。符合题目要求的只有D 选项",
+    "questionImage": "H12-831/images/q042.png"
+  },
+  {
+    "id": 43,
+    "type": "single",
+    "question": "缺省情况下，IS-IS 路由的开销类型为narrow 模式，该模式下路由开销值的最大值为\n以下哪一项?",
+    "options": [
+      "16777215",
+      "65535",
+      "63",
+      "1023"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "缺省情况下，IS-IS 设备接收和发送路由的开销类型为narrow，narrow 模式下cost\n的取值范围为1～63，所以最大值为63。"
+  },
+  {
+    "id": 44,
+    "type": "single",
+    "question": "以下哪一项不是IS-IS 为了支持IPv6 路由的处理和计算而增加的新内容?",
+    "options": [
+      "236 号TLV:通过定义路由信息前缀、度量值等信息来说明网络的可达性",
+      "232 号TLV:它相当于IPv4 中的“IP Interface Address”TLV，只不过把原来的32 比特的\nIPv4 地址改为128 比特的IPv6 地址",
+      "向外发布IPv6 路由时必须携带NLPID 值",
+      "IS-IS Hello 报文的源IP 地址更改为链路本地地址"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "增加了两个TLV（236 号TLV 和232 号TLV）和一个NLPID"
+  },
+  {
+    "id": 45,
+    "type": "single",
+    "question": "如图所示的网络，相邻的路由器之间使用直连接口建立EBGP 邻居关系。每台设备的\nRouterID 为10.0.0.X，AS 号为6500x，其中x 为路由器的编号。R1 和R4 均有到达\n192.168.1.0/24 的静态路由，通过import 方式引入BGP。在R1 配置了“ageregate\n192.168.1.0 16 detail-suppresed 命令，则R3 到达192.168.1.0/24 的流量路径为以下哪一\n项?",
+    "options": [
+      "R3-R2-R1",
+      "R3-R2-R4",
+      "RЗ-R6-R5-R1",
+      "R3-R5-R4"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q045.png"
+  },
+  {
+    "id": 46,
+    "type": "single",
+    "question": "在IS-IS Level-1-2 设备上配置以下哪一条命令可以使Level-1 设备不生成缺省路由?",
+    "options": [
+      "attached-bit advertise never",
+      "attached-bit advertise always",
+      "import-route isis level-2 into level-1",
+      "attached-bit avoid-learning"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "attached-bit advertise never ：设置Level-1-2 设备发布的LSP 报文中ATT 比特位的\n置位情况，设置ATT 比特位永远不置位，可以避免Level-1 设备生成缺省路由，减小路由\n表的规模；attached-bit advertise always：设置Level-1-2 设备发布的LSP 报文中ATT 比\n特位的置位情况，设置ATT 比特位永远置位，收到该LSP 的Level-1 设备会生成缺省路\n由；import-route isis level-2 into level-1：将Level-2 区域的路由渗透到本地Level-1 区域,\n配置在与外部区域相连的Level-1-2 设备上；attached-bit avoid-learning：设置即使收到\nLevel-1 LSP 报文的ATT 比特位置位，Level-1 设备也不生成缺省路由"
+  },
+  {
+    "id": 47,
+    "type": "single",
+    "question": "R1 和R2 使用直连接口建立EBGP 邻居关系，R1 将2000::1/128 引入BGP。缺省情况\n下，R2 到达2000::1/128 的下一跳为以下哪一\n\n项?",
+    "options": [
+      "2000:12::1",
+      "2001:12::1",
+      "2003:12::1",
+      "2002:12::1"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "bpg 负载分担缺省值为1，即不进行负载分担。R2 到达2000::1/128 的路由则会进\n入选路比较，根据BGP 的选路原则，前面的比较选项全部都一样，最后优选具有较小IP\n地址（2000:12::1）的邻居学来的路由。"
+  },
+  {
+    "id": 48,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，网络工程师发现R1 和R2 的Router ID 配置相同，且R1 和\nR2 都引入了缺省路由(deault-route-advertise always)，关于此场景的描述错误的是哪一\n项?",
+    "options": [
+      "R1 和R2 可以建立邻居关系",
+      "R2 和R4 可以建立邻居关系",
+      "R3 和R4 之间可能会出现路由环路",
+      "R1 和R3 可以建立邻居关系"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "R1 和R2 的Router ID 冲突了，无法建立邻居",
+    "questionImage": "H12-831/images/q048.png"
+  },
+  {
+    "id": 49,
+    "type": "single",
+    "question": "如图所示，网络管理员为了抵御DHCP Server 仿冒者攻击，在交换机上部署了DHCP\nSnooping 功能，那么以下哪一个接口应该被设置为DHCP 信任接\n\n口?",
+    "options": [
+      "GE0/0/2",
+      "GE0/0/4",
+      "GE0/0/3",
+      "GE0/0/1"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "交换机上部署了DHCP Snooping 功能后，连接到DHCP 服务器设置为信任接口，其\n他接口默认都是非信任接口，这样只有信任接口才会发送DHCP 的回应报文并提供IP 地\n址，可以抵御DHCP Server 仿冒者攻击。",
+    "questionImage": "H12-831/images/q049.png"
+  },
+  {
+    "id": 50,
+    "type": "single",
+    "question": "随着业务流量的增加，某企业需要扩充骨干网传输带宽，以下哪种方式最能满足该需\n求?",
+    "options": [
+      "增加高性能转发交换机，将骨干网原来直接相连的端口，分别连接到同一台交换机",
+      "修改网络层相关的路由协议，将路由协议负载分担的路径数量修改为最大值",
+      "增加骨干网设备间的隧道数量，并且为这些隧道开启HSB 保护",
+      "增加骨干网设备间互联的链路，骨干网设备之间部署链路聚合"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 51,
+    "type": "single",
+    "question": "如图所示的OSPFv3 网络，区域1 为Stub 区域。缺省情况下，以下哪一种类型的LSA\n只有其中一台路由器会生\n成?",
+    "options": [
+      "Link-LSA",
+      "Intra-Area-Prefix-LSA",
+      "Inter-Area-Prefix-LSA",
+      "Network-LSA"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q051.png"
+  },
+  {
+    "id": 52,
+    "type": "single",
+    "question": "如图所示的网络，相邻的路由器之间使用直连接口建立EBGP 邻居关系。每台设备的\nRouterID 为10.0.0.X,AS 号为6500x，其中x 为路由器的编号。R1 和R4 均有到达\n192.168.1.0/24 的静态路由，通过import 方式引入BGP。R1 向邻居发送路由时添加了\ncommnity 属性值(1:1)，网络中所有路由器均使能了传递团体属性的能力，以下哪一项可\n以让R3 到达192.168.1.0/24 的流量路径必须经过\nR4?",
+    "options": [
+      "在R4 上配置路由策略，拒绝接收携带commity 属性值为1:1 的路由",
+      "在R5 上配置路由策略，拒绝接收携带Commmity 属性值为1:1 的路由",
+      "在R3 上配置路由策略，拒绝接收携带Commmity 属性值为1:1 的路由",
+      "在R2 上配置路由策略，拒绝接收携带commmity 属性值为1:1 的路由"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "应该在R2 上配置过滤，因为R3 收到R2 R5 R6 的路由中R2 和R5 的路径属性一\n致，由于只发送最优路由，R2 和5 路由发送路由起源都会是R1 65001，因此必须在R2\n或R5 就必须过滤community，而R2 Router ID 小更优，因此应该在R2 上面配置过滤。",
+    "questionImage": "H12-831/images/q052.png"
+  },
+  {
+    "id": 53,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1 为普通区域，区域2 为\nStub 区域，区域3 为NSSA 区域，假如R5 引入了一条外部路由10.0.5.5/32，以下哪台路\n由器的路由表中不存在10.0.5.5/32 的路由条\n目?",
+    "options": [
+      "R6",
+      "R4",
+      "R2",
+      "R3"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "区域2 为Stub 区域，Stub 区域里面的路由器只会学习到1 类LSA、2 类LSA、3 类\nLSA 以及一条默认路由，因此R4 只会学习到区域间的路由条目以及一条默认路由，并不\n会学习到外部路由10.0.5.5/32。",
+    "questionImage": "H12-831/images/q053.png"
+  },
+  {
+    "id": 54,
+    "type": "single",
+    "question": "某交换机的输出信息如图所示，从该信息中可以判断出以下哪一项内\n容?",
+    "options": [
+      "当未知组播报文的平均速率为1500pps 时，GE0/0/1 口会对该组播报文进行阻塞",
+      "管理员在该交换机的GE0/0/1 口配置了流量抑制功能",
+      "当已知单播报文的平均速率为2500pps 时，GE0/0/1 口会关闭",
+      "GE0/0/1 口对广播报文进行阻塞后，只有当广播报文的平均速率小于1000pps 时才会\n被正常转发"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q054.png"
+  },
+  {
+    "id": 55,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，区域1 是NSSA 区域，区域2 是普通区域，R4 引入外部路由\n10.0.4.4/32。每一台设备的Router ID 为10.0.x.x，其中x 为设备的编号。在R1 和R3 的\nOSPF 进程中均配置了“asbr-summary 10.0.4.0 255.255.255.0”命令，以下描述中正确的是\n哪一\n\n项?",
+    "options": [
+      "R2 路由表中有10.0.4.4/24 的路由条目",
+      "R3 路由表中没有10.0.4.4/32 的路由条目",
+      "R1 路由表中有10.0.4.0/24 的路由条目",
+      "R3 路由表中有10.0.4.0/24 的路由条目"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q055.png"
+  },
+  {
+    "id": 56,
+    "type": "single",
+    "question": "如果某一台OSPF 路由器被设置为Stub 路由器，则该路由器发出的LSA 中链路度量值\n为以下哪一项?",
+    "options": [
+      "1",
+      "100",
+      "65535",
+      "10"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "将OSPF 路由器配置成STUB 路由器，STUB 路由器通过增大该路由器所生成的LSA\n中链路的度量值（65535），告知其它OSPF 路由器不要使用这个路由器来转发数据进而\n选路。Stub 路由器生成的Router LSA 中，所有链路的度量值都设置为比较大。"
+  },
+  {
+    "id": 57,
+    "type": "single",
+    "question": "当设备出现异常或故障时，设备将会产生多种信息，根据信息的严重等级或紧急程度，\n信息分为8 个等级，以下哪一种严重等级最高?",
+    "options": [
+      "Informational",
+      "Debugging",
+      "Notification",
+      "Warning"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "八个等级，显示值越小，等级越高，在ABCD 四个选项中，等级最高的是显示值为\n4 的Warning"
+  },
+  {
+    "id": 58,
+    "type": "single",
+    "question": "如图所示的IS-IS IPv6 网络，所有路由器均开启多拓扑功能.R4 Loopback0 接口的IPv6\n地址为2000::4/128，在R2 IS-IS 进程中配置“ipv6 summary 2000::64 level-1-2\"。缺省情\n\n况下，以下描述错误的是哪一项？",
+    "options": [
+      "R1 路由表中有2000::4/128 的路由条目",
+      "R2 路由表中有2000::/64 的路由条目",
+      "R3 路由表中有2000::/64 的路由条目",
+      "R2 路由表中有2000::4/128 的路由条目"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "实验证明，R2 没聚合后的路由，R3 中有聚合前后两条路由，R1 的L1 中有明细路\n由但L2 中只有聚合后的路由。错误的选项是B",
+    "questionImage": "H12-831/images/q058.png"
+  },
+  {
+    "id": 59,
+    "type": "single",
+    "question": "在如图所示的Hub＆Spoke 组网中，为了实现路由的正确传递，管理员必须在Hub-PE\n上手工配置以下哪一条命令？",
+    "options": [
+      "[Hub-PE-bgp-VPN_in] peer x.x.x.x allow-as-loop",
+      "[Hub-PE-bgp-VPN_in] peer x.x.x.x soo 200:1",
+      "[Hub-PE-bgp-VPN_out] peer x.x.x.x soo 200:1",
+      "[Hub-PE-bgp-VPN_out] peer x.x.x.x allow-as-loop"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "allow-as-loop 命令用来配置本地AS 号的重复使用,hub-pe 将spoke 学来的路由通过\nvpn_in 传递给hub-ce 的时候使用了一次AS 号，因此在hub-ce 通过vpn_out 传递路由到\n的hub-pe 的时候还会再使用一次AS 号，所以应该在HUB-PE 的vpn_out 配置allow-as-\nloop。",
+    "questionImage": "H12-831/images/q059.png"
+  },
+  {
+    "id": 60,
+    "type": "single",
+    "question": "某园区网络通过华为S 系列交换机组网，管理员在网络中开启了MAC 漂移检测功能，\n那么以下关于该功能的描述，错误的是哪一项？",
+    "options": [
+      "该功能可以上报告警，包括MAC 地址、VLAN、跳变接口等信息",
+      "交换机开启该功能后，可以整合整网MAC 地址漂移信息，并上报告警",
+      "该功能可提供接口保护动作，如使跳变的接口Down，实现自动破环",
+      "如果交换机下挂网络中只是在少量VLAN 内可能出现环路，建议配置后续动作是让接口\n从VLAN 中退出而不是接口Down"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "配置MAC 地址漂移检测功能后，在发生MAC 地址漂移时，可以上报包括MAC 地址、\nVLAN，以及跳变的接口等信息的告警。其中跳变的接口即为可能出现环路的接口。网络\n\n管理员可以根据告警信息，手工排查网络中环路的源头，也可以使用MAC 漂移检测提供\n的后续动作，使跳变的端口down 或者VLAN 从端口中退出，实现自动破环；MAC 地址\n漂移检测功能只能做单点环路检测，无法获取整个网络的拓扑信息；如果下挂网络中可能\n只是在少量VLAN 内出现环路，建议配置MAC 地址漂移检测与接口退出VLAN 联动机制。"
+  },
+  {
+    "id": 61,
+    "type": "single",
+    "question": "如图所示的IS-IS IPv6 网络，所有路由器均开启多拓扑功能，R4 Loopback0 接口的\nIPv6 地址为2000::4/128，在R4 IS-IS 进程中配置“ipv6 summary 2000::64 level-1-2”。缺\n省情况下，以下描述错误的是哪一项？",
+    "options": [
+      "R5 路由表中没有2000::/64 的路由条目",
+      "R1 路由表中有2000::4/128 的路由条目",
+      "R3 路由表中有2000::/64 的路由条目",
+      "R2 路由表中有2000::/64 的路由条目"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "和另一题类似题，另一题是在R2 上配置，本题在R4 上配置因为R4 和R5 是不同\n区域的level-1 路由器，R5 不会获得49.00001 的路由信息，故R5 路由表中没有\n2000::/64 的路由条目；R4 上配置了汇聚路由，故其向R1 和R2 发布的是汇聚路由，而\n不是明细路由，故B 错误。",
+    "questionImage": "H12-831/images/q061.png"
+  },
+  {
+    "id": 62,
+    "type": "single",
+    "question": "在MPLS 网络中，当Transit 设备收到MPLS 报文准备进行标签交换时，发现交换后的\n标签值为0，那么此时它会执行以下哪一项操作?",
+    "options": [
+      "将标签0 压入MPLS 报文的外层标签，并将携带两层标签的MPLS 报文转发给下一跳",
+      "将标签0 与MPLS 报文中的原始标签交换，并将该报文转发给下一跳",
+      "将MPLS 报文中的标签弹出，并将报文转发给下一跳",
+      "不对标签做任何处理，直接将报文转发给下一跳"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 63,
+    "type": "single",
+    "question": "如图所示的网络，R1、R2、R3 之间运行OSPF 协议，并且打开OSPF BFD 特性，R1\n和R3 之间使用Loopback 接口建立IBGP 邻居关系，假如将R2 的GE0/0/1 接口\nshutdown，在R1 上查看BGP 邻居关系缺省情况下，R1 BGP 邻居关系由Up 状态变为\nDown 状态的最长时间为以下哪一\n项?",
+    "options": [
+      "180s",
+      "40s",
+      "60s",
+      "3s"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "在BGP 中，如果BGP 邻居不可达，BGP 会尝试重新建立连接。BGP 的保持时间\n（Hold Time）通常是Keepalive 时间的3 倍，而Keepalive 时间的缺省值是60 秒，因此\nHold Time 的缺省值是180 秒。但是，由于打开了OSPF BFD 特性，BGP 可以更快地检测\n到邻居不可达的情况。BFD 最大检测周期为1s，所以是3s。",
+    "questionImage": "H12-831/images/q063.png"
+  },
+  {
+    "id": 64,
+    "type": "single",
+    "question": "在某MPLS 网络中，R1 和R2 的LSP 信息如图所示，此时管理员在R1 上输入命令\nping 3.3.3.3，那么以下关于该场景的描述，正确的是哪一\n项?",
+    "options": [
+      "R1 发出的Ping 报文会携带标签1025，R2 收到后会进行标签交换并基于MPLS 进行转\n发",
+      "R1 发出的Ping 报文不携带任何标签，但R2 收到后会添加标签并基于MPLS 进行转发",
+      "R1 发出的Ping 报文会携带标签1025，R2 收到后将剥离标签基于IP 进行转发",
+      "R1 发出的Ping 报文不携带任何标签，R2 收到后将基于IP 进行转发"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q064.png"
+  },
+  {
+    "id": 65,
+    "type": "single",
+    "question": "网络工程师抓取到一份组播数据帧，其目的MAC 地址为01-00-5e-00-01-01，据此分\n析，目的IPv4 地址不能为以下哪一项？",
+    "options": [
+      "224.0.0.1",
+      "224.0.1.1",
+      "239.128.1.1",
+      "225.0.1.1"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "224.0.0.1 :表示本子网上所有参加多播组的主机和路由器，为特殊的组播IP 地址，\n不能作为目的IPv4 地址"
+  },
+  {
+    "id": 66,
+    "type": "single",
+    "question": "网络工程师在处理现网故障时画出了如图所示的拓扑图，所有路由器运行OSPF，以下\n关于PC1 和PC2 互访路径的描述，正确的是哪一\n项?",
+    "options": [
+      "PC1 访问PC2 的路径为:PC1-R1-R3-R2-PC2;PC2 访问PC1 的路径为:PC2-R2-R1-PC1",
+      "PC1 访问PC2 的路径为:PC1-R1-R2-PC2;PC2 访问PC1 的路径为:PC2-R2-R3-R1-PC1",
+      "PC1 访问PC2 的路径为:PC1-R1-R2-PC2;PC2 访问PC1 的路径为:PC2-R2-R1-PC1",
+      "PC1 访问PC2 的路径为:PC1-R1-R3-R2-PC2;PC2 访问PC1 的路径为:PC2-R2-R3-R1-PC1"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q066.png"
+  },
+  {
+    "id": 67,
+    "type": "single",
+    "question": "如图所示的IS-IS 网络，R1 通过\"default-route-advertise always level-1”命令引入了缺\n省路由，以下描述中错误的是哪一项？",
+    "options": [
+      "10.0.1.1 可以ping 通10.0.2.2",
+      "在R1 上ping 任何一个不存在的IP 地址，例如10.0.4.4，该数据包不会从R1 发出",
+      "10.0.1.1 可以ping 通10.0.3.3",
+      "10.0.2.2 可以ping 通10.0.3.3"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q067.png"
+  },
+  {
+    "id": 68,
+    "type": "single",
+    "question": "NetEngine AR 路由器作为DHCP Server 可以为同一个网段或不同网段内的客户端分配\nIP 地址。以下哪一原因不会导致客户端无法获取IP 地址？",
+    "options": [
+      "客户端与服务器之间的链路有故障",
+      "设备未使能DHCP 功能",
+      "地址池中没有可用的IP 地址可分配",
+      "IP 地址租期小于24 小时"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "只要租期内无其他设备请求或冲突，客户端仍然可以正常使用该IP 地址。"
+  },
+  {
+    "id": 69,
+    "type": "single",
+    "question": "缺省情况下，IS-IS LSP 刷新时间间隔为以下哪一项？",
+    "options": [
+      "1200s",
+      "900s",
+      "3600s",
+      "10s"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "周期性更新：LSP 的刷新间隔为15 分钟；老化时间为20 分钟。"
+  },
+  {
+    "id": 70,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1 为Stub 区域，区域2 为\nTotally Stub 区域，区域3 为NSSA 区域，则区域1、区域2、区域3 中都不会出现以下哪\n\n一种类型的LSA？",
+    "options": [
+      "Type1",
+      "Type2",
+      "Type3",
+      "Type4"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "Stub 区域：Type1、Type2、Type3；Totally Stub 区域：Type1、Type2、Type3 的\n默认路由；NSSA 区域：Type1、Type2、Type3、Type7",
+    "questionImage": "H12-831/images/q070.png"
+  },
+  {
+    "id": 71,
+    "type": "single",
+    "question": "网络工程师通过命令行误删了某个接口的IP 地址，如果想要查看被删除的IP 地址，应\n该查询以下哪一种信息?",
+    "options": [
+      "Debug 信息",
+      "Log 信息",
+      "Trap 信息",
+      "SNMP 代理信息"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "如果想要查看被删除的IP 地址应该是查看log 日志信息记录，该操作会在系统日志\n中被记录。"
+  },
+  {
+    "id": 72,
+    "type": "single",
+    "question": "如图所示的OSPFv3 网络，区域1 为NSSA 区域。R1 将外部路由2000::1/128 引入\nOSPFv3。缺省情况下，区域1 中不存在以下哪一种类型的\nLSA?",
+    "options": [
+      "AS-External-LSA",
+      "Intra-Area-Prefix-LSA",
+      "NSSA LSA",
+      "Inter-Area-Prefix-LSA"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "NSSA 为特殊区域，5 类LSA（AS-External-LSA）不会在该区域传递。【题库获取方\n式，淘宝：老纪私题库】",
+    "questionImage": "H12-831/images/q072.png"
+  },
+  {
+    "id": 73,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，链路的Cost 值已在图中标出，R1 开启了OSPF IP FRR，且在\nOSPF 进程中配置了“maximum load-balancing 8”命令,则在R1 路由表中到达10.0.35.0/24\n的Cost 值为以下哪一\n\n项?",
+    "options": [
+      "30",
+      "10",
+      "20",
+      "40"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "OSPF IP FRR 由OSPF 利用全网链路状态数据库，预先计算出备份路径，保存在转发\n表中，以备在故障时提供流量保护。R1 开启了OSPF IP FRR，根据最小开销，针对\n10.0.35.0/24 路由添加到路由表的主路径是通过R5 转发，备份路径是通过R4-R3 转发，\n因此R1-R5 链路故障前，R1 路由表中到达10.0.35.0/24 的Cost 值为10，当R1-R5 链路\n故障后下一跳迅速切换为R4，此时的Cost 值变为20",
+    "questionImage": "H12-831/images/q073.png"
+  },
+  {
+    "id": 74,
+    "type": "single",
+    "question": "如图所示，报文在网络中基于MPLS 转发，当PE2 收到P2 发送过来的报文时，此时报\n文中携带的标签值为以下哪一\n\n项?",
+    "options": [
+      "3,1033",
+      "1033",
+      "无标签"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "P2 的out label 为3，3 号标签：隐式空标签，做次末跳弹出，减少最后一个路由器\n查表次数。因此PE2 收到数据的时候已经没有标签了。",
+    "questionImage": "H12-831/images/q074.png"
+  },
+  {
+    "id": 75,
+    "type": "single",
+    "question": "网络工程师在设备上输入\"dir\"，获取到以下选项中的文件名，请问以下哪一项最有可\n能是设备的版本文件?",
+    "options": [
+      "V300R022000SPC100.cfg",
+      "startup_v1.rdb",
+      "Ca.cer",
+      "V300R022C00SPC100.cc"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "在华为设备中，系统软件的版本文件通常以“.cc” 为扩展名；“startup_v1.rdb” 是数据\n库文件，通常用于存储启动配置信息，而不是版本信息。；.cfg 是配置文件；.cer 是证书\n文件."
+  },
+  {
+    "id": 76,
+    "type": "single",
+    "question": "如图所示的网络，相邻的路由器之间使用直连接口建立EBGP 邻居关系。每台设备的\nRoutexID 为10.0.X.X，AS 号为6500x，其中X 为路由器的编号。R1 和R4 均有到达\n192.168.1.0/24 的静态路由，通过import 方式引入BGP。缺省情况下，R6 收到的关于\n\n192.168.1.0/24 的路由中，As_path 的长度最长为以下哪一\n项?",
+    "options": [
+      "3",
+      "4",
+      "2",
+      "1"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "R6 收到的关于192.168.1.0/24 的路由可以来自三个EBGP 邻居（R2、R3、R5），\n来自R2 和R5 是2 条AS 路径，如果是来自R3，那么就会有3 条路径，因此收到最长的\nas_path 应该为3。",
+    "questionImage": "H12-831/images/q076.png"
+  },
+  {
+    "id": 77,
+    "type": "single",
+    "question": "在MPLS 网络中，会依据FIB、NHLFE 和ILM 等信息进行数据转发，其中在这些信息\n中，主要是通过以下哪一个选项进行信息关联？",
+    "options": [
+      "出标签",
+      "Tunnel ID",
+      "标签操作类型",
+      "FEC"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Tunnel ID：为了给使用隧道的上层应用（如VPN、路由管理）提供统一的接口，系\n统自动为隧道分配了一个ID。该Tunnel ID 的长度为32 比特，只是本地有效。在MPLS\n转发过程中，FIB、ILM 和NHLFE 表项是通过Tunnel ID 关联的。"
+  },
+  {
+    "id": 78,
+    "type": "single",
+    "question": "网络工程师发现组播客户端无法正确的接收组播数据，因此怀疑组播服务器设置的组\n地址不正确，请问组地址不能为以下哪一项?",
+    "options": [
+      "232.0.0.18",
+      "233.0.0.2",
+      "224.0.0.1",
+      "224.0.1.5"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "224.0.0.1 是特殊地址，代表的是本网的所有节点，不能作为组地址。"
+  },
+  {
+    "id": 79,
+    "type": "single",
+    "question": "在某Hub＆Spoke 组网中，VPN1 的路由传递路径如图所示，那么Hub-PE 将VPN1 路\n由转发给Spoke PE2 时，携带的As_Path 为以下哪一\n项?",
+    "options": [
+      "As_Path 为空",
+      "AS_Path=100",
+      "AS_Path=65001，100",
+      "AS_Path=65001,100，65002"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "答案已经过实验验证，AS_Path 为空。因为Hub-CE 通过OSPF 协议将路由传递给\nHub-PE，不会携带BGP 属性。导致丢失了原有的AS-Path 列表。所以Hub-PE 传递给\nSpoke-PE2 的AS-Path 列表为空。",
+    "questionImage": "H12-831/images/q079.png"
+  },
+  {
+    "id": 80,
+    "type": "single",
+    "question": "BFD 的检测机制是两个系统建立BFD 会话，并沿它们之间的路径周期性发送BFD 控制\n报文，如果一方在既定的时间内没有收到BFD 控制报文，则认为路径上发生了故障。以\n下哪一原因不会导致BFD 会话Down？",
+    "options": [
+      "BFD 会话的session-name 不一致",
+      "UDP 端口号为4784 的报文被拒绝接收",
+      "单跳BFD 会话绑定的出接口物理故障",
+      "BFD 会话的远端标识符和本地标识符不匹配"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 81,
+    "type": "single",
+    "question": "在BGP/MPLS IP VPN 网络中，VPNv4 的路由传递会携带Export RT 值，那么MP-BGP\n是通过以下哪一个路径属性携带的Export RT？",
+    "options": [
+      "AS_Path",
+      "Extended_Community",
+      "MP_REACH_NLRI",
+      "Local_Preference"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 82,
+    "type": "single",
+    "question": "如图所示的网络，相邻的路由器之间使用直连接口建立EBGP 邻居关系。每台设备的\nRouter ID 为10.0.XX，AS 号为6500X，其中X 为路由器的编号。R1 和R4 均有到达\n192.168.1.0/24 的静态路由，通过import 方式引入BGP，R1 向邻居发送路由时缘加了\nCommunity 属性值（1:1），网络中所有路由器均使能了传递团体属性的能力，R3 上配\n置了路由策略，拒绝接收携带Community 属性值为1:1 的路由，则R3 到达192.168.\n1.0/24 的流量路径为以下哪一项？",
+    "options": [
+      "R3-R5-R1",
+      "R3-R2-R4",
+      "R3 无到达192.168.1.0/24 的路由",
+      "R3-R2-R1"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "R1 和R4 均有到达192.168.1.0/24 的静态路由，通过import 方式引入BGP，那么\nR2 和R5 都会收到R1 和R4 发来的192.168.1.0/24 的路由，根据BGP 路由选路原则，\nR2 和R5 只会选择R1 发来的路由(R1 的Route-ID 比较小);所以在R2 和R5 的路由信息\n里，都带有Community 属性值(1:1)，对于R3 来说，不管是从R2、R3、R6 哪边传递过\n\n来的路由条目，都会携带Community 属性值(1:1)，因为R3 上配置了拒绝接收携带\nCommunity 属性值为1:1 的路由，因此R3 无法学习到192.168.1.0/24 的路由。",
+    "questionImage": "H12-831/images/q082.png"
+  },
+  {
+    "id": 83,
+    "type": "single",
+    "question": "网络设备出现以下哪一故障时，网络设备会通过SNMP 向网络管理服务器上报OID 为\n1.3.6.1.4.1.2011.5.25.155.31.3(节点名称为hwOspfv2IntraAreaRouteridConflict)的告警信\n息?",
+    "options": [
+      "OSPF 邻居震荡抑制状态发生变化",
+      "OSPF 检测到本地链路DRIP 地址冲突",
+      "OSPF 在区域内检测到路由器标识冲突",
+      "本地设备删除其他设备发布的OSPF 路由"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 84,
+    "type": "single",
+    "question": "如图所示，某管理员在交换机连接终端的接口启用了端口隔离功能，那么在该场景中，\nPC1 无法Ping 通以下哪个IP 地址？",
+    "options": [
+      "10.1.1.5",
+      "10.1.1.4",
+      "10.1.1.3",
+      "10.1. 1.1"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q084.png"
+  },
+  {
+    "id": 85,
+    "type": "single",
+    "question": "网络工程师想要清除串口登录密码，需要输入以下哪一\n项?",
+    "options": [
+      "5",
+      "3",
+      "6",
+      "4"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "清除串口登录密码，通常在密码管理子菜单下进行，第6 个选项。"
+  },
+  {
+    "id": 86,
+    "type": "single",
+    "question": "管理员在使能设备的MPLS LDP 功能时，必须先配置以下哪一条命令？",
+    "options": [
+      "[Huawei] mpls lsr-id 1.1.1.1",
+      "[Huawei-GigabitEthernet0/0/1] mpls ldp",
+      "[Huawei-GigabitEthernet0/0/1] mpls",
+      "[Huawei] mpls ldp"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "在使能设备的MPLS LDP 功能之前，首先需要配置LSR ID，这是因为LSR ID 是\nMPLS 网络中唯一标识一台LSR（Label Switching Router）的标识符，它是启动MPLS LDP\n功能的前提。"
+  },
+  {
+    "id": 87,
+    "type": "single",
+    "question": "某台IS-IS 路由器自己生成的LSP 信息如图所示，从LSP 信息中不能推断出以下哪一结\n论?",
+    "options": [
+      "该路由器的System ID 为0000.0000.0002",
+      "该路由器引入了4 个外部网段",
+      "该路由器所属的区域号为49.0001",
+      "该路由器某一个接口的IPv6 地址为2000:24::2"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "该路由器引入了5 个外部网段",
+    "questionImage": "H12-831/images/q087.png"
+  },
+  {
+    "id": 88,
+    "type": "single",
+    "question": "网络工程师发现某一台设备的接口频繁出现链路故障告警，该接口为以太网光口，则\n网络工程师使用以下哪一条命令可以检查该接口的收发光功率?",
+    "options": [
+      "display alarm all",
+      "display pon-transceiver",
+      "display transceiver",
+      "display temperature"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 89,
+    "type": "single",
+    "question": "如图所示的IS-IS IPv6 网络，所有路由器均开启多拓扑功能。R4 Loopback0 接口的\nIPv6 地址为2000::4/128.缺省情况下，以下哪一台路由器的路由表中无2000::4/128 的路\n\n由?",
+    "options": [
+      "R3",
+      "R2",
+      "R1",
+      "R5"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "R5 是L1 的。去往外部在不做路由渗透的情况下只有缺省路由。",
+    "questionImage": "H12-831/images/q089.png"
+  },
+  {
+    "id": 90,
+    "type": "single",
+    "question": "网络工程师使用capture-packet 工具抓取接口收到的报文，图中给出了部分输出信息，\n则该报文为哪一种协议的报\n\n文?",
+    "options": [
+      "LACP",
+      "LLDP",
+      "OSPF",
+      "BGP"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "“59”(十进制的89)，OSPF 使用网络端口号是89。"
+  },
+  {
+    "id": 91,
+    "type": "single",
+    "question": "OSPF Hello 报文中不包括以下哪一项?",
+    "options": [
+      "Router ID",
+      "Process ID",
+      "Area ID",
+      "Network Mask"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 92,
+    "type": "single",
+    "question": "VLAN 聚合可以实现在一个物理网络内，用多个Sub-VLAN 隔离广播域，并将这些Sub-\nVLAN 聚合成一个逻辑的Super-VLAN。那么以下关于VLAN 聚合的描述，正确的是哪一\n项?",
+    "options": [
+      "若不同Sub-VLAN 所属同一个Super-VLAN，则这些Sub-VLAN 内的主机可以直接进行\n二层通信",
+      "在配置VLAN 聚合时，可以配置VLAN1 作为Super-VLAN",
+      "若核心交换机创建了Super-VLAN 和对应的VLANIF 接口，那么只要当核心交换机内存\n在状态为业的物理接口，VLANIF 接口状态就会UP",
+      "若在Super-VLAN 所属VLANIF 接口下开启Proxy ARP，则可使所有Sub-VLAN 建立相\n应的ARP 表项进行互通"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 93,
+    "type": "single",
+    "question": "如图所示的网络，R1、R2、R3 之间运行OSPF 协议，R1 和R3 之间使用Loopback 接\n口建立IBGP 邻居关系，并且在BGP 进程中开启了BFD 功能，BFD 参数为“bfd min-tx-\ninterval 1000 min-rx-interva1 1000 detect-multiplier6”，假如将R2 的GE0/0/1 接口通过\n“undo network x. x.x. xy.y.y.y”命令关闭OSPF，在R1 上查看BGP 邻居关系，缺省情况下，\nR1 BGP 邻居关系由up 状态变为Down 状态的最长时间为以下哪一\n项?",
+    "options": [
+      "180s",
+      "6s",
+      "40s",
+      "60s"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "在描述的场景中，R1、R2、R3 之间运行OSPF 协议，R1 和R3 之间使用Loopback\n接口建立IBGP 邻居关系，并且BGP 进程中开启了BFD 功能。BFD 功能用于检测两个转\n发点之间的故障，提供了毫秒级的检测速度，确保业务的永续性。对于BFD 参数“bfd\nmin-tx-interval 1000 min-rx-interval 1000 detect-multiplier 6”，这里：min-tx-interval\n1000：表示BFD 报文的发送间隔（以毫秒为单位）至少为1000 毫秒，即1 秒。min-rx-\ninterval 1000：表示BFD 报文接收的期望间隔也为1000 毫秒。detect-multiplier 6：这是\n检测倍数，用于计算故障检测时间。如果在一个min-rx-interval 内没有收到BFD 报文，\n那么会等待detect-multiplier 倍的min-rx-interval 时间来确定是否真的发生了故障。因此，\n故障检测时间（Detection Time）可以通过以下公式计算：Detection Time = min-rx-\ninterval * detect-multiplier= 1000 毫秒* 6 = 6 秒现在，考虑到R2 的GE0/0/1 接口通过\n“undo network x.x.x.x y.y.y.y”命令关闭了OSPF，但这并不直接影响R1 和R3 之间的IBGP\n邻居关系，因为IBGP 邻居是通过Loopback 接口建立的。但是，如果由于某种原因（如\n网络中的其他故障或配置问题），导致R1 或R3 的BFD 检测失败，那么BGP 邻居状态可\n能会受到影响。在缺省情况下，根据上述BFD 参数，R1 的BGP 邻居关系由UP 状态变为\nDown 状态的最长时间为6 秒（基于BFD 的检测时间）。这是因为BFD 会在6 秒内检测\n到缺少的BFD 报文，并据此将BGP 邻居状态从UP 更改为Down。所以，答案是：6 秒。",
+    "questionImage": "H12-831/images/q093.png"
+  },
+  {
+    "id": 94,
+    "type": "single",
+    "question": "如图所示的IS-IS 网络，R1 通过“default-route-advertise always level-1”命令引入了缺\n省路由，以下描述中正确的是哪一\n项?",
+    "options": [
+      "R3 路由表中将出现缺省路由",
+      "R2 路由表中将出现缺省路由",
+      "R2 和R3 路由表中都将出现缺省路由",
+      "R2 和R3 路由表中都不会出现缺省路由"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "R1 通告缺省路由后，R2 有缺省路由指向R1，R3 无缺省路由。",
+    "questionImage": "H12-831/images/q094.png"
+  },
+  {
+    "id": 95,
+    "type": "single",
+    "question": "R1 的Router ID 为10.0.1.1，在R1 的LSDB 中看到如图所示的LSA，网络工程师根据\n该LSA 做出以下推断，其中错误的是哪一项？",
+    "options": [
+      "生成该LSA 的路由器不支持将外部路由引入OSPFv3",
+      "生成该LSA 的路由器至少有两个接口启用了OSPFv3",
+      "生成该LSA 的路由器不会产生Network-LSA",
+      "该LSA 不是由R1 生成"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "答案修订：A 正确，从以上官方参数可以判断，E 位为0，并不支持将外部路由引入\nOSPFv3；B 正确，因为Router LSA 中可以看到两条链路信息，说明生成该LSA 的路由器\n至少有两个接口都开启了OSPFv3；C 错误，Link connected to：a Transit Network，链接\n类型为传输网络，传输网络的LSA 通告都是由DR 发出来给各个DRother，所以Neighbor\nRouter ID 为DR 的Router ID，可以判断10.0.4.4 是DR 路由器，Network LSA 是有DR 生\n成的，故10.0.4.4 会产生Network LSA；D 正确，Originating Router：10.0.4.4，表示该\nLSA 来源于10.0.4.4，并不是由R1 生成。OSPFv3 的Router-LSA 字段解释：W：Wild-\nCard Receiver，值为1 时，表示该路由器支持组播路由。V：Virtual Link，值为1 时，表\n示产生此LSA 的路由器是虚连接的一端。E：External，值为1 时，表示产生此LSA 的路\n由器是ASBR。B：Border，值为1 时，表示产生此LSA 的路由器是ABR。Options：\n3Byte，可选项。DC：1bit，表示是否具有支持按需电路的能力。R：1bit，指明始发路由\n器是否是一台有效的路由器。NP：1bit，表示是否为NSSA 区域。MC：1bit，表示是否\n支持转发组播数据报文。E：1bit，表示是否支持外部路由。V6：1bit，表示是否参与\nIPv6 路由计算。如果该位为0，表示该路由器或链路不参与IPv6 路由计算。并且该LSA\n是可以生成二类LSA 的",
+    "questionImage": "H12-831/images/q095.png"
+  },
+  {
+    "id": 96,
+    "type": "single",
+    "question": "如图所示的OSPFv3 网络，区域1 为Stub 区域，区域2 为普通区域，区域3 为NSSA\n区域，则以下哪一种类型的LSA 只会出现在区域2 中？",
+    "options": [
+      "Link-LSA",
+      "Router-LSA",
+      "Intra-Area-Prefix-LSA",
+      "AS-External-LSA"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "特殊区域内不会传输5 类LSA（AS-External-LSA），可以传输1 类LSA、2 类\nLSA、3 类LSA",
+    "questionImage": "H12-831/images/q096.png"
+  },
+  {
+    "id": 97,
+    "type": "single",
+    "question": "如图所示的网络，相邻的路由器之间使用直连接口建立EBGP 邻居关系，AS 号为\n6500x，其中x 为路由器的编号。R1 和R4 均有到达192.168.1.0/24 的静态路由，通过\nimport 方式引入BGP，缺省情况下，在R3 路由表中，到达192.168.1.0/24 的路由条目携\n带的AS_Path 属性为以下哪一\n项?",
+    "options": [
+      "65006, 65005, 65004, 65001",
+      "65002, 65005, 65004",
+      "65006, 65005, 65004",
+      "65002, 65001"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "根据BGP 选路原则，对比到as-path 时，优选AS（as-path）最短的路由，D 选项\n65002, 65001 是最优的AS 路径选项。",
+    "questionImage": "H12-831/images/q097.png"
+  },
+  {
+    "id": 98,
+    "type": "single",
+    "question": "在BGP/MPLS IP VPN 网络中，当CE 和PE 之间运行以下哪一项路由协议时，PE 设备\n可以不在BGP 中执行路由重分发操作？",
+    "options": [
+      "BGP",
+      "静态路由",
+      "IS-IS",
+      "OSPF"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "当PE 与CE 间采用BGP 交互路由信息时，不需要在PE 上执行私网路由引入BGP\n的操作。"
+  },
+  {
+    "id": 99,
+    "type": "single",
+    "question": "当组网发生变化时，DHCP Snooping 绑定表不会立即老化，因此需要手动清除，那么\n管理员可以采用以下哪一条命令清除DHSP snooping 绑定表?",
+    "options": [
+      "resetdhcp snooping statistics global",
+      "reset dhcp snooping user-bind ip-address",
+      "resetsaved-configuration",
+      "dhcp snooping user-bind autosave"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "&lt;Huawei&gt;reset dhcp snooping user-bind //清除DHCP Snooping 绑定表"
+  },
+  {
+    "id": 100,
+    "type": "single",
+    "question": "如图所示的IS-IS IPV6 网络，所有路由器均开启多拓扑功能。在R4 IS-IS 进程中配置\n“ipv6 default-route-advertise always level-1”。缺省情况下，以下哪一台路由器的路由表中\n无缺省路\n\n由?",
+    "options": [
+      "R5",
+      "R3",
+      "R2",
+      "R1"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "R5 有L-1-2 下发的缺省路由。R3 跨域，验证了路由表中无缺省路由",
+    "questionImage": "H12-831/images/q100.png"
+  },
+  {
+    "id": 101,
+    "type": "single",
+    "question": "在BGP/MPLS IP VPN 网络中，VPNv4 的路由传递会携带RD 值，那么MP-BGP 是通\n过以下哪一个路径属性携带的RD 值？",
+    "options": [
+      "Extended_Community",
+      "AS_Path",
+      "MP_REACH_NLRІ",
+      "Local_Preference"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 102,
+    "type": "single",
+    "question": "如图所示的OSPf 网络，链路的Cost 值已在图中标出，R1 开启了OSPF IP FRR，且在\nOSPF 进程中配置了“maximum load-balancing 1”命令，则R1 到达10.0.3.3/32 的备份出接\n口为以下哪一\n项?",
+    "options": [
+      "GE0/0/2",
+      "GE0/0/1",
+      "GE0/0/3",
+      "无备份路径"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q102.png"
+  },
+  {
+    "id": 103,
+    "type": "single",
+    "question": "某一台OSPF 路由器的Debug 输出信息如图所示，请问该路由器的Router ID 为以下\n哪一\n项?",
+    "options": [
+      "10.0.1.1",
+      "10.0.12.2",
+      "10.0.2.2",
+      "10.0.12.1"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "类似题debug 显示的数据里面，容易看出Route:10.0.1.1，即为路由器的Router ID",
+    "questionImage": "H12-831/images/q103.png"
+  },
+  {
+    "id": 104,
+    "type": "single",
+    "question": "如图所示的IS-IS 网络，R1 通过“default-route-advertise always level-1”命令引入了缺\n省路由，则R3 路由表中缺省路由对应的下一跳设备为哪一台？",
+    "options": [
+      "R4",
+      "R3",
+      "R2",
+      "R1"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q104.png"
+  },
+  {
+    "id": 105,
+    "type": "single",
+    "question": "在某MPLS 网络中，R1 和R3 的LSP 信息如图所示，此时管理员在R1 上输入命令\nping -a 10.1.12.1 3.3.3.3，那么以下关于该场景的描述，正确的是哪一项？",
+    "options": [
+      "R2 收到的Echo Request 报文携带标签1025，R2 收到的Echo Reply 报文携带标签\n1024",
+      "R2 收到的Echo Request 报文不携带标签，R2 收到的Echo Reply 报文携带标签1024",
+      "R2 收到的Echo Request 报文携带标签1025，R2 收到的Echo Reply 报文不携带标签",
+      "R2 收到的Echo Request 报文不携带标签，R2 收到的Echo Rep1y 报文也不携带标签"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q105.png"
+  },
+  {
+    "id": 106,
+    "type": "single",
+    "question": "相比于OSPFv2 的Hello 报文，以下哪一字段是OSPFv3 的Hello 报文独有的字段?",
+    "options": [
+      "Hello Interval",
+      "Interface ID",
+      "Network Mask",
+      "Designated Router ID"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 107,
+    "type": "single",
+    "question": "管理员在交换机上配置了端口安全功能，并且将端口安全的保护动作设置为了restrict。\n那么当交换机端口上安全MAC 地址数达到限制后，收到源MAC 地址不存在的报文时，会\n执行以下哪一个动作?",
+    "options": [
+      "只丢弃该报文，但不上报告警",
+      "将接口状态置为error-down，并上报告警",
+      "继续接收该报文，并将该报文的源MAC 记录为安全动态MAC 地址",
+      "丢弃该报文，并上报告警"
+    ],
+    "answer": [
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 108,
+    "type": "single",
+    "question": "在PIM-SM 组播网络中，网络工程师发现组播客户端无法接收组播数据，网络工程师\n列出了多个原因，请问以下原因列表中的哪一项不会导致该现象?",
+    "options": [
+      "组播设备的下游接口禁止状态刷新报文的转发",
+      "组播设备的下游接口没有收到(*，G 加入)",
+      "各组播设备的RP 地址不一致",
+      "组播设备到RP 的单播路由不通"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 109,
+    "type": "single",
+    "question": "如图所示的OSPF 网络，R1 和R2 之间通过四条链路相连，R2 的Loopback0 接口开\n启OSPF，在R1 的OSPF 进程中配置\"maximum load-balancing 1\"命令，则R1 到达R2 的\nLoopback0 接口的出接口为以下哪一项？",
+    "options": [
+      "GE0/0/2.10",
+      "GE0/0/2.20",
+      "GE0/0/1",
+      "GE0/0/0"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "类似题通过maximum load-balancing 命令配置等价路由的最大数量，进行负载分担，\n该题的最大负载分担值是1，所以只能从1 个接口发出数据，不进行多接口负载分担。如\n果路由的优先级相同，则比较接口ID，选大的作为出接口。最后发送数据是选最大的\nGE0/0/2.20 接口",
+    "questionImage": "H12-831/images/q109.png"
+  },
+  {
+    "id": 110,
+    "type": "single",
+    "question": "如图所示的OSPf 网络，链路的Cost 值已在图中标出，R1 开启了OSPF IP FRR，且在\nOSPF 进程中配置了“maximum load-balancing 1”命令，则R1 到达10.0.3.3/32 的备份出接\n口为以下哪一\n项?",
+    "options": [
+      "GE0/0/1",
+      "GE0/0/2",
+      "GE0/0/3",
+      "无备份路径"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q110.png"
+  },
+  {
+    "id": 111,
+    "type": "single",
+    "question": "如图所示网络中，管理员先完成了如选项所示的路由配置，然后在R1-R3 所有设备和\n互联接口上使能MPLS 和LDP 功能，从而实现PC1 访问PC2 的流量在网络中基于MPLS\n转发。那么以下哪一选项的路由配置，可以实现该功能",
+    "options": [
+      "R1/R3仅配置BGP（无OSPF/IGP）",
+      "R1/R2/R3仅配置OSPF（宣告Loopback接口）",
+      "R1/R3配置OSPF+BGP+route recursive-lookup tunnel，R2配置OSPF",
+      "R1/R2/R3仅配置OSPF（宣告Loopback+直连网段）"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "MPLS LDP需要IGP（OSPF）建立LDP会话，选C的OSPF+BGP+路由递归查找隧道\n为正确配置。仅BGP无IGP无法建立LDP邻居，仅OSPF无法实现BGP路由基于MPLS转发。",
+    "questionImage": "H12-831/images/q111.png"
+  },
+  {
+    "id": 112,
+    "type": "single",
+    "question": "如图所示，管理员要使能R1~R4 设备的MPLS LDP 功能，那么以下关于R1 的配置，\n正确的是哪一\n项?",
+    "options": [
+      "全局配置mpls lsr-id+mpls+mpls ldp，接口仅启用mpls（缺mpls ldp）",
+      "全局配置mpls lsr-id+mpls+mpls ldp，接口启用mpls+mpls ldp",
+      "全局配置mpls+mpls ldp（无lsr-id），接口启用mpls+mpls ldp",
+      "全局配置mpls+mpls ldp（无lsr-id），接口仅启用mpls"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "配置LSR ID，全局启用MPLS、MPLS LDP，接口启用MPLS、MPLS LDP。",
+    "questionImage": "H12-831/images/q112.png"
+  },
+  {
+    "id": 113,
+    "type": "multiple",
+    "question": "如图所示的OSPFv3 网络，区域1 为NSSA 区域。R1 将外部路由2000::1/128 引入\nOSPFv3。缺省情况下，以下描述正确的有哪些\n项?",
+    "options": [
+      "R2 负责将R1 生成的描述2001::1/128 的NSSA LSA 转化为AS-External-LSA",
+      "R1 和R2 路由表中均没有缺省路由",
+      "R1 将生成描述2001::1/128 的AS-External-LSA",
+      "R1 将生成描述2001::1/128 的NSSA LSA"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q113.png"
+  },
+  {
+    "id": 114,
+    "type": "multiple",
+    "question": "R4 的Router ID 为10.0.4.4，在R4 的LSDB 中看到如图所示的LSA，网络工程师根据\n该LSA 做出以下推断，其中正确的有哪些项？",
+    "options": [
+      "R4 是某一条链路上的DR",
+      "区域1 是Stub 区域",
+      "R4 至少有一条链路没有建立OSPFv3 邻居关系",
+      "这三条LSA 属于区域1"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "这三条LSA，都是在Intra-Area-Prefix-LSA(Area 0.0.0.1)信息的列表下，因此都属于\n区域1；R4 是0.0.0.1、0.0.0.2、0.0.0.3 的产生origin router（路由生成设备）所以是\nDR。",
+    "questionImage": "H12-831/images/q114.png"
+  },
+  {
+    "id": 115,
+    "type": "multiple",
+    "question": "如图所示的网络，R1、R2、R4、R5 运行IS-IS，区域号为49.0001。R3、R6 运行IS-\nIS，区域号为49.0002。在AS 65000 内部，R1、R3、R4、R6 均与R2、R5 建立IBGP 邻\n居关系，其中R2、R5 是RR，R1、R4、R3、R6 是客户端。IBGP 邻居关系均使用\nLoopback0 接口建立。每台设备的Loopback0 接口的IP 地址为10.0.X.X/32，Router ID\n为10.0.X.X，其中X 为设备的编号。R1 和R4 将外部网络192.168.1.0/24 通过import 方\n式引入BGP，R3 和R6 通过import 方式将外部网络192.168.2.0/24 引入BGP。缺省情况\n下，以下描述正确的有哪些\n\n项?",
+    "options": [
+      "针对于192.168.2.0/24，R5 优选从R3 接收的BGP 路由",
+      "针对于192.168.1.0/24，R3 优选从R2 接收的BGP 路由",
+      "针对于192.168.1.0/24，R6 优选从R2 接收的BGP 路由",
+      "针对于192.168.2.0/24，R2 优选从R3 接收的BGP 路由"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q115.png"
+  },
+  {
+    "id": 116,
+    "type": "multiple",
+    "question": "如图所示，某企业希望在不改变网络部署的情况下，实现总部和分支机构间的安全互\n访，以及研发区和非研发区之间的业务隔离。为了满足该需求，管理员在网络中部署了\nBGP/MPLS IP VPN，那么以下关于该场景的描述，正确的有哪些\n\n项?",
+    "options": [
+      "若要实现总部和分支研发区的互访，可以将VPN1 和VEN2 的ERI 和IRT 均设置为\n100:100",
+      "由于研发区和非研发区存在地址空间重叠，因此无法实现两个区域的业务隔离",
+      "若要实现总部研发区和非研发区的隔离，可以将VPN1 的RT 值均设置为100:100，而\nVPN3 的RT 值均设置为200:200",
+      "若要实现总部和分支研发区的互访，需要将VPN1 和VPN2 的RD 值设置为相同值"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q116.png"
+  },
+  {
+    "id": 117,
+    "type": "multiple",
+    "question": "在BGP/MPLS IPVPN 网络中，某PE 设备VPN1 的输出信息如图所示，当VPN1 对应\n的VPN4 路由被通告给远端PE 时，对端PE 的哪些VPN 会接收该路\n\n由?",
+    "options": [
+      "VPN3:Import RT=100:1，300:1",
+      "VPN2:Import RT=200:1，400:1",
+      "VPN1:Import RT=100:1",
+      "VPN4: Import RI=500:1"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "只要匹配Import RT 的任意一个就能接收该路由，除了500:1 没有被匹配到，其他\n都有。",
+    "questionImage": "H12-831/images/q117.png"
+  },
+  {
+    "id": 118,
+    "type": "multiple",
+    "question": "如图所示的网络，网络工程师发现PC1 和PC2 互通的路径非最优路径，每条链路的\nCost 值相同，据此分析，以下哪些路由器可能是这个二层网络的根桥？",
+    "options": [
+      "SW4",
+      "SW3",
+      "SW2",
+      "SW1"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "根据路径所示，PC1 和PC2 互通数据需要经过SW1 和SW4，是因为SW2-SW3 之\n间的某接口是被生成树协议阻塞了，因此SW2 和SW3 不可能是根桥，生成树的根桥只可\n能属于SW1 或者SW4。",
+    "questionImage": "H12-831/images/q118.png"
+  },
+  {
+    "id": 119,
+    "type": "multiple",
+    "question": "交换机上的MAC 地址表项有多种类型，其中以下哪些类型是由用户手工配置的，表\n项不可老化?",
+    "options": [
+      "黑洞MAC 地址表",
+      "MUX MAC 地址表",
+      "动态MAC 地址表",
+      "静态MAC 地址表"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "黑洞MAC：这是由用户手工配置的，主要用于丢弃源MAC 地址或目的MAC 地址为\n指定MAC 地址的报文，不老化。静态MAC：同样是由用户手工配置并下发到各单板的，\n表项也不老化。"
+  },
+  {
+    "id": 120,
+    "type": "multiple",
+    "question": "如图所示的企业网络，R3 连接企业网络管理服务器，网络中的所有设备通过VPN 实\n现与网管互通。在巡检过程中发现，R3 有多余的RT 配置，在R3 上可以执行以下哪些命\n令删除多余RT，并且不影响所有设备和网络管理服务器的连通\n性?",
+    "options": [
+      "undo vpn-target 3:1 import-extcommunity",
+      "undo vpn-target 2:3 export-extcommunity",
+      "undo vpn-target 1:3 export-extcommmity",
+      "undo vpn-target 1:3 import-extcommunity"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q120.png"
+  },
+  {
+    "id": 121,
+    "type": "multiple",
+    "question": "如图所示的网络，R1、R2、R4、R5 运行IS-IS，区域号为49.0001，R3，R6 运行IS-\nIS，区域号为49.0002，在R2 和R5 上配置\"import-route isis level-2 into level-1\"，AS\n65000 内部，R1、R3、R4、R6 均与R2，R5 建立IBGP 邻居关系，其中R2、R5 是\nRR，R1，R4，R3，R6 是客户端。R2 和R5 之间也建立IBGP 邻居关系，且配置相同的\nCluster ID，IBGP 邻居关系均使用Loopback0 接口建立。每台设备的Loopback0 接口的\nIP 地址为10.0.X. X/32，Router ID 为10.0.X.X，其中X 为设备的编号，R1 和R4 将外部\n网络192.168.1.0/24 通过import 方式引入BGP, R3 和R6 通过import 方式将外部网络\n192.168.2.0/24 引入BGP，在所有路由器的BGP 进程中，配置\"maximum load-balancing\nibgp 8\"。缺省情况下，以下描述正确的有哪些\n项?",
+    "options": [
+      "R5 的路由表中到达192.168.2.0/24 有两条等价路由",
+      "R2 的路由表中到达192.168.1.0/24 有两条等价路由",
+      "R1 的路由表中有到达192.168.2.0/24 等价路由，且下一跳IP 相同",
+      "R3 的路由表中有到达192.168.1.0/24 的等价路由，且下一跳IP 不同"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q121.png"
+  },
+  {
+    "id": 122,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，R1 和R2 通过OSPF 实现Loopback0 接口互通。同时，R1\n和R2 开启了IP MPLS LDP 功能，LDP 传输地址为Loopback0 接口的IP 地址，网络工程\n师发现R1 和R2 无法建立LDPSession，于是首先在R2 上执行了如图所示的命令，在此\n基础上，请问以下哪些原因可能会导致R1 和R2 LDP Session 无法建\n立?",
+    "options": [
+      "R1 GE0/0/1 接口拒绝接收UDP 目的端口为646 的报文",
+      "R2 GE0/0/1 接口拒绝接收TCP 目的端口为646 的报文",
+      "R2 GE0/0/1 接口没有使能MPLS LDP",
+      "R1 GE0/0/1 接口拒绝接收目的IP 地址为10.0.2.2 的报文"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q122.png"
+  },
+  {
+    "id": 123,
+    "type": "multiple",
+    "question": "管理员为了防止广播风暴问题导致流量泛洪，准备在设备接口视图的入方向部署流量\n抑制功能，那么此时可以按照以下哪些参数对广播报文进行流量抑制?",
+    "options": [
+      "比特速率",
+      "包速率",
+      "MTU 值",
+      "百分比"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 124,
+    "type": "multiple",
+    "question": "IPSG 能够防御IP 地址欺骗攻击，那么以下关于IPSG 的描述，错误的有哪些项？",
+    "options": [
+      "IPSG 可以利用DHCP Snooping 绑定表对报文进行匹配检查",
+      "IPSG 的信任接口/非信任接口就是DHCP Snooping 中的信任接口/非信任接口",
+      "IPSG 支持在二层物理接口或者VLAN 上应用，也支持在三层物理接口或VLANIF 等逻辑\n接口上应用",
+      "IPSG 可以匹配检查主机发送的IP、ARP、PPPoE 等报文"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "B 项说法是对的，华为官网原话。C 错：IPSG 仅支持在二层物理接口或者VLAN 上\n应用，且只对使能了IPSG 功能的非信任接口进行检查。D 错：IPSG 只匹配检查主机发送\n的IP 报文，包括IPv4 和IPv6 报文，对于ARP、PPPoE 等非IP 报文，IPSG 不做匹配检\n查。"
+  },
+  {
+    "id": 125,
+    "type": "multiple",
+    "question": "如图所示的OSPFv3 网络，区域1 为普通区域，以下描述中正确的有哪些\n项?",
+    "options": [
+      "R1、R2 和R3 的LSDB 相同",
+      "R1、R2 和R3 均生成Inter-Area-Prefix-LSA",
+      "假如R5 引入了外部路由，则R4 计算该外部路由时不需要依赖Inter-Area-Router-LSA",
+      "R4 和R5 的LSDB 相同"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q125.png"
+  },
+  {
+    "id": 126,
+    "type": "multiple",
+    "question": "管理员在使能设备GE0/0/1 接口的MPLS LDP 功能时，必须配置以下哪些命令?",
+    "options": [
+      "[Huawei] mpls ldp",
+      "[Huawei-GigabitEthernet0/0/1]mpls",
+      "[Huawei-GigabitEthernet0/0/1]mpls ldp",
+      "[Huawei] mpls"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "使能设备的MPLS LDP 功能，必须在全局和接口上都启用mpls 和mpls ldp。"
+  },
+  {
+    "id": 127,
+    "type": "multiple",
+    "question": "某交换机接口配置如下所示，当该接口接收到的广播报文的平均速率为以下哪些项时，\n会被执行风暴控制动\n作?",
+    "options": [
+      "4000 pps",
+      "8500 pps",
+      "6500 pps",
+      "9000 pps"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 128,
+    "type": "multiple",
+    "question": "如图所示的网络，R1、R2、R4、R5 运行IS-IS，区域号为49.0001。R3、R6 运行IS-\nIS，区域号为49.0002。在AS 6500 内部，R1、R3、R4、R6 均与R2、R5 建立IBGP 邻\n居关系，其中R2、R5 是RR，R1、R4、R3、R6 是客户端。IBGP 邻居关系均使用\n\nLoopback0 接口建立。每台设备的Loopback0 接口的IP 地址为10.0.X.X/32，Router ID\n为10.0.X.X，其中X 为设备的编号。R1 和R4 将外部网络192.168.1.0/24 通过import 方\n式引入BGP，R3 和R6 通过import 方式将外部网络192.168.2.0/24 引入BGP。缺省情况\n下，以下描述正确的有哪些\n项?",
+    "options": [
+      "R3 到达192.168.1.0/24 的流量路径可能为R3-R2-R1",
+      "R3 到达192.168.1.0/24 的流量路径可能为R3-R5-R4",
+      "R1 到达192.168.2.0/24 的流量路径可能为R1-R2-R3",
+      "R1 到达192.168.2.0/24 的流量路径可能为R1-R5-R3"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q128.png"
+  },
+  {
+    "id": 129,
+    "type": "multiple",
+    "question": "以下哪些原因会导致网络设备Telnet 登录失败?",
+    "options": [
+      "Telnet 端口被禁用",
+      "网络设备Telnet 服务功能未开启",
+      "用户名和密码错误",
+      "客户端的IP 地址被阻止"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 130,
+    "type": "multiple",
+    "question": "如图所示的网络，R1、R2、R4、R5 运行IS-IS，区域号为49.0001，R3、R6 运行IS-\nIS.区域号为49.0002，在R2 上配置\"import-route isis level-2 into level-1\"。AS 65000 内\n部，R1、R3、R4、R6 均与R2、R5 建立IBGP 邻居关系，其中R2、R5 是RR，R1、\nR4、R3、R6 是客户端，R2 和R5 之间也建立IBGP 邻居关系，且配置相同的Cluster ID，\nIBGP 邻居关系均使用Loopback0 接口建立。每台设备的Loopback0 接口的IP 地址为\n10.0.X.X/32，Router ID 为10.0.X.X，其中X 为设备的编号。R1 和R4 将外部网络\n192.168.1.0/24 通过import 方式引入BGP，R3 和R6 通过import 方式将外部网络\n\n192.168.2.0/24 引入BGP。缺省情况下，以下描述正确的有哪些项？",
+    "options": [
+      "R2 的BGP 路由表中到达192.168.1.0/24 有三条有效路由",
+      "R5 的BGP 路由表中到达192.168.1.0/24 有两条有效路由",
+      "R3 的BGP 路由表中到达192.168.2.0/24 有一条有效路由",
+      "R4 的BGP 路由表中到达192.168.2.0/24 有三条有效路由"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "R4 的BGP 路由表中到达192.168.2.0/24 有2 条有效路由下一跳都是10.0.3.3 的负\n载分担路由；R2 的BGP 路由表中到达192.168.1.0/24 有2 条有效路由，R1 和R4 传来\n的。",
+    "questionImage": "H12-831/images/q130.png"
+  },
+  {
+    "id": 131,
+    "type": "multiple",
+    "question": "在如图所示场景，若想实现后门链路作为备份链路，可采用Sham Link 功能，那么以\n下关于sham Link 的描述，错误的有哪些\n项?",
+    "options": [
+      "管理员在配置Sham Link 时需指定链路的源/目IP 地址",
+      "Sham Link 需要管理员在PE 设备的普通OSPF 进程的区域视图中键入命令sham-link 建\n立",
+      "Sham Link 相当于在两台PE 之间建立了一条OSPF 区域内链路，保证VPN 流量优先经\n过Backdoor 链路",
+      "建立Sham Link 后，在其上泛洪的LSA 均会被转换为Type3LSA"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q131.png"
+  },
+  {
+    "id": 132,
+    "type": "multiple",
+    "question": "以下哪些原因可能会导致本端设备无法学习到对端设备的ARP 信息?",
+    "options": [
+      "链路传输不稳定或光功率不足",
+      "接口物理层未正常Up",
+      "接口下配置的IP 地址与对端设备不在同一网段",
+      "设备受到ARP 攻击"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 133,
+    "type": "multiple",
+    "question": "某一台路由器生成的AS-External-LSA 如图所示，根据此LSA 进行推断，以下描述正\n确的有哪些项?",
+    "options": [
+      "该LSA 是由NSSA LSA 转化后生成",
+      "该路由器的Router ID 为10.0.3.3",
+      "其它路由器到达2000::3 的Cost 值始终为1",
+      "该LSA 携带的Route Tag 值为1"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q133.png"
+  },
+  {
+    "id": 134,
+    "type": "multiple",
+    "question": "某一个割接项目的网络逻辑架构如图所示，割接目的是在R2 和R3 之间扩容一台网\n络设备R4。网络设备之间运行的是OSPF 协议。当物理网络连接后，在执行割接操作时，\n网络工程师首先错误的将R3 的备份配置导入了R4，基于此场景，以下描述正确的有哪些\n项?",
+    "options": [
+      "R1 和R3 能建立OSPF 邻居关系",
+      "R1 和R2 OSPF 邻居关系不受影响",
+      "R2 和R4 能建立OSPF 邻居关系",
+      "R3 和R4 能建立OSPF 邻居关系"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "网络工程师首先错误的将R3 的备份配置导入了R4，那么将会出现R3 和R4 一样的\n配置信息，R3 和R4 会出现IP 地址冲突，两者肯定无法正常建立OSPF 邻居，所以D 是\n错的；R1 和R3 原来的OSPF 邻居不会受到影响，R1 和R2 原来的OSPF 邻居也不会受到\n影响，所以AB 是对的；此题官方出题不严谨，没有考虑到R4 接入后，接口的连接顺序，\n但是按题意来讲本题考察的重点应该是建立邻居的问题，R4 按默认顺序连接接口的，R2\n和R4 就可以建立OSPF 邻居PS：C 如果不选会与另一题类似题冲突",
+    "questionImage": "H12-831/images/q134.png"
+  },
+  {
+    "id": 135,
+    "type": "multiple",
+    "question": "网络工程师需要撰写一份设备升级指导书，在该指导书中需要包括以下哪些内容？",
+    "options": [
+      "新旧版本之间的命令变化",
+      "获取版本文件的途径",
+      "修改sysname 的方法",
+      "版本回退的操作流程"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "设备的sysname 或系统名称是设备的标识，很可能需要在升级后进行修改或确认；\n如果新版本的系统运行不稳定或出现了其他问题，网络工程师可能需要执行版本回退。指\n导书中包含此内容可以帮助他们更容易实现此操作；一些命令可能在新版本中有所改变，\n或有新的命令可以使用。这些信息可以帮助网络工程师更顺利地使用新版本；帮助网络工\n程师知道从何处下载新的版本文件，这也是升级过程中的关键一步。"
+  },
+  {
+    "id": 136,
+    "type": "multiple",
+    "question": "如图所示，某网络管理员通过配置静态LSP 实现了MPLS 数据转发，拓扑图下方是管\n理员对某一设备的抓包信息，那么以下关于该信息的描述，正确的有哪些\n项?",
+    "options": [
+      "若抓包设备为R3，则R3 会对PCI 访问PC2 的报文执行IP 转发",
+      "PC2 访问PC1 的报文在MPLS 域内基于IP 包头转发",
+      "PC1 对PC2 执行了Ping 操作",
+      "PC1 访问PC2 的报文在MPLS 域内基干MPLS 标签转发"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q136.png"
+  },
+  {
+    "id": 137,
+    "type": "multiple",
+    "question": "如果割接准备不足，可能会出现以下哪些问题？",
+    "options": [
+      "未携带网线测试仪，端口无法UP 时，无法判断是端口硬件故障，还是线缆故障",
+      "割接失败，未备份配置文件，导致业务回退失败",
+      "不能在割接预定时间到达割接现场",
+      "单板突发硬件故障，但没有备用单板"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "测线仪是基本工具；备份配置也是基本操作；不提前准备好，事前才准备，可能可\n能影响准时到达；硬件单板他是备份之一。"
+  },
+  {
+    "id": 138,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，R1 和R2 之间通过四条链路相连，R2 的Loopback0 接口开\n启OSPF，在R1 的OSPF 进程中配置\"maximum load-balancing 3\"命令，则R1 到达R2 的\nLoopback0 接口的出接口为以下哪一项？",
+    "options": [
+      "GE0/0/2.10",
+      "GE0/0/1",
+      "GE0/0/2.20",
+      "GE0/0/0"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "当路由表中存在到达同一目的地址，且同一路由协议发现的多条路由时，只要这几\n条路由的开销值也相同，那么就可以进行负载分担。通过maximum load-balancing 命令\n配置等价路由的最大数量，进行负载分担后，报文将按照负载分担的方式从多条等价路由\n发送到同一目的地址。maximum load-balancing 设为3 时，如果路由的优先级相同，则比\n较接口ID，选大的作为出接口。最后发送数据是从这三个负载均衡接口发送出去，即为\nGE0/0/2.10、GE0/0/2.20、GE0/0/1",
+    "questionImage": "H12-831/images/q138.png"
+  },
+  {
+    "id": 139,
+    "type": "multiple",
+    "question": "某企业网络如图所示，其中CE 与PE 间通过部署EBGP 互通，此时CE1 向PE1 传递\n了一条私网路由。那么以下对该场景的分析，错误的有哪些\n项?",
+    "options": [
+      "若不采取额外措施，CE3 将丢弃该路由",
+      "若在PE1 上配置命令peer 10.1.1.1 soo 200:1 和peer 10.1.2.1 soo 200:1，CE2 将接收该\n路由",
+      "若在PE2 上配置命令peer 10.1.3.1 substitute-as，CE3 将接收该路由",
+      "若要CE3 成功接收该路由，需在PE1 上配置命令peer10.1.1.1 soo 200:1"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q139.png"
+  },
+  {
+    "id": 140,
+    "type": "multiple",
+    "question": "如图所示的IS-IS 网络，R1 通过“default-route-advertise always level-1”命令引入了缺\n省路由，以下描述中正确的有哪些\n项?",
+    "options": [
+      "R1 虽然配置了default-route-advertise always level-1 命令，但无法引入缺省路由",
+      "R1 路由表中不存在缺省路由",
+      "R2 路由表中存在缺省路由",
+      "R3 路由表中存在缺省路由"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "如果在Level-1 设备上配置了该命令，那么该设备只会向Level-1 区域发布缺省路由，\n不会将缺省路由发布到Level-2 区域，所以R3 是不存在缺省路由；R1 发布的缺省路由在\nR2 上，所以可以引入缺省路由。相似题总结：R2-R3 区域号不同时,R1 产生默认路由；\nR2-R3 区域号相同时，R1 不产生默认路由；R1 引入缺省路由（L1）时，R2 产生默认路\n由，下一跳指向R1。同时R3 不产生。",
+    "questionImage": "H12-831/images/q140.png"
+  },
+  {
+    "id": 141,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1、区域2、区域3 均为普\n通区域，R5Loopback0 接口的IP 地址为10.0.5.5/32，且该接口通过network 的方式使能\nOSPF。在R5 的GE0/0/1 和R1 的GE0/0/2 接口，均配置了“ospf filter-lsa-out all”，则以\n下哪些路由器的路由表中不存在10.0.5.5/32 的路由条\n\n目?",
+    "options": [
+      "R1",
+      "R6",
+      "R4",
+      "R2"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "\"ospf filter-lsa-out all\"命令用来配置对OSPF 接口出方向的LSA 进行过滤。R1、\nR2、R3、R4、R6 都没有10.0.5.5/32。",
+    "questionImage": "H12-831/images/q141.png"
+  },
+  {
+    "id": 142,
+    "type": "multiple",
+    "question": "某一台路由器生成的Router-LSA 如图所示，根据此LSA 进行推断，以下描述正确的\n有哪些项？",
+    "options": [
+      "该路由器是ABR",
+      "该路由器是ASBR",
+      "该路由器至少有一个接口属于Stub 区域",
+      "路由器至少有一个接口属于区域0"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q142.png"
+  },
+  {
+    "id": 143,
+    "type": "multiple",
+    "question": "当VPN 流量在典型的BGP/MPLS IP VPN 网络中传递时，通常包含两层标签，那么以\n下关于这两层标签的描述，错误的有哪些项?",
+    "options": [
+      "内层和外层标签均由LDP 分发，用于VPN 流量的端到端传递",
+      "外层标签由MP-BGP 分发，用于指导报文在远端PE 设备找到对应的CE 设备",
+      "内层标签由MP-BGP 分发，对端CE 设备会通过BGP Update 报文将内层标签传递到本\n端CE",
+      "外层标签由LDP 分发，若启用了PHP 功能，EgressPE 只能看到MP-BGP 分发的内层标\n签"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "当VPN 流量在典型的BGP/MPLS IP VPN 网络中传递时，通常包含两层标签。外层\n标签由LDP（标签分发协议）分发，用于指导报文在远端PE 设备找到对应的CE（客户设\n备）设备。内层标签由MP-BGP（多协议BGP）分发，用于端到端的VPN 流量传递。"
+  },
+  {
+    "id": 144,
+    "type": "multiple",
+    "question": "如图所示的IS-IS IPv6 网络，所有路由器均开启多拓扑功能。R4 Lopback0 接口的\nIPv6 地址为2000::4/128。在R2 和R1 IS-IS 进程中配置“ipv6 summary 2000::64 level-\n2”。在R1、R2 和R3 IS-IS 进程中配置“ipv6 import-route isis level-2 into level-1”。缺省情\n况下，以下哪些路由器的路由表中有2000::/64 的路由条\n目?",
+    "options": [
+      "R3",
+      "R2",
+      "R4",
+      "R5"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "经过汇总到level-2 在导入到level-1，R1/R2/R3/R5 都会有2000::/64 的路由条目，\nR4 不会在接收来源于自己的汇总路由。",
+    "questionImage": "H12-831/images/q144.png"
+  },
+  {
+    "id": 145,
+    "type": "multiple",
+    "question": "设备运行环境正常是保证设备正常运行的前提。在进行设备运行环境检查时，需要检\n查以下哪些内容?",
+    "options": [
+      "路由表",
+      "温度",
+      "供电",
+      "湿度"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "设备运行环境检查是温度、湿度、供电等，路由表是软件方面的，不是环境。"
+  },
+  {
+    "id": 146,
+    "type": "multiple",
+    "question": "网络工程师在处理故障后撰写了故障处理报告，他把实际组网简化为如图所示的网络。\nR1 和R2 均开启OSPF 协议，且分别作为PC1 和PC2 的网关，以下描述正确的有哪些\n项?",
+    "options": [
+      "PC1 和PC2 无法Ping 通",
+      "R1 可以Ping 通192.168.1.21",
+      "R1 可以Ping 通192.168.1.22",
+      "R2 可以Ping 通192.168.1.2"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q146.png"
+  },
+  {
+    "id": 147,
+    "type": "multiple",
+    "question": "如图所示的网络，PC1 和PC2 连接到同一台交换机，且属于相同的VLAN，以下哪些\n原因可能会导致PC1 和PC2 无法相互通\n信?",
+    "options": [
+      "主机配置了错误的静态ARP",
+      "SW1 配置了端口隔离",
+      "SW1GE0/0/1 接口链路故障",
+      "SW1 GE0/0/2 接口被Shutdown"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "主机上配置错误的静态ARP，数据转发到SW1 的时候会被丢弃；端口隔离会隔离两\n者通信；链路故障或者被人工shutdown，都会导致链路中断，PC1 和PC2 无法相互通信，\nABCD 都会导致无法通信。",
+    "questionImage": "H12-831/images/q147.png"
+  },
+  {
+    "id": 148,
+    "type": "multiple",
+    "question": "在BGP/MPLS IP VPN 网络中引入了RD 和RT 的概念，以下关于RD 和RT 的描述，\n正确的有哪些项?",
+    "options": [
+      "RD 值不用于标识一个路由的起源，也不用于决定该路由应该被加入到哪个VPN 实例",
+      "一个VPNv4 路由只能包含一个RD 值和一个RT 值",
+      "RD 被用于加到IPv4 地址之前，解决IPv4 地址冲突问题",
+      "VPNv4 地址一共96 bit，其中RD 值长64 bit"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 149,
+    "type": "multiple",
+    "question": "网络管理员在接入交换机上部署了DHCP Snooping 功能，其中以下哪些方案可以用来\n降低攻击者恶意申请IP 地址，导致DHCP server 拒绝服务的影响?",
+    "options": [
+      "配置DHCP Snooping 检查DHCP Request 报文中的CHADDR 字段",
+      "通过DHCP Snooping 限制交换机接口学习MAC 地址数量",
+      "将交换机上与合法DHCP Server 互联的接口设为信任接口",
+      "开启设备根据DHCP Snooping 绑定表生成接口的静态MAC 表项功能"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "将交换机上与合法DHCP Server 互联的接口设为信任接口只能确定合法的DHCP 服\n务器的接入方向，并不会降低攻击者恶意申请IP 地址。"
+  },
+  {
+    "id": 150,
+    "type": "multiple",
+    "question": "MPLS 网络中的三台设备已成功建立了LDP 会话，此时管理员配,置或修改以下哪些信\n息，会导致本地LDP 会话重新建立?",
+    "options": [
+      "配置PHP 特性",
+      "配置MPLS 对TTL 的处理模式",
+      "修改LDP 传输地址",
+      "修改标签发布方式"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "修改LDP 传输地址和修改标签发布方式的更改会影响到设备之间的通信方式和会话\n状态，从而触发重新建立会话的过程。而配置PHP 特性和MPLS 对TTL 的处理模式，通\n常情况下不会影响到LDP 会话的建立和维持，因此不会导致重新建立。"
+  },
+  {
+    "id": 151,
+    "type": "multiple",
+    "question": "端口安全是通过将接口学习到的动态MAC 地址转换为安全MAC 地址，包括安全动态\nMAC、安全静态MAC 和stickyMAC，那么以下关于安全mac 地址的描述，正确的有哪些\n项?",
+    "options": [
+      "手动保存配置后重启设备，安全静态MAC 地址信息会丢失",
+      "安全动态MAC 和Sticky MAC 的区别是，前者设备重启后MAC 表项会丢失",
+      "缺省情况下，这三种MAC 地址信息都不会被老化",
+      "安全动态MAC 和Sticky MAC 都是将动态学习到的MAC 地址转换成安全地址"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 152,
+    "type": "multiple",
+    "question": "MPLS 需要为报文事先分配好标签，建立一条LSP，才能进行报文转发。LSP 分为静\n态LSP 和动态LSP 两种，那么动态LSP 可以基于以下哪些协议建立？",
+    "options": [
+      "RSVP-TE",
+      "IS-IS",
+      "PIM-SM",
+      "LDP"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "动态LSP 可以基于以下协议建立：RSVP-TE：RSVP-TE 是用于建立基于TE（Traffic\nEngineering，流量工程）的LSP 的协议。LDP：LDP 是用于建立基于标签的LSP 的协议。"
+  },
+  {
+    "id": 153,
+    "type": "multiple",
+    "question": "如图所示，CE1 发送了VPN1 的流量给PE1，PE1 收到后将转发该VPN 流量，那么以\n下针对该场景的描述，正确的有哪些\n项?",
+    "options": [
+      "PE1 会使用VPNv4 路由的Next_Hop 地址对应的LDP 标签作为标签报文的外层标签",
+      "PE1 会根据Tunnel ID 查找对应的私网标签，并在报文中压入标签头",
+      "PE1 接收该数据的接口，绑定了VPN1 实例",
+      "PE1 会查看VPN1 实例对应的转发表，并获取Tunnel ID 信息"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "1、PE 上绑定VPN 实例;2、内层MP-BGP 标签，外层LDP 标签;3、在转发标签中找\n到tunnel id，当值不为0 时，使用mpls 标签表，并且把对应的标签压入标签头部。\nABCD 描述都是正确的。",
+    "questionImage": "H12-831/images/q153.png"
+  },
+  {
+    "id": 154,
+    "type": "multiple",
+    "question": "如图所示的OSPFv3 网络，区域1 为Stub 区域，区域2 为普通区域，区域3 为NSSA\n区域，R5 Loopback0 接口的IPv6 地址为2000::5/128，通过import 方式引入OSPFv3，\n\n一台设备的Router ID 为10.0.X.X.其中X 为设备的编号。以下描述正确的有哪些项？",
+    "options": [
+      "R2 会在区域2 生成Inter-Area-Router-LSA",
+      "R3 会生成AS-External-LSA",
+      "R2 会在区域0 生成Inter-Area-Router-LSA",
+      "R1 会生成AS-External-LSA"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q154.png"
+  },
+  {
+    "id": 155,
+    "type": "multiple",
+    "question": "如图所示的OSPFv3 网络，区域1 为普通区域，以下描述中错误的有哪些\n项?",
+    "options": [
+      "由于R4 和R5 处于同一区域，R4 和R5 的LSDB 相同",
+      "由于R4 和R5 处于同一区域，R4 如果生成了Intra-Area-Prefix-LSA，则该LSA 会发送\n给R5",
+      "由于R4 和R5 处于同一区域，假如R5 引入了外部路由，则R4 计算该外部路由时不需\n要依赖Interx-Area-Router-LSA",
+      "由于区域1 不连续，R4 和R5 无法获取到达对方接口IPv6 地址的路由"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q155.png"
+  },
+  {
+    "id": 156,
+    "type": "multiple",
+    "question": "如图所示的网络，R2、R6、R3 之间运行IS-IS IPv6，R6 Looback0 接口的IPv6 地址\n为2000::6/128。其它链路均运行OSPFv3，区域1 为stub 区域，区域2 为NSSA 区域。\n在R2 和R3 上将IS-IS 路由引入OSPFv3，以下描述错误的有哪些\n项?",
+    "options": [
+      "R2 在区域0 生成Inter-Area-Router-LSA",
+      "R2 在区域1 生成Inter-Area-Router-LSA",
+      "R3 在区域0 生成Inter-Area-Router-LSA",
+      "R1 在区域2 生成Inter-Area-Router-LSA"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q156.png"
+  },
+  {
+    "id": 157,
+    "type": "multiple",
+    "question": "如图所示，网络管理员在交换机上部署了DHCP Snooping 信任功能，其中GE0/0/2\n口为信任接口，GE0/0/3 口为非信任接口。那么以下关于这两个接口的描述，正确的有哪\n\n些项？",
+    "options": [
+      "当交换机从GE0/0/2 口收到DHCP 请求报文时，会将报文从GE0/0/3 口转发出去",
+      "当交换机从GE0/0/2 口收到DHCP 响应报文时，会将报文从GE0/0/1 口转发出去",
+      "当交换机从GE0/0/3 口收到DHCP 响应报文时，会将报文从GE0/0/1 口转发出去",
+      "当交换机从GE0/0/3 口收到DHCP 请求报文时，会将报文从GE0/0/2 口转发出去"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "交换机上部署了DHCP Snooping 功能，GE0/0/2 为信任端口，GE0/0/3 为非信任端\n口；凡是从“不信任”接口上收到的DHCP 回复报文（Offer、Ack、Nak）直接丢弃，因此C\n是错误的；只对信任接口上转发DHCP 请求和应答报文。这样可以隔离DHCP Server 仿冒\n者攻击，因此A 是错的；可以从非信任接口上收到DHCP 请求报文，因此D 是正确的；\n这样才能保证DHCP 客户端能够从合法的DHCP 服务器获取IP 地址。",
+    "questionImage": "H12-831/images/q157.png"
+  },
+  {
+    "id": 158,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1 为普通区域、区域2 为\nTotally NSSA 区域、区域3 为NSSA 区域，R5 将外部路由10.0.5.5/32 引入OSPF，则以\n\n下哪些路由器的路由表中存在10.0.5.5/32 的路由条目？",
+    "options": [
+      "R2",
+      "R6",
+      "R4",
+      "R3"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "R4 为Totally NSSA 区域，表中不存在10.0.5.5/32 的明细路由条目，去往R5 是通\n过默认路由",
+    "questionImage": "H12-831/images/q158.png"
+  },
+  {
+    "id": 159,
+    "type": "multiple",
+    "question": "R1 转发的目的IP 地址为4.4.4.4 的报文在某MPLS 网络中传输，其中R3 的部分LSP\n信息如图所示，那么在该报文传递的过程中，以下哪些设备会执行MPLS 标签操\n\n作?",
+    "options": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "R1 转发的目的IP 地址为4.4.4.4 的报文在MPLS 网络中传输会添加上标签1025 后\n转发出去，R2 收到R1 的数据包会交换标签为1026 后发给R3，R3 收到标签后对照标签\n表，出标签是3，该标签为隐式空标签，表明了发邻居时，会将该标签弹出，再将内层数\n据转给邻居R4。从整个过程可以看出只有R4 不会涉及到执行MPLS 标签操作。",
+    "questionImage": "H12-831/images/q159.png"
+  },
+  {
+    "id": 160,
+    "type": "multiple",
+    "question": "网络管理员在交换机上部署了IPSG 功能来预防IP 地址欺骗攻击，那么在如图所示的\n设备接口中，哪些接口收到报文后不会执行IPSG 检\n\n查?",
+    "options": [
+      "GE0/0/1",
+      "GE0/0/4",
+      "GE0/0/3",
+      "GE0/0/2"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q160.png"
+  },
+  {
+    "id": 161,
+    "type": "multiple",
+    "question": "某企业网络中既部署了VLAN 聚合，又部署了MUX VLAN，且交换机连接终端的接口\n均为Acess 接口。那么在如图所示的场景中，PC3 可以访问以下哪些IP 地\n\n址?",
+    "options": [
+      "10.1.1.2",
+      "10.1.1.15",
+      "10.1.1.1",
+      "10.1.1.100"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "部署了VLAN 聚合，同时也没有进行隔离（Separate VLAN），所以都可以互访。",
+    "questionImage": "H12-831/images/q161.png"
+  },
+  {
+    "id": 162,
+    "type": "multiple",
+    "question": "如图所示，某交换网络中部署了VLAN 聚合功能，其中Sub-VLAN 10 和Sub-VLAN 20\n均加入到Super-VLAN 100 中。那么该场景中PC 之间的通信情况，以下描述正确的有哪\n些\n\n项?",
+    "options": [
+      "PC1 可以与PC4 进行二层通信，因为同-Sub-VLAN 内的主机可以二层互通",
+      "PC2 不可以与PC4 进行二层通信，因为PC2 所属Super-VLAN 与PC4 所属VLAN 不同",
+      "PC1 可以直接与Pc2 二层通信，因为它们属于同-个Sub-VLAN",
+      "PC2 可以直接与PC3 二层通信，因为它们属于同一个IP 子网段"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "同一个Sub-VLAN 之间属于同一个广播域，因此相同Sub-VLAN 之间可以通过二层\n直接通信。",
+    "questionImage": "H12-831/images/q162.png"
+  },
+  {
+    "id": 163,
+    "type": "multiple",
+    "question": "如图所示的网络，R2、R6、R3 之间运行IS-IS IPv6，R6 Looback0 接口的IPv6 地址\n为2000::6/128。其它链路均运行OSPFv3,区域1 为stub 区域，区域2 为NSSA 区域。在\nR2 和R3 上将IS-IS 路由引入OSPFv3，以下哪些方式可以让R4 Ping 通\n\n2000::6?",
+    "options": [
+      "在R3 的IS-IS 进程中配置attached-bit advertise always",
+      "在R2 的IS-IS 进程中配置attached-bit advertise always",
+      "在R3 的IS-IS 进程中配置ipv6 default-route-advertise always leve1-1",
+      "在R2 的IS-IS 进程中配置ipv6 default-route-advertise always level-1"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "ABCD 命令都能让R6 形成缺省路由，此时就能实现到R4 的回包。",
+    "questionImage": "H12-831/images/q163.png"
+  },
+  {
+    "id": 164,
+    "type": "multiple",
+    "question": "如图所示，某管理员在路由器R1~R4 之间配置静态LSP，那么以下哪些选项的配置\n是正确\n的?",
+    "options": [
+      "【R2】static-lsp transit test incoming-interface GigabitEthernet 0/0/0 nexthop\n10.0.23.3 out-label 300",
+      "【R3】static-lsp transit test in-label 300 nexthop 10.0.34.4 out-label 400",
+      "【R4】static-lsp egress test incoming-interface GigabitEthernet 0/0/0 in-label 400",
+      "【R1】static-lsp ingress test incoming-interface GigabitEthernet 0/0/0 destination\n3.3.3.0 24 nexthop 10.0.12.2 out-label 200"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "AB 选项为transit 设备R2 和R3，需要配置In-label，A 错误；D 选项R1 属于\ningress 设备，不能配置incoming-interface。以下官方资料截图。",
+    "questionImage": "H12-831/images/q164.png"
+  },
+  {
+    "id": 165,
+    "type": "multiple",
+    "question": "如图所示的网络，R1、R2、R4、R5 运行IS-IS，区域号为49.0001，R3、R6 运行IS-\nIS，区域号为49.0002，在R2 上配置\"import-route isis level-2 into level-1\"。AS 65000 内\n部，R1、R3、R4、R6 均与R2、R5 建立IBGP 邻居关系，其中R2、R5 是RR，R1、\nR4、R3、R6 是客户端，R2 和R5 之间也建立IBGP 邻居关系，且配置相同的Cluster ID，\nIBGP 邻居关系均使用Loopback0 接口建立。每台设备的Loopback0 接口的IP 地址为\n10.0.X.X/32，Router ID 为10.0.X.X.其中X 为设备的编号。R1 和R4 将外部网络\n192.168.1.0/24 通过import 方式引入BGP，R3 和R6 通过import 方式将外部网络\n192.168.2.0/24 引入BGP。缺省情况下，以下描述正确的有哪些项？",
+    "options": [
+      "R5 的BGP 路由表中到达192.168.1.0/24 有两条有效路由",
+      "R3 的BGP 路由表中到达192.168.2.0/24 有一条有效路由",
+      "R4 的BGP 路由表中到达192.168.2.0/24 有三条有效路由",
+      "R2 的BGP 路由表中到达192.168.1.0/24 有三条有效路由"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "R4 的BGP 路由表中到达192.168.2.0/24 有两条有效路由，R2 的BGP 路由表中到\n达192.168.1.0/24 也是两条有效路由。",
+    "questionImage": "H12-831/images/q165.png"
+  },
+  {
+    "id": 166,
+    "type": "multiple",
+    "question": "如图所示的网络，相邻的路由器之间使用直连接口建立EBGP 邻居关系。每台设备的\nRouter ID 为10.0.X.X，AS 号为6500X，其中X 为路由器的编号。R1 和R4 均有到达\n192.168.1.0/24 的静态路由，通过import 方式引入BGP。缺省情况下，以下描述中正确\n的有哪些项？",
+    "options": [
+      "R6 到达192.168.1.0/24 的流量路径为R6-R5-R4",
+      "R5 到达192.168.1.0/24 的流量路径为R5-R4",
+      "R2 到达192.168.1.0/24 的流量路径为R2-R1",
+      "R3 到达192.168.1.0/24 的流量路径为R3-R2-R1"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q166.png"
+  },
+  {
+    "id": 167,
+    "type": "multiple",
+    "question": "如图所示，R1、R2、R3 运行了MPLS，且管理员配置了一条从1.1.1.0/24 网段到\n3.3.3.0/24 网段的静态LSP.那么以下关于该场景的描述，正确的有哪些项？",
+    "options": [
+      "R3 对PC2 发往PC1 的流量将执行MPLS 转发",
+      "R1 对PC1 发往PC2 的流量将执行MPLS 转发",
+      "PC2 可以访问PC1",
+      "PC1 无法访问PC2"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "该配置为单向LSP，只有PC1 的报文能经过MPLS 转发到PC2，而PC2 的报文无法\n通过MPLS 域，PC1 和PC2 无法通信。",
+    "questionImage": "H12-831/images/q167.png"
+  },
+  {
+    "id": 168,
+    "type": "multiple",
+    "question": "如图所示的OSPFv3 网络，区域1 为Stub 区域。缺省情况下，以下描述正确的有哪\n些\n项?",
+    "options": [
+      "R1 和R2 均会生成Network-LSA",
+      "R1 和R2 的路由表中均会产生缺省路由",
+      "R1 和R2 均会生成Intra-Area-Prefix-LSA",
+      "R1 和R2 均会生成Inter-Area-Prefix-LSA"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q168.png"
+  },
+  {
+    "id": 169,
+    "type": "multiple",
+    "question": "在如图所示网络中，要求PC1 与PC2 属于同一个VLAN，却无法进行二层互通，则可\n以通过以下哪些技术实\n现?",
+    "options": [
+      "MUX VLAN 技术，将PC1 与PC2 放入同一个Group VLAN",
+      "VLAN 聚合技术，将PC1 与PC2 放入同一个Sub-VLAN",
+      "MUX VLAN 技术，将PC1 与PC2 放入同一个Separate VLAN",
+      "端口隔离技术，将Switch 的GE0/0/1 口和GE0/0/2 口加入同一个端口隔离组"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q169.png"
+  },
+  {
+    "id": 170,
+    "type": "multiple",
+    "question": "在BGP/MPLS IP VPN 网络中引入了RD 和RT 的概念，以下关于RD 和RT 的描述，\n错误的有哪些项?",
+    "options": [
+      "RT 允许对端PE 决定将哪些VPN 路由从特定的VPN 路由表中删除",
+      "增加了RD 的IPv4 地址称为VPNv4 地址",
+      "RT 允许对端CE 决定将哪些VPN 路由导入特定的VPN 路由表",
+      "RD 可用于区分地址空间重叠的VPN 路由"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 171,
+    "type": "multiple",
+    "question": "以下关于OSPFv3 Link-LSA 和Intra-Area-Prefix-LSA 的描述，正确的有哪些项?",
+    "options": [
+      "Link-LSA 描述到此Link 上的link-local 地址、IPv6 前缀地址",
+      "每个设备都会为每个链路产生一个Intra-Area-Prefix-LSA",
+      "每个设备都会为每个链路产生一个Link-LSA",
+      "Intra-Area-Prefix-LSA 描述的前缀信息与Route-LSA 或者Network-LSA 相关联"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 172,
+    "type": "multiple",
+    "question": "在BGP/MPLS IP VPN 网络中，PE 设备间会通过Update 报文进行VPN 路由更新，其\n中Updata 报文中将包含以下哪些信息？",
+    "options": [
+      "VPNv4 路由前缀",
+      "Export RT 值",
+      "公网标签值",
+      "下一跳地址"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "在Update 报文中，会包含VPNv4 路由前缀，这是VPN 路由的主要信息。Export\nRT 值，用于决定哪些VPN 站点能学习，下一跳地址也是VPN 路由中重要的信息，用于\n指示数据包发送的目标地址。"
+  },
+  {
+    "id": 173,
+    "type": "multiple",
+    "question": "如图所示的网络，R1、R2、R4、R5 运行IS-IS，区域号为49.0001。R3、R6 运行IS-\nIS，区域号为49.0002。在AS65000 内部，R1、R3、R4、R6 检资标记(E 均与R2、R5 建\n立IBGP 邻居关系，其中R2、R5 是RR，R1、R4、R3、R6 是客户端。IBGP 邻居关系均\n使用Loopback0 接口建立。每台设备的Loopback0 接口的IP 地址为\n\n10.0.X.X/32,RouterID 为10.0.X.X，其中X 为设备的编号。R1 和R4 将外部网络\n192.168.1.0/24 通过import 方式引入BGP，R3 和R6 通过import 方式将外部网络\n192.168.2.0/24 引入BGP。缺省情况下，以下描述正确的有哪些\n项?",
+    "options": [
+      "针对于192.168.1.0/24，R3 优选的BGP 路由携带的Originator_ID 属性为10.0.2.2",
+      "针对于192.168.1.0/24，R5 优选从R1 接收的路由",
+      "针对于192.168.1.0/24，R6 优选的BGP 路由携带的Originator_ID 属性为10.0.1.1",
+      "针对于192.168.1.0/24，R2 优选的BGP 路由携带的Originator_ID 属性为10.0.1.1"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "R1 和R4，优选R-ID 小的R1，BGP 内部的设备选择的路由信息的Originator_ID 属\n性为10.0.1.1",
+    "questionImage": "H12-831/images/q173.png"
+  },
+  {
+    "id": 174,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，链路的Cost 值已在图中标出，R1 开启OSPF IP FRR，则以下\n描述中正确的有哪些\n\n项?",
+    "options": [
+      "如果整个网络开启BFD 检测功能(检测参数设为默认值)，当R2 和S1 之间的链路中断\n时，R1 可以快速感知OSPF 邻接关系故障",
+      "如果S1 设备断电，则R1 直接使用备份路径到达R3",
+      "R1 到达10.0.3.3/32 无法形成备份路径",
+      "如果R1 和S1 之间的链路中断，则R1 直接使用备份路径到达R3"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "OSPF IP FRR 由OSPF 利用全网链路状态数据库，预先计算出备份路径，保存在转发\n表中，以备在故障时提供流量保护，根据IP FRR 的原则，R1 会使用备份路径到达R3。\nS1 设备断电或者R1 和S1 之间的链路中断都会导致R1 接口状态中端，则R1 直接使用备\n份路径到达R3（R4-R2-R3 链路开销满足链路保护）具体的链路保护计算方法可参考官网\n介绍：https://support.huawei.com/enterprise/zh/doc/EDOC1100278244/3e2dec65",
+    "questionImage": "H12-831/images/q174.png"
+  },
+  {
+    "id": 175,
+    "type": "multiple",
+    "question": "如图所示的网络，R2、R6、R3 之间运行IS-IS IPv6，R6 Looback0 接口的IPv6 地址\n为2000::6/128。其它链路均运行OSPFv3，区域1 为Stub 区域，区域2 为NSSA 区域。\n在R2 和R3 上将IS-IS 路由引入OSPFv3，以下描述正确的有哪些\n\n项?",
+    "options": [
+      "R5 路由表中有2000::6/128 的路由条目",
+      "R1 路由表中有2000::6/128 的路由条目",
+      "R4 路由表中有2000::6/128 的路由条目",
+      "R6 路由表中有::/0 的路由条目"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q175.png"
+  },
+  {
+    "id": 176,
+    "type": "multiple",
+    "question": "运行OSPFv3 的路由器一定会产生哪些类型的LSA?",
+    "options": [
+      "Link-LSA",
+      "Network-LSA",
+      "Intra-Area-Prefix-LSA",
+      "Router-LSA"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 177,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，R1 和R2 通过OSPF 实现Loopback0 接口互通。同时，R1\n和R2 开启了MPLS LDP 功能，LDP 传输地址为Loopback0 接口的IP 地址，网络工程师\n发现R1 和R2 无法建立LDP Session，于是首先在R2 上执行了如图所示的命令，在此基\n础上，请问以下哪些原因可能会导致R1 和R2 LDP Session 无法建立？",
+    "options": [
+      "R2 GE0/0/1 接口拒绝接收目的IP 地址为224.0.0.2 的报文",
+      "R1 GE0/0/1 接口拒绝接收TCP 目的端口为646 的报文",
+      "R1 GE0/0/1 接口拒绝接收目的IP 地址为224.0.0.5 的报文",
+      "R2 GE0/0/1 接口拒绝接收源IP 地址为10.0.12.1 的报文"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "类似题，选项内容有区别，注意核对",
+    "questionImage": "H12-831/images/q177.png"
+  },
+  {
+    "id": 178,
+    "type": "multiple",
+    "question": "MPLS 标签是一个20 bit 长的本地标识符，其标签空间被划分为特殊标签、静态共享\n标签空间和动态信令协议标签空间，那么以下哪些属于特殊标签？",
+    "options": [
+      "1022",
+      "14",
+      "1025",
+      "2"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 179,
+    "type": "multiple",
+    "question": "如图所示的OSPFv3 网络，区域1 为NSSA 区域。R1 将外部路由2000::1/128 引入\nOSPFv3。缺省情况下，区域0 中有哪些类型的\n\nLSA?",
+    "options": [
+      "Intra-Area-Prefix-LSA",
+      "Inter-Area-Router-LSA",
+      "Inter-Area-Prefix-LSA",
+      "Link-LSA"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q179.png"
+  },
+  {
+    "id": 180,
+    "type": "multiple",
+    "question": "OSPF 协议要求同一个区域中的路由器保存相同的链路状态数据库LSDB。随着网络上\n路由数量不断增加，一些路由器由于系统资源有限，不能再承载如此多的路由信息，这种\n状态就被称为数据库超限。假如OSPF 网络中所有路由器均配置了“lsdb-over flow-limit\nnumber 7”，则以下哪些场景可能会导致路由器进入overflow 状态?",
+    "options": [
+      "Type3 LSA 数量超过7 条",
+      "Type4 LSA 数量超过7 条",
+      "Tye7 LSA 数量超过7 条",
+      "Type5 LSA 数量超过7 条"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "lsdb-overflow-limit 命令用来设置OSPF 的LSDB 中External LSA 的最大条目数。当\nOSPF 引入的外部路由（Type5 LSA 和Type7 LSA）数量超过允许的范围，会导致超出的外\n部路由无法得到正常处理，丢失引入的路由。"
+  },
+  {
+    "id": 181,
+    "type": "multiple",
+    "question": "某台OSPFv3 路由器的接口地址为2000::1/128，该前缀有可能会出现在以下哪些类\n型的LSA 中？",
+    "options": [
+      "Inter-Area-Router-LSA",
+      "Inter-Area-Prefix-LSA",
+      "AS-External-LSA",
+      "Router-LSA"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "一类和四类只描述接口ID。"
+  },
+  {
+    "id": 182,
+    "type": "multiple",
+    "question": "某企业网络通过部署MUX VLAN 功能，实现控制员工和访客之间的二层互通，那么关\n于如图所示的场景，以下描述正确的有哪些项",
+    "options": [
+      "PC3 与PC4 之间可以二层互通",
+      "PC1 与PC4 之间无法二层互通",
+      "PC1~PC4 均可以访问Server",
+      "PC1 与PC2 之间无法二层互通"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q182.png"
+  },
+  {
+    "id": 183,
+    "type": "multiple",
+    "question": "如图所示的网络，R1、R2、R4、R5 运行IS-IS，区域号为49.0001. R3、R6 运行IS-\nIS，区域号为49.0002，在R2 上配置\"import-route isis level-2 into level-1\"。AS 65000 内\n部，R1、R3、R4、R6 均与R2、R5 建立IBGP 邻居关系，其中R2、R5 是RR，R1、\nR4、R3. R6 是客户端，IBGP 邻居关系均使用Loopback0 接口建立。每台设备的\nLoopback0 接口的IP 地址为10.0.X.X/32，Router ID 为10.0.X.X，其中X 为设备的编号\nR1 和R4 将外部网络192.168.1.0/24 通过import 方式引入BGP，R3 和R6 通过import\n方式将外部网络192.168.2.0/24 引入BGP，缺省情况下，以下描述正确的有哪些项？",
+    "options": [
+      "R4 路由表中192.168. 2.0/24 的路由条目有两个下一跳",
+      "R1 路由表中有192. 168. 2.0/24 的路由条目",
+      "R1 路由表中有两条等价的缺省路由",
+      "R4 路由表中有两条等价的缺省路由"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "R1.R4 等价路由是L1-2 路由器给的；R1.R4 有2.0 路由是RR 反射的。",
+    "questionImage": "H12-831/images/q183.png"
+  },
+  {
+    "id": 184,
+    "type": "multiple",
+    "question": "如图所示的网络，AS 之间使用直连接口建立EBGP 邻居关系。AS 65456 内部部署\nOSPF （AS 之间的互联端口不开启OSPF），R4，R5 使用Loopback0 接口和R6 建立\nIBGP 邻居关系。每台设备的Loopback0 接口的IP 地址为10.0.X. X/32，Router ID 为\n10.0.X.X.其中X 为设备的编号。R1、R2、R3 将外部网络192.168.1.0/24 通过import 方\n式引入BGP:缺省情况下，以下描述正确的有哪些\n项?",
+    "options": [
+      "针对192.168.1.0/24，R5 优选从R2 接收的路由",
+      "针对192.168.1.0/24，R6 优选从R4 接收的路由",
+      "针对192.168.1.0/24，如果R3 配置default local-preference 150，则R5 优选从R3 接\n收的路由针对192.168.1.0/24，R4 优选从R1 接收的路由",
+      "针对192.168.1.0/24，R4 优选从R1 接收的路由"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q184.png"
+  },
+  {
+    "id": 185,
+    "type": "multiple",
+    "question": "某企业业务路由在网络中传递，其中PE1 与PE2 的部分配置如图所示，那么在此场\n景中，CE2 可能收到以下哪些类型的\nLSA?",
+    "options": [
+      "Type 7 LSA",
+      "Type 3 LSA",
+      "Type 5 LSA",
+      "Type 1 LSA"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "Domain ID 与本地相同的情况下：本地如果发送1、2、3 类LSA，则收到3 类\nLSA，如果发送5、7 类LSA，则收到5、7 类LSA。所以3、5、7 类LSA 都是有可能的。",
+    "questionImage": "H12-831/images/q185.png"
+  },
+  {
+    "id": 186,
+    "type": "multiple",
+    "question": "MPLS 标签是一个20 bit 长的本地标识符，其标签空间被划分为特殊标签、静态共享\n标签空间和动态信令协议标签空间，那么以下哪些属于动态信令协议标签?",
+    "options": [
+      "1025",
+      "1023",
+      "1024",
+      "1022"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 187,
+    "type": "multiple",
+    "question": "在如图所示的BGP/MPLS IP VPN 网络中，以下哪些RT 值的规划可以实现Site1 和\nSite2 均能与Site3 互\n\n访?",
+    "options": [
+      "PE1:IRT=100:1;ERT=100:1 PE2:IRT=100:1;ERT=100:1 PE3:IRT=100:1;ERT=100:1",
+      "PE1:IRT=100:1;ERT=100:1 PE2:IRT=200:1;ERT=200:1 PE3:IRT=100:1，\n200:1;ERT=100:1，200:1",
+      "PE1:IRT=100:1;ERT=200:1 PE2:IRT=200:1;ERT=100:1 PE3:IRT=100:1;ERT=200:1",
+      "PE1:IRT=100:1;ERT=200:1 PE2:IRT=100:1;ERT=200:1 PE3:IRT=200:1;ERT=100:1"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q187.png"
+  },
+  {
+    "id": 188,
+    "type": "multiple",
+    "question": "某一个割接项目的网络逻辑架构如图所示，割接目的是在R2 和R3 之间扩容一台网\n络设备R4。R1、R2、R3 的RouterID 分别为10.0.1.1、10.0.2.2、10.0.3.3。网络设备之间\n运行的是OSPF 协议。当物理网络连接后，在执行割接操作时，网络工程师首先错误的将\nR3 的备份配置导入了R4，基于此场景，以下描述正确的有哪些\n\n项?",
+    "options": [
+      "在R2 的LSDB 中，能看到R4 生成的LSA",
+      "在R1 的LSDB 中，能看到R3 生成的LSA",
+      "在R2 的LSDB 中，能看到R3 生成的LSA",
+      "在R3 的LSDB 中,能看到R4 生成的LSA"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "此题官方出题不严谨，没有考虑到R4 接入后，接口的连接顺序，按题意来讲本题考\n察的重点应该是建立邻居的问题，R4 默认顺序连接的，本题是多选题，R3 与R4 地址冲\n突，无法建立邻居，R2 因此也收不到R3 的LSA，CD 很明显都是错的，本题答案要选AB",
+    "questionImage": "H12-831/images/q188.png"
+  },
+  {
+    "id": 189,
+    "type": "multiple",
+    "question": "如图所示的网络，R1、R2、R4、R5 运行IS-IS，区域号为49.0001. R3、R6 运行IS-\nIS，区域号为49.0002.在AS 65000 内部，R1、R3、R4、R6 均与R2、R5 建立IBGP 邻\n居关系，其中R2、R5 是RR，R1、R4、R3、R6 是客户端。IBGP 邻居关系均使用\nLoopback0 接口建立，每台设备的Loopback0 接口的IP 地址为10.0.X.X/32，Router ID\n为10.0.X.X.其中X 为设备的编号. R1 和R4 将外部网络192. 168.1.0/24 通过import 方式\n引入BGP，R3 和R6 通过import 方式将外部网络192.168.2.0/24 引入BGP.缺省情况下，\n\n以下描述正确的有哪些项？",
+    "options": [
+      "R4 路由表中有两条等价的缺省路由",
+      "R3 路由表中到达192.168.1.0/24 有两个下一跳",
+      "针对于192.168.1.0/24，R3 优选从R2 接收的BGP 路由，R6 优选从R5 接收的BGP 路\n由",
+      "R1 路由表中没有192.168.2.0/24 的路由条目"
+    ],
+    "answer": [
+      0,
+      3
+    ],
+    "explanation": "C 选项:R6 无论从最小的Router-ID 还是最小的IP 邻居学习BGP，都应该选择R2。\nD 选项路由表中不存在192.162.2.0/24，但BGP 表中存在。",
+    "questionImage": "H12-831/images/q189.png"
+  },
+  {
+    "id": 190,
+    "type": "multiple",
+    "question": "某一台路由器生成的Router-LSA 如图所示，以下描述正确的有哪些项？",
+    "options": [
+      "该路由器是ABR",
+      "该路由器属于Stub 区域",
+      "其它路由器转发IPv6 流量时可以经过此路由器",
+      "该路由器是本地链路的DR"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q190.png"
+  },
+  {
+    "id": 191,
+    "type": "multiple",
+    "question": "网络工程师在R1 上查看LLDP 邻居信息，以下描述中正确的有哪些项？",
+    "options": [
+      "对端设备的管理IP 地址为192.168.1.1",
+      "对端设备的接口编号为GE0/0/0",
+      "对端设备的sysname 为R2",
+      "对端设备的VLAN ID 为1"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 192,
+    "type": "multiple",
+    "question": "以下关于OSPFv3 的描述，正确的有哪些项?",
+    "options": [
+      "OSPFv3 支持一个链路上多个进程",
+      "OSPFv3 的RouterLSA 和Network LSA 里不包含IP 地址",
+      "广播、NBMA 及P2MP 网络中，邻居不再由IP 地址标识，只由RouterID 标识",
+      "OSPFv3 的LSA 报文里添加了LSA 的泛洪范围"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 193,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1、区域2、区域3 均为普\n通区域，R5Loopback0 接口的IP 地址为10.0.5.5/32，且该接口通过network 的方式使能\nOSPF。在所有路由器上均配置了acl 2000，匹配规则如图所示。在R1、R2、R3 的区域0\n中，均配置了“filter 2000 export”，则以下哪些路由器的路由表中不存在10.0.5.5/32 的路\n由条\n\n目?",
+    "options": [
+      "R3",
+      "R2",
+      "R4",
+      "R6"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "链路状态路由协议传递的是链路状态信息，而不是路由信息。3 类LSA 是通过路由\n表中的路径生成的。所以在骨干路由器的area 0 中使用“filter 2000 export”export 关键字\n指定这个过滤应用于从area 0 导出到其他区域的路由。所以非骨干区域中的R4 和R6 将\n不会收到相关路由。",
+    "questionImage": "H12-831/images/q193.png"
+  },
+  {
+    "id": 194,
+    "type": "multiple",
+    "question": "某管理员通过display mls ldp session 命令查看R1 与R2 间LDP 会话的建立情况，输\n出信息如图所示，那么以下关于该信息的描述，正确的有哪些\n\n项?",
+    "options": [
+      "会话中发送和接收的Keepalive 消息数相同",
+      "R1 与R2 采用的标签发布方式均为DU",
+      "R1 的传输地址大于R2",
+      "R1 与R2 间的LDP 会话处于初始化状态"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q194.png"
+  },
+  {
+    "id": 195,
+    "type": "multiple",
+    "question": "如图所示的IS-IS IPV6 网络，所有路由器均开启多拓扑功能。在R4 和R5 IS-IS 进程\n中配置\"ipv6 default-route-advertise always level-1\"。缺省情况下，以下哪些路由器的路由\n表中有缺省路\n\n由?",
+    "options": [
+      "R3",
+      "R4",
+      "R1",
+      "R2"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "ipv6 default-route-advertise always level-1：产生L1 的缺省路由。又因为R1-\nR2\\R2-R3 区域号不同，仅仅建立L2 邻居，所以L2 区域会把缺省路由再传回L1 区域。",
+    "questionImage": "H12-831/images/q195.png"
+  },
+  {
+    "id": 196,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域1 是NSSA 区域，区域2 是普通区域，R4 引入外部路由\n10.0.4.4/32。每一台设备的RouterID 为10.0.x.x，其中x 为设备的编号。在R1 和R3 的\nOSPF 进程中均配置了“asbr-summary 10.0.4.0 255.255.255.0”命令，则以下哪些路由器的\n路由表中有10.0.4.0/24 的路由条\n\n目?",
+    "options": [
+      "R1",
+      "R5",
+      "R3",
+      "R2"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "在R1 和R3 的OSPF 进程中均配置了“asbr-summary 10.0.4.0 255.255.255.0”命令，\n由于R3 的Route-ID 比较大，最终成功发布汇总路由10.0.4.0/24 进入区域0 和2 的是\nR3；最终R3 路由表只有存在R4 传递的10.0.4.4/32 的路由；实验验证过，R1、R2、R5\n有汇总路由10.0.4.0/24",
+    "questionImage": "H12-831/images/q196.png"
+  },
+  {
+    "id": 197,
+    "type": "multiple",
+    "question": "设备产生的信息可以向控制台、远程终端、Log 缓冲区、日志文件、SNMP 代理等方\n向输出信息。缺省情况下，以下哪些输出方向可接收trap 信检查标记?",
+    "options": [
+      "控制台",
+      "远程终端",
+      "Trap 缓冲区",
+      "SNMP 代理"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 198,
+    "type": "multiple",
+    "question": "网络工程师在处理故障后撰写了故障处理报告，他把实际组网简化为如图所示的网络。\nR1 和R2 均开启OSPF 协议，且分别作为PC1 和Pc2 的网关，以下描述正确的有哪些\n项?",
+    "options": [
+      "如果R1 GE0/0/1 接口故障，R1 可以Ping 通192.168.1.2",
+      "如果R1 GE0/0/1 接口关闭OSPF 功能，R1 可以Ping 通192.168.1.2",
+      "如果R1 GE0/0/1 接口故障，R1 可以Ping 通192.168.1.12",
+      "PC1 和PC2 无法Ping 通"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q198.png"
+  },
+  {
+    "id": 199,
+    "type": "multiple",
+    "question": "在BGP/MPLS IP VPN 网络中，PE 设备向外发布VPNv4 路由时，会携带以下哪些信息?",
+    "options": [
+      "IPv4 地址前缀",
+      "export Target",
+      "Import Target",
+      "RD"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "Import Route Targets 是用于PE 设备接收VPNv4 路由的，而不是在向外发布路由时\n使用"
+  },
+  {
+    "id": 200,
+    "type": "multiple",
+    "question": "网络工程师在处理故障后撰写了故障处理报告，他把实际组网简化为如图所示的网络。\nR1 和R2 均开启OSPF 协议，且分别作为PC1 和PC2 的网关，以下描述正确的有哪些\n\n项?",
+    "options": [
+      "在R2 上无法Ping 通10.0.12.1",
+      "PC1 和PC2 无法Ping 通",
+      "在R1 上无法Ping 通192.168.1.2",
+      "在R1 上无法Ping 通192.168.1.12"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q200.png"
+  },
+  {
+    "id": 201,
+    "type": "multiple",
+    "question": "R2 设备上存在如图所示的文件信息，当网络工程师使用“dir |include 4”命令查看文件\n信息时，会看到以下哪些文\n\n件?",
+    "options": [
+      "2.cfg",
+      "3.zip",
+      "3.dat",
+      "4.zip"
+    ],
+    "answer": [
+      2,
+      3
+    ],
+    "explanation": "include 4 意思是筛选出包含4 的关键字的行，从列表中可以看到，只有3.dat 和",
+    "questionImage": "H12-831/images/q201.png"
+  },
+  {
+    "id": 202,
+    "type": "multiple",
+    "question": "华为NetEngine AR 系列路由器作为FTP 客户端登录FTP 服务器(FTP 服务器开启所有\n权限)，可以执行以下哪些操作?",
+    "options": [
+      "下载文件",
+      "上传文件",
+      "建立目录",
+      "删除文件"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "FTP 客户端具有多种操作权限，包括上传和下载文件，删除文件，以及建立目录，\n只要FTP 服务器开启所有权限，这些都可以被操作。"
+  },
+  {
+    "id": 203,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域1 和区域2 都是普通区域，R4 引入外部路由\n10.0.4.4/32。在R1 和R3 的OSPF 进程中均配置了“asbr-sumary 10.0.4.0 255.255.255.0”\n命令，则以下哪些路由器的路由表中有10.0.4.4/32 的路由条\n目?",
+    "options": [
+      "R2",
+      "R5",
+      "R3",
+      "R1"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "R1,R3 上配置的是asbr-summary，其他区域都是普通区域不是nssa 区域。并且\nR1、R3 都不是ASBR，所以无法对10.0.4.4/32 进行汇总。所有设备上都有10.0.4.4/32\n的路由。",
+    "questionImage": "H12-831/images/q203.png"
+  },
+  {
+    "id": 204,
+    "type": "multiple",
+    "question": "如图所示的IS-IS 网络，R1 通过\"default-route-advertise always level-1\"命令引入了缺\n省路由，R2 通过\"default-route-advertise always level-2\"命令引入了缺省路由，以下哪些\n路由器的路由表中存在缺省路\n\n由?",
+    "options": [
+      "R3",
+      "R2",
+      "R4",
+      "R1"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q204.png"
+  },
+  {
+    "id": 205,
+    "type": "multiple",
+    "question": "管理员在交换机上部署流量抑制功能时，在设备的VLAN 视图下，可以对以下哪一类\n型的报文基于比特速率进行流量抑制？",
+    "options": [
+      "未知组播报文",
+      "广播报文",
+      "已知单播报文",
+      "未知单播报文"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 206,
+    "type": "multiple",
+    "question": "管理员通过命令display mpls lsp 查看设备的LSP，输出信息如图所示，以下关于该信\n息的描述，正确的有哪些\n项?",
+    "options": [
+      "对于访问1.1.1.1 的流量而言，该设备是最后一跳，即Egress 设备",
+      "从该设备GE0/0/1 口发出的访问3.3.3.3 的流量，将不携带标签",
+      "对于访问3.3.3.3 的流量而言，该设备是倒数第二跳Transit 设备",
+      "从该设备GE0/0/0 口发出的访问1.1.1.1 的流量，将携带标签1026"
+    ],
+    "answer": [
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q206.png"
+  },
+  {
+    "id": 207,
+    "type": "multiple",
+    "question": "LSR(Label Switching Router)通过LDP 发现机制发现LDP 对等体，从而建立LDP 会\n话。以下关于LDP 会话的描述，正确的有哪些项?",
+    "options": [
+      "LSR 通过发送组播或单播Hello 消息发现LDP 对等体",
+      "LSR 基于UDP 发送Hello 消息",
+      "传输地址较大的LSR 主动发起建立TCP 链接",
+      "LSR 基于LDP 发现机制可以建立本地LDP 会话或远端LDP 会话"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 208,
+    "type": "multiple",
+    "question": "如图所示的OSPFv3 网络，区域1 为Totally stub 区域，区域2 为普通区域，区域3\n为TotallyNSSA 区域。R6Loopback0 接口的IPv6 地址为2000::6/128。每一台设备的\nRouterID 为10.0.XX，其中X 为设备的编号。当所有链路正常时，缺省情况下，以下描述\n正确的有哪些\n\n项?",
+    "options": [
+      "R4 发送数据包到达2000::6 的路径可能为R4-R1-R5-R3-R6",
+      "R4 发送数据包到达2000::6 的路径可能为R4-R2-R6",
+      "R4 发送数据包到达2000::6 的路径可能为R4-R1-R3-R6",
+      "R4 发送数据包到达2000::6 的路径可能为R4-R1-R2-R6"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q208.png"
+  },
+  {
+    "id": 209,
+    "type": "multiple",
+    "question": "某一台网络设备已建立OSPF 邻居关系，其GE0/0/0 接口的配置如图所示，在该接口\n下执行以下哪些命令不影响该接口OSPF 邻居状\n\n态?",
+    "options": [
+      "undo description",
+      "undo ip address 10.0.12.2 24",
+      "undo ospf dr-priority",
+      "undo ospf cost"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "不能删除IP 地址，否则会影响邻居的建立，但是DR 优先级，接口描述，cost 等的\n删除都不会影响OSPF 邻居的建立的。",
+    "questionImage": "H12-831/images/q209.png"
+  },
+  {
+    "id": 210,
+    "type": "multiple",
+    "question": "如图所示的IS-IS 网络，R1 通过“default-route-advertise always level-1”命令引入了缺\n省路由，以下描述中正确的有哪些\n项?",
+    "options": [
+      "10.0.1.1 可以ping 通10.0.2.2",
+      "10.0.1.1 可以ping 通10.0.3.3",
+      "10.0.12.2 可以ping 通10.0.3.3",
+      "10.0.2.2 可以ping 通10.0.3.3"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "区域号相同时，L1-2 的ATT 位不会置1，所以L1 区域没有去往L2 区域的ISIS 路\n由。相似题总结：R2-R3 区域号不同时,R1 产生默认路由；R2-R3 区域号相同时，R1 不产\n生默认路由；R1 引入缺省路由（L1）时，R2 产生默认路由，下一跳指向R1。同时R3 不\n产生。",
+    "questionImage": "H12-831/images/q210.png"
+  },
+  {
+    "id": 211,
+    "type": "multiple",
+    "question": "如图所示的网络，R1、R2、R4、R5 运行IS-IS，区域号为49.0001。R3、R6 运行IS-\nIS，区域号为49.0002。在R2 和R5 上配置“import-route isis level-2 into level-1”。AS\n65000 内部，R1、R3、R4、R6 均与R2、R5 建立IBGP 邻居关系，其中R2、R5 是RR，\nR1、R4、R3、R6 是客户端。IBGP 邻居关系均使用Loopback0 接口建立。每台设备的\nLoopback0 接口的IP 地址为10.0.x.X/32，RouterID 为10.0.X.X，其中X 为设备的编号。\nR1 和R4 将外部网络192.168.1.0/24 通过import 方式引入BGP，R3 和R6 通过import\n方式将外部网络192.168.2.0/24 引入BGP。缺省情况下，以下描述正确的有哪些\n项?",
+    "options": [
+      "R1 路由表中有192.168.2.0/24 的路由条目",
+      "R4 路由表中192.168.2.0/24 的路由条目有两个不同的出接口",
+      "R1 路由表中有两条等价的缺省路由",
+      "R4 路由表中有两条等价的缺省路由"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q211.png"
+  },
+  {
+    "id": 212,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1、区域2、区域3 均为普\n通区域，R5 Loopback0 接口的IP 地址为10.0.5.5/32，且该接口通过network 的方式使\n能OSPF.在所有路由器上均配置了acl 2000，匹配规则如图所示。在R1、R2、R3 的区域\n0 中，均配置了\"filter 2000 import\"，则以下哪些路由器的路由表中不存在10.0.5.5/32 的\n路由条目？",
+    "options": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "因为是import，所以除了R1 其他的都不存在10.0.5.5/32 的路由条目。",
+    "questionImage": "H12-831/images/q212.png"
+  },
+  {
+    "id": 213,
+    "type": "multiple",
+    "question": "如图所示，R1~R4 是AS123 中的4 台路由器，它们都运行了OSPF，实现了AS 内部\n的路由互通，其中10.1.1.0/24 和10.4.4.0/24 两个网段路由被发布到OSPF 中。现在，R1\n与R4 基于Loopback0 接口建立了IBGP 对等体关系，并且分别将10.1.1.0/24 和\n10.4.4.0/24 网段发布到BGP 中。那么以下哪些方式可以实现PC1 与PC2 互\n访?",
+    "options": [
+      "在R2 和R3 上运行BGP，并在AS123 中建立IBGP 全互联",
+      "在R1~R4 上激活MPLS 及LDP，建立路由1.1.1.1/32 和4.4.4.4/32 的LSP",
+      "在R1 上部署策略路由，指定PC1 访问PC2 的流量下一跳为R2",
+      "在R1 和R4 上，分别将10.1.1.0/24 和10.4.4.0/24 路由引入OSPF"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "策略路由只会指向R1 下一跳，无法负责其他跳或者返回的路由",
+    "questionImage": "H12-831/images/q213.png"
+  },
+  {
+    "id": 214,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1 为stub 区域，区域2 为\nTotally NSSA 区域，区域3 为NSSA 区域，假如R5 引入了一条外部路由10.0.5.5/32，以\n下哪些路由器的路由表中不存在10.0.5.5/32 的路由条\n\n目?",
+    "options": [
+      "R6",
+      "R4",
+      "R2",
+      "R3"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "R4 和R6 均为特殊区域内部的路由器，特殊区域使用的是默认路由访问外部路由，\n路由表中不存在明细的10.0.5.5/32 的路由条目。",
+    "questionImage": "H12-831/images/q214.png"
+  },
+  {
+    "id": 215,
+    "type": "multiple",
+    "question": "某台BGP 路由器收到一条BGP 路由，其携带的AS_Path 属性为“100 200 300”。如果\n该路由器想要拒绝这条路由，可以使用以下哪些as-path-filter?",
+    "options": [
+      "ip as-path-filter 1 deny .*",
+      "ip as-path-filter 1 deny 200",
+      "ip as-path-filter 1 deny 00$",
+      "ip as-path-filter 1 deny 00.*30"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 216,
+    "type": "multiple",
+    "question": "网络中出现二层环路可能会有以下哪些现象?",
+    "options": [
+      "接口带宽利用率过高",
+      "CPU 占用率过高",
+      "设备无法登录或登录后运行缓慢",
+      "业务接口指示灯频繁闪烁"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "指示灯闪烁、CPU 占用率高、带宽增大、无法登陆都是二层环路导致的现象。"
+  },
+  {
+    "id": 217,
+    "type": "multiple",
+    "question": "以下哪些信息既能通过观察设备指示灯判断，又能通过命令行的方式查看?",
+    "options": [
+      "单板运行状态",
+      "设备运行的版本",
+      "链路连通性",
+      "存储空间的大小"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "接触过设备都会知道设备运行的版本和存储空间大小不会通过指示灯显示出来，指\n示灯只能看到链路是否正常，单板是否正常，设备运行是否正常。"
+  },
+  {
+    "id": 218,
+    "type": "multiple",
+    "question": "某一个割接项目的网络逻辑架构如图所示，割接目的是使位于不同地理位置的终端能\n够互访，终端的网关部署在PE 上。在割接完成后，网络工程师可以采用以下哪些方式，\n\n初步判定网络连通性是否正常？",
+    "options": [
+      "在PE1 和PE2 上查看ARP 表中是否有对方网段的ARP 条目",
+      "在PE1 和PE2 上部署NQA 检测，目的地址设为对方的IP 地址",
+      "在PE1 上使用192.168.1.1 作为源地址Ping192.168.2.1",
+      "在PE1 和PE2 上查看路由表中是否有到达对方网段的路由"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q218.png"
+  },
+  {
+    "id": 219,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域1 和区域2 都是普通区域，R5 的Loopback0 接口的IP\n地址为10.0.5.5/32，该接口使能OSPF。在R1 和R3 的区域2 中均配置了“abr-summary\n10.0.5.0 255.255.255.0”命令，则以下哪些路由器的路由表中有10.0.5.0/24 的路由条\n\n目?",
+    "options": [
+      "R2",
+      "R3",
+      "R4",
+      "R5"
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "explanation": "abr-summary 3 类LSA 汇总，如果在R1 上配置的话，那么R1 也会通告给R2 和R4",
+    "questionImage": "H12-831/images/q219.png"
+  },
+  {
+    "id": 220,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1 为NSSA 区域，区域2 和\n区域3 为普通区域，R5 的OSPF 进程中配置了“default-rout advertise always”命令，以下\n哪些路由器的路由表中有缺省路\n\n由?",
+    "options": [
+      "R6",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "default-route-advertise always：通告缺省路由，这样操作之后，普通区域的R1、\nR2、R3、R4 都有R5 传来的缺省路由，而R6 在特殊区域，本来就会产生缺省路由。",
+    "questionImage": "H12-831/images/q220.png"
+  },
+  {
+    "id": 221,
+    "type": "multiple",
+    "question": "设备作为SSH 客户端登录其他设备，使用公钥认证登录失败，可能的原因有以下哪些\n项？",
+    "options": [
+      "服务器上保存的用户公钥不正确",
+      "客户端未使能首次认证功能",
+      "客户端上保存的服务器私钥不正确",
+      "缺少本地密钥对"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "客户端不会保存服务器的私钥。私钥应该只留在服务器上，并保持秘密。客户端只\n需要知道服务器的公钥，以便在连接过程中验证服务器的身份。"
+  },
+  {
+    "id": 222,
+    "type": "multiple",
+    "question": "如图所示的IS-IS 网络，R1 通过“default-route-advertise always level-1”命令引入了缺\n省路由，以下哪些路由器的路由表中存在缺省路\n由?",
+    "options": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q222.png"
+  },
+  {
+    "id": 223,
+    "type": "multiple",
+    "question": "如图所示的OSPFv3 网络，R3Loopback0 接口的IPv6 地址为2000::3/128，且使能\nOSPFv3。以下描述中正确的有哪些\n项?",
+    "options": [
+      "R2 一定会生成Link-LSA",
+      "R1 一定会生成Network-LSA",
+      "R3 一定会生成Intra-Area-Prefix-LSA",
+      "R2 生成的Link-LSA 不会出现在R1 的LSDB 中"
+    ],
+    "answer": [
+      0,
+      2,
+      3
+    ],
+    "explanation": "类似题",
+    "questionImage": "H12-831/images/q223.png"
+  },
+  {
+    "id": 224,
+    "type": "multiple",
+    "question": "如图所示的IS-IS 网络，R1 通过“default-route-advertise always level-1”命令引入了缺\n省路由，以下描述中正确的是哪一\n\n项?",
+    "options": [
+      "R1 路由表中存在缺省路由",
+      "R3 路由表中不存在缺省路由",
+      "R1 虽然配置了default-route-advertise always level-1 命令，但无法引入缺省路由",
+      "R2 路由表中存在缺省路由"
+    ],
+    "answer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q224.png"
+  },
+  {
+    "id": 225,
+    "type": "multiple",
+    "question": "如图所示的OSPF 网络，区域号已在图中标出，其中区域1 为Stub 区域，区城2 为\nTotally Stub 区域，区域3 为NSSA 区域，以下哪些路由器不能引入外部路\n\n由?",
+    "options": [
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "Stub 只有区域内和区域间路由和默认路由，totally stub 只有区域内和默认路由，两\n者都不能引入外部路由。",
+    "questionImage": "H12-831/images/q225.png"
+  },
+  {
+    "id": 226,
+    "type": "multiple",
+    "question": "某一台路由器生成的Router-LSA 如图所示，根据此LSA 进行推断，以下描述正确的\n有哪些项？",
+    "options": [
+      "该路由器至少有一个接口属于NSSA 区域",
+      "该路由器是ASBR",
+      "该路由器至少有一个接口属于区域0",
+      "该路由器是ABR"
+    ],
+    "answer": [
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q226.png"
+  },
+  {
+    "id": 227,
+    "type": "multiple",
+    "question": "网络工程师在处理故障后撰写了故障处理报告，他把实际组网简化为如图所示的网络。\n在故障网络中，R1 和R2 均开启OSPF 协议，且分别作为PC1 和PC2 的网关，以下对于\n故障网络连通性的描述，正确的有哪些项？",
+    "options": [
+      "R2 可以Ping 通192.168.1.11",
+      "R1 可以Ping 通192.168.1.22",
+      "PC1 和PC2 无法Ping 通",
+      "R1 可以Ping 通192.168.1.21"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q227.png"
+  },
+  {
+    "id": 228,
+    "type": "multiple",
+    "question": "如图所示的OSPFv3 网络，区域1 为Stub 区域，区域2 为普通区域，区域3 为NSSA\n区域。R6 Lopback0 接口的IPv6 地址为2000::6/128。每一台设备的Router ID 为\n10.0.X.X，其中X 为设备的编号。以下描述正确的有哪些\n项?",
+    "options": [
+      "区域0 中存在R1 生成的描述2000::6/128 的Inter-Area-Prefix-LSA",
+      "区域3 中存在R1 生成的描述2000::6/128 的Inter-Area-Prefix-LSA",
+      "区域2 中存在R3 生成的描述2000::6/128 的Inter-Area-Prefix-LSA",
+      "区域1 中存在R2 生成的描述2000::6/128 的Inter-Area-Prefix-LSA"
+    ],
+    "answer": [
+      1,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q228.png"
+  },
+  {
+    "id": 229,
+    "type": "judge",
+    "question": "在创建IPv6 静态路由时，对于广播类型接口，需要指定下一跳，下一跳地址可以是\n链路本地地址。当下一跳地址为链路本地地址时，必须指定出接口。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "在创建IPv6 静态路由时，可以同时指定出接口和下一跳。对于不同的出接口类型，\n也可以只指定出接口或只指定下一跳。对于点到点接口，指定出接口。对于广播类型接口，\n需要指定下一跳。下一跳地址可以是链路本地地址。当下一跳地址为链路本地地址时，必\n须指定出接口。"
+  },
+  {
+    "id": 230,
+    "type": "judge",
+    "question": "display startup 命令可以用来查看设备本次及下次启动相关的系统软件、配置文件，\n并且能看到这些文件的保存路径。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 231,
+    "type": "judge",
+    "question": "如图所示的网络，R1 和R2 通过Loopback0 接口建立EBGP 邻居关系。R1 将\n2001::1/128 的路由引入BGP，之后又取消引入该路由。则在R1 取消路由引入后，R1 发\n送的Update 报文中，MP_UNREACH_NLRI 的Next Hop 字段的取值为2000::1。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "应该是MP_UNREACH_NLRI 的撤销路由字段",
+    "questionImage": "H12-831/images/q231.png"
+  },
+  {
+    "id": 232,
+    "type": "judge",
+    "question": "网络工程师通过Console 口登录某一台NetEngine AR6120 时，发现密码错误，无法\n登录，如果该设备仍然能够通过Telnet 账号登录，且用户账号具有修改Console 口密码的\n权限，此时他可以通过Telnet 登录设备修改Console 口密码.",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "如果该设备仍然可以通过Telnet 账号登录，说明该Telnet 账号具有访问设备的权限。\n因此，网络工程师可以通过Telnet 登录设备，并使用具有修改Console 口密码权限的用户\n账号来修改Console 口密码。"
+  },
+  {
+    "id": 233,
+    "type": "judge",
+    "question": "如图所示的网络，R1 和R2 互联接口规划的IP 地址已在图中标出，但R1 和R2 无法\nPing 通，因此网络工程师查看R1 和R2 接口的配置，根据配置信息判断，R2 接口掩码配\n置错误是导致该故障的原因。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "从配置上查看，10.0.12.2 和R1 接口地址是同一网段内地址，10.0.12.1 也是R2 接\n口地址的同一网段内地址，该配置虽然掩码不一样，但是并不会导致R1 和R2 无法Ping\n通，故障的原因是其他原因，并非掩码问题",
+    "questionImage": "H12-831/images/q233.png"
+  },
+  {
+    "id": 234,
+    "type": "judge",
+    "question": "如图所示，为了实现VPN 路由在Hub＆Spoke 组网中正确的传递，管理员在Hub-PE\n与Hub-CE 之间部署了IGP，在Spoke-PE 与Spoke-CE 之间部署了EBGP。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Hub-PE 与Hub-CE 之间部署IGP，在Spoke-PE 与Spoke-CE 之间也部署IGP，Hub-\nPE 和Spoke-PE 之间部署EBGP。",
+    "questionImage": "H12-831/images/q234.png"
+  },
+  {
+    "id": 235,
+    "type": "judge",
+    "question": "网络管理员可以用clocktimezone 命令设置设备的时区信息。如果两台网络设备的时\n区设置不一致，会导致这两台设备运行的动态路由协议无法正常建立邻居关系。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "网络管理员无法用clocktimezone 命令直接设置设备的时区信息。他们需要设置路由\n器或交换机的硬件时钟来改变时区信息。即使两台网络设备的时区设置不一致，也不一定\n会导致这两台设备运行的动态路由协议无法正常建立邻居关系。动态路由协议会自动调整\n自身以适应不同的时钟设置。"
+  },
+  {
+    "id": 236,
+    "type": "judge",
+    "question": "如图所示的OSPF 网络，链路的Cost 值已在图中标出，R1 开启OSPF IP FRR，则R1\n到达10.0.3.3/32 的主路径为R1-R2-R3，备份路径为R1-R4-R2-\n\nR3",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "参考如下资料。开销满足双保护条件，因此备份路径为R1-R4-R2-R3 可以正常启用",
+    "questionImage": "H12-831/images/q236.png"
+  },
+  {
+    "id": 237,
+    "type": "judge",
+    "question": "网络工程师在进行故障处理时，如果忘记Console 口密码，华为NetEngineAR 系列路\n由器支持在BootROM 下配置跳过console 口密码启动。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 238,
+    "type": "judge",
+    "question": "如图所示的OSPFV3 网络，R1、R2、R3 互联的端口开启OSPFv3，并且均配置了\nIPv6 全球单播地址，其中R1 和R3 是DR，则R1 和R3 均会产生IntraArea-Prefix-LSA。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Intra-Area-Prefix-LSA：每个设备及DR 都会产生一个或多个此类LSA，在所属的区\n域内传播。",
+    "questionImage": "H12-831/images/q238.png"
+  },
+  {
+    "id": 239,
+    "type": "judge",
+    "question": "如图所示的网络，R1 和R2 已通过Loopback0 接口建立EBGP 邻居关系，R1 将\n2001::1/128 的路由引入BGP，则R1 发送的update 报文中，在MP_REACH_NLRI 的Next\n\nHop 字段的取值为2000::1。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "R1 将2001::1/128 的路由引入BGP 后，它会在Update 报文中使用\nMP_REACH_NLRI 来通知其他BGP 邻居该路由可达，并将Next Hop 字段设置为引入该路\n由的下一跳地址。",
+    "questionImage": "H12-831/images/q239.png"
+  },
+  {
+    "id": 240,
+    "type": "judge",
+    "question": "在网络相对稳定、对路由收敛时间要求较高的组网环境中，可以指定OSPF LSA 的更\n新时间间隔为0 来取消LSA 的更新时间间隔，使得拓扑或者路由的变化可以立即通过LSA\n发布到网络中，从而加快网络中路由的收敛速度。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 241,
+    "type": "judge",
+    "question": "如图所示的组网，R1 和R2 通过直连接口无法建立EBGP 邻居关系，网络工程师首先\n查看了R1 和R2 BGP 相关的配置，据此判断，R1 和R2 无法建立EBGP 邻居关系的原因\n是Keepalive 和Hold 参数不匹配。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Keepalive 和Holdtime 双方不一致不会影响邻居关系的建立，会进入协商，将采用\n双方中较小的保活时间来使用，所以无法建立和这个原因没关系。",
+    "questionImage": "H12-831/images/q241.png"
+  },
+  {
+    "id": 242,
+    "type": "judge",
+    "question": "如图所示的IS-IS IPv6 网络，在R1 上查看LSDB，从输出信息可以推断R1 是DIS。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "0000.0000.0001.01.00 表示这个设备是DIS。",
+    "questionImage": "H12-831/images/q242.png"
+  },
+  {
+    "id": 243,
+    "type": "judge",
+    "question": "MPLS 支持承载多种网络协议业务，包括单播IPv4 业务、组播IPv4 业务、单播IPv6\n业务、组播IPv6 业务等。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "MPLS（多协议标签交换）是一种用于数据包交换的网络技术，它支持承载多种网络\n协议业务，包括单播IPv4 业务、组播IPv4 业务、单播IPv6 业务、组播IPv6 业务等。"
+  },
+  {
+    "id": 244,
+    "type": "judge",
+    "question": "路由反射器和它的客户机组成一个集群(Cluster)，使用AS 内唯一的ClusterID 作为标\n识。当一条路由第一次被RR 反射的时候，如果没有Cluster List 属性，RR 会把本地\nCluster ID 添加到Cluster List 的前面。如果一条路由中已经存在了Cluster_List 属性，则\n照不再修改Cluster List 属性。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 245,
+    "type": "judge",
+    "question": "管理员静态配置LSP 的Ingress 节点时，推荐采用指定下一跳的方式建立静态LSP，\n确保本地路由表中存在与指定目的IP 地址精确匹配的路由项。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 246,
+    "type": "judge",
+    "question": "如图所示的IS-IS IPv6 网络，当网络稳定后，R1 可以Ping 通2000:12::0，并且通过\n“display ipv6 neighbors”可以查看200:12::0 对应的MAC 地址。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "测试过，R1 可以Ping 通2000:12::0，可以查看2000:12::0 对应的MAC 地址",
+    "questionImage": "H12-831/images/q246.png"
+  },
+  {
+    "id": 247,
+    "type": "judge",
+    "question": "在BGP/MPLS IP VPN 网络中，PE 和P 设备间通过运行MP-BGP 来交换公网标签，从\n而实现P 设备基于标签进行数据转发。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "是PE-PE 之间通过运行MP-BGP(多协议边界网关协议)来交换公网标签的，而不是\nPE-P。PE 和P 设备间通常通过运行BGP 来交换路由信息，而非公网标签。"
+  },
+  {
+    "id": 248,
+    "type": "judge",
+    "question": "网络维护可以分为两类:日常维护和故障排除。如果维护人员技术水平高，他就可以根\n据经验维护网络，无需遵循操作规范。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "网络维护不仅仅是技术问题，而且也是管理问题。日常维护对操作人员的技术要求\n不高，但对操作的规范性要求比较高。"
+  },
+  {
+    "id": 249,
+    "type": "judge",
+    "question": "MP_REACH_NLRI 的地址族信息域由2 字节的地址族标识AF1 和1 字节的子地址族标\n识SAFI 组成。当BGP-IPv4 单播地址族下传递公网IPv4 路由时，SAFI 是1，当BGP-IPv6\n单播地址族下传递公网IPv6 路由时，SAFI 也是1。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 250,
+    "type": "judge",
+    "question": "高级ACL 根据源IP 地址、目的IP 地址、IP 协议类型、TCP 源/目的端口、UDP 源/\n目的端口号等信息来定义规则，使用路由策略调用高级ACL 可以实现BGP 路由控制。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "高级ACL 通常是在网络设备(如路由器、交换机)上配置的，用于控制数据包的转发\n或丢弃，并不能直接实现BGP(Border GatewayProtocol)路由控制。"
+  },
+  {
+    "id": 251,
+    "type": "judge",
+    "question": "两台设备间已建立好LDP 会话，此时管理员修改了一台设备的传输地址，它会导致\nLDP 会话中断，从而造成业务中断",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "LDP 会话是基于传输地址进行通信的，当传输地址被修改后，两台设备间的LDP 会\n话将会中断，导致业务中断。"
+  },
+  {
+    "id": 252,
+    "type": "judge",
+    "question": "如图所示的OSPFv3 网络，R1、R2、R3 互联的端口开启OSPFv3，每一台设备的\nRouterID 为10.0.X.X,其中X 为设备的编号。在R3 上查看某一条LSA 的详细信息，从输出\n信息中可以推断出该LSA 是由R2 生成，并且它描述的是与Network-LSA 相关联的IPv6\n前缀地址",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q252.png"
+  },
+  {
+    "id": 253,
+    "type": "judge",
+    "question": "在配置VLAN 聚合时，将Sub-VLAN 加入Super-VLAN 之前，必须删除该Sub-VLAN\n对应的VLANIF 接口。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "在配置VLAN 聚合时，将Sub-VLAN 加入Super-VLAN 之前，必须删除该Sub-VLAN\n对应的VLANIF 接口。这是因为在将一个VLAN 加入另一个VLAN 聚合时，必须确保两者\n在物理层上是分离的。"
+  },
+  {
+    "id": 254,
+    "type": "judge",
+    "question": "当网络设备的硬件发生故障时，通常可以采用替换法，例如更换光模块、更换单板、\n更换电源模块等，在执行以上操作时，需要佩戴防静电腕带。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "人的身体和衣服有可能带有静电。这些静电可能会通过直接接触或靠近等方法被传\n递到电子设备上，从而损坏敏感的电子元件。防静电腕带可以将人体上的静电安全地导入\n地面，避免对设备的损坏。"
+  },
+  {
+    "id": 255,
+    "type": "judge",
+    "question": "华为NetEngine AR6120 和AR6121 均有两个业务接口卡槽位，且这两个槽位可以合\n并为1 个槽位。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 256,
+    "type": "judge",
+    "question": "如图所示的OSPFv3 网络，区域1 为普通区域。R2 会生成Inter-Area-Prefix-LSA，用\n于描述区域内某个网段的路由，区域0 和区域1 中都存在这种类型的LSA。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q256.png"
+  },
+  {
+    "id": 257,
+    "type": "judge",
+    "question": "一般大型的、重要的割接项目，都要求在实验室内搭建环境进行提前验证，这种方式\n被称为实验局测试。实验局测试成功代表割接方案可行，无需再约客户进行评审。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 258,
+    "type": "judge",
+    "question": "为了保证BGP 协议免受攻击，可以在BGP 邻居之间使用MD5 认证来降低被攻击的可\n能性。MD5 算法配置简单，配置后生成单一密码，需要人为干预才可以更换密码。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 259,
+    "type": "judge",
+    "question": "如图所示的网络，R1 和R2 通过SW1 相连，如果SW1 未启用STP，则R1 和R2 无\n法互相Ping 通。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "STP 是生成树协议，用来破解环路功能的，本拓扑没有存在环路，无需启用STP。",
+    "questionImage": "H12-831/images/q259.png"
+  },
+  {
+    "id": 260,
+    "type": "judge",
+    "question": "OSPF 与BFD 联动就是将BFD 和OSPF 协议关联起来，加快OSPF 协议对于网络拓扑\n变化的响应。BFD 状态变为UP 后，OSPF 邻居状态才能达到Full 状态。BFD 状态变为\nDown 后，OSPF 邻居状态才能变为Down 状态。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "导致OSPF 邻居状态变为Down 状态的原因很多，不一定就是BFD down 的原因。"
+  },
+  {
+    "id": 261,
+    "type": "judge",
+    "question": "BGP 基于前缀的ORF（Outbound Route Filtering）能力，能将本端设备配置的基于前\n缀的入口策略通过路由刷新报文发送给BGP 邻居,BGP 邻居根据这些策略构造出口策略，\n在路由发送时对路由进行过滤。相比于在BGP 邻居上配置路由策略，这种方式不仅避免\n了本端设备接收大量无用的路由，降低了本端设备的CPU 使用率，还有效减少了本端设\n备的配置工作。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "ORF 的好处在于可以减少不必要的路由信息交换，从而降低网络带宽消耗和CPU 的\n使用率。"
+  },
+  {
+    "id": 262,
+    "type": "judge",
+    "question": "如图所示的OSPFv3 网络，R1、R2、R3 互联的端口开启OSPFv3，并且均配置了\nIPv6 全球单播地址，则R1、R2、R3 都会产生Intra-Area-Prefix LSA。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Intra-Area-Prefix-LSA 每个设备及DR 都会产生一个或多个此类LSA，在所属的区域\n内传播。",
+    "questionImage": "H12-831/images/q262.png"
+  },
+  {
+    "id": 263,
+    "type": "judge",
+    "question": "OSPF 邻居之间周期性发送Hello 报文建立和维护邻接关系，并且Hello 定时器的时间\n间隔要保持一致，否则不能建立邻接关系。为了加速OSPF 收敛，网络工程师可以将\nHello 报文的时间间隔设置为1ms。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 264,
+    "type": "judge",
+    "question": "如图所示的OSPFv3 网络，R1 和R2 的接口均有两个IPv6 地址，虽然R1 和R2 IPv6\n地址前缀长度不同，它们仍然能够建立OSPFv3 邻居关系。假如R2 是DR，那么在R2 产\n生的Intra-Area-Prefix-LSA 中会包含四个前缀。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "实验测试过，R2 产生的Intra-Area-Prefix-LSA 中会包含四个前缀",
+    "questionImage": "H12-831/images/q264.png"
+  },
+  {
+    "id": 265,
+    "type": "judge",
+    "question": "当交换机配置了端口隔离功能后，缺省情况下，属于同一VLAN 的不同主机无法进行\n二层和三层通信。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 266,
+    "type": "judge",
+    "question": "BGP 协议支持使用\"filter-policy acl-nunber import\"命令对接收的路由信息进行过滤，\nacl-number 的取值范围是2000-3999。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "acl-number 的取值范围是2000-2999"
+  },
+  {
+    "id": 267,
+    "type": "judge",
+    "question": "当IP 报文进入MPLS 域中，入节点会检查源IP 地址对应的Tunnel ID，当Tunnel ID\n不为0x0 时，入节点会对该报文执行MPLS 转发",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "官方介绍，检查目的IP 地址，不是源地址"
+  },
+  {
+    "id": 268,
+    "type": "judge",
+    "question": "在如图所示的Hub＆Spoke 组网中，Hub-PE 可以通过手工配置允许本地AS 编号重复\n实现路由的正确传递。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q268.png"
+  },
+  {
+    "id": 269,
+    "type": "judge",
+    "question": "MAC 地址表中的表项分为动态表项、静态表项和黑洞表项。同时交换机的MAC 地址\n表中还存在一种业务类型的MAC 地址表项，这类表项一般是通过动态表项转换来的。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 270,
+    "type": "judge",
+    "question": "如图所示的IS-IS 网络，R1 通过\"default-route-advertise always level-1\"命令引入了缺\n省路由，则R3 能通过IS-IS 学习到该缺省路由",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q270.png"
+  },
+  {
+    "id": 271,
+    "type": "judge",
+    "question": "Trap 信息是系统检测到故障而产生的通知，主要记录故障等系统状态信息。如果网络\n管理员想要通过命令行查看Trap 信息，需要首先使能SNMP 代理功能。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Trap 信息是SNMP 的一部分，用来通知网络管理系统发生了重要事件，比如设备故\n障、连接中断等。为了查看这些Trap 信息，网络管理员确实需要启用SNMP 代理功能。"
+  },
+  {
+    "id": 272,
+    "type": "judge",
+    "question": "OSPF 支持等价负载分担，当组网中存在的等价路由数量大于maximum load-\nbalancing 命令配置的等价路由数量时，如果接口的优先级和接口索引都相同，则负载分\n担选取下一跳IP 地址小的路由。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 273,
+    "type": "judge",
+    "question": "如图所示的网络，R1 和R2 配置了单跳BFD 检测，网络工程师发现BFD 会话Down\n因此查询了R1 和R2 BFD 相关的配置，配置信息已在图中标出。此外，网络工程师在R1\n上执行了Ping10.0.12.2 的操作，输出信息如图所示。据此判断，BFD 会话Down 的可能\n\n原因是UDP 端口为4784 的报文被拒绝通过。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "数据通信是正常的，bfd 的配置也正常，可能是策略拒绝了用于BFD 协议的UDP 端\n口4784 的通信。",
+    "questionImage": "H12-831/images/q273.png"
+  },
+  {
+    "id": 274,
+    "type": "judge",
+    "question": "某企业网络如图所示，若CE2 双归属PE2 和PE3，有可能产生Type 5 LSA 路由环路，\n可以通过在PE2 和PE3 设备上设置route-tag 命令来进行防环，当PE3 收到的路由的\nRoute Tag 与本地配置的一样，则会忽略该路由。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "RouteTag 实际上就是一个可以附加在LSA 上的标签，它提供了一个额外的检查，以\n确定是否应该接受或忽略某个路由。",
+    "questionImage": "H12-831/images/q274.png"
+  },
+  {
+    "id": 275,
+    "type": "judge",
+    "question": "在MPLS 网络中，用LSR ID 来唯一标识一个LSR（Label Switching Router），LSR ID\n缺省为设备某个物理接口IP 地址，可以手工配置为Loopback 接口地址。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "缺省情况下没有LSR ID，必须手工配置为设备上存在的IP 地址。"
+  },
+  {
+    "id": 276,
+    "type": "judge",
+    "question": "IPSG 是一种基于三层接口的源IP 地址过滤技术，它能够防止恶意主机伪造合法主机\n的IP 地址来仿冒合法主机访问合法网络资源的行为。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 277,
+    "type": "judge",
+    "question": "dir 命令与ls 命令用来显示FTP 服务器上所有文件或指定文件的信息，同时可以将指\n定文件的信息保存至本地设备。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 278,
+    "type": "judge",
+    "question": "MPLS 根据数据的转发方向确定上、下游关系，MPLS 标签报文从上游LSR 发出，被\n下游LSR 接收并处理;同理，MPLS 标签的发布也是从上游向下游逐个分配。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 279,
+    "type": "judge",
+    "question": "当到达同一目的地址存在多条等价路由时，可以通过BGP 等价负载分担实现均衡流量\n的目的。但是公网中到达同一目的地的IBGP 路由和EBG 由不能形成负载分担。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "配置maximum load-balancing ebgp 命令后，仅EBGP 路由形成负载分担；配置\nmaximum load-balancing ibgp 命令后，仅IBGP 路由形成负载分担。"
+  },
+  {
+    "id": 280,
+    "type": "judge",
+    "question": "在执行割接项目时，网络工程师可集中在客户的网络维护中心进行远程操作，并且指\n导现场施工人员完成硬件相关的操作，例如设备上电、设备连线等。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "在执行割接项目时，网络工程师确实可以在客户的网络维护中心进行远程操作。在\n大型网络环境中，许多任务都可以通过远程管理软件或系统进行。例如，配置更改、软件\n更新和故障排除等操作都可以远程完成。同时，如果需要进行更具物理性质的操作，例如\n设备上电、设备连接线路等，网络工程师可以通过电话或视频会议等方式指导现场施工人\n员进行。"
+  },
+  {
+    "id": 281,
+    "type": "judge",
+    "question": "网络工程师可以通过现场观察NetEngine AR6120 的接口指示灯判断链路连接是否正\n常，但无法判断接口是否配置了IP 地址",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "指示灯可以判断链路的物理层状态，无法判断接口是否配置了IP 地址，这是一个逻\n辑配置，无法通过硬件设备的指示灯来判断。"
+  },
+  {
+    "id": 282,
+    "type": "judge",
+    "question": "虽然广播网中IS-IS 同一网段上的同一级别的路由器之间都会形成邻接关系，即包括\n所有的非DIS 路由器之间也会形成邻接关系。但在IS-IS 与BFD 联动的实现上，只在DIS\n和非DIS 之间建立BFD 会话，非DIS 之间不启动BFD 会话。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "官方文档原话"
+  },
+  {
+    "id": 283,
+    "type": "judge",
+    "question": "设备运行环境是指设备运行的机房、供电、散热等外部环境，这是设备运行的基础条\n件。对于设备运行环境的维护，工作人员只能亲临现场才能完成。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "注意，此处说的是设备运行环境的维护，并不是设备的维护，根据官方文档介绍，\n应该选正确的"
+  },
+  {
+    "id": 284,
+    "type": "judge",
+    "question": "如图所示的IS-IS 网络，链路的Cost 值已在图中标出，R1 开启IS-IS Auto FRR，则R1\n到达10.0.3.3/32 的主路径为R1-R2-R3，备份路径为R1-R4-R2-R3。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "IS-IS LFA Auto FRR 会进行流量保护，只有满足cost(R4-R2)&lt;cost(R1-\nR4)+cost(R1+R2)，R1-R4 才能作为备份路径，题目中50&gt;10+10，所以没有达到作为\n备份路径的条件，因此题目描述错误。参考如下官方介绍：",
+    "questionImage": "H12-831/images/q284.png"
+  },
+  {
+    "id": 285,
+    "type": "judge",
+    "question": "AS-path 属性是BGP 协议的私有属性，“if-match as-path-filter“命令仅对BGP 路由有\n效。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 286,
+    "type": "judge",
+    "question": "当Is-IS 网络中有多条冗余链路时，可能会出现多条等价路由，针对等价路由中的某\n一条路由，网络管理员可以通过\"nexthop x.x.x.x weight value”命令调整其优先级，value\n值越小，表示优先级越高。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 287,
+    "type": "judge",
+    "question": "当交换机某端口上配置了基本QinQ 功能后，只有从该端口收到带有VLAN Tag 的报\n文，才会为该报文打上本端口缺省VLAN 的Tag，从而达到扩展VLAN 空间的目的。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "端口上配置了基本QinQ 功能后，不论从该端口收到报文是否带有VLAN Tag，设备\n都会为该报文打上本端口缺省VLAN 的Tag。"
+  },
+  {
+    "id": 288,
+    "type": "judge",
+    "question": "当增加了新特性或者需要对原有性能进行优化，以及解决当前运行版本的问题时，需\n要对设备进行升级。此时需要加载高版本的系统软件,并重新启动设备来实现。华为\nNetEngine AR 系列的设备使用相同的软件包，例如AR6120、AR6280、AR6000V。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "华为NetEngine AR 系列的软件包和设备型号有关系。"
+  },
+  {
+    "id": 289,
+    "type": "judge",
+    "question": "OSPFv3 报文封装在IPv6 报文内，可以采用单播、组播和广播的形式发送。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "不包含广播"
+  },
+  {
+    "id": 290,
+    "type": "judge",
+    "question": "某台IS-IS 路由器自己生成的LSP 信息如图所示，从LSP 信息中可以推断该路由器非\n本链路的DIS。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "0000.0000.0004.00 中的最后00 代表非DIS。",
+    "questionImage": "H12-831/images/q290.png"
+  },
+  {
+    "id": 291,
+    "type": "judge",
+    "question": "IS-IS LSP 分片由LSP ID 中的LSP Number 字段进行标识，这个字段的长度是4 bit. 因\n此，一个IS-IS 进程最多可产生256 个LSP 分片，携带的信息量有限。通过增加附加系统\nID，可以让IS-IS 进程产生更多LSP 分片.",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 292,
+    "type": "judge",
+    "question": "MPLS 标签是一个20 bit 长的本地标识符，当管理员配置静态LSP 时，可以手动指定\n入标签和出标签，取值范围为0~1048575。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 293,
+    "type": "judge",
+    "question": "OSPF 支持等价负载分担，当组网中存在的等价路由数量大于maximum load-\nbalancing 命令配置的等价路由数量时，如果路由的优先级相同则负载分担选取接口索引\n大的路由。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 294,
+    "type": "judge",
+    "question": "MPLS 标签是一个20 bit 长的标识符，当管理员配置静态LSP 时，不同MPLS 设备的\n标签值不能相互重叠",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "不同设备上的标签值可以重叠。"
+  },
+  {
+    "id": 295,
+    "type": "judge",
+    "question": "某企业网络工程师想通过部署VLAN 聚合和MUX VLAN 实现节约IP 地址，并隔离二\n层互访，那么同时为了节省VLAN 资源，该工程师可以将super VLAN 和MUXAN 设置为\n同一VANID",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "将Super-VLAN 和MUX VLAN 设置为同一VLAN ID 会导致VLAN ID 冲突，影响网络\n的正常运行。正确的做法是为每个VLAN 分配唯一的VLAN ID。"
+  },
+  {
+    "id": 296,
+    "type": "judge",
+    "question": "根据本地维护的LSDB，运行OSPF 协议的设备通过SPF 算法计算出以自己为根的最\n短路径树，并根据这一最短路径树决定到目的网络的下一跳。如果网络频繁变化，可以将\nSPF 计算的最长间隔设置为0，从而提升路由收敛速度",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "SPF 计算的最长间隔是为了避免在网络状态频繁变化时导致计算过于频繁从而消耗\n过多计算资源。将它设置为0 意味着任何微小改动都会引发立即的SPF 计算，这反而可能\n导致路由器的CPU 负载过重，严重影响设备性能和网络稳定性。"
+  },
+  {
+    "id": 297,
+    "type": "judge",
+    "question": "在MPLS 网络中，当一台LSR(Label SwitchingRouter)接收到对端发送过来的Hello 消\n息后，会建立LDP 邻接体关系，其中Hello 消息会采用组播或单播的形式发送。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "当一台LSR 接收到对端发送的Hello 消息后，会建立LDP 邻接关系，并且Hello 消\n息的确可以采取组播或单播两种形式发送。"
+  },
+  {
+    "id": 298,
+    "type": "judge",
+    "question": "随着企业网络规模的不断扩大，某一个企业计划将分散部署的服务器集中移动到同一\n个机房统一管理，在搬迁的某一个阶段，工作内容为硬件搬迁。在此阶段，网络工程师不\n需要执行设备调测，因此网络工程师无需制定割接方案。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "机房搬迁虽然不需要执行设备调测，制定迁接方案仍然是必要的。迁接方案不仅仅\n关注设备的调试，而且包括设备的拆卸、包装、搬运、安装，以及确保设备在搬迁过程和\n搬迁后到达新位置后可以正常工作。"
+  },
+  {
+    "id": 299,
+    "type": "judge",
+    "question": "在BGP/MPLS IP VPN 网络中，CE 和PE 设备之间只能通过IGP 或BGP 协议进行路由\n打通。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "还有包括静态路由，静态路由不属于IGP 或BGP"
+  },
+  {
+    "id": 300,
+    "type": "judge",
+    "question": "如图所示的IS-IS IPv6 网络，R1 和R2 的接口均有两个IPv6 地址，由于R1 和R2\nIPv6 地址前缀长度不同，它们无法建立邻居关系。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q300.png"
+  },
+  {
+    "id": 301,
+    "type": "judge",
+    "question": "使能了DHCP Snooping 的设备根据DHCP 客户端发送的DHCP 请求报文信息会生成\nDHCP Snooping 绑定表，从而实现后续报文的匹配检查，防范非法用户的攻击。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "使能了DHCP Snooping 的设备将用户的DHCP 请求报文通过信任接口发送给合法的\nDHCP 服务器。设备根据DHCP 服务器回应的DHCP ACK 报文信息生成DHCP Snooping 绑\n定表。后续设备再从使能了DHCP Snooping 的接口接收用户发来的DHCP 报文时，会进\n行匹配检查，能够有效防范非法用户的攻击。"
+  },
+  {
+    "id": 302,
+    "type": "judge",
+    "question": "为防止攻击者伪造BGP 报文对设备进行攻击，可以通过配置GTS 功能检测IP 报文头\n中的TTL 值的范围来对设备进行保护。如果某台设备配置了“peer x.x.x.x valid-ttl-hops\n100”，则被检测的报文的TTL 值有效范围为[155，255].",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 303,
+    "type": "judge",
+    "question": "在路由器上使用\"display version|begin uptime\"命令，则输出信息的首个单词为\n\"uptime\"",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "使用display version | begin uptime 命令后的输出会从包含\"uptime\" 的行开始显示\n比如回显如下：HUAWEI AR2200 uptime is 2 weeks, 3 days, 6 hours, 30 minutes 从\n上面的输出可以看到，首个单词是\"HUAWEI\"（设备名称），而不是\"uptime\"。"
+  },
+  {
+    "id": 304,
+    "type": "judge",
+    "question": "IP 报文在MPLS 网络中经过的路径称为标签交换路径LSP,LSP 是一个双向路径，指明\n了数据流的传递方向。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 305,
+    "type": "judge",
+    "question": "MpLs 支持多层标签嵌套，当设备收到MPLS 报文后，会先处理靠近二层首部的标签，\n即栈顶MPLS 标签。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 306,
+    "type": "judge",
+    "question": "在BGP/MPLS IP VPN 网络中，为了保留引入的OSPF 路由信息，BGP 在\nMP_REACH_NLRI 属性中携带Domain ID 来标识和区分不同的OSPF 域",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 307,
+    "type": "judge",
+    "question": "如图所示的网络，R2 GE0/0/0 接口开启DHCP Server 功能，地址池为全局地址池。\nR1 GE0/0/0 和GE0/0/1 接口作为DHCP 客户端，缺省情况下，只有一个接口能获取IP\n\n地址。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "R2 的地址为10.1.1.1，地址池也是10.1.1.0/24，所以只有一个接口能获取到\n10.1.1.0/24 网段的地址，因为路由器的不同接口属于不同的广播域。不能再同一个网段。",
+    "questionImage": "H12-831/images/q307.png"
+  },
+  {
+    "id": 308,
+    "type": "judge",
+    "question": "为了保证BGP 协议免受攻击，可以在BGP 邻居之间使用Keychain 认证来降低被攻击\n的可能性。其中keychain 具有一组密码，可以根据配置自动切换，适用于对安全性能要\n求比较高的网络。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 309,
+    "type": "judge",
+    "question": "如图所示的OSPFv3 网络，R1、R2、R3 互联的端口开启OSPFv3，每一台设备的\nRouter ID 为10.0.x.x，其中x 为设备的编号。在R3 上查看某一条LSA 的详细信息，从输\n\n出信息中可以推断出R1 和R2 是网络中的DR。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Router LSA 中Link connected to：a Transit Network 表示链接到传输网络，则此时\nNeighbor Router ID 表示的是DR 的Router ID，故R1(10.0.1.1)和R2(10.0.2.2)都是DR 。",
+    "questionImage": "H12-831/images/q309.png"
+  },
+  {
+    "id": 310,
+    "type": "judge",
+    "question": "某台IS-IS 路由器自己生成的LSP 信息如图所示，从LSP 信息中可以推断该路由器配\n置了5 个IPv6 地址",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "是收到了5 个IPV6 的地址，并不是路由器本地配置的",
+    "questionImage": "H12-831/images/q310.png"
+  },
+  {
+    "id": 311,
+    "type": "judge",
+    "question": "在大型BGP 网路中，对等体的数目众多，配置和维护极为不便。对于存在相同配置的\nBGP 对等体，可以将它们加入一个BGP 对等体组进行批量配置，简化管理的难度，并提\n高路由发布效率。配置IBGP 对等体组时，不需要指定对等体组的AS 号，配置EBGP 对等\n体组时，必须指定对等体组的AS 号。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 312,
+    "type": "judge",
+    "question": "如图所示的组网，R1 和R2 通过直连接口无法建立EBGP 邻居关系，网络工程师首先\n查看了R1 和R2 BGP 相关的配置，据此判断，R1 和R2 无法建立EBGP 邻居关系的原因\n是RouterID 和接口IP 地址不一致。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "RouterID 只是一个标识，只要不冲突就可以，不需要和接口IP 地址一致",
+    "questionImage": "H12-831/images/q312.png"
+  },
+  {
+    "id": 313,
+    "type": "judge",
+    "question": "两台LSR（Label Switching Router）之间交换Hello 消息触发LDP 会话的建立，Hello\n消息中会携带传输地址，其中传输地址较小的设备将作为主动方，发起建立TCP 连接。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 314,
+    "type": "judge",
+    "question": "I-SPF 和PRC 可以提高IS-IS 路由的收敛速度。它们都是只对发生变化的路由进行重新\n计算。不同的是，PRC 不需要计算节点路径，而是根据ISPF 算出来的SPT 来更新路由。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 315,
+    "type": "judge",
+    "question": "Type7 LSA 是为了支持NSSA 区域而新增的一种LSA 类型，用于描述引入的外部路由\n信息。它由NSSA 区域的自治域边界路由器(ASBR)产生，它扩散范围和Type5 LSA 类似，\n除了普通区域和Stub 区域外，TyPe7LSA 将扩散至OSPF 网络中的所有NSSA 区域",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Type 7 LSA 只在它们自己的NSSA 区域进行扩散，Type 7 LSA 不会直接扩散进其他\nNSSA 区域，而是会由ABR 转换成Type 5 LSA 在扩散到其他区域(包括其他NSSA 区域)。"
+  },
+  {
+    "id": 316,
+    "type": "judge",
+    "question": "大中型企业网络可分为接入层、汇聚层、核心层，网络工程师在对任一层次执行的影\n响现网业务的操作都需要制定割接方案。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "为了避免或尽可能减少对业务的影响，网络工程师在对任一层次执行的影响现网业\n务的操作都需要制定割接方案，提前制定出的详细操作步骤和应急处理措施。"
+  },
+  {
+    "id": 317,
+    "type": "judge",
+    "question": "缺省情况下，P2P、Broadcast 类型的接口发送OSPF Hello 报文的时间间隔的值为10\n秒，邻居失效时间是40 秒。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 318,
+    "type": "judge",
+    "question": "如图所示，为保证交换机Core 和ACC_1 间正常进行MACsec 会话协商，要求交换机\nAGG_1 支持二层协议透传功能。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "ACC 与core 非直连，需要在AGG 上开启透传功能。",
+    "questionImage": "H12-831/images/q318.png"
+  },
+  {
+    "id": 319,
+    "type": "judge",
+    "question": "在创建IPv6 静态路由时，对于点到点接口，必须指定出接口。对于广播类型接口，\n必须指定下一跳。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 320,
+    "type": "judge",
+    "question": "当网络中短时间内出现大量MAC 地址漂移现象，一般是因为网络中存在环路，可以\n通过STP 生成树协议消除二层环路。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 321,
+    "type": "judge",
+    "question": "为了将NSSA 区域引入的外部路由发布到其它区域，需要把Type7 LSA 转化为Type5\nLSA 以便在整个OSPF 网络中通告。缺省情况下，执行LSA 转换的路由器是NSSA 区域中\nRouter ID 最大的区域边界路由器(ABR)",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "当NSSA 区域中有多个ABR 时，系统会根据规则自动选择一个ABR 作为转换器（通\n常情况下NSSA 区域选择Router ID 最大的设备），将Type7 LSA 转换为Type5 LSA。"
+  },
+  {
+    "id": 322,
+    "type": "judge",
+    "question": "在CE 多归属场景，若P 使能了BGP 的AS 号替换功能，还可以配置SOO 特性来避免\n环路，即在PE 与CE 的EBGP 对等体通过命令peerso 使能该特性。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "在BGP/MPLS IP VPN 中，SOO 属性用于防止路由反向传播回原VPN 而引发的环\n路。"
+  },
+  {
+    "id": 323,
+    "type": "judge",
+    "question": "当管理员采用命令static-lsp egress 配置MPLS 域内设备的静态LSP 时，需要同时指\n定入标签值和出标签值。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 324,
+    "type": "judge",
+    "question": "使用“display ospfv3 peer verbose”查看OSPFv3 邻居信息，在输出信息中可以看到对\n端的Router ID，对端接口的全局单播地址，邻居的状态等内容。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "可以看到对端的Router ID，对端接口的链路本地地址，邻居的状态等内容。但是无\n法看到对端接口的全局单播地址。"
+  },
+  {
+    "id": 325,
+    "type": "judge",
+    "question": "如图所示的网络，R2 GE0/0/0 接口开启DHCP Server 功能，地址池为全局地址池。\nR1GE0/0/0 和GE0/0/1 接口作为DHCP 客户端，缺省情况下,R1 任何一个接口都不能获\n取IP 地址。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "和另一个判断题类似，两题答案没有冲突，注意看R2 接口IP 地址不一样R1 和R2\n是在同一个二层广播网络，R2 地址池里面的地址网段和R2 接口GE0/0/0 的IP 地址只有\n在同一个网段才能正常下发IP 地址到DHCP 客户端",
+    "questionImage": "H12-831/images/q325.png"
+  },
+  {
+    "id": 326,
+    "type": "judge",
+    "question": "在路由器上使用“display current-configuration |include 10.0.2.*”命令，可以看到当前\n配置中包含“10.0.2”的全部信息。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "使用“display current-configuration | include 10.0.2.”命令可以查看当前配置中包含\n“10.0.2”开头的所有信息。在这里\"|\"代表管道，表示将前一个命令的输出作为后一个命令\n的输入。\"include\"用于查询包含特定字符串的行；而\"10.0.2.“则是所要查询的内容；”*\"代\n表零个或多个字符"
+  },
+  {
+    "id": 327,
+    "type": "judge",
+    "question": "MP-BGP 通过新增路径属性MP_REACH_NLRI，在BGP/MPLS IP VPN 网络中发布\nVPNv4 路由信息或撤销不可达路由。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "MP_UNREACH_NLRI 才是撤销不可达路由"
+  },
+  {
+    "id": 328,
+    "type": "judge",
+    "question": "LSP 快速扩散特性可以加快LSP 的扩散速度，正常情况下，当IS-IS 收到其它路由器\n发来的LSP 时，如果此LSP 比本地LSDB 中相应的LSP 要新，则更新LSDB 中的LSP，并\n用一个定时器定期将LSDB 内已更新的LSP 扩散出去，而使能了LSP 快速扩散特性的设备\n收到一个或多个较新的LSP 时，在路由计算之前，先将小于指定数目的LSP 扩散出去，\n加快LSDB 的同步过程。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 329,
+    "type": "judge",
+    "question": "在MPLS 网络中，管理员同时部署了端到端的QoS 功能，那么MPLS 网络中的倒教第\n二跳设备可以基于PHP 特性将MPLS 标签弹出，从而让Egress 能够基于内层报文的QoS\n优先级进行报文处理。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "部署QoS 的场景下，标签被弹出后，其中的优先级也会一并丢失。"
+  },
+  {
+    "id": 330,
+    "type": "judge",
+    "question": "在同一个交换机接口上，管理员只能配置对广播、未知组播、未知单播、已知组播和\n已知单播报文中的一种进行流量抑制。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "在一般的现代交换机上，网络管理员可以同时对广播、未知组播、未知单播、已知\n组播和已知单播报文进行流量抑制。这些类型的流量抑制可以单独或者同时被应用到交换\n机接口上，这有助于防止交换机接口被特定类型的流量淹没，从而保护网络质量。"
+  },
+  {
+    "id": 331,
+    "type": "judge",
+    "question": "每个OSPFv3 路由器都会为每个链路产生一个Link-LSA，描述此链路上的link-local\n地址、IPv6 前缀地址以及接口编号等信息，并提供将会在Network-LSA 中设置的链路选\n项，它仅在本链路内传播。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Link-LSA 是作用于本地链路的，没有描述接口编号信息"
+  },
+  {
+    "id": 332,
+    "type": "judge",
+    "question": "某企业网络如图所示，若CE2 双归属PE2 和PE3，有可能产生Type3LSA 路由环路，\n可以通过在PE2 和PE3 设备上设置dn-bit-setdisable 命令来进行防环。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "为了防止路由环路，OSPF 多实例进程使用一个bit 位作为标志位，称为DN 位。dn-\nbit-set disable 命令用来禁止设置OSPF LSA 的DN 位，可能会产生路由环路。",
+    "questionImage": "H12-831/images/q332.png"
+  },
+  {
+    "id": 333,
+    "type": "judge",
+    "question": "如果交换机连接的用户变动比较频繁，可以通过端口安全把动态MAC 地址转换为\nSticky mac 地址。这样可以在用户变动时，通过表项老化及时清除绑定的旧MAC 地址表\n项。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 334,
+    "type": "judge",
+    "question": "如图所示的网络，R1 和R2 配置了单跳BFD 检测，网络工程师发现BFD 会话Down，\n因此查询了R1 和R2 BFD 相关的配置，配置信息已在图中标出根据配置信息判断，BFD\n会话Down 的原因是R1 和R2 配置的时间参数不匹配。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "时间参数不匹配是可以协商出时间的，取两端协商最小值，所以不是参数原因。",
+    "questionImage": "H12-831/images/q334.png"
+  },
+  {
+    "id": 335,
+    "type": "judge",
+    "question": "在BGP/MPLS IP VPN 网络中，两个站点的CE 设备之间需建立MP-EBGP 对等体关系，\n从而实现VPN 路由端到端的传递",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "端到端的VPN 路由是通过PE 设备，而不是直接通过CE 设备来实现的。"
+  },
+  {
+    "id": 336,
+    "type": "judge",
+    "question": "交换机的某个接口处于error-down 状态，可能是由于该接口接收到的广播报文的平\n均速率超过了管理员在风暴控制中设置的最大阈值。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "如果有配置了广播风暴控制，并且配置了风暴控制动作为error-down，那么当平均\n速率超过了管理员在风暴控制中设置的最大阈值是会造成接口处于error-down 状态，因\n此是可能的原因之一。"
+  },
+  {
+    "id": 337,
+    "type": "judge",
+    "question": "在BGP/MPLS IP VPN 网络中，若要修改VPN 实例下的RD 值，必须先去使能VPN 实\n例相应的地址族或删除该VPN 实例。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 338,
+    "type": "judge",
+    "question": "当交换机配置了端口隔离功能后，缺省情况下，属于同一VLAN 的不同主机无法进行\n一层和三层通信。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 339,
+    "type": "judge",
+    "question": "为了保证LDP 消息的可靠发送，LDP 的Discovery 消息、Session 消息、\nAdvertisement 消息和Notification 消息都使用TCP 传输。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "为保证LDP 消息的可靠发送,除了Discovery(Hello)消息使用UDP(端口646)外,LDP\n的Session 消息、Advertisement 消息和Notification 消息都使用TCP(端口646)传输。"
+  },
+  {
+    "id": 340,
+    "type": "judge",
+    "question": "在BGP/MPLS IP VPN 网络中，PE 设备之间可以通过BGP-4 协议进行VPNv4 路由的\n传递",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "BGP-4 传递的是IPv4 路由。MP-BGP 才是传递VPNv4 路由。"
+  },
+  {
+    "id": 341,
+    "type": "judge",
+    "question": "如图所示的IS-IS IPv6 网络，当网络稳定后，R2 可以Ping 通2000:12::1，但是通过\n“display ipv6 neighbors”无法看到2000:12::1 对应的MAC 地址。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "实验验证过，R2 可以Ping 通2000:12::1，但是通过查看display ipv6 neighbors 无\n法看到2000:12::1 对应的MAC 地址。",
+    "questionImage": "H12-831/images/q341.png"
+  },
+  {
+    "id": 342,
+    "type": "judge",
+    "question": "如图所示的网络，R1 和R2 建立EBGP 邻居关系，R1 通过“network 2000::1/128”命\n令引入Loopback 接口的路由，在R1 发送的更新报文中Next Hop 属性(公认必遵属性)的\n取值为\n\n2000:12::1",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "R1 发送的update 报文中Next Hop 是给对端（R2）选路用的；简单理解就是R1 告\n诉R2，你发往2000::1 地址的下一跳要发给2000:12::1，题目描述是对的。",
+    "questionImage": "H12-831/images/q342.png"
+  },
+  {
+    "id": 343,
+    "type": "judge",
+    "question": "如图所示的OSPFV3 网络，R1、R2、R3 互联的端口开启OSPFv3，其中R1 和R3 是\nDR，在R3 的LSDB 中可以看到R1 生成的Intra-Are-Prefix-LSA 和Link-LSA。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q343.png"
+  },
+  {
+    "id": 344,
+    "type": "fill",
+    "question": "为防止攻击者伪造BGP 报文对设备进行攻击，可以通过配置GTSM 功能检测IP 报文\n头中的TTL 值的范围来对设备进行保护。如果某台设备配置了'peer x.x.x.x valid-tt1-hops\n100”，则被检测的报文的TTL 值有效范围为{() ,255}。",
+    "options": [],
+    "answer": [
+      "156"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 345,
+    "type": "fill",
+    "question": "如图所示，网络工程师在进行故障处理时，将某一个组播网络的示意图画出，R1 和\nR2 启用的IGMP 版本为2，使用PIM-SM 作为组播路由协议，其它配置均为默认配置，则\n该组播网络中的查询器是\n()",
+    "options": [],
+    "answer": [
+      "R1"
+    ],
+    "explanation": "IGMPv2 版本做了改进，规定同一网段上有多个组播路由器时，具有最小IP 地址的\n组播路由器被选举出来充当查询器。",
+    "questionImage": "H12-831/images/q345.png"
+  },
+  {
+    "id": 346,
+    "type": "fill",
+    "question": "R1 和R2 使用直连接口建立EBGP 邻居关系，R1 将2000::1/128 引入BGP。缺省情\n况下，R2 到达2000::1/128 的下一跳地址为\n\n()",
+    "options": [],
+    "answer": [
+      "2001:12::1"
+    ],
+    "explanation": "优选对等体小的IPV6 地址"
+  },
+  {
+    "id": 347,
+    "type": "fill",
+    "question": "某交换网络中部署了VLAN 聚合功能，其中Sub-VLAN 2 和Sub-VLAN 3 均加入到\nSuper-VLAN 10 中，若不同Sub-VLAN 内的主机想要实现互通，则应在Super-LAN 对应的\nVANIF 10 接口视图下，输入命令（）inter-sub-vlan-proxy enable。(所有字母小写)",
+    "options": [],
+    "answer": [
+      "arp-proxy"
+    ],
+    "explanation": "Sub-VLAN 间的主机如果需要互访，必须在Super-VLAN 的VLANIF 接口上配置\nVLAN 间Proxy ARP 功能。"
+  },
+  {
+    "id": 348,
+    "type": "fill",
+    "question": "网络管理员在接入交换机上部署IPSG 功能来预防IP 地址欺骗攻击，那么他需要在交\n换机的接口视图或()视图中使能IP 报文检查功能。（若填写英文，请所有字母大写）",
+    "options": [],
+    "answer": [
+      "VLAN"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 349,
+    "type": "fill",
+    "question": "如图所示的网络，R2 与R1 之间部署OSPF 协议，且R2 的GE0/0/1 接口也使能了\nOSPF 协议。R2 与R3 之间部署IS-IS 协议，为了让R1 能获取到达10.0.3.3/32 的路由，\n在R2 上做了将IS-IS 路由引入OSPF 路由的操作，则R2 产生的Type5 LSA 中的FA 地址\n为（）。",
+    "options": [],
+    "answer": [
+      "10.0.23.253"
+    ],
+    "explanation": "R2 引入10.0.3.3 到OSPF，该路由下一跳10.0.23.253，R2 的接口g0/0/1 也使能了\nOSPF 路由，OSPF 路由优于ISIS 路由，所以优先使用OSPF 路由，即R1 的OSPF 路由表\n里有10.0.23.253 的路由，直接作为下一跳",
+    "questionImage": "H12-831/images/q349.png"
+  },
+  {
+    "id": 350,
+    "type": "fill",
+    "question": "如图所示的网络，R2 与R1 之间部署OSPF 协议，R2 与R3 之间部署IS-IS 协议，为\n了让R1 能获取到10.0.3.3/32 的路由，在R2 上做了将IS-IS 路由引入OSPF 路由的操作，\n则R2 产生的Type5 LSA 中的FA 地址为（）。",
+    "options": [],
+    "answer": [
+      "0.0.0.0"
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q350.png"
+  },
+  {
+    "id": 351,
+    "type": "fill",
+    "question": "网络工程师使用capture-packet 工具抓取接口收到的报文，图中给出了部分输出信息，\n已知该报文是某一种动态路由协议的报文，则该协议为()(填写术语，全大\n\n写)",
+    "options": [],
+    "answer": [
+      "RIP"
+    ],
+    "explanation": "这个FF 后面的11 是指的是UDP 协议,因为16 进制的11 就是十进制的17。而用到\nUDP 的动态路由协议，只有RIP。"
+  },
+  {
+    "id": 352,
+    "type": "fill",
+    "question": "在MPLS 网络中，当Egress 设备收到的MPLS 报文的S 字段取值为（）时，表明该标\n签是栈底标签，直接进行IP 转发。（填写阿拉伯数字）",
+    "options": [],
+    "answer": [
+      "1"
+    ],
+    "explanation": "当Egress 设备收到的MPLS 报文的S 字段取值为1 时，表明该标签是栈底标签，直\n接进行IP 转发。"
+  },
+  {
+    "id": 353,
+    "type": "fill",
+    "question": "在MPLS 网络中，倒数第二跳LSR（Label Switching Router）进行标签交换时，如果\n发现交换后的标签值为()，则将标签弹出，并将报文发给最后一跳。（填写阿拉伯数字）",
+    "options": [],
+    "answer": [
+      "3"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 354,
+    "type": "fill",
+    "question": "在如图所示的Hub＆Spoke 组网中，为了实现路由的正确传递，管理员必须在Hub-\nPE 的BGP-VPN_out 视图中，手工配置命令peer 10.1.2.1（）(所有字母小\n写)",
+    "options": [],
+    "answer": [
+      "allow-as-loop"
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q354.png"
+  },
+  {
+    "id": 355,
+    "type": "fill",
+    "question": "如图所示的OSPFv3 网络，R1 的LSDB 中有（）条Link-LSA。（填写阿拉伯数字）",
+    "options": [],
+    "answer": [
+      "2"
+    ],
+    "explanation": "Link-LSA:每个路由器都会产生,仅在所在链路上传播; R1 的LSDB 有两条LSA,一条是\n自己产生的,一条来自于R2。",
+    "questionImage": "H12-831/images/q355.png"
+  },
+  {
+    "id": 356,
+    "type": "fill",
+    "question": "如图所示的网络，R2 与R1 之间部署OSPF 协议，且R2 的GE0/0/1 接口也使能了\nOSPF 协议。R2 与R3 之间部署IS-IS 协议，为了让R1 能获取到达10.0.3.3/32 的路由，\n在R2 上做了将IS-IS 路由引入OSPF 路由的操作，则在R1 的路由表中，到达10.0.3.3/32\n的下一跳地址为（）。",
+    "options": [],
+    "answer": [
+      "10.0.23.253"
+    ],
+    "explanation": "R2 引入10.0.3.3 到OSPF，该路由下一跳10.0.23.253，R2 的接口g0/0/1 也使能了\nOSPF 路由，OSPF 路由优于ISIS 路由，所以优先使用OSPF 路由，即R1 的OSPF 路由表\n里有10.0.23.253 的路由，直接作为下一跳",
+    "questionImage": "H12-831/images/q356.png"
+  },
+  {
+    "id": 357,
+    "type": "fill",
+    "question": "在系统升级或降级之前，使用“display（）命令来查看设备本次及下次启动相关的系\n统软件、备份系统软件、配置文件、License 文件、补丁文件以及语音文件。(所有字母小\n写)",
+    "options": [],
+    "answer": [
+      "startup"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 358,
+    "type": "fill",
+    "question": "如图所示的OSPFv3 网络，R2 的LSDB 中有()条Router-LSA。（填写阿拉伯数字）",
+    "options": [],
+    "answer": [
+      "3"
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q358.png"
+  },
+  {
+    "id": 359,
+    "type": "fill",
+    "question": "如图所示的网络，R2 与R1 之间部署OSPF 协议。R2 与R3 之间部署IS-IS 协议，为\n了让R1 能获取到达10.0.3.3/32 的路由，在R2 上做了将IS-IS 路由引入OSPF 路由的操\n\n作，则在R1 的路由表中，到达10.0.3.3/32 的下一跳地址为（）",
+    "options": [],
+    "answer": [
+      "10.0.23.3"
+    ],
+    "explanation": "OSPF 称为最短路径优先的原因，不需要找R2，直接下一跳指向R3。",
+    "questionImage": "H12-831/images/q359.png"
+  },
+  {
+    "id": 360,
+    "type": "fill",
+    "question": "在BGP/MPLS IP VPN 中，通过()区分使用相同地址空间的IPv4 前缀，此时的IPv4 地\n址称为VPNv4 地址。(填写缩略语，所有字母大写)",
+    "options": [],
+    "answer": [
+      "RD"
+    ],
+    "explanation": "RD 用于区分使用相同地址空间的IPv4 前缀，增加了RD 的IPv4 地址称为VPN-\nIPv4 地址（即VPNv4 地址）"
+  },
+  {
+    "id": 361,
+    "type": "fill",
+    "question": "如图所示的OSPFv3 网络，R2 的LSDB 中有（）条Link-LSA。（填写阿拉伯数字）",
+    "options": [],
+    "answer": [
+      "4"
+    ],
+    "explanation": "Link-LSA:每个路由器都会产生,仅在所在链路上传播;R2 的LSDB 有4 条LSA，2 条\n是自己产生的，2 条来分别来自于R1、R3。",
+    "questionImage": "H12-831/images/q361.png"
+  },
+  {
+    "id": 362,
+    "type": "drag",
+    "question": "管理员在配置交换机的端口安全功能时，同步开启了静态MAC地址漂移检测功能，若后续发生静态MAC地址漂移现象，交换机就会根据配置的动作对接口做保护处理。请将接口安全保护动作的名称和操作进行对应。",
+    "options": [],
+    "dragItems": [
+      "restrict",
+      "protect",
+      "shutdown"
+    ],
+    "dragTargets": [
+      "接口状态被置为error-down，并上报告警",
+      "丢弃触发静态MAC地址漂移的报文，并上报告警",
+      "只丢弃触发静态MAC地址漂移的报文，不上报告警"
+    ],
+    "dragAnswer": [
+      1,
+      2,
+      0
+    ],
+    "explanation": "restrict：丢弃源MAC地址不存在的报文并上报告警。推荐使用restrict动作。\nprotect：只丢弃源MAC地址不存在的报文，不上报告警。\nshutdown：接口状态被置为error-down，并上报告警。默认情况下，接口关闭后不会自动恢复，只能由网络管理人员在接口视图下使用restart命令重启接口进行恢复。"
+  },
+  {
+    "id": 363,
+    "type": "drag",
+    "question": "IP报文经过MPLS网络时，MPLS设备会对TTL进行处理，若如图所示拓扑采用uniform处理模式，请将报文传输过程中的TTL值进行一一对应。",
+    "options": [],
+    "dragItems": [
+      "255",
+      "254",
+      "253",
+      "252",
+      "1",
+      "0"
+    ],
+    "dragTargets": [
+      "①",
+      "②",
+      "③"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "Uniform模式：IP报文经过MPLS网络时，在入节点，IP TTL减1映射到MPLS TTL字段，此后报文在MPLS网络中按照标准的TTL处理方式处理。在出节点将MPLS TTL减1后映射到IP TTL字段。",
+    "questionImage": "H12-831/images/q363.png"
+  },
+  {
+    "id": 364,
+    "type": "drag",
+    "question": "MPLS的体系结构分为控制平面和转发平面，如图所示为各个协议和表项的关系图，请将协议和表项填入对应的位置。",
+    "options": [],
+    "dragItems": [
+      "标签信息表LIB",
+      "标签转发信息表LFIB",
+      "路由信息表RIB",
+      "IP路由协议",
+      "标签分发协议LDP",
+      "转发信息表FIB"
+    ],
+    "dragTargets": [
+      "①",
+      "②",
+      "③",
+      "④",
+      "⑤",
+      "⑥"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "explanation": "控制平面：路由信息表RIB由IP路由协议、静态路由和直连路由共同生成；标签信息表LIB由标签分发协议LDP等生成。转发平面：转发信息表FIB从RIB提取；标签转发信息表LFIB负责带MPLS标签报文的转发。",
+    "questionImage": "H12-831/images/q364.png"
+  },
+  {
+    "id": 365,
+    "type": "drag",
+    "question": "某企业网络及VPN规划如图所示，请将业务流量可以互通的站点进行一一对应。",
+    "options": [],
+    "dragItems": [
+      "site1",
+      "Site2",
+      "Site3",
+      "Site4"
+    ],
+    "dragTargets": [
+      "Site1",
+      "Site2",
+      "Site3",
+      "Site4"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q365.png"
+  },
+  {
+    "id": 366,
+    "type": "drag",
+    "question": "如图所示的OSPF网络，区域1是NSSA区域，区域2是Stub区域，R4引入外部路由10.0.4.4/32，每一台设备的Router ID为10.0.X.X，其中X为设备的编号，在R1和R3的OSPF进程中均配置了\"asbr-summary 10.0.4.0 255.255.255.0\"命令，请将以下路由表中的路由条目与路由器匹配。",
+    "options": [],
+    "dragItems": [
+      "R1",
+      "R5",
+      "R2",
+      "R3"
+    ],
+    "dragTargets": [
+      "仅有10.0.4.4/32",
+      "仅有10.0.4.0/24",
+      "既没有10.0.4.4/32，也没有10.0.4.0/24",
+      "既有10.0.4.4/32，也有10.0.4.0/24"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "由于R3的Router-ID比较大，最终成功发布汇总路由10.0.4.0/24进入区域0和2的是R3。R3路由表只有R4传递的10.0.4.4/32的路由。R1、R2、R5有汇总路由10.0.4.0/24。",
+    "questionImage": "H12-831/images/q366.png"
+  },
+  {
+    "id": 367,
+    "type": "drag",
+    "question": "请将IS-IS协议的特性与功能进行匹配。",
+    "options": [],
+    "dragItems": [
+      "提升收敛速度",
+      "防止出现次优路径"
+    ],
+    "dragTargets": [
+      "PRC",
+      "I-SPF",
+      "与BFD联动",
+      "路由泄露"
+    ],
+    "dragAnswer": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 368,
+    "type": "drag",
+    "question": "如图所示的网络，R1、R2、R4、R5运行IS-IS，区域号为49.0001，R3、R6运行IS-IS，区域号为49.0002。AS 65000内部，R1、R3、R4、R6均与R2、R5建立IBGP邻居关系，其中R2、R5是RR，R1、R4、R3、R6是客户端。IBGP邻居关系均使用Loopback0接口建立。R2和R5之间也建立IBGP邻居关系。每台设备的Loopback0接口的IP地址为10.0.X.X/32，Router ID为10.0.X.X，其中X为设备的编号。R1和R4将外部网络192.168.1.0/24通过import方式引入BGP。针对于192.168.1.0/24，请根据\"display bgp routing-table\"输出信息中有效路由的数量进行匹配。",
+    "options": [],
+    "dragItems": [
+      "1",
+      "2",
+      "3"
+    ],
+    "dragTargets": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      2,
+      0,
+      1,
+      2
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q368.png"
+  },
+  {
+    "id": 369,
+    "type": "drag",
+    "question": "如图所示的OSPFv3网络，R1、R2、R3的RouterID分别为10.0.1.1、10.0.2.2、10.0.3.3。请根据LSDB信息补全每一条路上的端口号。",
+    "options": [],
+    "dragItems": [
+      "GE0/0/0",
+      "GE0/0/1",
+      "GE0/0/2",
+      "2",
+      "3",
+      "6"
+    ],
+    "dragTargets": [
+      "①",
+      "②",
+      "③",
+      "④",
+      "⑤",
+      "⑥"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "explanation": "",
+    "questionImage": "H12-831/images/q369.png"
+  },
+  {
+    "id": 370,
+    "type": "drag",
+    "question": "请将以下接口拖拽到对应的OSPF Cost值",
+    "options": [],
+    "dragItems": [
+      "GE0/0/0",
+      "GE0/0/1",
+      "GE0/0/2"
+    ],
+    "dragTargets": [
+      "Cost=1",
+      "Cost=2",
+      "Cost=3",
+      "Cost=4",
+      "Cost=5",
+      "Cost=6"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      2,
+      -1,
+      -1,
+      -1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 371,
+    "type": "drag",
+    "question": "请将以下OSPF Cost值拖拽到对应的路由器角色",
+    "options": [],
+    "dragItems": [
+      "10",
+      "30",
+      "50"
+    ],
+    "dragTargets": [
+      "ABR(10.0.4.4)",
+      "ASBR(10.0.3.3)",
+      "Internal Router(10.0.2.2)"
+    ],
+    "dragAnswer": [
+      0,
+      2,
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 372,
+    "type": "drag",
+    "question": "在VLAN聚合和MUX VLAN场景中，请将各PC/Server拖拽到正确的VLAN角色",
+    "options": [],
+    "dragItems": [
+      "PC1",
+      "PC2",
+      "PC3",
+      "PC4",
+      "Server"
+    ],
+    "dragTargets": [
+      "主VLAN(Principal VLAN)成员",
+      "从VLAN(Sub-VLAN)成员",
+      "隔离从VLAN(Isolate Sub-VLAN)成员",
+      "互通从VLAN(Community Sub-VLAN)成员"
+    ],
+    "dragAnswer": [
+      4,
+      3,
+      2,
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 373,
+    "type": "drag",
+    "question": "请将以下Router ID拖拽到对应的OSPFv3路由器角色",
+    "options": [],
+    "dragItems": [
+      "10.0.1.1",
+      "10.0.2.2",
+      "10.0.3.3",
+      "10.0.4.4"
+    ],
+    "dragTargets": [
+      "Area 0 区域内路由器",
+      "Area 1 区域内路由器",
+      "ABR(Area Border Router)",
+      "ASBR(AS Boundary Router)"
+    ],
+    "dragAnswer": [
+      3,
+      0,
+      2,
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 374,
+    "type": "drag",
+    "question": "请将割接准备阶段的检查项拖拽到对应的操作描述",
+    "options": [],
+    "dragItems": [
+      "网线",
+      "设备版本文件",
+      "单板",
+      "License",
+      "割接人员名单"
+    ],
+    "dragTargets": [
+      "检查软件包大小，确认文件和设备型号是否匹配",
+      "安装在未入网的设备上，观察运行情况",
+      "使用测试仪检测连通性",
+      "查看是否在有效期，以免影响设备功能",
+      "职责与权限分配是否清晰"
+    ],
+    "dragAnswer": [
+      2,
+      0,
+      1,
+      3,
+      4
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 375,
+    "type": "drag",
+    "question": "请将以下BGP Debug信息中的数值拖拽到对应的含义",
+    "options": [],
+    "dragItems": [
+      "10.0.1.1",
+      "10.0.2.2",
+      "100",
+      "200"
+    ],
+    "dragTargets": [
+      "R1的Router ID",
+      "R2的Router ID",
+      "R1的AS号",
+      "R2的AS号"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      3,
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 376,
+    "type": "drag",
+    "question": "请将OSPF故障恢复步骤按正确顺序拖拽排列",
+    "options": [],
+    "dragItems": [
+      "故障感知",
+      "LSA更新",
+      "路由计算",
+      "下发FIB"
+    ],
+    "dragTargets": [
+      "步骤1",
+      "步骤2",
+      "步骤3",
+      "步骤4"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 377,
+    "type": "drag",
+    "question": "在BGP/MPLS IP VPN Hub-Spoke场景中，请将RT值拖拽到对应的导入/导出目标",
+    "options": [],
+    "dragItems": [
+      "100:1",
+      "200:1"
+    ],
+    "dragTargets": [
+      "IRT=Spoke-CE1",
+      "ERT=Spoke-CE1",
+      "IRT=Hub-PE3(VPN1in)",
+      "ERT=Hub-PE3(VPN1out)"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      0,
+      1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 378,
+    "type": "drag",
+    "question": "请将Cost值拖拽到图中对应的OSPF链路标记",
+    "options": [],
+    "dragItems": [
+      "10",
+      "20",
+      "50"
+    ],
+    "dragTargets": [
+      "Cost=A",
+      "Cost=B",
+      "Cost=C"
+    ],
+    "dragAnswer": [
+      1,
+      2,
+      0
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 379,
+    "type": "drag",
+    "question": "请将时间值拖拽到对应的协议默认参数描述",
+    "options": [],
+    "dragItems": [
+      "10s",
+      "40s"
+    ],
+    "dragTargets": [
+      "OSPF Broadcast类型默认Hello失效时间(Dead Interval)",
+      "OSPF Broadcast类型默认Hello发送间隔(Hello Interval)",
+      "IS-IS接口默认Hello时间间隔"
+    ],
+    "dragAnswer": [
+      1,
+      0,
+      -1
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 380,
+    "type": "drag",
+    "question": "在BGP路由表有效路由匹配中，请将路由条目拖拽到对应的路由器",
+    "options": [],
+    "dragItems": [
+      "1",
+      "2",
+      "3"
+    ],
+    "dragTargets": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+    ],
+    "dragAnswer": [
+      0,
+      1,
+      -1,
+      -1,
+      -1,
+      2
+    ],
+    "explanation": ""
+  },
+  {
+    "id": 381,
+    "type": "drag",
+    "question": "请将Router ID拖拽到OSPFv3 LSDB中对应的LSA Origin Router位置",
+    "options": [],
+    "dragItems": [
+      "10.0.1.1",
+      "10.0.3.3",
+      "10.0.4.4"
+    ],
+    "dragTargets": [
+      "Link-LSA Origin Router",
+      "Network-LSA Origin Router",
+      "Inter-Area-Prefix-LSA Origin Router",
+      "Intra-Area-Prefix-LSA Origin Router"
+    ],
+    "dragAnswer": [
+      0,
+      -1,
+      2,
+      1
+    ],
+    "explanation": ""
+  }
+];

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Debug</title></head>
+<body>
+<div id="app"></div>
+<script src="quiz_data.js"></script>
+<script>
+// Mock minimal browser APIs that might be missing
+window.onerror = function(msg, url, line, col, err) {
+    document.getElementById('app').innerHTML = 
+        '<pre style="color:red;padding:20px;background:#fee">ERROR: ' + msg + '\nLine: ' + line + ':' + col + '\nStack: ' + (err&&err.stack) + '</pre>';
+    console.error('JS ERROR:', msg, 'at', url, line, col);
+    return false;
+};
+window.addEventListener('unhandledrejection', function(e) {
+    document.getElementById('app').innerHTML += 
+        '<pre style="color:orange;padding:10px;background:#ffe">PROMISE ERROR: ' + e.reason + '</pre>';
+});
+</script>
+<script>
+// Load the main script
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'hcip_practice.html', false);  // sync
+xhr.send();
+var html = xhr.responseText;
+// Extract the main inline script (the big one)
+var match = html.match(/<script>([\s\S]*?)<\/script>/g);
+if (match && match.length >= 2) {
+    try {
+        // The second big script block
+        var mainScript = match[1].replace(/^<script>|<\/script>$/g, '');
+        eval(mainScript);
+        // Now call render
+        try {
+            render();
+            document.title = '✅ Render OK';
+        } catch(e) {
+            document.getElementById('app').innerHTML = 
+                '<pre style="color:red;padding:20px;background:#fee">RENDER ERROR: ' + e.message + '\n' + e.stack + '</pre>';
+        }
+    } catch(e) {
+        document.getElementById('app').innerHTML = 
+            '<pre style="color:red;padding:20px;background:#fee">SCRIPT LOAD ERROR: ' + e.message + '\n' + e.stack + '</pre>';
+    }
+} else {
+    document.getElementById('app').innerHTML = '<p>Could not find script blocks. Found: ' + (match?match.length:0) + '</p>';
+}
+</script>
+</body></html>
