@@ -51,15 +51,20 @@
     if (it.warn) badges += '<span class="badge warn">有风险</span>';
     if (it.large) badges += '<span class="badge danger">超 100MB</span>';
 
+    /* 夸克按钮统一走「目录级深链」：点击后直接落在该文件所在目录 */
+    var quarkBtn = '<a class="btn btn-' + (it.large ? 'primary' : 'ghost') + ' btn-sm"' +
+      ' href="' + esc(it.quarkUrl) + '"' +
+      ' target="_blank" rel="noopener"' +
+      ' data-quark-hint="' + esc(it.quarkHint) + '"' +
+      ' title="' + esc(it.quarkHint) + '">' +
+      w.PT.icon('cloud') + (it.large ? '夸克网盘下载' : '夸克网盘') + '</a>';
+
     var acts;
     if (it.large) {
-      acts = '<a class="btn btn-primary btn-sm" href="' + DATA.quarkShare +
-        '" target="_blank" rel="noopener">' + w.PT.icon('cloud') + '夸克网盘下载</a>';
+      acts = quarkBtn;
     } else {
       acts = '<a class="btn btn-primary btn-sm" href="' + it.pageUrl +
-        '" download>' + w.PT.icon('download') + '立即下载</a>' +
-        '<a class="btn btn-ghost btn-sm" href="' + DATA.quarkShare +
-        '" target="_blank" rel="noopener">' + w.PT.icon('cloud') + '夸克网盘</a>';
+        '" download>' + w.PT.icon('download') + '立即下载</a>' + quarkBtn;
     }
 
     return '<article class="dl reveal" style="--acc:' + it.accent + '" data-cat="' + it.cat + '" data-id="' + it.id + '">' +

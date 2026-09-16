@@ -8,8 +8,119 @@
   var REPO = 'https://github.com/tiamo1990/index';
   var BRANCH = 'main';
   var PAGES = 'https://tiamo1990.github.io/index';
+
+  /* ---------- 夸克网盘 ---------- */
   var QUARK_SHARE = 'https://pan.quark.cn/s/956743d482f3';
+  var QUARK_HASH = QUARK_SHARE + '#/list/share/';
   var QUARK_LIST = 'https://pan.quark.cn/list#/list/all/8d82567b3a9b406ab78be5e57a8a0a30-vivo%E5%88%B7%E6%9C%BA%E5%B7%A5%E5%85%B7';
+
+  /* 网盘目录 → fid（用于把下载项精确定位到所在文件夹） */
+  var QDIR = {
+    root: { fid: '8d82567b3a9b406ab78be5e57a8a0a30', name: 'vivo刷机工具' },
+    base: { fid: '97f5cfcef7274365acec22035df7e0d1', name: 'vivo 玩机工具' },
+    ksu: { fid: '40eb02f370f4453cbdd1bc11f916e840', name: 'ksu模块' },
+    misans: { fid: '174f8afc554d4107903585f9b4a7df26', name: 'KSU字体模块-MiSans' },
+    lsp: { fid: 'ff9880c02171483e81316e777b39ea22', name: 'lsp模块' },
+    rootMgr: { fid: '2af27c5693ee4242a2eb8b93bcb62ac2', name: 'root管理器' },
+    tempRoot: { fid: '3b8fa20bbc974e16b3edbb93732f6112', name: '临时root' },
+    tempRootFix: { fid: 'd95752f4366c4ef1b0728a8a4a8f5d39', name: '临时root权限修复脚本' },
+    bootloader: { fid: '170f9a44b2694279bfdd5426608c8109', name: '解锁bootloader（永久）' },
+    bootloaderTool: { fid: '902f7b9a2a684d4394bdd6510a7da979', name: 'vivoiqoo9400解锁一键工具（不支持平板）' },
+    theme: { fid: 'd32d4c8a56f54b29b1ad5c971617fb29', name: '主题替换资源（origin os6）' },
+    themePack: { fid: '8c90caf9dc5b41c0ab61194727501181', name: '主题包' },
+    toolbox: { fid: '4be2fe105f8e46a790b3a9f632eae74d', name: '玩机工具箱' }
+  };
+
+  /* 下载项 → 网盘所在目录 key + 文件 fid（文件 fid 用于精确高亮该文件） */
+  var QMAP = {
+    'bootloader/vivo-iqoo-9400-unlock-tool.zip': ['bootloader', 'a5b3365c52dc493e98f9e686856d5dd5'],
+    'bootloader/vivo-iqoo-9400-unlock-tool/KernelSU.apk': ['bootloaderTool', '1b0279ae4a1f4f9098b2eb81c964d413'],
+    'bootloader/vivo-iqoo-9400-unlock-tool/SakiSU_v4.3.0-sakisu.1_35039-arm64-v8a-release.apk': ['bootloaderTool', 'fb1b21633a5c4c9e82f63f3ff5ab54a2'],
+    'bootloader/vivo-iqoo-9400-unlock-tool/test.exe': ['bootloaderTool', '99e84c144bd24250acc7f265558bdabd'],
+
+    'temp-root/vivo-oneclick-jailbreak-minimal.zip': ['tempRoot', '6eb4c7f1607f441aa20eee59278568cc'],
+    'temp-root/fix-temp-root-no-real-permission.sh': ['tempRootFix', 'f6ed33a643ce4ff0870a13cd202cd043'],
+
+    'root-manager/KernelSU_v3.2.5-44-g0f65ab64.apk': ['rootMgr', '5a1b5c086bf14f1db651fce9cb020788'],
+
+    'ksu-modules/MiSans-Replace-OriginOS6-Regular.zip': ['misans', '0ae2bd175b024eb3b50d75fbad9ca3a7'],
+    'ksu-modules/MiSans-Replace-OriginOS6-Demibold.zip': ['misans', 'fe5e2b4813684207a4ea3da08fe89b97'],
+    'ksu-modules/MiSans-Replace-OriginOS6-Bold.zip': ['misans', '47db5bf6b0714de6a91aaccd0bbf63c5'],
+    'ksu-modules/MiSans-Replace-OriginOS6-Heavy.zip': ['misans', '5d2d309c84804a7882e7025bacc252d2'],
+    'ksu-modules/Zygisk-Next-1.4.5-836-b13d58a.zip': ['ksu', '54e866abb4cf4d4cb30860c3e8b92902'],
+    'ksu-modules/magic_mount_rs-2.2.51-534.zip': ['ksu', '5a3c59fe316247c69c98aa81e2197c51'],
+    'ksu-modules/Mediatek_Mali_GPU_Governor_v2.12.3.zip': ['ksu', '8c40e23ce80240cdbfe7be2e3c62d021'],
+    'ksu-modules/Chase-dream-thread-4-3-1-v2.1.3.zip': ['ksu', '648cd0a3740e413f9b9397996dfa9aed'],
+    'ksu-modules/YueHong-Hide-v5.4.7.zip': ['ksu', 'd391796ac2b048fa8bac16496700256e'],
+    'ksu-modules/RescueX-v3.5.11.zip': ['ksu', '0201fc2e2b2c4ec885a56619c3749055'],
+    'ksu-modules/FontLoader.zip': ['ksu', '71044ebecc924550a6ee17e80a9cef3d'],
+    'ksu-modules/block_vivo_ota_v1.2.zip': ['ksu', 'de485b99da874d069c71700f702b6182'],
+    'ksu-modules/ExtremePerformance-Final-2026022603.zip': ['ksu', 'ebdaa8d6d80c499997eb987d14081384'],
+    'ksu-modules/ExtremeGT-vivoD9400.zip': ['ksu', '75cc83544b0e41bebf259eaea30e08fe'],
+    'ksu-modules/AutoADBWiFi.zip': ['ksu', 'ef0d66b209c740ddbcd749d808d513f1'],
+    'ksu-modules/RemoveThermalControl-iQOO-v1.0.3.zip': ['ksu', '672a7e9b855248799ba09752fb51ac20'],
+    'ksu-modules/VIVO-BlockSystemUpdate.zip': ['ksu', '580ffb14ffde41b080670970a6591150'],
+
+    'lsp-modules/vivo-iqoo-theme-crack-v114514.zip': ['lsp', 'e7635552b9d044c0b9241d5bff7d4311'],
+    'lsp-modules/theme-crack-above-15.5.0.1.zip': ['lsp', '973e5c86d2664ffb9b081497385b973a'],
+    'lsp-modules/DeepSeek-CA-Root.zip': ['lsp', 'df98e724b2ab48f4966154d14bc9b61f'],
+    'lsp-modules/magic_mount_rs-2.2.51-534.zip': ['lsp', '5ab0aef649264cedbeaaa1bb76fb4437'],
+
+    'theme/MTManager-2.26.4-and-5-more.rar': ['theme', '1ceda1d3ea764c56afb75a67adf7ff54'],
+    'theme/pack/com.android-xiaomi-clone-original.systemui': ['themePack', 'b8b0a560cb3140b98ce11e35cd1687c8'],
+    'theme/pack/xiaomi-clone-modified.itz': ['themePack', 'b7aa21c87d71491f8596f18216aa963e'],
+
+    'toolbox/VioletToolbox.exe': ['toolbox', '470c3bde961143258a02064fce43dcd8'],
+
+    'common/7z2603-x64.exe': ['base', 'f67cdbc9de15436c8443a335fdba7995'],
+    'common/ADB-portable-oneclick.zip': ['base', '8a49cf93ebfc428b8312cec6e748d48f'],
+    'common/vivo_usb_driver.exe': ['base', 'fb6132fb00b4488095affe2092886762']
+  };
+
+  /* --------------------------------------------------------------------------
+     夸克深链策略（2026-09-16 实测结论，勿凭直觉改动）
+
+     夸克分享页 hash 路由为 `#/list/share/<fid>`，其中 <fid> 只能是**目录 fid**。
+     实测三组对照：
+       · #/list/share                              → 落在分享根目录（vivo刷机工具）
+       · #/list/share/<目录fid>                    → ✅ 正确定位到该目录，面包屑与
+                                                     文件列表均正确
+       · #/list/share/<目录fid>/<文件fid>          → ❌ 文件 fid 被当作目录解析，
+                                                     页面显示「没有文件」（空目录）
+     因此：一律使用**目录级**深链，不做文件级拼接。
+     文件级定位改由 UI 提示承担 —— 按钮 title / 点击后的 toast 会告知用户
+     「该文件位于哪个目录、文件名是什么」，用户进目录后即可一眼找到。
+     -------------------------------------------------------------------------- */
+  var QUARK_LINK_MODE = 'dir';
+
+  /* 站点级入口：直接落在「vivo 玩机工具」主目录，省去一次点击 */
+  var QUARK_ENTRY = QUARK_HASH + '97f5cfcef7274365acec22035df7e0d1';
+
+  function quarkOf(file) {
+    var hit = QMAP[file];
+    if (!hit) return null;
+    var dir = QDIR[hit[0]];
+    var chain = [QDIR.root, QDIR.base];
+    if (dir !== QDIR.base) {
+      if (hit[0] === 'misans') chain.push(QDIR.ksu);
+      if (hit[0] === 'themePack') chain.push(QDIR.theme);
+      if (hit[0] === 'bootloaderTool') chain.push(QDIR.bootloader);
+      chain.push(dir);
+    }
+
+    var dirUrl = QUARK_HASH + dir.fid;
+    var fileUrl = QUARK_HASH + dir.fid + '/' + hit[1];
+
+    return {
+      dirFid: dir.fid,
+      fileFid: hit[1],
+      dirName: dir.name,
+      path: chain.map(function (d) { return d.name; }).join(' / '),
+      dirUrl: dirUrl,
+      fileUrl: fileUrl,
+      url: QUARK_LINK_MODE === 'dir' ? dirUrl : fileUrl
+    };
+  }
 
   var CATS = [
     {
@@ -402,8 +513,14 @@
       it.blobUrl = REPO + '/blob/' + BRANCH + '/downloads/' + it.file.split('/').map(encodeURIComponent).join('/');
       it.rawUrl = 'https://raw.githubusercontent.com/tiamo1990/index/' + BRANCH + '/downloads/' +
         it.file.split('/').map(encodeURIComponent).join('/');
-      it.dlUrl = it.large ? QUARK_SHARE : it.pageUrl;
-      it.quarkUrl = QUARK_SHARE;
+      var q = quarkOf(it.file);
+      it.quark = q;
+      it.quarkUrl = q ? q.url : QUARK_SHARE;
+      it.quarkPath = q ? q.path : QUARK_NOTE;
+      it.quarkHint = q
+        ? '将在夸克网盘中打开《' + q.dirName + '》，请下载 ' + it.fileName
+        : '将在夸克网盘中打开分享目录';
+      it.dlUrl = it.large ? it.quarkUrl : it.pageUrl;
       ALL.push(it);
     });
   });
@@ -416,8 +533,11 @@
     branch: BRANCH,
     pages: PAGES,
     quarkShare: QUARK_SHARE,
+    quarkEntry: QUARK_ENTRY,
     quarkList: QUARK_LIST,
     quarkNote: QUARK_NOTE,
+    quarkLinkMode: QUARK_LINK_MODE,
+    quarkDirs: QDIR,
     cats: CATS,
     all: ALL,
     bytes: bytes,

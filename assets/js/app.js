@@ -96,7 +96,7 @@
 
   /* ---------- 3. Toast ---------- */
   var toastWrap;
-  function toast(msg) {
+  function toast(msg, ms, ico) {
     if (!toastWrap) {
       toastWrap = d.createElement('div');
       toastWrap.className = 'toast-wrap';
@@ -104,12 +104,12 @@
     }
     var el = d.createElement('div');
     el.className = 'toast';
-    el.innerHTML = icon('check') + '<span>' + msg + '</span>';
+    el.innerHTML = icon(ico || 'check') + '<span>' + msg + '</span>';
     toastWrap.appendChild(el);
     setTimeout(function () {
       el.classList.add('out');
       setTimeout(function () { el.remove(); }, 320);
-    }, 2200);
+    }, ms || 2200);
   }
 
   /* ---------- 4. 剪贴板 ---------- */
@@ -386,7 +386,7 @@
         t: it.name,
         s: it.catName + ' · ' + it.sizeText,
         ic: it.icon,
-        href: it.large ? data.quarkShare : it.blobUrl,
+        href: it.large ? it.quarkUrl : it.blobUrl,
         external: true,
         raw: it.search
       });
@@ -487,12 +487,28 @@
   function initShareLinks() {
     var data = w.PTDATA;
     if (!data) return;
-    d.querySelectorAll('[data-quark-link]').forEach(function (a) { a.href = data.quarkShare; });
+    /* 打开用「主目录深链」（少一次点击），复制用「原始分享短链」（便于转发） */
+    var open = data.quarkEntry || data.quarkShare;
+    d.querySelectorAll('[data-quark-link]').forEach(function (a) {
+      a.href = open;
+      if (!a.title) a.title = '在夸克网盘中打开《vivo 玩机工具》主目录';
+    });
     d.querySelectorAll('[data-quark-copy]').forEach(function (b) {
       if (!b.dataset.copy) b.dataset.copy = data.quarkShare;
     });
     d.querySelectorAll('[data-github-link]').forEach(function (a) { a.href = data.repo; });
     d.querySelectorAll('[data-pages-link]').forEach(function (a) { a.href = data.pages; });
+  }
+
+  /* ---------- 15b. 夸克网盘深链：打开后告知「去哪找文件」 ----------
+     夸克分享页只支持目录级深链（文件级会把文件当目录解析成空列表），
+     因此文件定位改由 toast 指引：告诉用户目标目录与文件名。 */
+  function initQuarkHints() {
+    d.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[data-quark-hint]') : null;
+      if (!a) return;
+      toast(a.dataset.quarkHint, 6500, 'cloud');
+    }, true);
   }
 
   /* ---------- 16. 无障碍：外链 ---------- */
@@ -519,6 +535,7 @@
     initCmdk();
     initYear();
     initShareLinks();
+    initQuarkHints();
     initExternal();
     d.documentElement.classList.add('ready');
   }

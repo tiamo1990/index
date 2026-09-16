@@ -61,7 +61,7 @@
   <a href="guide.html">刷机指南 <span class="muted">03</span></a>
   <a href="faq.html">常见问题 <span class="muted">04</span></a>
   <a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 仓库 <span class="muted">↗</span></a>
-  <a href="#quark" data-quark-link target="_blank" rel="noopener">夸克网盘 <span class="muted">↗</span></a>
+  <a href="https://pan.quark.cn/s/956743d482f3" data-quark-link target="_blank" rel="noopener">夸克网盘 <span class="muted">↗</span></a>
 </div>
 
 <main>
@@ -106,9 +106,16 @@
           <option value="size-asc">体积从小到大</option>
         </select>
 
-        <button class="btn btn-ghost btn-sm" type="button" id="quarkBtn">
+        <a class="btn btn-ghost btn-sm" id="quarkBtn" data-quark-link
+           href="https://pan.quark.cn/s/956743d482f3" target="_blank" rel="noopener"
+           title="在夸克网盘中打开《vivo 玩机工具》主目录">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-          夸克网盘全量包
+          夸克网盘全集
+        </a>
+
+        <button class="btn btn-ghost btn-sm" type="button" id="quarkCopy"
+          title="复制夸克网盘分享链接" aria-label="复制夸克网盘分享链接">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
       </div>
 
@@ -172,7 +179,7 @@
         <h4>下载通道</h4>
         <ul>
           <li><a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 仓库 ↗</a></li>
-          <li><a data-quark-link href="#" target="_blank" rel="noopener">夸克网盘 ↗</a></li>
+          <li><a data-quark-link href="https://pan.quark.cn/s/956743d482f3" target="_blank" rel="noopener">夸克网盘 ↗</a></li>
           <li><a href="faq.html#disclaimer">免责声明</a></li>
         </ul>
       </div>
@@ -190,8 +197,10 @@
 <script>
 (function(){
   document.addEventListener('DOMContentLoaded', function(){
-    var b = document.getElementById('quarkBtn');
-    if (b && window.PTDATA) b.addEventListener('click', function(){
+    /* quarkBtn 为普通外链（由 app.js 升级为网盘主目录深链），无需额外处理；
+       quarkCopy 单独负责「复制分享链接」，避免「打开」与「复制」两种语义混在一个按钮上。 */
+    var c = document.getElementById('quarkCopy');
+    if (c && window.PTDATA) c.addEventListener('click', function(){
       window.PT.copy(window.PTDATA.quarkShare, '夸克网盘链接已复制');
     });
   });

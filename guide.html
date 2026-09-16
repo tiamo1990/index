@@ -1,289 +1,289 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<html lang="zh-CN" data-theme="dark" data-page-node-id="fWSogtsw5jQV6K0KlKQGbW">
+<head data-page-node-id="DW2jGAQuTbWXNvXCmoGQfA">
+<meta charset="UTF-8" data-page-node-id="Mk7Jp1eN56Te0AT25KIUOG">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" data-page-node-id="zpMoUS296LHvf7LKyNPryL">
 <title>刷机指南 · 完整操作流程 — vivo 玩机工具</title>
-<meta name="description" content="vivo / iQOO 刷机完整流程：环境部署、临时 Root 与永久解锁路线选择、KernelSU 刷入、内核模块顺序建议、主题与 SystemUI 替换步骤，以及异常处理。">
-<meta name="theme-color" content="#f6f7fb">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/main.css">
+<meta name="description" content="vivo / iQOO 刷机完整流程：环境部署、临时 Root 与永久解锁路线选择、KernelSU 刷入、内核模块顺序建议、主题与 SystemUI 替换步骤，以及异常处理。" data-page-node-id="mCBaLldDkCQh0r2yXTbDPZ">
+<meta name="theme-color" content="#f6f7fb" data-page-node-id="PoU3lLjKOqGDsuVFzQwHaG">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" data-page-node-id="BqzCeNzrIVr7qUSsWFWjNP">
+<link rel="stylesheet" href="assets/css/main.css" data-page-node-id="WMDAJk1PSuTCEu2IgDhP26">
 <script>(function(){try{var t=localStorage.getItem('pt-theme')||'light';var q=/[?&]theme=(dark|light)/.exec(location.search);if(q)t=q[1];document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#05060b':'#f6f7fb');}catch(e){}})();</script>
 </head>
-<body>
+<body data-page-node-id="b06bEHcFeYyXAXcfcVOk4v">
 
-<div class="bg-stage" aria-hidden="true">
-  <div class="grid"></div>
-  <div class="blob a"></div>
-  <div class="blob b"></div>
-  <div class="blob c"></div>
-  <div class="noise"></div>
+<div class="bg-stage" aria-hidden="true" data-page-node-id="gdjnKqsBh3XH1vmuDDYxhn">
+  <div class="grid" data-page-node-id="qqEdMVpkBOWidcmGHvpB3g"></div>
+  <div class="blob a" data-page-node-id="1BlGEdSI1DVJb8OVwTP0rG"></div>
+  <div class="blob b" data-page-node-id="amMPUb3coscGNmC0BhOfd2"></div>
+  <div class="blob c" data-page-node-id="l14JdWY89R6BZgnhj3nAFw"></div>
+  <div class="noise" data-page-node-id="fGWROmk4qbe7TR1vmWzuT8"></div>
 </div>
-<div class="cursor-glow" aria-hidden="true"></div>
-<div class="progress-bar" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true" data-page-node-id="SHGELXhf3jXaBQzZvvUqN2"></div>
+<div class="progress-bar" aria-hidden="true" data-page-node-id="cr40vca9Txf6wF7GENdzCk"></div>
 
-<header class="nav">
-  <div class="shell shell-wide nav-inner">
-    <a class="brand" href="index.html" aria-label="vivo 玩机工具 首页">
-      <span class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="9" rx="2.6"/><path d="M8 11V7.4a4.5 4.5 0 0 1 8.8-1.3"/></svg>
+<header class="nav" data-page-node-id="tOShVCvm9FNs10gppXLNXE">
+  <div class="shell shell-wide nav-inner" data-page-node-id="037iMpVV62Ywp9JThwj50c">
+    <a class="brand" href="index.html" aria-label="vivo 玩机工具 首页" data-page-node-id="n4ElzUCHOiOvXSo7mYUyfD">
+      <span class="brand-mark" data-page-node-id="XSlzqY3rbFmZsA3edFwfd7">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-page-node-id="HRXNXtLanqmUI8zNJnxCsg"><rect x="4" y="11" width="16" height="9" rx="2.6" data-page-node-id="nvOgUM9Wgo6NB5GIXYKIU6"/><path d="M8 11V7.4a4.5 4.5 0 0 1 8.8-1.3" data-page-node-id="TvjpJdPrHJLNvZXipTRhzJ"/></svg>
       </span>
-      <span class="brand-txt"><b>vivo 玩机工具</b><span>Play Toolkit</span></span>
+      <span class="brand-txt" data-page-node-id="BSHoyUPO7zEbVTeDAabG9t"><b data-page-node-id="9OAiJfNVQTjQAoESeSmsaJ">vivo 玩机工具</b><span data-page-node-id="plKAldGrcZT2y1mbvB0CGe">Play Toolkit</span></span>
     </a>
-    <nav class="nav-links" aria-label="主导航">
-      <a href="index.html">首页</a>
-      <a href="tools.html">资源库</a>
-      <a href="guide.html">刷机指南</a>
-      <a href="faq.html">常见问题</a>
+    <nav class="nav-links" aria-label="主导航" data-page-node-id="gdAqAFYn1SBnjFqpOD80UZ">
+      <a href="index.html" data-page-node-id="34p5nzOUg6kdNl3RcePRFj">首页</a>
+      <a href="tools.html" data-page-node-id="JP5TphRcdiVoEcEiBSHZmv">资源库</a>
+      <a href="guide.html" data-page-node-id="PiillCFFrYEKdI5h1xIy82">刷机指南</a>
+      <a href="faq.html" data-page-node-id="N9Np0tx4UspjyVy0vgJGFs">常见问题</a>
     </nav>
-    <div class="nav-right">
-      <button class="kbd-hint" data-cmdk type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true" style="width:15px;height:15px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        搜索资源 <kbd>Ctrl K</kbd>
+    <div class="nav-right" data-page-node-id="PjGT0tz7VQxKrmywa35J6L">
+      <button class="kbd-hint" data-cmdk type="button" data-page-node-id="TazDx3728eQjSnXzxYnlUd">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true" style="width:15px;height:15px" data-page-node-id="MLdbbjvvPJmSVxHgqB9zdh"><circle cx="11" cy="11" r="8" data-page-node-id="V9k9GMZCz0H7c9kBuGphfW"/><line x1="21" y1="21" x2="16.65" y2="16.65" data-page-node-id="Jffcm8PpXBu1Zk6oLSinxz"/></svg>
+        搜索资源 <kbd data-page-node-id="A53CQf5iqEuofH1lD9KVUw">Ctrl K</kbd>
       </button>
-      <button class="icon-btn" data-theme-toggle type="button" aria-label="切换深浅色主题">
-        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <button class="icon-btn" data-theme-toggle type="button" aria-label="切换深浅色主题" data-page-node-id="MHbDo3QcNtCS4EFw9Gxguv">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" aria-hidden="true" data-page-node-id="AXYBGkES9fkRZ1xGPEUBIY"><circle cx="12" cy="12" r="5" data-page-node-id="ewWOlCaxoDkhhLEynD3kWN"/><line x1="12" y1="1" x2="12" y2="3" data-page-node-id="c5mDWXFX3GtxgPSxTiCQDY"/><line x1="12" y1="21" x2="12" y2="23" data-page-node-id="lhNye1hQzdmGBKzKB7R83j"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-page-node-id="3AFIMxVxDcrmX4MBROT5l4"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-page-node-id="X8Fs7IMwJPXFJpc30BV9CI"/><line x1="1" y1="12" x2="3" y2="12" data-page-node-id="4vxX54gxfcLsruMe4xhbgX"/><line x1="21" y1="12" x2="23" y2="12" data-page-node-id="4KXrEuLpbVN6nPAYBy0Nf6"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-page-node-id="KNrO5lweVtR3E6VkF0IDtA"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-page-node-id="B89koFcTf36qQpME04slux"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-page-node-id="ltbAawtRVrgJWF9Afg3ddF"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-page-node-id="RPHd5gVeE1GflugmFfV44B"/></svg>
       </button>
-      <a class="icon-btn" href="https://github.com/tiamo1990/index" target="_blank" rel="noopener" aria-label="GitHub 仓库">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      <a class="icon-btn" href="https://github.com/tiamo1990/index" target="_blank" rel="noopener" aria-label="GitHub 仓库" data-page-node-id="S0DshPVvGor8WSXd1aEV6d">
+        <svg viewBox="0 0 24 24" aria-hidden="true" data-page-node-id="CjanUDpeH3Dbulu9TVuc6V"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" data-page-node-id="p7QtnsXCEbqpQaBE4pbV8m"/></svg>
       </a>
-      <button class="icon-btn burger" data-burger type="button" aria-label="打开菜单" aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      <button class="icon-btn burger" data-burger type="button" aria-label="打开菜单" aria-expanded="false" data-page-node-id="mNxgF70I9wEU6ZKnuqTz1q">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true" data-page-node-id="a1ZKOt5sMwvNCNBWOhBGT4"><line x1="3" y1="7" x2="21" y2="7" data-page-node-id="67Y0AcLtf4CHSmugS8qxse"/><line x1="3" y1="12" x2="21" y2="12" data-page-node-id="lDfyr8pAcNY3orgoGmHKMD"/><line x1="3" y1="17" x2="21" y2="17" data-page-node-id="Ca7u5J8AcQEJZaIRM6hN8l"/></svg>
       </button>
     </div>
   </div>
 </header>
 
-<div class="drawer" id="drawer">
-  <a href="index.html">首页 <span class="muted">01</span></a>
-  <a href="tools.html">资源库 <span class="muted">02</span></a>
-  <a href="guide.html">刷机指南 <span class="muted">03</span></a>
-  <a href="faq.html">常见问题 <span class="muted">04</span></a>
-  <a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 仓库 <span class="muted">↗</span></a>
-  <a href="index.html#quark" data-quark-link target="_blank" rel="noopener">夸克网盘 <span class="muted">↗</span></a>
+<div class="drawer" id="drawer" data-page-node-id="ygDGGTtzpJHvYIKTVCkkOb">
+  <a href="index.html" data-page-node-id="eGXFClG7lHSbLNm25LJ1IC">首页 <span class="muted" data-page-node-id="H1coeM2pkQd9xGlUCn7Y6h">01</span></a>
+  <a href="tools.html" data-page-node-id="eVpNjqJIbFEFvTfNejmQ21">资源库 <span class="muted" data-page-node-id="ABsqlUad1YssgX4hceAr3P">02</span></a>
+  <a href="guide.html" data-page-node-id="hdfsL61xtLFNmzSkEqR9lg">刷机指南 <span class="muted" data-page-node-id="V7O3hjIWWVxyArWCYpRrKs">03</span></a>
+  <a href="faq.html" data-page-node-id="ZgaMg04R4GmdRHAfUVhqAP">常见问题 <span class="muted" data-page-node-id="qIIJAP5hqqFmgaxJXNVH50">04</span></a>
+  <a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener" data-page-node-id="Fzu9JtfXzHjszHEzbr0rgR">GitHub 仓库 <span class="muted" data-page-node-id="o6p8MEHCDBdnpGOVuu6jyM">↗</span></a>
+  <a href="index.html#quark" data-quark-link target="_blank" rel="noopener" data-page-node-id="PK91kbSxI6n7mQgFzoSoL5">夸克网盘 <span class="muted" data-page-node-id="Ei5OWGDd7BtUdw1VHSYa2T">↗</span></a>
 </div>
 
-<main>
+<main data-page-node-id="dB9X9pZH999P49j5r5qmKM">
 
-  <section class="page-hero">
-    <div class="shell shell-wide">
-      <nav class="crumb reveal" aria-label="面包屑">
-        <a href="index.html">首页</a>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-        <span>刷机指南</span>
+  <section class="page-hero" data-page-node-id="BhnjmPC2RppZWwlQwlDLFn">
+    <div class="shell shell-wide" data-page-node-id="FFQKgI9fDrPCcudj5ALXdm">
+      <nav class="crumb reveal" aria-label="面包屑" data-page-node-id="qX2ySs6i7C2KqtZcYjKkzd">
+        <a href="index.html" data-page-node-id="ZHSKO5pUJ5tiRp98cZPUg1">首页</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-page-node-id="jEsIzDYxAQPp1bKZq35X1p"><polyline points="9 18 15 12 9 6" data-page-node-id="L2ax5yH8Pe8xk8Uy7CFxPs"/></svg>
+        <span data-page-node-id="sRYv8ChPfGgZd30jC9UQEC">刷机指南</span>
       </nav>
-      <h1 class="h1 reveal" style="font-size:clamp(2rem,4.6vw,3.1rem)">
-        从零开始的<span class="grad">完整刷机流程</span>
+      <h1 class="h1 reveal" style="font-size:clamp(2rem,4.6vw,3.1rem)" data-page-node-id="BF02Gr8eblbcQ09liBF3dZ">
+        从零开始的<span class="grad" data-page-node-id="PSyeSTutnKxysfBCAoGHWY">完整刷机流程</span>
       </h1>
-      <p class="lede reveal">
+      <p class="lede reveal" data-page-node-id="GbDM8RqstqZJOM8IHNTZ1V">
         按真实操作顺序编排的六个阶段。建议全程读完再动手，尤其是「路线选择」一节——
         它会决定你是否需要付出解锁 Bootloader 的代价。
       </p>
     </div>
   </section>
 
-  <section class="sec" style="padding-top:20px">
-    <div class="shell shell-wide">
-      <div class="split-2">
+  <section class="sec" style="padding-top:20px" data-page-node-id="lPqOuvVaio3rAIAoMXNfV4">
+    <div class="shell shell-wide" data-page-node-id="m2UpHcK6asVQ4OPesgIpTg">
+      <div class="split-2" data-page-node-id="QBR2s0s7PEL8AeisPLmMfE">
 
         <!-- TOC -->
-        <aside class="toc" aria-label="目录">
-          <h4>目录</h4>
-          <a href="#prepare">前置准备</a>
-          <a href="#s1">01 · 环境部署</a>
-          <a href="#s2">02 · 路线选择</a>
-          <a href="#s3">03 · 解锁 Bootloader</a>
-          <a href="#s4">04 · 刷入 Root 管理器</a>
-          <a href="#s5">05 · 刷入内核模块</a>
-          <a href="#s6">06 · 主题与系统 UI</a>
-          <a href="#trouble">异常处理</a>
+        <aside class="toc" aria-label="目录" data-page-node-id="FIJOAGsHCubdT4iNI58IPL">
+          <h4 data-page-node-id="0zfC9A8NxVtsliqTSCDEPM">目录</h4>
+          <a href="#prepare" data-page-node-id="5nD8cH2hgS4kOi4Y5soo6I">前置准备</a>
+          <a href="#s1" data-page-node-id="TBEnoaBa5K2MMAMYmBdDqG">01 · 环境部署</a>
+          <a href="#s2" data-page-node-id="ijFugMDfRqT1FHwbHCLSth">02 · 路线选择</a>
+          <a href="#s3" data-page-node-id="xw5vcrRwClrEvxeCpbzhle">03 · 解锁 Bootloader</a>
+          <a href="#s4" data-page-node-id="sYvS9VfWHqmGuoEk6Omjqc">04 · 刷入 Root 管理器</a>
+          <a href="#s5" data-page-node-id="53oK07ANttDJ080CEx02ID">05 · 刷入内核模块</a>
+          <a href="#s6" data-page-node-id="BCYHwVCTsEodDzRrP52nOH">06 · 主题与系统 UI</a>
+          <a href="#trouble" data-page-node-id="qd2NHiEIIoN37SplMOFxXE">异常处理</a>
         </aside>
 
-        <div>
+        <div data-page-node-id="1SqooblBjMU7MCNGfgWw8C">
           <!-- 前置准备 -->
-          <div id="prepare" style="scroll-margin-top:110px">
-            <span class="eyebrow">Before You Start</span>
-            <h2 class="h2" style="margin-bottom:20px">前置准备</h2>
+          <div id="prepare" style="scroll-margin-top:110px" data-page-node-id="7slYHHIHhwH5DkOWNBdWH5">
+            <span class="eyebrow" data-page-node-id="O2g8iQO3PxeR77mFFTr265">Before You Start</span>
+            <h2 class="h2" style="margin-bottom:20px" data-page-node-id="bQhyYcMeyv4t29llDe1Kbe">前置准备</h2>
 
-            <div class="callout danger reveal" style="margin-bottom:22px">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              <div>
-                <b>解锁 Bootloader 会清空设备全部数据</b>，并可能使官方保修状态发生变化。
+            <div class="callout danger reveal" style="margin-bottom:22px" data-page-node-id="VJObjUFNgF1JWSsn1C6vRj">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-page-node-id="vBBLidR63sf59fBwn1xV4M"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" data-page-node-id="XfqiYbN67hTGPGRzNFAtZQ"/><line x1="12" y1="9" x2="12" y2="13" data-page-node-id="7cHI7iCRizfUCt6JOnKnR2"/><line x1="12" y1="17" x2="12.01" y2="17" data-page-node-id="fZiZlpbrBLE60Ceyb30DxK"/></svg>
+              <div data-page-node-id="ndNJ1bY2HdjFvDTIQ0VH6B">
+                <b data-page-node-id="yU5ScfruJA2wCPjIjLbHrh">解锁 Bootloader 会清空设备全部数据</b>，并可能使官方保修状态发生变化。
                 动手前请把照片、聊天记录、应用数据完整备份到云端或电脑，并确认电量在 60% 以上。
               </div>
             </div>
 
-            <div class="grid-2">
-              <article class="card reveal">
-                <span class="icon-tile" data-icon="hardDrive"></span>
-                <h3 class="h3">硬件与环境清单</h3>
-                <ul style="margin-top:12px;display:grid;gap:9px">
-                  <li class="lede" style="font-size:13.6px">· 一台 Windows 10 / 11 电脑，USB 接口建议直连主板后置</li>
-                  <li class="lede" style="font-size:13.6px">· 原装或支持数据传输的 USB 线（劣质线是识别失败主因）</li>
-                  <li class="lede" style="font-size:13.6px">· 目标机型为 vivo / iQOO 骁龙 9400 平台（平板不支持）</li>
-                  <li class="lede" style="font-size:13.6px">· 已备份全部数据，且清楚各项操作的风险</li>
+            <div class="grid-2" data-page-node-id="W6SpKA0AShzKHKv91izk3t">
+              <article class="card reveal" data-page-node-id="yTKkCnSGYIiCywDBCZUcWG">
+                <span class="icon-tile" data-icon="hardDrive" data-page-node-id="W3AlUwBNSG5bRrlOwZlcDY"></span>
+                <h3 class="h3" data-page-node-id="qe9HDcQVdgt2is6CyBJJ6G">硬件与环境清单</h3>
+                <ul style="margin-top:12px;display:grid;gap:9px" data-page-node-id="zcPuyw0va6yFrEGy1x45vY">
+                  <li class="lede" style="font-size:13.6px" data-page-node-id="WWVuzhcv1STJnvFvB1ZhUl">· 一台 Windows 10 / 11 电脑，USB 接口建议直连主板后置</li>
+                  <li class="lede" style="font-size:13.6px" data-page-node-id="Blw0kxNMuCt0RAAt8gqRM0">· 原装或支持数据传输的 USB 线（劣质线是识别失败主因）</li>
+                  <li class="lede" style="font-size:13.6px" data-page-node-id="2RMDhUIzCOE3laYcTwdMjc">· 目标机型为 vivo / iQOO 骁龙 9400 平台（平板不支持）</li>
+                  <li class="lede" style="font-size:13.6px" data-page-node-id="oQyV1UTvrSZ9ctoxfJJemt">· 已备份全部数据，且清楚各项操作的风险</li>
                 </ul>
               </article>
 
-              <article class="card reveal">
-                <span class="icon-tile" data-icon="box"></span>
-                <h3 class="h3">需要提前下载</h3>
-                <ul style="margin-top:12px;display:grid;gap:9px">
-                  <li class="lede" style="font-size:13.6px">· vivo USB 驱动 + ADB 便携包（环境类）</li>
-                  <li class="lede" style="font-size:13.6px">· 一键解锁工具或临时 Root 包（按路线二选一）</li>
-                  <li class="lede" style="font-size:13.6px">· KernelSU / SakiSU 管理器</li>
-                  <li class="lede" style="font-size:13.6px">· 计划刷入的内核模块</li>
+              <article class="card reveal" data-page-node-id="q3SBbJtQyt6HtgSm9E0uAv">
+                <span class="icon-tile" data-icon="box" data-page-node-id="viJAjvXFSX7v6IZ8bQGMRl"></span>
+                <h3 class="h3" data-page-node-id="wLACQqDniAS1F5T8R0nIGN">需要提前下载</h3>
+                <ul style="margin-top:12px;display:grid;gap:9px" data-page-node-id="AIJs0a27bVW1gBajausdEv">
+                  <li class="lede" style="font-size:13.6px" data-page-node-id="nFXG7NKaxurPLaXI7aqSK9">· vivo USB 驱动 + ADB 便携包（环境类）</li>
+                  <li class="lede" style="font-size:13.6px" data-page-node-id="rNbxf9bA9vLY9KDjJhQThX">· 一键解锁工具或临时 Root 包（按路线二选一）</li>
+                  <li class="lede" style="font-size:13.6px" data-page-node-id="S26RMwWXZkyRbj6JHFYvs1">· KernelSU / SakiSU 管理器</li>
+                  <li class="lede" style="font-size:13.6px" data-page-node-id="ybbHesGHNola2QQK4VO5jp">· 计划刷入的内核模块</li>
                 </ul>
-                <a class="btn btn-soft btn-sm" href="tools.html" style="margin-top:18px">前往资源库下载</a>
+                <a class="btn btn-soft btn-sm" href="tools.html" style="margin-top:18px" data-page-node-id="wHEZ5XMN6wQeQxdFzm6Eu7">前往资源库下载</a>
               </article>
             </div>
           </div>
 
           <!-- 步骤 -->
-          <div class="steps" style="margin-top:52px">
+          <div class="steps" style="margin-top:52px" data-page-node-id="rhk78E1lALrJ4HEwxPz7Ec">
 
-            <article class="step reveal" id="s1" style="scroll-margin-top:110px">
-              <span class="no">01</span>
-              <div>
-                <h3>环境部署与设备识别</h3>
-                <p>
+            <article class="step reveal" id="s1" style="scroll-margin-top:110px" data-page-node-id="diKXmghk0tqrHFmnDesBEP">
+              <span class="no" data-page-node-id="i4gPbibmrpv9A2JGVXqFhJ">01</span>
+              <div data-page-node-id="8IFyEBpN8IbwNqe2eFzwLY">
+                <h3 data-page-node-id="7fRoxcE4G2VIbdd2D4N32j">环境部署与设备识别</h3>
+                <p data-page-node-id="Bii7LEaK4TgkmxVaTg6vv1">
                   先安装 vivo 官方 USB 驱动，再解压 ADB 便携包。设备开启「开发者选项 → USB 调试」后连接电脑，
                   确认 ADB 能正确列出设备。这一步不通，后面全部无法进行。
                 </p>
-                <div class="code">adb version
+                <div class="code" data-page-node-id="ky7aYqxYL4r3rrGgRD0qRx">adb version
 adb devices
-<span style="color:var(--tx-3)"># 输出应包含一行形如  3A21FDH200XXXX  device  的记录</span>
-<span style="color:var(--tx-3)"># 若显示 unauthorized，请在手机屏幕点击「允许 USB 调试」</span><button class="cp" data-copy="adb version
-adb devices" data-copy-msg="命令已复制" aria-label="复制命令"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
-                <div class="tips">
-                  <span class="badge">vivo_usb_driver.exe</span>
-                  <span class="badge">ADB 便携包</span>
+<span style="color:var(--tx-3)" data-page-node-id="afeiGMSZe0VzjOL0fDlTEx"># 输出应包含一行形如  3A21FDH200XXXX  device  的记录</span>
+<span style="color:var(--tx-3)" data-page-node-id="dQArGOjfB0tiFV7Sn2BZ6O"># 若显示 unauthorized，请在手机屏幕点击「允许 USB 调试」</span><button class="cp" data-copy="adb version
+adb devices" data-copy-msg="命令已复制" aria-label="复制命令" data-page-node-id="l5iSUzjqyNuO3JHDCoQ0Dt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="12yFFOYBZTwjCIrpyOU3lM"><rect x="9" y="9" width="13" height="13" rx="2" data-page-node-id="6dSWZYBFg8VGFC5LX4gwl5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" data-page-node-id="WsFUiCLz5yHMCfIr6xE3SA"/></svg></button></div>
+                <div class="tips" data-page-node-id="YJDeUGEWRV2xz990xk78D1">
+                  <span class="badge" data-page-node-id="TtEoE2ctFXkjXXyOzECzaZ">vivo_usb_driver.exe</span>
+                  <span class="badge" data-page-node-id="sawtb3rJhCOAhrMh7ySacq">ADB 便携包</span>
                 </div>
               </div>
             </article>
 
-            <article class="step reveal" id="s2" style="scroll-margin-top:110px">
-              <span class="no">02</span>
-              <div>
-                <h3>路线选择：临时 Root 还是永久解锁</h3>
-                <p>
+            <article class="step reveal" id="s2" style="scroll-margin-top:110px" data-page-node-id="105QHzUApfAQvF6pDfnum4">
+              <span class="no" data-page-node-id="XJXx542SIXx0SCHc5luDPL">02</span>
+              <div data-page-node-id="BsAjA1oD3Ldh0zksYAD2m8">
+                <h3 data-page-node-id="Gf0gxFUmk3PysYMzpoxLTP">路线选择：临时 Root 还是永久解锁</h3>
+                <p data-page-node-id="LMcfgjRqBnBnvaXABdwMu5">
                   这是整个流程中最重要的决策点。两条路线并不互斥——可以先走临时路线验证需求，再决定是否永久解锁。
                 </p>
 
-                <div class="grid-2" style="margin-top:18px">
-                  <div class="glass" style="padding:18px">
-                    <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">
-                      <span class="badge ok"><span class="dot"></span>免解锁</span>
-                      <b style="font-size:14px">临时 Root</b>
+                <div class="grid-2" style="margin-top:18px" data-page-node-id="2SXlzzSwd3olhxO6Mrbbxm">
+                  <div class="glass" style="padding:18px" data-page-node-id="PLDFkPpKC5hZsbpN0dJS5m">
+                    <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px" data-page-node-id="YmWvXGTXGc1bEGjEzanY9L">
+                      <span class="badge ok" data-page-node-id="A3FEsD5LMn6EBLt1li5drn"><span class="dot" data-page-node-id="YaFFFDPpXZADO8Tng4mbBe"></span>免解锁</span>
+                      <b style="font-size:14px" data-page-node-id="uVrd46oa1IGb61NJv9gUVv">临时 Root</b>
                     </div>
-                    <p class="lede" style="font-size:13.4px">
+                    <p class="lede" style="font-size:13.4px" data-page-node-id="U3C56tz4FSzGu0nxq40hkF">
                       不写分区、不改动 Bootloader 状态，重启后权限自动消失。
                       代价是无法长期驻留，内核模块与部分需要开机自启的功能受限。
                     </p>
                   </div>
-                  <div class="glass" style="padding:18px">
-                    <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">
-                      <span class="badge warn"><span class="dot"></span>需解锁</span>
-                      <b style="font-size:14px">永久解锁 + KernelSU</b>
+                  <div class="glass" style="padding:18px" data-page-node-id="LjtbNWp7SvAHQezd5puWOZ">
+                    <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px" data-page-node-id="CY2VLPLVR48P5q54dUZWrF">
+                      <span class="badge warn" data-page-node-id="Q3pDqbb0OVOhmSvZPjHpCH"><span class="dot" data-page-node-id="Pnp0egIU8iyETDlTOSb5GY"></span>需解锁</span>
+                      <b style="font-size:14px" data-page-node-id="yBFEGx2QLoseCrz3wqrHqX">永久解锁 + KernelSU</b>
                     </div>
-                    <p class="lede" style="font-size:13.4px">
+                    <p class="lede" style="font-size:13.4px" data-page-node-id="wzTVJG54ofQbsH8BfKnVKl">
                       一次性解锁 Bootloader 并写入 KernelSU，获得持久、完整的 Root 能力，
                       可自由刷入内核模块与主题破解。代价是清空数据。
                     </p>
                   </div>
                 </div>
-                <div class="tips">
-                  <span class="badge">仅尝鲜 → 临时 Root</span>
-                  <span class="badge">长期使用 → 永久解锁</span>
+                <div class="tips" data-page-node-id="QeBfCcOSI5CCaMsTkRW0jH">
+                  <span class="badge" data-page-node-id="hgm0WcevLyqjKcv3LgM9eU">仅尝鲜 → 临时 Root</span>
+                  <span class="badge" data-page-node-id="2k5GFrQ0IK1y7YAP0egPTl">长期使用 → 永久解锁</span>
                 </div>
               </div>
             </article>
 
-            <article class="step reveal" id="s3" style="scroll-margin-top:110px">
-              <span class="no">03</span>
-              <div>
-                <h3>解锁 Bootloader（永久路线）</h3>
-                <p>
-                  解压「vivo / iQOO 9400 一键解锁工具」压缩包，保持 <code>test.exe</code> 与主程序同目录，
+            <article class="step reveal" id="s3" style="scroll-margin-top:110px" data-page-node-id="mBvi7zF7jf7DkU5EEndeMW">
+              <span class="no" data-page-node-id="h4drBchMaHUi4Oc6uYQbs6">03</span>
+              <div data-page-node-id="783etnDSr979nlP03Y63ju">
+                <h3 data-page-node-id="I53Bcbwje7CZYC8fM2WFCg">解锁 Bootloader（永久路线）</h3>
+                <p data-page-node-id="7oYiqIF8sGBACjwMkIGpeX">
+                  解压「vivo / iQOO 9400 一键解锁工具」压缩包，保持 <code data-page-node-id="6h72QuuWKGDlGx7EMQ0vGY">test.exe</code> 与主程序同目录，
                   以管理员身份运行并按提示操作。工具会自动完成设备检测、解锁申请与分区写入。
                 </p>
-                <div class="callout info" style="margin-top:16px">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                  <div>
+                <div class="callout info" style="margin-top:16px" data-page-node-id="LKoQlGkrH5mOhFvV8TFNra">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-page-node-id="ygwLuTSiCx1pKMJiJsCMwg"><circle cx="12" cy="12" r="10" data-page-node-id="woqdfeXiCk6EO5YmtTWmrI"/><line x1="12" y1="16" x2="12" y2="12" data-page-node-id="vUwCAf1d8yABu9jJaDSN70"/><line x1="12" y1="8" x2="12.01" y2="8" data-page-node-id="wDXPtToEZOghQ6xgIjhMRA"/></svg>
+                  <div data-page-node-id="RuadwBUbvV5DnrzkyW2bRM">
                     解锁过程中设备会多次重启并自动清空数据，这属于正常现象，全程请勿拔线。
                     解锁完成后首次开机会出现「设备已解锁」提示。
                   </div>
                 </div>
-                <div class="tips">
-                  <span class="badge">一键解锁工具</span>
-                  <span class="badge danger">会清空数据</span>
-                  <span class="badge">不支持平板</span>
+                <div class="tips" data-page-node-id="cqnM4NA7reCqp9YHDnWo8B">
+                  <span class="badge" data-page-node-id="AbCTvmWefu7Lt4HoBAfskd">一键解锁工具</span>
+                  <span class="badge danger" data-page-node-id="XdCNl3VgLyKzVCzHwTH9tn">会清空数据</span>
+                  <span class="badge" data-page-node-id="7yzDK4Xd1B2EzOkS6jRfb2">不支持平板</span>
                 </div>
               </div>
             </article>
 
-            <article class="step reveal" id="s4" style="scroll-margin-top:110px">
-              <span class="no">04</span>
-              <div>
-                <h3>刷入 Root 管理器</h3>
-                <p>
+            <article class="step reveal" id="s4" style="scroll-margin-top:110px" data-page-node-id="rcSgEoy9QjgYegkE2vpf7d">
+              <span class="no" data-page-node-id="HiKCpuxaMchEHee7l7vDeX">04</span>
+              <div data-page-node-id="PS3brYmM6LPkgeTB3e0raI">
+                <h3 data-page-node-id="kfMmpW5bn2SYZr5v3w8tqW">刷入 Root 管理器</h3>
+                <p data-page-node-id="Vz5cZMF04dPo4O8K5wSkK9">
                   解锁完成后，安装 KernelSU 管理器接管 Root 权限。若使用 SakiSU 方案，
                   则安装对应的 SakiSU APK，两者择一即可，不建议同时启用。
                 </p>
-                <div class="code">adb install KernelSU_v3.2.5-44-g0f65ab64.apk
-<span style="color:var(--tx-3)"># 打开 App 确认「已安装」且版本号与内核匹配</span><button class="cp" data-copy="adb install KernelSU_v3.2.5-44-g0f65ab64.apk" data-copy-msg="命令已复制" aria-label="复制命令"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
-                <div class="tips">
-                  <span class="badge">KernelSU 管理器</span>
-                  <span class="badge">SakiSU（替代方案）</span>
+                <div class="code" data-page-node-id="uG7loGhOJsFQ43c3H3Bo4D">adb install KernelSU_v3.2.5-44-g0f65ab64.apk
+<span style="color:var(--tx-3)" data-page-node-id="aevQ3h9O55mLgDSFHly3Dr"># 打开 App 确认「已安装」且版本号与内核匹配</span><button class="cp" data-copy="adb install KernelSU_v3.2.5-44-g0f65ab64.apk" data-copy-msg="命令已复制" aria-label="复制命令" data-page-node-id="7nl0A3lA5KJccrksjxRDsy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="RwPEvDCVgZH3jOHiHxLhsA"><rect x="9" y="9" width="13" height="13" rx="2" data-page-node-id="vGqB3svU97dy665hITAtAD"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" data-page-node-id="3ljfuduxwBGtzEKoMen7eG"/></svg></button></div>
+                <div class="tips" data-page-node-id="k9jI0VRiiYsHfMSh7J2IuV">
+                  <span class="badge" data-page-node-id="TgjvsWc58nuDb5QpXB2Ahk">KernelSU 管理器</span>
+                  <span class="badge" data-page-node-id="cPUyu54r3GtnDv2XeNBnWW">SakiSU（替代方案）</span>
                 </div>
               </div>
             </article>
 
-            <article class="step reveal" id="s5" style="scroll-margin-top:110px">
-              <span class="no">05</span>
-              <div>
-                <h3>刷入内核模块</h3>
-                <p>
+            <article class="step reveal" id="s5" style="scroll-margin-top:110px" data-page-node-id="MVOEsVIzCxvDFFzm7I9N5B">
+              <span class="no" data-page-node-id="TUKsKOYi9N2F4qUhUdJ2X4">05</span>
+              <div data-page-node-id="Wlh388AoAdMbdiv5v8mcFC">
+                <h3 data-page-node-id="O6arYLDA2r431TpKDuP4vI">刷入内核模块</h3>
+                <p data-page-node-id="fnbcpFTly1LrrwVfYN80hA">
                   在 KernelSU 管理器的「模块」页面逐项选择 zip 文件安装并重启生效。
                   建议按下面的顺序推进，先装依赖、再做功能增强，出问题时更容易定位。
                 </p>
 
-                <div class="glass" style="padding:20px;margin-top:18px">
-                  <div style="display:grid;gap:14px">
-                    <div style="display:flex;gap:13px;align-items:flex-start">
-                      <span class="badge brand">1</span>
-                      <div>
-                        <b style="font-size:13.8px">基础依赖层</b>
-                        <p class="lede" style="font-size:13.2px;margin-top:3px">
+                <div class="glass" style="padding:20px;margin-top:18px" data-page-node-id="Qk1TieIvuKgYZ4suCX6Sty">
+                  <div style="display:grid;gap:14px" data-page-node-id="77jcEvfn3si1Fqtr5wB8np">
+                    <div style="display:flex;gap:13px;align-items:flex-start" data-page-node-id="YUYGmFkBANGaBQjjvx4YLl">
+                      <span class="badge brand" data-page-node-id="USvvgjUYYwLA0B3jKWGB5T">1</span>
+                      <div data-page-node-id="J7DZ3vOu4vcJwy7234FTHY">
+                        <b style="font-size:13.8px" data-page-node-id="OX3y5YMHYyo7DsTCmsHjaT">基础依赖层</b>
+                        <p class="lede" style="font-size:13.2px;margin-top:3px" data-page-node-id="K1tR03PGbIDaZnE26h1QIQ">
                           Zygisk Next → magic_mount_rs。这两项是后续模块运行的前置条件。
                         </p>
                       </div>
                     </div>
-                    <div style="display:flex;gap:13px;align-items:flex-start">
-                      <span class="badge brand">2</span>
-                      <div>
-                        <b style="font-size:13.8px">系统稳定性层</b>
-                        <p class="lede" style="font-size:13.2px;margin-top:3px">
+                    <div style="display:flex;gap:13px;align-items:flex-start" data-page-node-id="5pvlDxrIzQ5m2Pwtmk8LIb">
+                      <span class="badge brand" data-page-node-id="phaIFWOcp3Lia9ELeYoHqw">2</span>
+                      <div data-page-node-id="IDlLzGJVsbnm2n8a2O0zbd">
+                        <b style="font-size:13.8px" data-page-node-id="sVCXJHrDNLCjiA49n2ntki">系统稳定性层</b>
+                        <p class="lede" style="font-size:13.2px;margin-top:3px" data-page-node-id="nGvXBbxbhHjkEEAXeW9Pda">
                           block_vivo_ota / 屏蔽系统更新 → AutoADB WiFi → RescueX 救援模块。
                         </p>
                       </div>
                     </div>
-                    <div style="display:flex;gap:13px;align-items:flex-start">
-                      <span class="badge brand">3</span>
-                      <div>
-                        <b style="font-size:13.8px">性能调度层</b>
-                        <p class="lede" style="font-size:13.2px;margin-top:3px">
+                    <div style="display:flex;gap:13px;align-items:flex-start" data-page-node-id="T42kvJNvt9fd0lVSa9BgPO">
+                      <span class="badge brand" data-page-node-id="rwSTYRo4bJxS4z6foAZ62p">3</span>
+                      <div data-page-node-id="0tUvAFD7X5FhGzuClTtoLu">
+                        <b style="font-size:13.8px" data-page-node-id="4e5NXvaPdgJHv55Hd0LlpG">性能调度层</b>
+                        <p class="lede" style="font-size:13.2px;margin-top:3px" data-page-node-id="cHeXgB8YEwVeaaTefYuB9E">
                           GPU Governor / 线程调度 / ExtremeGT / 极致性能。
-                          <span class="muted">同类模块不要叠加，选中一个即可。</span>
+                          <span class="muted" data-page-node-id="P7JairKToECsl9VGZBn5VV">同类模块不要叠加，选中一个即可。</span>
                         </p>
                       </div>
                     </div>
-                    <div style="display:flex;gap:13px;align-items:flex-start">
-                      <span class="badge brand">4</span>
-                      <div>
-                        <b style="font-size:13.8px">外观与隐藏层</b>
-                        <p class="lede" style="font-size:13.2px;margin-top:3px">
+                    <div style="display:flex;gap:13px;align-items:flex-start" data-page-node-id="TAW3B1WaIV4zklVrHRt4pE">
+                      <span class="badge brand" data-page-node-id="eq7Bk87fpTIsyCxB5A5Coo">4</span>
+                      <div data-page-node-id="gE9F1dpUN9MgBxyPUccSah">
+                        <b style="font-size:13.8px" data-page-node-id="ewTAuVdJL791HzsLN7kzJR">外观与隐藏层</b>
+                        <p class="lede" style="font-size:13.2px;margin-top:3px" data-page-node-id="kgj1kBEnILkXdZxMb9HiV8">
                           MiSans 字体模块（四选一）→ FontLoader → 月虹隐藏 / 移除温控。
                         </p>
                       </div>
@@ -291,56 +291,56 @@ adb devices" data-copy-msg="命令已复制" aria-label="复制命令"><svg view
                   </div>
                 </div>
 
-                <div class="callout warn" style="margin-top:18px">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                  <div>
-                    <b>不要一次性刷入全部模块。</b>
+                <div class="callout warn" style="margin-top:18px" data-page-node-id="iqon8E3RC7dw2z6hVq6dwi">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-page-node-id="CyrmDOqPPLXHTJF9FhMPv1"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" data-page-node-id="5U1FUN4sMK766k79TCH66l"/><line x1="12" y1="9" x2="12" y2="13" data-page-node-id="Zma7EnE0vF0GoMxJudKIS9"/><line x1="12" y1="17" x2="12.01" y2="17" data-page-node-id="dQ16lo75s4HhUM3tQQWdPi"/></svg>
+                  <div data-page-node-id="vkzVFNTLMgdJULrYk1q0zo">
+                    <b data-page-node-id="30W75MWarTKzkAQeIJWLUo">不要一次性刷入全部模块。</b>
                     每装 2–3 个就重启验证一次，确认开机正常后再继续，否则很难判断是哪个模块导致的启动异常。
                   </div>
                 </div>
 
-                <div class="tips">
-                  <span class="badge">Zygisk Next</span>
-                  <span class="badge">magic_mount_rs</span>
-                  <span class="badge">MiSans 字体</span>
-                  <span class="badge">性能调度</span>
-                  <span class="badge">Root 隐藏</span>
+                <div class="tips" data-page-node-id="WmGszA3ncNoTOgl3BUJVuZ">
+                  <span class="badge" data-page-node-id="Godp3XUv5frqVulw3mrHkA">Zygisk Next</span>
+                  <span class="badge" data-page-node-id="RMeDh33HP4sjGtpQczukU9">magic_mount_rs</span>
+                  <span class="badge" data-page-node-id="MimIkZTlmv5id2KhAEKMSt">MiSans 字体</span>
+                  <span class="badge" data-page-node-id="wgBDWAWzC2GGsYdH9Kc9n4">性能调度</span>
+                  <span class="badge" data-page-node-id="cc56PZZS4JGZZi0aGRF39y">Root 隐藏</span>
                 </div>
               </div>
             </article>
 
-            <article class="step reveal" id="s6" style="scroll-margin-top:110px">
-              <span class="no">06</span>
-              <div>
-                <h3>主题与系统 UI 替换</h3>
-                <p>
+            <article class="step reveal" id="s6" style="scroll-margin-top:110px" data-page-node-id="m0qKmrEPRLvEAbskLmmgeG">
+              <span class="no" data-page-node-id="xMbdKLL6lZlNGReFp9VA6s">06</span>
+              <div data-page-node-id="ud9Qdd4OO8dFnZB5sm1Gxz">
+                <h3 data-page-node-id="u6v1SmCpW8v8neDF5PAqug">主题与系统 UI 替换</h3>
+                <p data-page-node-id="VQgNgoYIlZWEIagP9gGnPK">
                   这一阶段依赖 LSPosed 环境：先确认 Zygisk Next 已就绪并启用 LSPosed，
                   再安装主题破解模块，最后替换 SystemUI 资源。
                 </p>
-                <div style="display:grid;gap:10px;margin-top:16px">
-                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center">
-                    <span class="badge">a</span>
-                    <span class="lede" style="font-size:13.4px">安装并启用 LSPosed 框架，确认作用域勾选系统 UI 与主题商店</span>
+                <div style="display:grid;gap:10px;margin-top:16px" data-page-node-id="Ci8CReEm3KNiAOUyHdH4ZM">
+                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center" data-page-node-id="pFHQEqe3cADJga7SKwJHZX">
+                    <span class="badge" data-page-node-id="FY9EoRhFcVYIIIyTlQgDWa">a</span>
+                    <span class="lede" style="font-size:13.4px" data-page-node-id="YlnIp2vTeJXjg2NypTYW59">安装并启用 LSPosed 框架，确认作用域勾选系统 UI 与主题商店</span>
                   </div>
-                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center">
-                    <span class="badge">b</span>
-                    <span class="lede" style="font-size:13.4px">刷入对应系统版本的「主题破解」模块（15.5.0.1 以上请选新版）</span>
+                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center" data-page-node-id="XMmpdkJ9TjSLcIiKE1hI7N">
+                    <span class="badge" data-page-node-id="K5eWVrVH03gHFp1rkHY97o">b</span>
+                    <span class="lede" style="font-size:13.4px" data-page-node-id="oPjV7h1ZPrfG2leszOSrsU">刷入对应系统版本的「主题破解」模块（15.5.0.1 以上请选新版）</span>
                   </div>
-                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center">
-                    <span class="badge">c</span>
-                    <span class="lede" style="font-size:13.4px">用 MT 管理器替换 SystemUI 资源，或直接导入 .itz 主题包</span>
+                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center" data-page-node-id="xCBu3wOqVHhOrdBpwJ3hCZ">
+                    <span class="badge" data-page-node-id="sAQfqCNav557W80TqSdT21">c</span>
+                    <span class="lede" style="font-size:13.4px" data-page-node-id="CA34WJo4HwDn11QTYD0svB">用 MT 管理器替换 SystemUI 资源，或直接导入 .itz 主题包</span>
                   </div>
-                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center">
-                    <span class="badge">d</span>
-                    <span class="lede" style="font-size:13.4px">重启并校验：状态栏、通知面板、快捷开关是否全部生效</span>
+                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center" data-page-node-id="fJ4LCX7zxGefLUlHVfRgQp">
+                    <span class="badge" data-page-node-id="NyEBx8Lk7giewyFpZe94RX">d</span>
+                    <span class="lede" style="font-size:13.4px" data-page-node-id="xdnJ0mwrfhmF8lmP4RZolD">重启并校验：状态栏、通知面板、快捷开关是否全部生效</span>
                   </div>
                 </div>
-                <div class="tips">
-                  <span class="badge">主题破解 v114514</span>
-                  <span class="badge">15.5.0.1+ 破解</span>
-                  <span class="badge">仿小米主题包</span>
-                  <span class="badge">SystemUI 资源</span>
-                  <span class="badge">MT 管理器</span>
+                <div class="tips" data-page-node-id="UEOeiFLFPSU5Lgc1CF1DBt">
+                  <span class="badge" data-page-node-id="TqOS8UglAmXgWXtd4gkLSn">主题破解 v114514</span>
+                  <span class="badge" data-page-node-id="FUUTqNtDN6eHMgYuZPaiHF">15.5.0.1+ 破解</span>
+                  <span class="badge" data-page-node-id="DGbXfeESgMzJPq3Bp5IJ7B">仿小米主题包</span>
+                  <span class="badge" data-page-node-id="ugiJojUN1OBIwzv0fn2sqU">SystemUI 资源</span>
+                  <span class="badge" data-page-node-id="ToNBjBSn1XiCg70tabAamj">MT 管理器</span>
                 </div>
               </div>
             </article>
@@ -348,80 +348,80 @@ adb devices" data-copy-msg="命令已复制" aria-label="复制命令"><svg view
           </div>
 
           <!-- 异常处理 -->
-          <div id="trouble" style="scroll-margin-top:110px;margin-top:52px">
-            <span class="eyebrow">Troubleshooting</span>
-            <h2 class="h2" style="margin-bottom:20px">异常处理速查</h2>
+          <div id="trouble" style="scroll-margin-top:110px;margin-top:52px" data-page-node-id="c5CjQ6IGhfw4x3aesBfGyJ">
+            <span class="eyebrow" data-page-node-id="UGrfcPEEBotLw58fnR8wvE">Troubleshooting</span>
+            <h2 class="h2" style="margin-bottom:20px" data-page-node-id="IHuHhVk2vhGS3qGq2q0A5i">异常处理速查</h2>
 
-            <div class="acc">
-              <div class="acc-item">
-                <button class="acc-q" type="button" aria-expanded="false">
-                  <span class="idx">Q1</span>
+            <div class="acc" data-page-node-id="1EkRfGGRdJzYu9LVAfD9JF">
+              <div class="acc-item" data-page-node-id="b5e9WdzRDOEjHRaJ66VqSu">
+                <button class="acc-q" type="button" aria-expanded="false" data-page-node-id="ghFpN71jk9ziiBuTfSb6Cd">
+                  <span class="idx" data-page-node-id="SgK71jtdnLW7aHfO4tuo1a">Q1</span>
                   电脑识别不到设备怎么办？
-                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                  <span class="tg" data-page-node-id="kPiRIBDNqjv45OqgaQG3by"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="GrQoeTI0A5I8VNRulwT4Ul"><line x1="12" y1="5" x2="12" y2="19" data-page-node-id="VT2XeYqGS6xID3LeKv8hkt"/><line x1="5" y1="12" x2="19" y2="12" data-page-node-id="1zop7cqDOiEohcyv1Yv0Yj"/></svg></span>
                 </button>
-                <div class="acc-a"><div class="inner">
-                  按顺序排查：<strong>①</strong> 更换 USB 线与接口（优先主板后置口）；<strong>②</strong> 重新安装 vivo USB 驱动；
-                  <strong>③</strong> 设备端把 USB 模式从「仅充电」改为「传输文件」；<strong>④</strong> 在设备管理器中查看是否有带感叹号的未知设备，
-                  如有则手动指定驱动目录；<strong>⑤</strong> 关闭电脑上的手机助手类软件后重试。
+                <div class="acc-a" data-page-node-id="7btYe5l9OserMNDqxyYq0r"><div class="inner" data-page-node-id="5BIDwJhpdwU0p0nBRWYq1Z">
+                  按顺序排查：<strong data-page-node-id="CBeAZ8ZWR0yI4zMPzYsDEW">①</strong> 更换 USB 线与接口（优先主板后置口）；<strong data-page-node-id="LUvenu23wGnjcWTqxXsslB">②</strong> 重新安装 vivo USB 驱动；
+                  <strong data-page-node-id="bI9gWFDqH3vQvniwzQ8dsH">③</strong> 设备端把 USB 模式从「仅充电」改为「传输文件」；<strong data-page-node-id="XCI2jFfolA1ZYEiBACxAKe">④</strong> 在设备管理器中查看是否有带感叹号的未知设备，
+                  如有则手动指定驱动目录；<strong data-page-node-id="jp89DUAakeDfuCQcxLLTlN">⑤</strong> 关闭电脑上的手机助手类软件后重试。
                 </div></div>
               </div>
 
-              <div class="acc-item">
-                <button class="acc-q" type="button" aria-expanded="false">
-                  <span class="idx">Q2</span>
+              <div class="acc-item" data-page-node-id="37DcyIIrl0VeWeRIF2Q2rU">
+                <button class="acc-q" type="button" aria-expanded="false" data-page-node-id="u41P0tFq7WusiP9Yzi2Dhj">
+                  <span class="idx" data-page-node-id="vWiVSEjXS5EfXF6zkWSQnL">Q2</span>
                   adb devices 显示 unauthorized
-                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                  <span class="tg" data-page-node-id="HZaR28wsg9mf18B3kgeHEJ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="Hhk4V0efyHJcQVCWQJ9CEC"><line x1="12" y1="5" x2="12" y2="19" data-page-node-id="shWnCEWRN2X1mQL9akN6Jz"/><line x1="5" y1="12" x2="19" y2="12" data-page-node-id="VqUmSphywPo4O0ORBCiKMC"/></svg></span>
                 </button>
-                <div class="acc-a"><div class="inner">
+                <div class="acc-a" data-page-node-id="57wciRXzVZHbDivehIHy2S"><div class="inner" data-page-node-id="XkcmxcOoFBRLhShCcc03tR">
                   这是设备尚未授权调试。点亮手机屏幕查看是否有「允许 USB 调试」弹窗并勾选「始终允许」。
                   若没有弹窗，进入开发者选项执行「撤销 USB 调试授权」后重新插拔；仍无效可尝试重启 ADB 服务：
-                  <code style="font-size:12.5px">adb kill-server</code> → <code style="font-size:12.5px">adb start-server</code>。
+                  <code style="font-size:12.5px" data-page-node-id="LlCibxVorTRxH8jdEoSj4a">adb kill-server</code> → <code style="font-size:12.5px" data-page-node-id="IhaQWLKCPZugDfqiI9hGKH">adb start-server</code>。
                 </div></div>
               </div>
 
-              <div class="acc-item">
-                <button class="acc-q" type="button" aria-expanded="false">
-                  <span class="idx">Q3</span>
+              <div class="acc-item" data-page-node-id="zeiBGQSvYcTI39GmVBCnDI">
+                <button class="acc-q" type="button" aria-expanded="false" data-page-node-id="hKWCy8HCrNsXArjGQf4Nx6">
+                  <span class="idx" data-page-node-id="msNNa5qVhDIkfFbyE3yIYa">Q3</span>
                   临时 Root 拿到了但权限不生效
-                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                  <span class="tg" data-page-node-id="0LJHLCDAzxW3F3WyY3pr2V"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="VxkYaMJstnjD4NBjmtd03L"><line x1="12" y1="5" x2="12" y2="19" data-page-node-id="eJiPkNHDCR6AuA80GBchBr"/><line x1="5" y1="12" x2="19" y2="12" data-page-node-id="XP2tAQXSKPzcWjXYi8yLT8"/></svg></span>
                 </button>
-                <div class="acc-a"><div class="inner">
-                  这是典型的「有 root 无实权」。使用资源库中的<strong>修复临时 root 无实权脚本</strong>，
-                  在 ADB Shell 中推入并执行，即可恢复挂载与写入权限。执行后建议用 <code style="font-size:12.5px">id</code> 命令确认 uid=0。
+                <div class="acc-a" data-page-node-id="cUm990HZrNrYk5nHioUmQh"><div class="inner" data-page-node-id="LX2jj2dP5GKCHhhA62qHjw">
+                  这是典型的「有 root 无实权」。使用资源库中的<strong data-page-node-id="f29VIFAGhdLi0lVgAJ3k1a">修复临时 root 无实权脚本</strong>，
+                  在 ADB Shell 中推入并执行，即可恢复挂载与写入权限。执行后建议用 <code style="font-size:12.5px" data-page-node-id="gpkjKcDjoaqL5ouczFWMuZ">id</code> 命令确认 uid=0。
                 </div></div>
               </div>
 
-              <div class="acc-item">
-                <button class="acc-q" type="button" aria-expanded="false">
-                  <span class="idx">Q4</span>
+              <div class="acc-item" data-page-node-id="g0qBjkfNf6aNALwG8qaDbF">
+                <button class="acc-q" type="button" aria-expanded="false" data-page-node-id="umulsm4blD089qxqOVgx14">
+                  <span class="idx" data-page-node-id="JIl5PvMUk9HaaCGWU0y8Sd">Q4</span>
                   刷入模块后无法开机
-                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                  <span class="tg" data-page-node-id="XDfmbtnkngDs7zZfyE8mUv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="ajsbbXYk5iLErldlpktcz4"><line x1="12" y1="5" x2="12" y2="19" data-page-node-id="Hx4RGmKdI0NXDicMTiWhQq"/><line x1="5" y1="12" x2="19" y2="12" data-page-node-id="gnH3Yoh3IvFTEc40AchJ24"/></svg></span>
                 </button>
-                <div class="acc-a"><div class="inner">
-                  长按电源键强制重启，多数情况下 KernelSU 会在检测到连续启动失败后自动进入<strong>安全模式</strong>并禁用全部模块。
+                <div class="acc-a" data-page-node-id="H1sLp0yy8qj4LfnMmYIAHA"><div class="inner" data-page-node-id="Ir45zIe6drhxSs20K2a2oh">
+                  长按电源键强制重启，多数情况下 KernelSU 会在检测到连续启动失败后自动进入<strong data-page-node-id="xndMeVqUAThCspGVeQwBYv">安全模式</strong>并禁用全部模块。
                   若未自动进入，可在开机时按音量键组合触发安全模式，进入后逐个禁用最近安装的模块定位问题。
                   这也是为什么不要一次性刷入多个模块的原因。
                 </div></div>
               </div>
 
-              <div class="acc-item">
-                <button class="acc-q" type="button" aria-expanded="false">
-                  <span class="idx">Q5</span>
+              <div class="acc-item" data-page-node-id="KBc85yXd4RVMCS3bnDB588">
+                <button class="acc-q" type="button" aria-expanded="false" data-page-node-id="BP2IGZ732mic4hme0ijWPI">
+                  <span class="idx" data-page-node-id="DpouaUf3dDCPmKDCyvKpAV">Q5</span>
                   解锁后收到系统更新提示
-                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                  <span class="tg" data-page-node-id="Jle05wLZmG6JMUYH6eLhh5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-page-node-id="zyBubHHDU0vQLcyCDu8QU2"><line x1="12" y1="5" x2="12" y2="19" data-page-node-id="YZ1f8P6CglHkEeQMbX1w19"/><line x1="5" y1="12" x2="19" y2="12" data-page-node-id="YlMsgcZyaCKaHtP3zTxuvV"/></svg></span>
                 </button>
-                <div class="acc-a"><div class="inner">
-                  刷入 <strong>block_vivo_ota</strong> 或 <strong>vivo 屏蔽系统更新</strong> 模块阻断升级流程。
+                <div class="acc-a" data-page-node-id="rep1XxYKoPBhaJE6GAkhis"><div class="inner" data-page-node-id="QB1W4VkmNEX973G6QnS4ip">
+                  刷入 <strong data-page-node-id="tCi7Ejjo7Df1cttJH1Plag">block_vivo_ota</strong> 或 <strong data-page-node-id="MbZi97m8lE0r8RNQjEKPSn">vivo 屏蔽系统更新</strong> 模块阻断升级流程。
                   切勿在解锁状态下直接接受 OTA，覆盖安装极可能导致 Root 环境失效甚至无法开机。
                 </div></div>
               </div>
             </div>
 
-            <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
-              <a class="btn btn-ghost" href="faq.html">查看全部常见问题</a>
-              <a class="btn btn-primary" href="tools.html">
+            <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap" data-page-node-id="EsttGh2FqVLWINOvuTr1vA">
+              <a class="btn btn-ghost" href="faq.html" data-page-node-id="Tfn9Pbj8mx0n1f3U8PKv32">查看全部常见问题</a>
+              <a class="btn btn-primary" href="tools.html" data-page-node-id="Kv5zRJWX7RHGQ8KILoH1PN">
                 前往资源库下载
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-page-node-id="UiLMe7G67sMcbLRB3eEhJl"><line x1="5" y1="12" x2="19" y2="12" data-page-node-id="PoC6fw4C8NNfDc9IzdhIgz"/><polyline points="12 5 19 12 12 19" data-page-node-id="sNhAeVbLGz4g76uBgtQiGE"/></svg>
               </a>
             </div>
           </div>
@@ -433,48 +433,48 @@ adb devices" data-copy-msg="命令已复制" aria-label="复制命令"><svg view
 
 </main>
 
-<footer class="footer">
-  <div class="shell shell-wide">
-    <div class="footer-grid">
-      <div class="about">
-        <a class="brand" href="index.html">
-          <span class="brand-mark">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="9" rx="2.6"/><path d="M8 11V7.4a4.5 4.5 0 0 1 8.8-1.3"/></svg>
+<footer class="footer" data-page-node-id="0tkSde5DIprJR4yGHFFikZ">
+  <div class="shell shell-wide" data-page-node-id="XgwE8Zi7QDBYJhm7SB2v21">
+    <div class="footer-grid" data-page-node-id="SDmqSjKnPyWUECrCieQoyT">
+      <div class="about" data-page-node-id="CDz37aMQQ8snuowPD4lcDb">
+        <a class="brand" href="index.html" data-page-node-id="C7j5dXRZ4LchIFLgHftF3U">
+          <span class="brand-mark" data-page-node-id="8TICHIo3Rm7Aid5LBtVlh9">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-page-node-id="iqyAXDObl1jPDIrG3x8Xz4"><rect x="4" y="11" width="16" height="9" rx="2.6" data-page-node-id="FdbffDpUwEhEPNaTwUKVYr"/><path d="M8 11V7.4a4.5 4.5 0 0 1 8.8-1.3" data-page-node-id="qgXSZv7EDz3ZShPaTCOlVF"/></svg>
           </span>
-          <span class="brand-txt"><b>vivo 玩机工具</b><span>Play Toolkit</span></span>
+          <span class="brand-txt" data-page-node-id="7qRudDRGUbTUXf6SiIkyR9"><b data-page-node-id="lnSfrbVv5cKVnELA2tguOP">vivo 玩机工具</b><span data-page-node-id="2INQqzL02dDbhSwv2RHVBP">Play Toolkit</span></span>
         </a>
-        <p>面向 vivo / iQOO 机型的玩机资源整合站点，覆盖解锁、Root、内核模块与主题改造全流程。</p>
+        <p data-page-node-id="Cz8bCyhC6BRSZETwa0kXdt">面向 vivo / iQOO 机型的玩机资源整合站点，覆盖解锁、Root、内核模块与主题改造全流程。</p>
       </div>
-      <div>
-        <h4>站点导航</h4>
-        <ul>
-          <li><a href="index.html">首页</a></li>
-          <li><a href="tools.html">资源库</a></li>
-          <li><a href="guide.html">刷机指南</a></li>
-          <li><a href="faq.html">常见问题</a></li>
+      <div data-page-node-id="1Hm6Kdyt1qhjKsSSqyh25b">
+        <h4 data-page-node-id="esPG2Ia3KugEicggzLLhIu">站点导航</h4>
+        <ul data-page-node-id="Bk7DyZ98LXft5Xtsj6uYPQ">
+          <li data-page-node-id="d7VFAD9unjnkxqyVDFOCEh"><a href="index.html" data-page-node-id="wWV85LiQF47WR2i7IcM7aF">首页</a></li>
+          <li data-page-node-id="EWg0KVWqqAA49cknI12YcC"><a href="tools.html" data-page-node-id="9tsER8y9c15l0BAfpBFrfx">资源库</a></li>
+          <li data-page-node-id="iTvgVdedDbIVfivLmAldU4"><a href="guide.html" data-page-node-id="hBipBrKoSoIofSZt8ZicdH">刷机指南</a></li>
+          <li data-page-node-id="jxgFAu2scA6krSTHMc7VEB"><a href="faq.html" data-page-node-id="gp3IPMeP9hP1IWS8vOVSRL">常见问题</a></li>
         </ul>
       </div>
-      <div>
-        <h4>资源分类</h4>
-        <ul>
-          <li><a href="tools.html#cat-bootloader">解锁 Bootloader</a></li>
-          <li><a href="tools.html#cat-temp-root">临时 Root</a></li>
-          <li><a href="tools.html#cat-ksu">KernelSU 模块</a></li>
-          <li><a href="tools.html#cat-theme">主题替换资源</a></li>
+      <div data-page-node-id="cEy5nIFLgTrbTHhX23tDSs">
+        <h4 data-page-node-id="FkESrGqTC6yLZtLvZh8Wfd">资源分类</h4>
+        <ul data-page-node-id="2am0kBITtkDpVO7YXu9HrH">
+          <li data-page-node-id="HBb5xQhN9fi1UXUQqz5Pja"><a href="tools.html#cat-bootloader" data-page-node-id="BcTSPZrVWYvF1GVz9O1pIA">解锁 Bootloader</a></li>
+          <li data-page-node-id="m2MW6CFTsLrJ0oGDz9rP17"><a href="tools.html#cat-temp-root" data-page-node-id="SVseGHDXNZ7ijs4Kw0QACF">临时 Root</a></li>
+          <li data-page-node-id="Y9c4D8BLJpkcEKH0jsC5fj"><a href="tools.html#cat-ksu" data-page-node-id="ptJpWXxxgXXFRjH0gSxv8C">KernelSU 模块</a></li>
+          <li data-page-node-id="2PPBgrmD3Gu6TRZK1H2PMC"><a href="tools.html#cat-theme" data-page-node-id="kcmmui8vy0xooTEvM6ZRNI">主题替换资源</a></li>
         </ul>
       </div>
-      <div>
-        <h4>下载通道</h4>
-        <ul>
-          <li><a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 仓库 ↗</a></li>
-          <li><a data-quark-link href="#" target="_blank" rel="noopener">夸克网盘 ↗</a></li>
-          <li><a href="faq.html#disclaimer">免责声明</a></li>
+      <div data-page-node-id="ZfHqJErdO4hBTaf3tuueqd">
+        <h4 data-page-node-id="DTRQP9aQ2BRWdoGjz0mG5U">下载通道</h4>
+        <ul data-page-node-id="xwBbxgwzFbD2dCZu2ePnsD">
+          <li data-page-node-id="GTjEXUAaKVos4d71O9byAh"><a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener" data-page-node-id="bNYY4UE8yVte0a9DqKdBXv">GitHub 仓库 ↗</a></li>
+          <li data-page-node-id="ivoo2tGlccjNN2XaO4NSDk"><a data-quark-link href="https://pan.quark.cn/s/956743d482f3" target="_blank" rel="noopener" data-page-node-id="n6RtL8NoeYdb9qXPD0CN67">夸克网盘 ↗</a></li>
+          <li data-page-node-id="FyMEODRnpAdFhL1KWpEnQG"><a href="faq.html#disclaimer" data-page-node-id="hDxizQuNrxBEsD6tY3ptCt">免责声明</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bot">
-      <span>© <span data-year>2026</span> vivo 玩机工具 · 资源仅供学习与个人使用</span>
-      <span class="muted">GitHub Pages 静态托管 · 双通道分发</span>
+    <div class="footer-bot" data-page-node-id="0rXSnHHKYcUXDWithHFEwU">
+      <span data-page-node-id="9jBgDsMQr4IIXt63P5Tjqy">© <span data-year data-page-node-id="GPk8PatQ2VGrSyaYzAZPh7">2026</span> vivo 玩机工具 · 资源仅供学习与个人使用</span>
+      <span class="muted" data-page-node-id="M5bL4xf7glPxrtRL2GQUtf">GitHub Pages 静态托管 · 双通道分发</span>
     </div>
   </div>
 </footer>

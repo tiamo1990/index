@@ -17,7 +17,11 @@
 
   function init() {
     /* --- 分享链接注入 --- */
-    d.querySelectorAll('[data-quark-link]').forEach(function (a) { a.href = DATA.quarkShare; });
+    var qOpen = DATA.quarkEntry || DATA.quarkShare;
+    d.querySelectorAll('[data-quark-link]').forEach(function (a) {
+      a.href = qOpen;
+      if (!a.title) a.title = '在夸克网盘中打开《vivo 玩机工具》主目录';
+    });
     d.querySelectorAll('[data-quark-copy]').forEach(function (b) { b.dataset.copy = DATA.quarkShare; });
     var addr = d.getElementById('quarkAddr');
     if (addr) addr.textContent = DATA.quarkShare;
@@ -51,10 +55,14 @@
         var badges = it.tags.slice(0, 2).map(function (t) {
           return '<span class="badge">' + esc(t) + '</span>';
         }).join('');
+        var qBtn = '<a class="btn btn-' + (it.large ? 'primary' : 'ghost') + ' btn-sm"' +
+          ' href="' + esc(it.quarkUrl) + '" target="_blank" rel="noopener"' +
+          ' data-quark-hint="' + esc(it.quarkHint) + '"' +
+          ' title="' + esc(it.quarkHint) + '">' + ic('cloud') +
+          (it.large ? '夸克网盘下载' : '夸克网盘') + '</a>';
         var acts = it.large
-          ? '<a class="btn btn-primary btn-sm" href="' + DATA.quarkShare + '" target="_blank" rel="noopener">' + ic('cloud') + '夸克网盘下载</a>'
-          : '<a class="btn btn-primary btn-sm" href="' + it.pageUrl + '" download>' + ic('download') + '立即下载</a>' +
-            '<a class="btn btn-ghost btn-sm" href="' + DATA.quarkShare + '" target="_blank" rel="noopener">' + ic('cloud') + '夸克网盘</a>';
+          ? qBtn
+          : '<a class="btn btn-primary btn-sm" href="' + it.pageUrl + '" download>' + ic('download') + '立即下载</a>' + qBtn;
         return '<article class="dl reveal" style="--acc:' + it.accent + '">' +
           '<div class="dl-top">' +
             '<span class="dl-ico">' + ic(it.icon) + '</span>' +
