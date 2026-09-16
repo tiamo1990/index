@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>常见问题 · 故障排查与免责声明 — vivo 玩机工具</title>
 <meta name="description" content="vivo / iQOO 刷机常见问题：下载与安装、解锁与 Root、内核模块使用、主题改造、安全与风险，以及站点免责声明与资源版权说明。">
 <meta name="theme-color" content="#f6f7fb">
+<link rel="canonical" href="https://shancha.dpdns.org/faq.html">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/main.css">
 <script>(function(){try{var t=localStorage.getItem('pt-theme')||'light';var q=/[?&]theme=(dark|light)/.exec(location.search);if(q)t=q[1];document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#05060b':'#f6f7fb');}catch(e){}})();</script>
@@ -17,6 +18,7 @@
   <div class="blob a"></div>
   <div class="blob b"></div>
   <div class="blob c"></div>
+  <div class="blob d"></div>
   <div class="noise"></div>
 </div>
 <div class="cursor-glow" aria-hidden="true"></div>
@@ -105,26 +107,29 @@
               <div class="acc-item">
                 <button class="acc-q" type="button" aria-expanded="false">
                   <span class="idx">01</span>
-                  两种下载通道有什么区别？该选哪个？
+                  三种下载通道有什么区别？该选哪个？
                   <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
                 </button>
                 <div class="acc-a"><div class="inner">
-                  <strong>GitHub 通道</strong>适合逐项获取：直接点击下载按钮即可拉取单个文件，链接稳定、可追溯版本历史，
+                  <strong>GitHub 仓库直链</strong>适合逐项获取：点击「立即下载」即可拉取单个文件，链接稳定、可追溯版本历史，
                   适合只需要其中一两个工具的场景。<br>
-                  <strong>夸克网盘通道</strong>适合一次性打包：可以转存整个「vivo刷机工具」目录，避免逐个下载；
-                  单个文件超过 100 MiB 的项目（例如 MiSans Heavy 字体模块）<strong>仅在此通道提供</strong>。
+                  <strong>GitHub Releases</strong>承载体积超过仓库单文件 100 MiB 上限的资源（当前为 MiSans Heavy 字体模块），
+                  卡片上标注「Release 通道」，按钮指向 Release 直链。<br>
+                  <strong>夸克网盘</strong>适合一次性打包：可转存整个「vivo刷机工具」目录，避免逐个下载，
+                  且与仓库、Release 互为镜像备份。
                 </div></div>
               </div>
 
               <div class="acc-item">
                 <button class="acc-q" type="button" aria-expanded="false">
                   <span class="idx">02</span>
-                  为什么有的卡片没有「立即下载」按钮？
+                  超过 100 MiB 的文件是怎么提供的？
                   <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
                 </button>
                 <div class="acc-a"><div class="inner">
-                  GitHub 对单个文件设有 100 MiB 的硬性上限，超过该体积的文件无法提交到仓库主干。
-                  这类资源在卡片上会标注「超 100MB」，下载按钮直接指向夸克网盘。
+                  GitHub 对<strong>仓库内单个文件</strong>设有 100 MiB 的硬性上限，超过该体积的文件无法提交到仓库主干。
+                  这类资源改由 <strong>GitHub Releases 附件</strong>承载（单文件上限 2 GiB，不占用 Pages 站点体积配额），
+                  卡片上标注「超 100 MiB」与「Release 通道」，主按钮指向 Release 直链，同时保留夸克网盘镜像。
                 </div></div>
               </div>
 
@@ -439,6 +444,7 @@
         <h4>下载通道</h4>
         <ul>
           <li><a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 仓库 ↗</a></li>
+          <li><a data-release-link href="https://github.com/tiamo1990/index/releases/tag/v2026.09.16" target="_blank" rel="noopener">GitHub Releases ↗</a></li>
           <li><a data-quark-link href="https://pan.quark.cn/s/956743d482f3" target="_blank" rel="noopener">夸克网盘 ↗</a></li>
           <li><a href="faq.html#disclaimer">免责声明</a></li>
         </ul>
@@ -446,7 +452,7 @@
     </div>
     <div class="footer-bot">
       <span>© <span data-year>2026</span> vivo 玩机工具 · 资源仅供学习与个人使用</span>
-      <span class="muted">GitHub Pages 静态托管 · 双通道分发</span>
+      <span class="muted">GitHub Pages 静态托管 · 三通道分发</span>
     </div>
   </div>
 </footer>

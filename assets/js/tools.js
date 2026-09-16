@@ -26,6 +26,7 @@
 
   /* ---------- 分类导航 ---------- */
   function renderChips() {
+    if (!chips) return;
     var total = DATA.count;
     var html = '<button class="chip on" data-cat="all">全部 <span class="cnt">' + total + '</span></button>';
     DATA.cats.forEach(function (c) {
@@ -49,22 +50,27 @@
     }).join('');
     if (it.hot) badges = '<span class="badge brand">热门</span>' + badges;
     if (it.warn) badges += '<span class="badge warn">有风险</span>';
-    if (it.large) badges += '<span class="badge danger">超 100MB</span>';
+    if (it.large) badges += '<span class="badge danger">超 100 MiB</span>';
+    if (it.relUrl) badges += '<span class="badge ok">Release 通道</span>';
 
     /* 夸克按钮统一走「目录级深链」：点击后直接落在该文件所在目录 */
-    var quarkBtn = '<a class="btn btn-' + (it.large ? 'primary' : 'ghost') + ' btn-sm"' +
+    var quarkBtn = '<a class="btn btn-ghost btn-sm"' +
       ' href="' + esc(it.quarkUrl) + '"' +
       ' target="_blank" rel="noopener"' +
       ' data-quark-hint="' + esc(it.quarkHint) + '"' +
       ' title="' + esc(it.quarkHint) + '">' +
-      w.PT.icon('cloud') + (it.large ? '夸克网盘下载' : '夸克网盘') + '</a>';
+      w.PT.icon('cloud') + '夸克网盘</a>';
 
-    var acts;
-    if (it.large) {
-      acts = quarkBtn;
+    var dlBtn;
+    if (it.relUrl) {
+      /* 超过 100 MiB：仓库无法承载，主通道改为 Release 直链 */
+      dlBtn = '<a class="btn btn-primary btn-sm" href="' + esc(it.relUrl) + '"' +
+        ' target="_blank" rel="noopener"' +
+        ' title="从 GitHub Releases 下载 ' + esc(it.fileName) + '">' +
+        w.PT.icon('download') + 'Release 直链下载</a>';
     } else {
-      acts = '<a class="btn btn-primary btn-sm" href="' + it.pageUrl +
-        '" download>' + w.PT.icon('download') + '立即下载</a>' + quarkBtn;
+      dlBtn = '<a class="btn btn-primary btn-sm" href="' + esc(it.pageUrl) + '"' +
+        ' download>' + w.PT.icon('download') + '立即下载</a>';
     }
 
     return '<article class="dl reveal" style="--acc:' + it.accent + '" data-cat="' + it.cat + '" data-id="' + it.id + '">' +
@@ -81,7 +87,7 @@
         esc(it.fileName) + '</span>' +
         '<button class="cp" data-copy="' + esc(it.dlUrl) + '" data-copy-msg="下载链接已复制" title="复制下载链接">' +
         w.PT.icon('copy') + '</button></div>' +
-      '<div class="dl-acts">' + acts + '</div>' +
+      '<div class="dl-acts">' + dlBtn + quarkBtn + '</div>' +
     '</article>';
   }
 
@@ -112,17 +118,22 @@
   function render() {
     var list = pick();
     if (!list.length) {
-      grid.innerHTML = '';
-      emptyEl.hidden = false;
+      if (grid) grid.innerHTML = '';
+      if (emptyEl) emptyEl.hidden = false;
     } else {
-      emptyEl.hidden = true;
+      if (emptyEl) emptyEl.hidden = true;
+      if (!grid) return;
       grid.innerHTML = list.map(card).join('');
       w.PT.mountIcons(grid);
       w.PT.observeReveal(grid.querySelectorAll('.reveal'));
+      /* 每次重渲染都会产生新的外链节点，需重新加固 rel */
+      if (w.PT.hardenExternal) w.PT.hardenExternal(grid);
     }
     var bytes = list.reduce(function (s, i) { return s + i.size; }, 0);
-    meta.innerHTML = '共 <b>' + list.length + '</b> 项资源 · 合计 <b>' + DATA.bytes(bytes) + '</b>' +
-      (state.cat === 'all' && !state.q ? ' · 全量资源库' : '');
+    if (meta) {
+      meta.innerHTML = '共 <b>' + list.length + '</b> 项资源 · 合计 <b>' + DATA.bytes(bytes) + '</b>' +
+        (state.cat === 'all' && !state.q ? ' · 全量资源库' : '');
+    }
     if (clr) clr.classList.toggle('show', !!state.q);
   }
 
@@ -149,14 +160,14 @@
     var hash = location.hash.replace('#', '');
     if (hash.indexOf('cat-') === 0) {
       var id = hash.slice(4);
-      var b = chips.querySelector('[data-cat="' + id + '"]');
+      var b = chips && chips.querySelector('[data-cat="' + id + '"]');
       if (b) { b.click(); }
     }
 
     /* 从首页 ?c= 参数进入 */
     var m = /[?&]c=([a-z-]+)/.exec(location.search);
     if (m) {
-      var b2 = chips.querySelector('[data-cat="' + m[1] + '"]');
+      var b2 = chips && chips.querySelector('[data-cat="' + m[1] + '"]');
       if (b2) b2.click();
     }
 

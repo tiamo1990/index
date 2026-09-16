@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>资源库 · 全部下载项 — vivo 玩机工具</title>
-<meta name="description" content="vivo / iQOO 玩机资源库：解锁 Bootloader 工具、临时 Root、KernelSU 模块、LSPosed 模块、主题替换资源与通用环境驱动，支持搜索、分类筛选与 GitHub / 夸克网盘双通道下载。">
+<meta name="description" content="vivo / iQOO 玩机资源库：解锁 Bootloader 工具、临时 Root、KernelSU 模块、LSPosed 模块、主题替换资源与通用环境驱动，支持搜索、分类筛选与 GitHub 仓库 / GitHub Releases / 夸克网盘三通道下载。">
 <meta name="theme-color" content="#f6f7fb">
+<link rel="canonical" href="https://shancha.dpdns.org/tools.html">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/main.css">
 <script>(function(){try{var t=localStorage.getItem('pt-theme')||'light';var q=/[?&]theme=(dark|light)/.exec(location.search);if(q)t=q[1];document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#05060b':'#f6f7fb');}catch(e){}})();</script>
@@ -17,6 +18,7 @@
   <div class="blob a"></div>
   <div class="blob b"></div>
   <div class="blob c"></div>
+  <div class="blob d"></div>
   <div class="noise"></div>
 </div>
 <div class="cursor-glow" aria-hidden="true"></div>
@@ -74,12 +76,14 @@
         <span>资源库</span>
       </nav>
 
-      <h1 class="h1 reveal" style="font-size:clamp(2rem,4.6vw,3.1rem)">
+      <h1 class="h1 reveal reveal-blur" style="font-size:clamp(2rem,4.6vw,3.1rem)">
         全部<span class="grad">下载资源</span>
       </h1>
-      <p class="lede reveal">
-        共 <strong>35 项</strong>资源，覆盖 8 个功能分类。支持关键词搜索与分类筛选；
-        全部项目均提供<strong>夸克网盘</strong>通道，除超出 GitHub 体积上限者外同时提供<strong>仓库直链</strong>下载。
+      <p class="lede reveal reveal-blur">
+        共 <strong><span class="tnum" data-metric="count">35</span> 项</strong>资源，覆盖
+        <span class="tnum" data-metric="cats">8</span> 个功能分类。支持关键词搜索与分类筛选；
+        全部项目均提供<strong>夸克网盘</strong>通道，未超出体积上限者提供<strong>仓库直链</strong>，
+        超过 GitHub 单文件 100 MiB 上限者提供 <strong>Release 直链</strong>。
       </p>
     </div>
   </section>
@@ -114,12 +118,20 @@
         </a>
 
         <button class="btn btn-ghost btn-sm" type="button" id="quarkCopy"
+          data-copy="https://pan.quark.cn/s/956743d482f3" data-quark-copy data-copy-msg="夸克网盘链接已复制"
           title="复制夸克网盘分享链接" aria-label="复制夸克网盘分享链接">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
+
+        <a class="btn btn-ghost btn-sm" data-release-link
+           href="https://github.com/tiamo1990/index/releases/tag/v2026.09.16" target="_blank" rel="noopener"
+           title="打开 GitHub Releases 页面（承载超 100 MiB 的资源）">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          Release 通道
+        </a>
       </div>
 
-      <div class="chips reveal" id="catChips" style="margin-top:18px"></div>
+      <div class="chips reveal reveal-blur" id="catChips" style="margin-top:18px"></div>
 
       <div class="result-meta" id="resultMeta"></div>
 
@@ -131,12 +143,14 @@
         <span>试着更换关键词，或切换到「全部」分类查看完整列表。</span>
       </div>
 
-      <div class="callout warn" style="margin-top:34px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div class="callout info reveal reveal-blur" style="margin-top:34px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
         <div>
-          <b>关于超大文件：</b>
-          单个文件体积超过 GitHub 100 MiB 上限的项目（如 MiSans Heavy 字体模块）已从仓库主干移出，
-          仅通过<strong>夸克网盘</strong>通道提供，卡片上会标注「超 100MB」。
+          <b>关于超 100 MiB 的文件：</b>
+          GitHub 对仓库内单个文件硬性限制 100 MiB。体积超限的项目（当前为
+          <strong>MiSans Heavy 字体模块</strong>，117 MiB）已从仓库主干移出，改由
+          <strong>GitHub Releases</strong> 附件承载，卡片上标注「超 100 MiB」与「Release 通道」，
+          下载按钮指向 Release 直链；同时保留<strong>夸克网盘</strong>镜像作为备份通道。
         </div>
       </div>
 
@@ -186,7 +200,7 @@
     </div>
     <div class="footer-bot">
       <span>© <span data-year>2026</span> vivo 玩机工具 · 资源仅供学习与个人使用</span>
-      <span class="muted">GitHub Pages 静态托管 · 双通道分发</span>
+      <span class="muted">GitHub Pages 静态托管 · 三通道分发</span>
     </div>
   </div>
 </footer>
@@ -194,17 +208,5 @@
 <script src="assets/data/resources.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/tools.js"></script>
-<script>
-(function(){
-  document.addEventListener('DOMContentLoaded', function(){
-    /* quarkBtn 为普通外链（由 app.js 升级为网盘主目录深链），无需额外处理；
-       quarkCopy 单独负责「复制分享链接」，避免「打开」与「复制」两种语义混在一个按钮上。 */
-    var c = document.getElementById('quarkCopy');
-    if (c && window.PTDATA) c.addEventListener('click', function(){
-      window.PT.copy(window.PTDATA.quarkShare, '夸克网盘链接已复制');
-    });
-  });
-})();
-</script>
 </body>
 </html>

@@ -16,6 +16,16 @@
   var PAGES = 'https://shancha.dpdns.org';
   var PAGES_GH = 'https://tiamo1990.github.io/index';
 
+  /* ---------- GitHub Releases（> 100 MiB 资源通道） ----------
+     GitHub 对**仓库内单个文件**硬性限制 100 MiB，超限文件既无法提交也无法由
+     Pages 提供。Release 附件不受该限制（单个上限 2 GiB），因此体积超限的资源
+     统一走 Release 直链，既保留版本追溯，也不占用 Pages 站点体积配额。
+     新增超限资源时：上传附件后在此登记 tag 与文件名即可。 */
+  var RELEASE_TAG = 'v2026.09.16';
+  var RELEASE_PAGE = REPO + '/releases/tag/' + RELEASE_TAG;
+  var RELEASE_LATEST = REPO + '/releases/latest';
+  var RELEASE_DL = REPO + '/releases/download/' + RELEASE_TAG + '/';
+
   /* ---------- 夸克网盘 ---------- */
   var QUARK_SHARE = 'https://pan.quark.cn/s/956743d482f3';
   var QUARK_HASH = QUARK_SHARE + '#/list/share/';
@@ -249,8 +259,9 @@
           file: 'ksu-modules/MiSans-Replace-OriginOS6-Heavy.zip',
           size: 123117792,
           large: true,
-          desc: 'MiSans Heavy 字重替换模块。单个文件体积 117 MiB，超过 GitHub 单文件 100 MiB 硬性上限，因此本项通过夸克网盘通道分发，不进入仓库主干。',
-          tags: ['字体', 'MiSans', 'Heavy', '超大文件'],
+          relAsset: 'MiSans-Replace-OriginOS6-Heavy.zip',
+          desc: 'MiSans Heavy 字重替换模块。单文件体积 117 MiB，超过 GitHub 仓库单文件 100 MiB 硬性上限，因此通过 GitHub Releases 通道分发，直链下载不限速，同时保留夸克网盘镜像。',
+          tags: ['字体', 'MiSans', 'Heavy', '> 100 MiB'],
           group: 'MiSans 字体模块'
         },
         {
@@ -520,6 +531,14 @@
       it.blobUrl = REPO + '/blob/' + BRANCH + '/downloads/' + it.file.split('/').map(encodeURIComponent).join('/');
       it.rawUrl = 'https://raw.githubusercontent.com/tiamo1990/index/' + BRANCH + '/downloads/' +
         it.file.split('/').map(encodeURIComponent).join('/');
+
+      /* 未进入仓库主干的资源（> 100 MiB），其 downloads/ 与 blob/ 路径并不存在，
+         任何指向它们的链接都会 404。统一改写为 Release 页面，避免出现死链。 */
+      if (it.relAsset) {
+        it.pageUrl = RELEASE_PAGE;
+        it.blobUrl = RELEASE_PAGE;
+        it.rawUrl = RELEASE_PAGE;
+      }
       var q = quarkOf(it.file);
       it.quark = q;
       it.quarkUrl = q ? q.url : QUARK_SHARE;
@@ -527,7 +546,15 @@
       it.quarkHint = q
         ? '将在夸克网盘中打开《' + q.dirName + '》，请下载 ' + it.fileName
         : '将在夸克网盘中打开分享目录';
-      it.dlUrl = it.large ? it.quarkUrl : it.pageUrl;
+
+      /* > 100 MiB 的资源由 Release 附件承载：
+         · relUrl   —— Release 直链（主通道）
+         · chanText —— 分发通道标签，用于卡片徽标与提示文案
+         · dlUrl    —— 「复制下载链接」与命令面板实际使用的地址 */
+      it.relUrl = it.relAsset ? RELEASE_DL + it.relAsset.split('/').map(encodeURIComponent).join('/') : '';
+      it.chan = it.relUrl ? 'release' : 'repo';
+      it.chanText = it.relUrl ? 'GitHub Release' : 'GitHub 仓库';
+      it.dlUrl = it.relUrl || it.pageUrl;
       ALL.push(it);
     });
   });
@@ -535,11 +562,45 @@
   var TOTAL = ALL.reduce(function (s, i) { return s + i.size; }, 0);
   var REPO_TOTAL = ALL.reduce(function (s, i) { return s + (i.large ? 0 : i.size); }, 0);
 
+  /* ---------- 站点指标（供首页数字滚动使用，避免在 HTML 里写死） ----------
+     页面只写 data-metric="count" 这类语义键，具体数值与单位由数据层给出，
+     新增/删除资源后首页统计自动同步，不会出现「页面写 35、实际 36」的漂移。 */
+  function units(n) {
+    if (n < 1024) return { v: n, dec: 0, suffix: ' B' };
+    var u = ['KiB', 'MiB', 'GiB'], i = -1;
+    do { n /= 1024; i++; } while (n >= 1024 && i < u.length - 1);
+    var dec = n >= 100 ? 0 : (n >= 10 ? 1 : 2);
+    return { v: +n.toFixed(dec), dec: dec, suffix: ' ' + u[i] };
+  }
+
+  function countIn(catId) {
+    var c = CATS.filter(function (x) { return x.id === catId; })[0];
+    return c ? c.items.length : 0;
+  }
+
+  var MISANS_N = ALL.filter(function (i) { return i.group === 'MiSans 字体模块'; }).length;
+  var RELEASE_N = ALL.filter(function (i) { return !!i.relUrl; }).length;
+
+  var METRICS = {
+    count: { v: ALL.length, dec: 0, suffix: '' },
+    cats: { v: CATS.length, dec: 0, suffix: '' },
+    ksu: { v: countIn('ksu'), dec: 0, suffix: '' },
+    weights: { v: MISANS_N, dec: 0, suffix: '' },
+    channels: { v: 3, dec: 0, suffix: '' },          /* 仓库 / Release / 夸克网盘 */
+    releases: { v: RELEASE_N, dec: 0, suffix: '' },
+    total: units(TOTAL),
+    repoTotal: units(REPO_TOTAL)
+  };
+
   w.PTDATA = {
     repo: REPO,
     branch: BRANCH,
     pages: PAGES,
     pagesGh: PAGES_GH,
+    releaseTag: RELEASE_TAG,
+    releasePage: RELEASE_PAGE,
+    releaseLatest: RELEASE_LATEST,
+    releaseDl: RELEASE_DL,
     quarkShare: QUARK_SHARE,
     quarkEntry: QUARK_ENTRY,
     quarkList: QUARK_LIST,
@@ -549,6 +610,7 @@
     cats: CATS,
     all: ALL,
     bytes: bytes,
+    metrics: METRICS,
     total: TOTAL,
     totalText: bytes(TOTAL),
     repoTotal: REPO_TOTAL,

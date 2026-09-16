@@ -43,7 +43,13 @@
     filter: '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
     home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
     droplet: '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
-    wand: '<path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8 19 13"/><path d="M15 9h.01"/><path d="M17.8 6.2 19 5"/><path d="M3 21l9-9"/><path d="M12.2 6.2 11 5"/>'
+    wand: '<path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8 19 13"/><path d="M15 9h.01"/><path d="M17.8 6.2 19 5"/><path d="M3 21l9-9"/><path d="M12.2 6.2 11 5"/>',
+    /* 以下三个键曾被数据层引用却未定义，会静默回退成通用文件图标 —— 补齐 */
+    android: '<path d="M7 9h10a1 1 0 0 1 1 1v5a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-5a1 1 0 0 1 1-1z"/><path d="M8.4 5.6 7.2 3.7"/><path d="M15.6 5.6l1.2-1.9"/><line x1="10" y1="13" x2="10.01" y2="13"/><line x1="14" y1="13" x2="14.01" y2="13"/>',
+    flash: '<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',
+    plug: '<path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z"/>',
+    tag: '<path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>',
+    sparkles: '<path d="m12 3 1.9 5.7L20 10.6l-6.1 1.9L12 18.2l-1.9-5.7L4 10.6l6.1-1.9z"/><path d="M19 2.6v2.8"/><path d="M20.4 4h-2.8"/>'
   };
 
   var GITHUB = '<path fill="currentColor" stroke="none" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>';
@@ -73,7 +79,7 @@
     d.documentElement.setAttribute('data-theme', t);
     try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
     var meta = d.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', t === 'dark' ? '#05060b' : '#f5f6fb');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#05060b' : '#f6f7fb');
   }
 
   function initTheme() {
@@ -235,6 +241,8 @@
   }
 
   /* ---------- 7. 指针效果 ---------- */
+  var SPOT_SEL = '.card, .dl, .chan, .step, .stat-cell, .acc-item, .pill, .glass';
+
   function initPointer() {
     if (w.matchMedia('(hover: none)').matches || w.innerWidth < 760) return;
     d.body.classList.add('has-pointer');
@@ -245,9 +253,12 @@
 
     d.addEventListener('pointermove', function (e) {
       mx = e.clientX; my = e.clientY;
-      var t = e.target.closest ? e.target.closest('.card, .dl, .chan, .step') : null;
+      var t = e.target.closest ? e.target.closest(SPOT_SEL) : null;
       if (t !== activeSpot) {
-        if (activeSpot) activeSpot.style.removeProperty('--mx'), activeSpot.style.removeProperty('--my');
+        if (activeSpot) {
+          activeSpot.style.removeProperty('--mx');
+          activeSpot.style.removeProperty('--my');
+        }
         activeSpot = t;
       }
       if (t) {
@@ -268,20 +279,95 @@
     }
   }
 
+  /* ---------- 7b. 磁吸按钮 ----------
+     指针进入磁吸范围后按钮向指针方向位移，用缓动回中，形成「有弹性」的手感。 */
+  function initMagnetic() {
+    if (w.matchMedia('(hover: none)').matches || w.innerWidth < 760) return;
+    var els = d.querySelectorAll('[data-magnetic]');
+    if (!els.length) return;
+    var STRENGTH = 0.26, MAX = 9;
+
+    els.forEach(function (el) {
+      var raf = null, tx = 0, ty = 0, cx = 0, cy = 0;
+
+      function tick() {
+        cx += (tx - cx) * 0.2;
+        cy += (ty - cy) * 0.2;
+        el.style.setProperty('--mag-x', cx.toFixed(2) + 'px');
+        el.style.setProperty('--mag-y', cy.toFixed(2) + 'px');
+        if (Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1) {
+          raf = requestAnimationFrame(tick);
+        } else { raf = null; }
+      }
+      function aim(nx, ny) {
+        tx = nx; ty = ny;
+        if (!raf) raf = requestAnimationFrame(tick);
+      }
+
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width / 2)) * STRENGTH;
+        var dy = (e.clientY - (r.top + r.height / 2)) * STRENGTH;
+        aim(Math.max(-MAX, Math.min(MAX, dx)), Math.max(-MAX, Math.min(MAX, dy)));
+      });
+      el.addEventListener('pointerleave', function () { aim(0, 0); });
+    });
+  }
+
+  /* ---------- 7c. 点击水波 ---------- */
+  function initRipple() {
+    d.addEventListener('pointerdown', function (e) {
+      var b = e.target.closest ? e.target.closest('.btn, .chip, .icon-btn') : null;
+      if (!b) return;
+      var r = b.getBoundingClientRect();
+      var span = d.createElement('span');
+      span.className = 'ripple';
+      var size = Math.max(r.width, r.height) * 2.1;
+      span.style.cssText = 'width:' + size + 'px;height:' + size + 'px;' +
+        'left:' + (e.clientX - r.left - size / 2) + 'px;' +
+        'top:' + (e.clientY - r.top - size / 2) + 'px';
+      b.appendChild(span);
+      setTimeout(function () { span.remove(); }, 620);
+    });
+  }
+
   /* ---------- 8. 数字滚动 ---------- */
   function initCounters() {
-    var els = d.querySelectorAll('[data-count]');
+    var els = d.querySelectorAll('[data-count], [data-metric]');
     if (!els.length) return;
+    var M = (w.PTDATA && w.PTDATA.metrics) || {};
+
+    /* data-metric="count" → 由数据层给出数值/精度/单位，
+       页面不再写死数字，资源增删后统计自动同步。 */
+    els.forEach(function (el) {
+      var key = el.dataset.metric;
+      if (!key) return;
+      var m = M[key];
+      if (!m) return;
+      el.dataset.count = m.v;
+      el.dataset.dec = m.dec;
+      el.dataset.suffix = m.suffix;
+    });
+
     var run = function (el) {
       var target = parseFloat(el.dataset.count);
+      if (isNaN(target)) return;
       var dec = (el.dataset.dec | 0);
       var suf = el.dataset.suffix || '';
+      var fmt = function (v) { return (dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US')) + suf; };
+
+      /* 声明偏好减少动效时直接落定终值 —— 滚动数字属于装饰性动效，
+         对前庭敏感用户无信息增益，不应强制播放 1.4s。 */
+      if (w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.textContent = fmt(target);
+        return;
+      }
+
       var dur = 1400, t0 = performance.now();
       function step(t) {
         var p = Math.min(1, (t - t0) / dur);
         var e = 1 - Math.pow(1 - p, 3);
-        var v = target * e;
-        el.textContent = (dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US')) + suf;
+        el.textContent = fmt(target * e);
         if (p < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
@@ -384,9 +470,10 @@
     data.all.forEach(function (it) {
       entries.push({
         t: it.name,
-        s: it.catName + ' · ' + it.sizeText,
+        s: it.catName + ' · ' + it.sizeText + ' · ' + it.chanText,
         ic: it.icon,
-        href: it.large ? it.quarkUrl : it.blobUrl,
+        /* 指向真实可下载地址：Release 资源走 Release 直链，其余走站点直链 */
+        href: it.dlUrl,
         external: true,
         raw: it.search
       });
@@ -483,7 +570,7 @@
     d.querySelectorAll('[data-year]').forEach(function (e) { e.textContent = new Date().getFullYear(); });
   }
 
-  /* ---------- 15. 分享链接注入 ---------- */
+  /* ---------- 15. 链接注入 ---------- */
   function initShareLinks() {
     var data = w.PTDATA;
     if (!data) return;
@@ -498,6 +585,19 @@
     });
     d.querySelectorAll('[data-github-link]').forEach(function (a) { a.href = data.repo; });
     d.querySelectorAll('[data-pages-link]').forEach(function (a) { a.href = data.pages; });
+    d.querySelectorAll('[data-release-link]').forEach(function (a) { a.href = data.releasePage; });
+    d.querySelectorAll('[data-release-latest]').forEach(function (a) { a.href = data.releaseLatest; });
+    /* 复制按钮的默认地址同样由数据层给出，避免 HTML 里写死或留空 */
+    d.querySelectorAll('[data-release-copy]').forEach(function (b) {
+      if (!b.dataset.copy) b.dataset.copy = data.releasePage;
+    });
+    d.querySelectorAll('[data-repo-copy]').forEach(function (b) {
+      if (!b.dataset.copy) b.dataset.copy = data.repo;
+    });
+    var rTag = d.querySelectorAll('[data-release-tag]');
+    if (rTag.length && data.releaseTag) {
+      rTag.forEach(function (e) { e.textContent = data.releaseTag; });
+    }
   }
 
   /* ---------- 15b. 夸克网盘深链：打开后告知「去哪找文件」 ----------
@@ -511,12 +611,20 @@
     }, true);
   }
 
-  /* ---------- 16. 无障碍：外链 ---------- */
-  function initExternal() {
-    d.querySelectorAll('a[href^="http"]').forEach(function (a) {
-      if (a.hostname && a.hostname !== location.hostname) {
-        a.setAttribute('rel', 'noopener');
-      }
+  /* ---------- 16. 无障碍：外链 ----------
+     注意两点：
+     1. 不能直接覆写 rel —— 会抹掉作者已写的 noreferrer / nofollow 等值，
+        统一合并为「去重后的 token 集合」再写回。
+     2. 本函数必须可重复调用：资源卡由 home.js / tools.js 在 boot() 之后动态插入，
+        若只在启动时跑一次，动态卡片上的外链将得不到加固。 */
+  function hardenExternal(root) {
+    (root || d).querySelectorAll('a[href^="http"]').forEach(function (a) {
+      if (!a.hostname || a.hostname === location.hostname) return;
+      var set = {};
+      (a.getAttribute('rel') || '').split(/\s+/).forEach(function (t) { if (t) set[t] = 1; });
+      set.noopener = 1;
+      if (a.target === '_blank') set.noreferrer = 1;
+      a.setAttribute('rel', Object.keys(set).join(' '));
     });
   }
 
@@ -527,6 +635,8 @@
     initNav();
     initReveal();
     initPointer();
+    initMagnetic();
+    initRipple();
     initCounters();
     initMarquee();
     initAccordion();
@@ -536,7 +646,7 @@
     initYear();
     initShareLinks();
     initQuarkHints();
-    initExternal();
+    hardenExternal();
     d.documentElement.classList.add('ready');
   }
 
@@ -551,6 +661,7 @@
     copy: copy,
     mountIcons: mountIcons,
     observeReveal: observeReveal,
+    hardenExternal: hardenExternal,
     bytes: function (n) { return w.PTDATA ? w.PTDATA.bytes(n) : n; }
   };
 })(window, document);
