@@ -7,7 +7,14 @@
 
   var REPO = 'https://github.com/tiamo1990/index';
   var BRANCH = 'main';
-  var PAGES = 'https://tiamo1990.github.io/index';
+
+  /* 规范站点域名 = 自定义域名（由仓库根目录的 CNAME 文件绑定）。
+     注意：绑定自定义域名后，tiamo1990.github.io/index/* 会被 GitHub 301 到
+     http://shancha.dpdns.org/*（GitHub 自签证书未就绪时降级为 http），
+     因此站内一律使用自定义域名 —— 既避免多一跳与明文降级，
+     也让下载链接与页面同源，`download` 属性才能生效。 */
+  var PAGES = 'https://shancha.dpdns.org';
+  var PAGES_GH = 'https://tiamo1990.github.io/index';
 
   /* ---------- 夸克网盘 ---------- */
   var QUARK_SHARE = 'https://pan.quark.cn/s/956743d482f3';
@@ -532,6 +539,7 @@
     repo: REPO,
     branch: BRANCH,
     pages: PAGES,
+    pagesGh: PAGES_GH,
     quarkShare: QUARK_SHARE,
     quarkEntry: QUARK_ENTRY,
     quarkList: QUARK_LIST,

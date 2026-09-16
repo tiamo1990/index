@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /downloads/
 
-Sitemap: https://tiamo1990.github.io/index/sitemap.xml
+Sitemap: https://shancha.dpdns.org/sitemap.xml
