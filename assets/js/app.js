@@ -67,6 +67,7 @@
 
   /* ---------- 2. 主题 ---------- */
   var THEME_KEY = 'pt-theme';
+  var DEFAULT_THEME = 'light';   /* 站点默认观感：浅色 */
 
   function applyTheme(t) {
     d.documentElement.setAttribute('data-theme', t);
@@ -76,14 +77,13 @@
   }
 
   function initTheme() {
+    /* 优先级：URL 参数 > 本地存储 > 站点默认（浅色） */
     var forced = /[?&]theme=(dark|light)/.exec(location.search);
     var saved = forced ? forced[1] : null;
     if (!saved) {
       try { saved = localStorage.getItem(THEME_KEY); } catch (e) {}
     }
-    if (!saved) {
-      saved = w.matchMedia && w.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    }
+    if (!saved) saved = DEFAULT_THEME;
     applyTheme(saved);
     d.querySelectorAll('[data-theme-toggle]').forEach(function (b) {
       b.addEventListener('click', function () {
