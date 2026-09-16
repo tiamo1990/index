@@ -1,0 +1,17 @@
+# 统一换行符，避免 Windows 环境下的 CRLF 污染
+* text=auto eol=lf
+
+# 二进制资源不做任何转换
+*.zip    binary
+*.rar    binary
+*.apk    binary
+*.exe    binary
+*.itz    binary
+*.systemui binary
+*.png    binary
+*.jpg    binary
+*.ico    binary
+
+# GitHub 语言统计：站点为纯静态站点，排除资源目录
+downloads/** linguist-vendored
+assets/**    linguist-documentation

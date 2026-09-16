@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>刷机指南 · 完整操作流程 — vivo 玩机工具</title>
+<meta name="description" content="vivo / iQOO 刷机完整流程：环境部署、临时 Root 与永久解锁路线选择、KernelSU 刷入、内核模块顺序建议、主题与 SystemUI 替换步骤，以及异常处理。">
+<meta name="theme-color" content="#05060b">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/main.css">
+<script>(function(){try{var t=localStorage.getItem('pt-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+
+<div class="bg-stage" aria-hidden="true">
+  <div class="grid"></div>
+  <div class="blob a"></div>
+  <div class="blob b"></div>
+  <div class="blob c"></div>
+  <div class="noise"></div>
+</div>
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="shell shell-wide nav-inner">
+    <a class="brand" href="index.html" aria-label="vivo 玩机工具 首页">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="9" rx="2.6"/><path d="M8 11V7.4a4.5 4.5 0 0 1 8.8-1.3"/></svg>
+      </span>
+      <span class="brand-txt"><b>vivo 玩机工具</b><span>Play Toolkit</span></span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a href="tools.html">资源库</a>
+      <a href="guide.html">刷机指南</a>
+      <a href="faq.html">常见问题</a>
+    </nav>
+    <div class="nav-right">
+      <button class="kbd-hint" data-cmdk type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true" style="width:15px;height:15px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        搜索资源 <kbd>Ctrl K</kbd>
+      </button>
+      <button class="icon-btn" data-theme-toggle type="button" aria-label="切换深浅色主题">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/tiamo1990/index" target="_blank" rel="noopener" aria-label="GitHub 仓库">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <button class="icon-btn burger" data-burger type="button" aria-label="打开菜单" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer">
+  <a href="index.html">首页 <span class="muted">01</span></a>
+  <a href="tools.html">资源库 <span class="muted">02</span></a>
+  <a href="guide.html">刷机指南 <span class="muted">03</span></a>
+  <a href="faq.html">常见问题 <span class="muted">04</span></a>
+  <a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 仓库 <span class="muted">↗</span></a>
+  <a href="index.html#quark" data-quark-link target="_blank" rel="noopener">夸克网盘 <span class="muted">↗</span></a>
+</div>
+
+<main>
+
+  <section class="page-hero">
+    <div class="shell shell-wide">
+      <nav class="crumb reveal" aria-label="面包屑">
+        <a href="index.html">首页</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        <span>刷机指南</span>
+      </nav>
+      <h1 class="h1 reveal" style="font-size:clamp(2rem,4.6vw,3.1rem)">
+        从零开始的<span class="grad">完整刷机流程</span>
+      </h1>
+      <p class="lede reveal">
+        按真实操作顺序编排的六个阶段。建议全程读完再动手，尤其是「路线选择」一节——
+        它会决定你是否需要付出解锁 Bootloader 的代价。
+      </p>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:20px">
+    <div class="shell shell-wide">
+      <div class="split-2">
+
+        <!-- TOC -->
+        <aside class="toc" aria-label="目录">
+          <h4>目录</h4>
+          <a href="#prepare">前置准备</a>
+          <a href="#s1">01 · 环境部署</a>
+          <a href="#s2">02 · 路线选择</a>
+          <a href="#s3">03 · 解锁 Bootloader</a>
+          <a href="#s4">04 · 刷入 Root 管理器</a>
+          <a href="#s5">05 · 刷入内核模块</a>
+          <a href="#s6">06 · 主题与系统 UI</a>
+          <a href="#trouble">异常处理</a>
+        </aside>
+
+        <div>
+          <!-- 前置准备 -->
+          <div id="prepare" style="scroll-margin-top:110px">
+            <span class="eyebrow">Before You Start</span>
+            <h2 class="h2" style="margin-bottom:20px">前置准备</h2>
+
+            <div class="callout danger reveal" style="margin-bottom:22px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <div>
+                <b>解锁 Bootloader 会清空设备全部数据</b>，并可能使官方保修状态发生变化。
+                动手前请把照片、聊天记录、应用数据完整备份到云端或电脑，并确认电量在 60% 以上。
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <article class="card reveal">
+                <span class="icon-tile" data-icon="hardDrive"></span>
+                <h3 class="h3">硬件与环境清单</h3>
+                <ul style="margin-top:12px;display:grid;gap:9px">
+                  <li class="lede" style="font-size:13.6px">· 一台 Windows 10 / 11 电脑，USB 接口建议直连主板后置</li>
+                  <li class="lede" style="font-size:13.6px">· 原装或支持数据传输的 USB 线（劣质线是识别失败主因）</li>
+                  <li class="lede" style="font-size:13.6px">· 目标机型为 vivo / iQOO 骁龙 9400 平台（平板不支持）</li>
+                  <li class="lede" style="font-size:13.6px">· 已备份全部数据，且清楚各项操作的风险</li>
+                </ul>
+              </article>
+
+              <article class="card reveal">
+                <span class="icon-tile" data-icon="box"></span>
+                <h3 class="h3">需要提前下载</h3>
+                <ul style="margin-top:12px;display:grid;gap:9px">
+                  <li class="lede" style="font-size:13.6px">· vivo USB 驱动 + ADB 便携包（环境类）</li>
+                  <li class="lede" style="font-size:13.6px">· 一键解锁工具或临时 Root 包（按路线二选一）</li>
+                  <li class="lede" style="font-size:13.6px">· KernelSU / SakiSU 管理器</li>
+                  <li class="lede" style="font-size:13.6px">· 计划刷入的内核模块</li>
+                </ul>
+                <a class="btn btn-soft btn-sm" href="tools.html" style="margin-top:18px">前往资源库下载</a>
+              </article>
+            </div>
+          </div>
+
+          <!-- 步骤 -->
+          <div class="steps" style="margin-top:52px">
+
+            <article class="step reveal" id="s1" style="scroll-margin-top:110px">
+              <span class="no">01</span>
+              <div>
+                <h3>环境部署与设备识别</h3>
+                <p>
+                  先安装 vivo 官方 USB 驱动，再解压 ADB 便携包。设备开启「开发者选项 → USB 调试」后连接电脑，
+                  确认 ADB 能正确列出设备。这一步不通，后面全部无法进行。
+                </p>
+                <div class="code">adb version
+adb devices
+<span style="color:var(--tx-3)"># 输出应包含一行形如  3A21FDH200XXXX  device  的记录</span>
+<span style="color:var(--tx-3)"># 若显示 unauthorized，请在手机屏幕点击「允许 USB 调试」</span><button class="cp" data-copy="adb version
+adb devices" data-copy-msg="命令已复制" aria-label="复制命令"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+                <div class="tips">
+                  <span class="badge">vivo_usb_driver.exe</span>
+                  <span class="badge">ADB 便携包</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="step reveal" id="s2" style="scroll-margin-top:110px">
+              <span class="no">02</span>
+              <div>
+                <h3>路线选择：临时 Root 还是永久解锁</h3>
+                <p>
+                  这是整个流程中最重要的决策点。两条路线并不互斥——可以先走临时路线验证需求，再决定是否永久解锁。
+                </p>
+
+                <div class="grid-2" style="margin-top:18px">
+                  <div class="glass" style="padding:18px">
+                    <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">
+                      <span class="badge ok"><span class="dot"></span>免解锁</span>
+                      <b style="font-size:14px">临时 Root</b>
+                    </div>
+                    <p class="lede" style="font-size:13.4px">
+                      不写分区、不改动 Bootloader 状态，重启后权限自动消失。
+                      代价是无法长期驻留，内核模块与部分需要开机自启的功能受限。
+                    </p>
+                  </div>
+                  <div class="glass" style="padding:18px">
+                    <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">
+                      <span class="badge warn"><span class="dot"></span>需解锁</span>
+                      <b style="font-size:14px">永久解锁 + KernelSU</b>
+                    </div>
+                    <p class="lede" style="font-size:13.4px">
+                      一次性解锁 Bootloader 并写入 KernelSU，获得持久、完整的 Root 能力，
+                      可自由刷入内核模块与主题破解。代价是清空数据。
+                    </p>
+                  </div>
+                </div>
+                <div class="tips">
+                  <span class="badge">仅尝鲜 → 临时 Root</span>
+                  <span class="badge">长期使用 → 永久解锁</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="step reveal" id="s3" style="scroll-margin-top:110px">
+              <span class="no">03</span>
+              <div>
+                <h3>解锁 Bootloader（永久路线）</h3>
+                <p>
+                  解压「vivo / iQOO 9400 一键解锁工具」压缩包，保持 <code>test.exe</code> 与主程序同目录，
+                  以管理员身份运行并按提示操作。工具会自动完成设备检测、解锁申请与分区写入。
+                </p>
+                <div class="callout info" style="margin-top:16px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  <div>
+                    解锁过程中设备会多次重启并自动清空数据，这属于正常现象，全程请勿拔线。
+                    解锁完成后首次开机会出现「设备已解锁」提示。
+                  </div>
+                </div>
+                <div class="tips">
+                  <span class="badge">一键解锁工具</span>
+                  <span class="badge danger">会清空数据</span>
+                  <span class="badge">不支持平板</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="step reveal" id="s4" style="scroll-margin-top:110px">
+              <span class="no">04</span>
+              <div>
+                <h3>刷入 Root 管理器</h3>
+                <p>
+                  解锁完成后，安装 KernelSU 管理器接管 Root 权限。若使用 SakiSU 方案，
+                  则安装对应的 SakiSU APK，两者择一即可，不建议同时启用。
+                </p>
+                <div class="code">adb install KernelSU_v3.2.5-44-g0f65ab64.apk
+<span style="color:var(--tx-3)"># 打开 App 确认「已安装」且版本号与内核匹配</span><button class="cp" data-copy="adb install KernelSU_v3.2.5-44-g0f65ab64.apk" data-copy-msg="命令已复制" aria-label="复制命令"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+                <div class="tips">
+                  <span class="badge">KernelSU 管理器</span>
+                  <span class="badge">SakiSU（替代方案）</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="step reveal" id="s5" style="scroll-margin-top:110px">
+              <span class="no">05</span>
+              <div>
+                <h3>刷入内核模块</h3>
+                <p>
+                  在 KernelSU 管理器的「模块」页面逐项选择 zip 文件安装并重启生效。
+                  建议按下面的顺序推进，先装依赖、再做功能增强，出问题时更容易定位。
+                </p>
+
+                <div class="glass" style="padding:20px;margin-top:18px">
+                  <div style="display:grid;gap:14px">
+                    <div style="display:flex;gap:13px;align-items:flex-start">
+                      <span class="badge brand">1</span>
+                      <div>
+                        <b style="font-size:13.8px">基础依赖层</b>
+                        <p class="lede" style="font-size:13.2px;margin-top:3px">
+                          Zygisk Next → magic_mount_rs。这两项是后续模块运行的前置条件。
+                        </p>
+                      </div>
+                    </div>
+                    <div style="display:flex;gap:13px;align-items:flex-start">
+                      <span class="badge brand">2</span>
+                      <div>
+                        <b style="font-size:13.8px">系统稳定性层</b>
+                        <p class="lede" style="font-size:13.2px;margin-top:3px">
+                          block_vivo_ota / 屏蔽系统更新 → AutoADB WiFi → RescueX 救援模块。
+                        </p>
+                      </div>
+                    </div>
+                    <div style="display:flex;gap:13px;align-items:flex-start">
+                      <span class="badge brand">3</span>
+                      <div>
+                        <b style="font-size:13.8px">性能调度层</b>
+                        <p class="lede" style="font-size:13.2px;margin-top:3px">
+                          GPU Governor / 线程调度 / ExtremeGT / 极致性能。
+                          <span class="muted">同类模块不要叠加，选中一个即可。</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div style="display:flex;gap:13px;align-items:flex-start">
+                      <span class="badge brand">4</span>
+                      <div>
+                        <b style="font-size:13.8px">外观与隐藏层</b>
+                        <p class="lede" style="font-size:13.2px;margin-top:3px">
+                          MiSans 字体模块（四选一）→ FontLoader → 月虹隐藏 / 移除温控。
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="callout warn" style="margin-top:18px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <div>
+                    <b>不要一次性刷入全部模块。</b>
+                    每装 2–3 个就重启验证一次，确认开机正常后再继续，否则很难判断是哪个模块导致的启动异常。
+                  </div>
+                </div>
+
+                <div class="tips">
+                  <span class="badge">Zygisk Next</span>
+                  <span class="badge">magic_mount_rs</span>
+                  <span class="badge">MiSans 字体</span>
+                  <span class="badge">性能调度</span>
+                  <span class="badge">Root 隐藏</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="step reveal" id="s6" style="scroll-margin-top:110px">
+              <span class="no">06</span>
+              <div>
+                <h3>主题与系统 UI 替换</h3>
+                <p>
+                  这一阶段依赖 LSPosed 环境：先确认 Zygisk Next 已就绪并启用 LSPosed，
+                  再安装主题破解模块，最后替换 SystemUI 资源。
+                </p>
+                <div style="display:grid;gap:10px;margin-top:16px">
+                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center">
+                    <span class="badge">a</span>
+                    <span class="lede" style="font-size:13.4px">安装并启用 LSPosed 框架，确认作用域勾选系统 UI 与主题商店</span>
+                  </div>
+                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center">
+                    <span class="badge">b</span>
+                    <span class="lede" style="font-size:13.4px">刷入对应系统版本的「主题破解」模块（15.5.0.1 以上请选新版）</span>
+                  </div>
+                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center">
+                    <span class="badge">c</span>
+                    <span class="lede" style="font-size:13.4px">用 MT 管理器替换 SystemUI 资源，或直接导入 .itz 主题包</span>
+                  </div>
+                  <div class="glass" style="padding:14px 16px;display:flex;gap:12px;align-items:center">
+                    <span class="badge">d</span>
+                    <span class="lede" style="font-size:13.4px">重启并校验：状态栏、通知面板、快捷开关是否全部生效</span>
+                  </div>
+                </div>
+                <div class="tips">
+                  <span class="badge">主题破解 v114514</span>
+                  <span class="badge">15.5.0.1+ 破解</span>
+                  <span class="badge">仿小米主题包</span>
+                  <span class="badge">SystemUI 资源</span>
+                  <span class="badge">MT 管理器</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- 异常处理 -->
+          <div id="trouble" style="scroll-margin-top:110px;margin-top:52px">
+            <span class="eyebrow">Troubleshooting</span>
+            <h2 class="h2" style="margin-bottom:20px">异常处理速查</h2>
+
+            <div class="acc">
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">Q1</span>
+                  电脑识别不到设备怎么办？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  按顺序排查：<strong>①</strong> 更换 USB 线与接口（优先主板后置口）；<strong>②</strong> 重新安装 vivo USB 驱动；
+                  <strong>③</strong> 设备端把 USB 模式从「仅充电」改为「传输文件」；<strong>④</strong> 在设备管理器中查看是否有带感叹号的未知设备，
+                  如有则手动指定驱动目录；<strong>⑤</strong> 关闭电脑上的手机助手类软件后重试。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">Q2</span>
+                  adb devices 显示 unauthorized
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  这是设备尚未授权调试。点亮手机屏幕查看是否有「允许 USB 调试」弹窗并勾选「始终允许」。
+                  若没有弹窗，进入开发者选项执行「撤销 USB 调试授权」后重新插拔；仍无效可尝试重启 ADB 服务：
+                  <code style="font-size:12.5px">adb kill-server</code> → <code style="font-size:12.5px">adb start-server</code>。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">Q3</span>
+                  临时 Root 拿到了但权限不生效
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  这是典型的「有 root 无实权」。使用资源库中的<strong>修复临时 root 无实权脚本</strong>，
+                  在 ADB Shell 中推入并执行，即可恢复挂载与写入权限。执行后建议用 <code style="font-size:12.5px">id</code> 命令确认 uid=0。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">Q4</span>
+                  刷入模块后无法开机
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  长按电源键强制重启，多数情况下 KernelSU 会在检测到连续启动失败后自动进入<strong>安全模式</strong>并禁用全部模块。
+                  若未自动进入，可在开机时按音量键组合触发安全模式，进入后逐个禁用最近安装的模块定位问题。
+                  这也是为什么不要一次性刷入多个模块的原因。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">Q5</span>
+                  解锁后收到系统更新提示
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  刷入 <strong>block_vivo_ota</strong> 或 <strong>vivo 屏蔽系统更新</strong> 模块阻断升级流程。
+                  切勿在解锁状态下直接接受 OTA，覆盖安装极可能导致 Root 环境失效甚至无法开机。
+                </div></div>
+              </div>
+            </div>
+
+            <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+              <a class="btn btn-ghost" href="faq.html">查看全部常见问题</a>
+              <a class="btn btn-primary" href="tools.html">
+                前往资源库下载
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell shell-wide">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="9" rx="2.6"/><path d="M8 11V7.4a4.5 4.5 0 0 1 8.8-1.3"/></svg>
+          </span>
+          <span class="brand-txt"><b>vivo 玩机工具</b><span>Play Toolkit</span></span>
+        </a>
+        <p>面向 vivo / iQOO 机型的玩机资源整合站点，覆盖解锁、Root、内核模块与主题改造全流程。</p>
+      </div>
+      <div>
+        <h4>站点导航</h4>
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="tools.html">资源库</a></li>
+          <li><a href="guide.html">刷机指南</a></li>
+          <li><a href="faq.html">常见问题</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>资源分类</h4>
+        <ul>
+          <li><a href="tools.html#cat-bootloader">解锁 Bootloader</a></li>
+          <li><a href="tools.html#cat-temp-root">临时 Root</a></li>
+          <li><a href="tools.html#cat-ksu">KernelSU 模块</a></li>
+          <li><a href="tools.html#cat-theme">主题替换资源</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>下载通道</h4>
+        <ul>
+          <li><a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 仓库 ↗</a></li>
+          <li><a data-quark-link href="#" target="_blank" rel="noopener">夸克网盘 ↗</a></li>
+          <li><a href="faq.html#disclaimer">免责声明</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span>© <span data-year>2026</span> vivo 玩机工具 · 资源仅供学习与个人使用</span>
+      <span class="muted">GitHub Pages 静态托管 · 双通道分发</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/data/resources.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

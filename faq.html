@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>常见问题 · 故障排查与免责声明 — vivo 玩机工具</title>
+<meta name="description" content="vivo / iQOO 刷机常见问题：下载与安装、解锁与 Root、内核模块使用、主题改造、安全与风险，以及站点免责声明与资源版权说明。">
+<meta name="theme-color" content="#05060b">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/main.css">
+<script>(function(){try{var t=localStorage.getItem('pt-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+
+<div class="bg-stage" aria-hidden="true">
+  <div class="grid"></div>
+  <div class="blob a"></div>
+  <div class="blob b"></div>
+  <div class="blob c"></div>
+  <div class="noise"></div>
+</div>
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="shell shell-wide nav-inner">
+    <a class="brand" href="index.html" aria-label="vivo 玩机工具 首页">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="9" rx="2.6"/><path d="M8 11V7.4a4.5 4.5 0 0 1 8.8-1.3"/></svg>
+      </span>
+      <span class="brand-txt"><b>vivo 玩机工具</b><span>Play Toolkit</span></span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a href="tools.html">资源库</a>
+      <a href="guide.html">刷机指南</a>
+      <a href="faq.html">常见问题</a>
+    </nav>
+    <div class="nav-right">
+      <button class="kbd-hint" data-cmdk type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true" style="width:15px;height:15px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        搜索资源 <kbd>Ctrl K</kbd>
+      </button>
+      <button class="icon-btn" data-theme-toggle type="button" aria-label="切换深浅色主题">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/tiamo1990/index" target="_blank" rel="noopener" aria-label="GitHub 仓库">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <button class="icon-btn burger" data-burger type="button" aria-label="打开菜单" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer">
+  <a href="index.html">首页 <span class="muted">01</span></a>
+  <a href="tools.html">资源库 <span class="muted">02</span></a>
+  <a href="guide.html">刷机指南 <span class="muted">03</span></a>
+  <a href="faq.html">常见问题 <span class="muted">04</span></a>
+  <a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 仓库 <span class="muted">↗</span></a>
+  <a href="index.html#quark" data-quark-link target="_blank" rel="noopener">夸克网盘 <span class="muted">↗</span></a>
+</div>
+
+<main>
+
+  <section class="page-hero">
+    <div class="shell shell-wide">
+      <nav class="crumb reveal" aria-label="面包屑">
+        <a href="index.html">首页</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        <span>常见问题</span>
+      </nav>
+      <h1 class="h1 reveal" style="font-size:clamp(2rem,4.6vw,3.1rem)">
+        常见问题与<span class="grad">免责声明</span>
+      </h1>
+      <p class="lede reveal">
+        按主题整理了下载、解锁、模块与主题改造四类高频问题，以及站点的资源来源、版权与风险说明。
+      </p>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:14px">
+    <div class="shell shell-wide">
+      <div class="split-2">
+        <aside class="toc" aria-label="目录">
+          <h4>主题</h4>
+          <a href="#download">下载与安装</a>
+          <a href="#unlock">解锁与 Root</a>
+          <a href="#modules">模块使用</a>
+          <a href="#theme">主题改造</a>
+          <a href="#disclaimer">免责声明</a>
+          <a href="#license">版权说明</a>
+        </aside>
+
+        <div>
+
+          <!-- 下载与安装 -->
+          <div id="download" style="scroll-margin-top:110px">
+            <span class="eyebrow">Download</span>
+            <h2 class="h2" style="margin-bottom:20px">下载与安装</h2>
+            <div class="acc">
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">01</span>
+                  两种下载通道有什么区别？该选哪个？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  <strong>GitHub 通道</strong>适合逐项获取：直接点击下载按钮即可拉取单个文件，链接稳定、可追溯版本历史，
+                  适合只需要其中一两个工具的场景。<br>
+                  <strong>夸克网盘通道</strong>适合一次性打包：可以转存整个「vivo刷机工具」目录，避免逐个下载；
+                  单个文件超过 100 MiB 的项目（例如 MiSans Heavy 字体模块）<strong>仅在此通道提供</strong>。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">02</span>
+                  为什么有的卡片没有「立即下载」按钮？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  GitHub 对单个文件设有 100 MiB 的硬性上限，超过该体积的文件无法提交到仓库主干。
+                  这类资源在卡片上会标注「超 100MB」，下载按钮直接指向夸克网盘。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">03</span>
+                  下载下来的 zip 怎么用？需要解压吗？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  分两种情况：<strong>内核模块类</strong>（放在 ksu-modules / lsp-modules 目录下）<strong>不要解压</strong>，
+                  直接在 KernelSU 或 LSPosed 管理器中选中 zip 刷入；<strong>工具类</strong>（解锁工具、ADB 便携包、紫罗兰工具箱等）
+                  则需要解压后运行。若系统解压失败，可使用资源库中的 7-Zip。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">04</span>
+                  KernelSU 的管理器后缀是 .apk，为什么安装提示格式错误？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  本站提供的文件名已统一规范为 <code style="font-size:12.5px">.apk</code>，可直接安装。
+                  如果你的系统仍拦截安装，请在「设置 → 安全 → 安装未知应用」中允许文件管理器安装应用，
+                  并确认下载过程没有中断导致文件损坏。
+                </div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 解锁与 Root -->
+          <div id="unlock" style="scroll-margin-top:110px;margin-top:48px">
+            <span class="eyebrow">Unlock &amp; Root</span>
+            <h2 class="h2" style="margin-bottom:20px">解锁与 Root</h2>
+            <div class="acc">
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">05</span>
+                  临时 Root 和永久解锁到底该怎么选？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  如果你只是想体验 Root 权限、临时导出数据或测试某个功能，选<strong>临时 Root</strong>：
+                  不写分区、重启即失效、不改变解锁状态。如果你需要长期运行内核模块、隐藏 Root 或做主题改造，
+                  则必须走<strong>永久解锁</strong>路线。两者不冲突，可以先临时验证再决定。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">06</span>
+                  解锁后保修还有效吗？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  解锁 Bootloader 会改变设备的安全状态，多数厂商会据此调整保修判定，
+                  部分情况下需重新锁回原始状态方可获得正常服务。具体政策以官方售后说明为准——本站无法给出承诺，
+                  请在动手前自行确认并接受这一风险。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">07</span>
+                  解锁工具报错「不支持当前设备」
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  先核对两点：<strong>①</strong> 工具面向 vivo / iQOO 骁龙 9400 平台，
+                  <strong>不支持平板设备</strong>；<strong>②</strong> 部分机型要求系统版本在特定范围内。
+                  若机型与版本均匹配仍报错，请检查 USB 驱动是否安装正确、是否以管理员身份运行。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">08</span>
+                  解锁流程中途中断了怎么办？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  <strong>不要立刻拔线或反复重启。</strong>保持连接，重新以管理员身份运行工具并选择「继续 / 重试」，
+                  多数现代工具支持断点续做。若设备已进入 fastboot 且无法退出，可长按电源键 15 秒以上强制重启，
+                  再重新进入流程。仍无法恢复时，请使用官方恢复工具或前往售后处理。
+                </div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 模块使用 -->
+          <div id="modules" style="scroll-margin-top:110px;margin-top:48px">
+            <span class="eyebrow">Modules</span>
+            <h2 class="h2" style="margin-bottom:20px">模块使用</h2>
+            <div class="acc">
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">09</span>
+                  模块一定要装 Zygisk Next 吗？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  只要你想运行 LSPosed 及其模块（主题破解、CA 证书注入等），就<strong>必须</strong>先安装 Zygisk Next，
+                  它提供 Zygisk API 兼容层。纯内核侧的模块（调度、温控、OTA 阻断）则不依赖它。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">10</span>
+                  magic_mount_rs 出现了两次，要装哪个？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  两个文件<strong>内容完全一致</strong>，只是分别放在 KernelSU 模块区与 LSPosed 模块区便于查找。
+                  <strong>装一次就够了</strong>，重复刷入会造成冲突。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">11</span>
+                  多个性能模块能不能一起刷？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  不建议。GPU Governor、线程调度、ExtremeGT、极致性能这几个模块的作用域高度重叠，
+                  同时启用会互相抢夺调度权，轻则效果互相抵消，重则造成卡顿甚至无法开机。
+                  <strong>同一层级只保留一个。</strong>
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">12</span>
+                  移除温控模块会不会烧坏手机？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  移除温控<strong>不会改变硬件本身的物理耐受极限</strong>，但会让系统不再主动降频保护，
+                  长时间高负载下机身温度会明显升高，进而加速电池老化、影响手感甚至触发热保护关机。
+                  建议仅在明确需要且能接受后果时短期使用，并避免边充边玩。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">13</span>
+                  银行 App 检测到 Root 怎么办？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  刷入<strong>月虹一键隐藏模块</strong>并在其中勾选目标应用，配合 KernelSU 的「隐藏 Root」开关使用。
+                  注意：金融类应用的反检测策略会持续更新，隐藏方案不保证长期有效，请勿将其用于规避合法的风控要求。
+                </div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 主题改造 -->
+          <div id="theme" style="scroll-margin-top:110px;margin-top:48px">
+            <span class="eyebrow">Themes</span>
+            <h2 class="h2" style="margin-bottom:20px">主题改造</h2>
+            <div class="acc">
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">14</span>
+                  主题破解模块该选哪个版本？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  看系统版本：<strong>低于 15.5.0.1</strong> 使用「vivo/iQOO 主题破解 v114514」；
+                  <strong>15.5.0.1 及以上</strong>使用「主题破解（15.5.0.1 以上版本）」。
+                  版本选错会出现模块加载但功能不生效的情况。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">15</span>
+                  .itz 与 .systemui 这两种文件怎么用？
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  <code style="font-size:12.5px">.itz</code> 是完整主题包，可在主题商店的「本地导入」中直接加载；
+                  <code style="font-size:12.5px">.systemui</code> 是系统 UI 资源文件，需要用 MT 管理器定位到对应路径进行替换。
+                  替换前<strong>务必备份原始文件</strong>，否则一旦出现异常将难以回滚。
+                </div></div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-q" type="button" aria-expanded="false">
+                  <span class="idx">16</span>
+                  替换 SystemUI 后状态栏显示异常
+                  <span class="tg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+                </button>
+                <div class="acc-a"><div class="inner">
+                  几乎都是<strong>系统版本不匹配</strong>导致的资源字段对不上。请恢复备份的原版 SystemUI，
+                  确认当前系统版本与主题包适配范围一致后，再重新替换。跨大版本（如 OriginOS 5 → 6）混用资源包必然出问题。
+                </div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 免责声明 -->
+          <div id="disclaimer" style="scroll-margin-top:110px;margin-top:48px">
+            <span class="eyebrow">Disclaimer</span>
+            <h2 class="h2" style="margin-bottom:20px">免责声明</h2>
+
+            <div class="callout danger reveal" style="margin-bottom:18px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <div>
+                <b>请在使用前完整阅读本节。</b>
+                继续下载或使用本站资源，即视为你已理解并接受下列全部条款。
+              </div>
+            </div>
+
+            <div class="glass reveal" style="padding:26px;display:grid;gap:16px">
+              <p class="lede" style="font-size:14px">
+                <strong style="color:var(--tx)">一、风险自担。</strong>
+                解锁 Bootloader、获取 Root 权限、刷入第三方模块与替换系统资源均属于<strong>超出厂商设计范围</strong>的操作，
+                可能导致数据丢失、系统不稳定、硬件过热、电池损耗加速、保修状态变更，极端情况下设备无法开机。
+                本站仅提供资源整合与文档说明，<strong>不对任何直接或间接损失承担责任</strong>。
+              </p>
+              <p class="lede" style="font-size:14px">
+                <strong style="color:var(--tx)">二、合规使用。</strong>
+                请确保你对所操作的设备拥有合法所有权，并遵守当地法律法规与厂商服务条款。
+                严禁将本站资源用于破解他人设备、绕过付费授权、规避风控或任何其他非法用途。
+              </p>
+              <p class="lede" style="font-size:14px">
+                <strong style="color:var(--tx)">三、无担保。</strong>
+                所有资源按「现状」提供，不附带任何形式的明示或默示担保。
+                由于机型、系统版本与使用环境的差异，本站无法保证每一项资源在你的设备上都能正常工作。
+              </p>
+              <p class="lede" style="font-size:14px">
+                <strong style="color:var(--tx)">四、操作前提。</strong>
+                动手前请完成数据备份、确认电量充足（建议 60% 以上）、确认机型与系统版本匹配，
+                并确保你已具备基本的命令行与刷机操作能力。
+              </p>
+            </div>
+          </div>
+
+          <!-- 版权说明 -->
+          <div id="license" style="scroll-margin-top:110px;margin-top:48px">
+            <span class="eyebrow">License</span>
+            <h2 class="h2" style="margin-bottom:20px">版权与资源来源</h2>
+
+            <div class="glass reveal" style="padding:26px;display:grid;gap:16px">
+              <p class="lede" style="font-size:14px">
+                本站收录的工具、模块与主题资源<strong>均来源于公开渠道</strong>，包括开源项目官方发布页、
+                开发者公开分享与社区流传版本。相关著作权归各自作者所有。
+              </p>
+              <p class="lede" style="font-size:14px">
+                本站仅做<strong>归类、命名规范化与下载分发</strong>，不对任何资源的内容进行修改或二次打包，
+                也不从中获取商业利益。
+              </p>
+              <p class="lede" style="font-size:14px">
+                如果你是某项资源的作者或权利持有人，并认为本站的分发方式不妥，
+                欢迎通过 GitHub 仓库提交 Issue 与我们联系，我们会<strong>在核实后第一时间移除相关文件</strong>。
+              </p>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;padding-top:6px">
+                <a class="btn btn-ghost btn-sm" href="https://github.com/tiamo1990/index/issues" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+                  提交 Issue 反馈
+                </a>
+                <a class="btn btn-ghost btn-sm" href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                  前往仓库
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell shell-wide">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="9" rx="2.6"/><path d="M8 11V7.4a4.5 4.5 0 0 1 8.8-1.3"/></svg>
+          </span>
+          <span class="brand-txt"><b>vivo 玩机工具</b><span>Play Toolkit</span></span>
+        </a>
+        <p>面向 vivo / iQOO 机型的玩机资源整合站点，覆盖解锁、Root、内核模块与主题改造全流程。</p>
+      </div>
+      <div>
+        <h4>站点导航</h4>
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="tools.html">资源库</a></li>
+          <li><a href="guide.html">刷机指南</a></li>
+          <li><a href="faq.html">常见问题</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>资源分类</h4>
+        <ul>
+          <li><a href="tools.html#cat-bootloader">解锁 Bootloader</a></li>
+          <li><a href="tools.html#cat-temp-root">临时 Root</a></li>
+          <li><a href="tools.html#cat-ksu">KernelSU 模块</a></li>
+          <li><a href="tools.html#cat-theme">主题替换资源</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>下载通道</h4>
+        <ul>
+          <li><a href="https://github.com/tiamo1990/index" target="_blank" rel="noopener">GitHub 仓库 ↗</a></li>
+          <li><a data-quark-link href="#" target="_blank" rel="noopener">夸克网盘 ↗</a></li>
+          <li><a href="faq.html#disclaimer">免责声明</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span>© <span data-year>2026</span> vivo 玩机工具 · 资源仅供学习与个人使用</span>
+      <span class="muted">GitHub Pages 静态托管 · 双通道分发</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/data/resources.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
